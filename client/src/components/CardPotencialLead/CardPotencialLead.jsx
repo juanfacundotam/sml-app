@@ -39,26 +39,26 @@ const DashboardContract = () => {
             <Title></Title>
             <Table >
             <TableHead>
-                <TableRow className="bg-lime">
-                    <TableHeaderCell className=" text-left font-medium">Invoice Id</TableHeaderCell>
-                    <TableHeaderCell className=" text-left font-medium">Name</TableHeaderCell>
-                    <TableHeaderCell className=" text-left font-medium">Profesion</TableHeaderCell>
-                    <TableHeaderCell className=" text-left font-medium">Nivel</TableHeaderCell>
-                    <TableHeaderCell className=" text-left font-medium">Telefono</TableHeaderCell>
-                    <TableHeaderCell className=" text-left font-medium">Email</TableHeaderCell>
-                    <TableHeaderCell className=" text-left font-medium">Status</TableHeaderCell>
+                <TableRow className={`${styles.tableRow} ${styles.tableRowH}`}>
+                    <TableHeaderCell className={`${styles.p}`}>Invoice Id</TableHeaderCell>
+                    <TableHeaderCell className={`${styles.p}`}>Name</TableHeaderCell>
+                    <TableHeaderCell className={`${styles.p}`}>Profesion</TableHeaderCell>
+                    <TableHeaderCell className={`${styles.p}`}>Nivel</TableHeaderCell>
+                    <TableHeaderCell className={`${styles.p}`}>Telefono</TableHeaderCell>
+                    <TableHeaderCell className={`${styles.p}`}>Email</TableHeaderCell>
+                    <TableHeaderCell className={`${styles.p}`}>Status</TableHeaderCell>
                 </TableRow>
             </TableHead>
             <TableBody>
                 {data.map((item) => (
-                    <TableRow className={`${styles.styles}`}>
-                        <TableCell className=" text-left">{item.invoiseId}</TableCell>
-                        <TableCell className=" text-left">{item.name}</TableCell>
-                        <TableCell className=" text-left">{item.profesion}</TableCell>
-                        <TableCell className=" text-left">{item.nivel}</TableCell>
-                        <TableCell className=" text-left">{item.telefono}</TableCell>
-                        <TableCell className=" text-left">{item.email}</TableCell>
-                        <TableCell className=" text-left">{item.status}</TableCell>
+                    <TableRow className={`${styles.tableRow}`}>
+                        <TableCell className={`${styles.p}`}>{item.invoiseId}</TableCell>
+                        <TableCell className={`${styles.p}`}>{item.name}</TableCell>
+                        <TableCell className={`${styles.p}`}>{item.profesion}</TableCell>
+                        <TableCell className={`${styles.level} ${"stext-left"}`}>{item.nivel}</TableCell>
+                        <TableCell className={`${styles.p}`}>{item.telefono}</TableCell>
+                        <TableCell className={`${styles.p}`}>{item.email}</TableCell>
+                        <TableCell className={`${styles.status}`}>{item.status}</TableCell>
                     </TableRow>
                 ))}
             </TableBody>

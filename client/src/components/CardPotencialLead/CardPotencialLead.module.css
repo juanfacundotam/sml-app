@@ -1,3 +1,39 @@
-.style{
-  background-color:rgb(59, 131, 121) ;
+.tableRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #39394b;
+  width: 80vw;
+  padding: 10px;
+  margin: 10px 10px 10px 0;
+  border-radius: 10px;
+}
+.tableRowH{
+  background-color: transparent;
+}
+.p{
+  text-align: center;
+  width: 15%;
+}
+.status{
+  background-color: #ff69b4;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  width: 15%;
+  text-align: center;
+}
+.bold{
+  font-weight: bold;
+}
+.level{
+  background-color: #6254ff;
+  line-height: .5;
+  padding: 10px;
+  border-radius: 5px;
+  color: #3b3961;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
 }
