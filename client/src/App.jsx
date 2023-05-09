@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Landing from "./views/Login/Landing/Landing";
+import Landing from "./views/Landing/Landing";
 import Employees from "./views/Employees/Employees.jsx";
 import Analytics from "./views/Analytics/Analytics.jsx";
 import Nav from "./components/Nav/Nav";
