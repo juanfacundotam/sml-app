@@ -1,5 +1,5 @@
-import React from 'react'
-import { useAuth0 } from '@auth0/auth0-react'
+import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Login() {
   const{loginWithRedirect} = useAuth0()
@@ -7,7 +7,7 @@ function Login() {
     <div>
       <button onClick={()=> loginWithRedirect()}>LOGIN</button>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

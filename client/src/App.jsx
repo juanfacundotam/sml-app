@@ -9,16 +9,13 @@ import Login from "./views/Login/Login";
 function App() {
   const location = useLocation();
   return (
-    <div>
-     
-      {location.pathname !== "/" && <Nav/>}
+    <div className="App">
+      {location.pathname !== "/" && <Nav />}
       <Routes>
-       
-        
-        <Route path="/login" element={<Login/>} />
-        <Route path="/" element={<Landing/>} />
-        <Route path="/employees" element={<Employees/>} />
-        <Route path="/analytics" element={<Analytics/>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/employees" element={<Employees />} />
+        <Route path="/analytics" element={<Analytics />} />
       </Routes>
     </div>
   );

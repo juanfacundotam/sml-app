@@ -5,8 +5,7 @@
   align-items: start;
   justify-content: space-between;
   flex-direction: row;
-  margin-left: 250px;
-  width: 80%;
+  width: 100%;
   height: 100vh;
 }
 .container h1 {
