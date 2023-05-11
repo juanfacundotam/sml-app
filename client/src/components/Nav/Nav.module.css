@@ -1,7 +1,7 @@
 .container {
   background-color: #39394b;
   display: flex;
-  width: 15rem;
+  min-width: 15rem;
   height: 100vh;
 }
 
@@ -69,4 +69,21 @@
 .logout {
   margin-left: 0.5rem;
   font-size: 1.5rem;
+}
+@media screen and (max-width: 1024px) {
+  .container {
+    min-width: 8rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .log {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .contentList {
+    margin-left: 0.5rem;
+  }
 }
