@@ -1,8 +1,10 @@
 import React from "react";
 import style from "./Nav.module.css";
 import { Link } from "react-router-dom";
+import Logout from "../../views/Logout/Logout"
+import Profile from "../../views/Login/Profile";
+
 import {
-  IoLogOut,
   IoStatsChart,
   IoSettingsSharp,
   IoGrid,
@@ -47,18 +49,10 @@ function Nav() {
         </div>
 
         <div className={style.log}>
-          <img
-            className={style.img}
-            src={
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFADjIwjVTPKIf_2YkWdv2-N5TPzIItNC0TQ&usqp=CAU"
-            }
-          ></img>
-          <div className={style.text}>
-            <p>Easin Arafat</p>
-            <p>Free Account</p>
-          </div>
+          <Profile />
+          <div/>
           <div className={style.logout}>
-            <IoLogOut />
+            <Logout />
           </div>
         </div>
       </div>
