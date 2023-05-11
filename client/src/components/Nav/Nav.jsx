@@ -1,13 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Logout from "../../views/Logout/Logout"
+import Logout from "../../views/Logout/Logout";
 import Profile from "../../views/Login/Profile";
+import style from "./Nav.module.css";
 
-import {
-  IoStatsChart,
-  IoSettingsSharp,
-  IoGrid,
-} from "react-icons/io5";
+import { IoStatsChart, IoSettingsSharp, IoGrid } from "react-icons/io5";
 
 function Nav() {
   return (
@@ -56,17 +53,11 @@ function Nav() {
             </ul>
           </div>
         </div>
-        <div className="flex justify-center items-center gap-1 ml-1 mb-5">
-          <img
-            className="w-12 h-12 rounded-full"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFADjIwjVTPKIf_2YkWdv2-N5TPzIItNC0TQ&usqp=CAU"
-            alt="profile avatar"
-          />
-          <div className=" text-sm">
-            <p>Easin Arafat</p>
-            <p>Free Account</p>
-          </div>
-          <div className=" text-lg ml-1">
+
+        <div className={style.log}>
+          <Profile />
+          <div />
+          <div className={style.logout}>
             <Logout />
           </div>
         </div>
