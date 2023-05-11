@@ -67,7 +67,7 @@ function Nav() {
             <p>Free Account</p>
           </div>
           <div className=" text-lg ml-1">
-            <IoLogOut />
+            <Logout />
           </div>
         </div>
       </div>
