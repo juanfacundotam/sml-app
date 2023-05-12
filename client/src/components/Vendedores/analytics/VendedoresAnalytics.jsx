@@ -254,7 +254,7 @@ const AnalyticsSealer = () => {
                       2
                     </div>}</div>
                   <div className="w-1/7 text-center">{item.telefono}</div>
-                  <div className="w-1/7 text-center"><img scr={img} />{item.Email}</div>
+                  <div className="w-1/7 text-center">{item.Email}</div>
                   
                   <div className="w-1/7 text-center">
                     {item.status === true ? (
