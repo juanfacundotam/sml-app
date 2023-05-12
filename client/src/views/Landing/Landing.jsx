@@ -1,14 +1,16 @@
 import React from "react";
 import style from "./Landing.module.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Nav from "../../components/Nav/Nav";
 
 function Landing() {
   const { isAuthenticated } = useAuth0();
+  const location = useLocation();
+
   return (
     <div className={style.container}>
-      {isAuthenticated || location.state?.fromLogin ? (
+      {(isAuthenticated || location.state?.fromLogin) && (
         <>
           <Nav />
           <div>
@@ -21,7 +23,7 @@ function Landing() {
             </Link>
           </div>
         </>
-      ) : null}
+      )}
     </div>
   );
 }

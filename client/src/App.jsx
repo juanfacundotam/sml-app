@@ -20,6 +20,7 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>
+      <img className="Appimg" src="https://cdn.discordapp.com/attachments/1105243107555037294/1106577865698459788/White_Logo_Social_Media_Lab.png"></img>
     </div>
   );
 }

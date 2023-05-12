@@ -22,8 +22,8 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
     <Auth0Provider
-        domain="dev-p8jpj5dccyqig58k.us.auth0.com"
-        clientId="FsvWNC8mE2wREIIOsDyOeOVTJgdQAQEQ"
+        domain="dev-nzhxzzb0uswslgg5.us.auth0.com"
+        clientId="H73gErJkGH4rcXsfGsbuCHZwAkoC7lUK"
         redirectUri={window.location.origin}
       >
       <App />

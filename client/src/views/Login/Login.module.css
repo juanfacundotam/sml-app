@@ -1,5 +1,6 @@
 .container {
     background-color: #39394b;
+    
     width: 15rem;
     height: 100vh;
     display: flex;
@@ -36,6 +37,6 @@
     width: 20px;
     margin-right: 5px;
     height: 20px;
-    background-image: url(https://aid-frontend.prod.atl-paas.net/atlassian-id/front-end/5.0.437/static/media/google-logo.e086107b.svg);
+    background-image: url(https://cdn-icons-png.flaticon.com/512/2237/2237440.png);
     background-size: cover;
   }

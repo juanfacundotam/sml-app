@@ -37,7 +37,11 @@ const Form = (props) => {
     }
 
     // Si no hay errores, ejecutar la función de autenticación
-    props.Login(userData);
+    if (props.Login) {
+      props.Login(userData);
+    }
+    
+    
     setErrors({
       username: "",
       password: "",
