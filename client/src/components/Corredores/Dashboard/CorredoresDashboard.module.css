@@ -1,0 +1,143 @@
+.title {
+	font-weight: 600;
+	color: rgb(202, 202, 202);
+	font-size: 20px;
+}
+.buttonAdd {
+	background-color: #38369e;
+	color: rgb(202, 202, 202);
+	border-radius: 7px;
+	padding: 6px 25px;
+	font-size: 13px;
+}
+.buttonNivel {
+	background-color: rgb(202, 202, 202);
+	color: #39394b;
+	border-radius: 2px;
+	padding: 1px 10px;
+	font-size: 18px;
+	margin-left: 10px;
+	font-weight: 700;
+}
+.buttonNivelActive {
+	background-color: #38369e;
+	color: #39394b;
+	border-radius: 2px;
+	padding: 1px 10px;
+	font-size: 18px;
+	margin-left: 10px;
+	font-weight: 700;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.table {
+	/* border: 1px solid violet; */
+	position: relative;
+	display: flex;
+}
+
+.tableHead {
+	color: rgb(189, 189, 189);
+	font-size: 12px;
+	font-weight: 100;
+	/* border: 1px solid violet; */
+}
+
+.tableRow {
+	margin-top: 20px;
+	display: grid;
+	grid-template-columns: 17% 16% 18% 18% 19%auto;
+	margin-left: 20px;
+}
+
+.tableCards {
+	display: grid;
+	grid-template-columns: 8% 11% 10% 8% 16% 1% auto;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #39394b;
+	font-size: 13px;
+	color: rgb(204, 203, 203);
+	margin: 10px;
+	padding: 13px;
+	border-radius: 10px;
+}
+
+.tableCell {
+	padding: 0;
+}
+
+.tableBody {
+	/* border: 1px solid green; */
+}
+
+.tableCards {
+}
+.icon {
+	color: rgb(116, 136, 201);
+	font-size: 30px;
+	margin-left: 6px;
+}
+.iconComplete {
+	color: #2d2bbf;
+	font-size: 33px;
+	margin-left: 6px;
+}
+.iconInstaComplete {
+	color: #2d2bbf;
+	font-size: 33px;
+	margin-left: 6px;
+}
+
+.divInput {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	background-color: black;
+	opacity: 0.8;
+	height: 870px;
+	width: 970px;
+}
+.divInput2 {
+	z-index: 1;
+	background-color: #39394b;
+	height: 70px;
+	width: 285px;
+	border-radius: 5px;
+}
+.input {
+	margin-top: 5px;
+	margin-left: 5px;
+	background-color: #39394b;
+	color: rgb(204, 203, 203);
+	font-size: 17px;
+	border: none;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	width: 230px;
+}
+.inputName {
+	margin-top: 5px;
+	margin-left: 5px;
+	background-color: #39394b;
+	color: rgb(204, 203, 203);
+	font-size: 14px;
+	border: none;
+
+	width: 160px;
+}
+.bottomInput {
+	margin-top: 5px;
+	margin-left: 5px;
+	background-color: #38369e;
+	color: rgb(204, 203, 203);
+	font-size: 15px;
+	width: 150px;
+	margin-left: 45px;
+	border-radius: 5px;
+}
+@media screen and (max-width: 1500px) {
+	.tableRow {
+		grid-template-columns: 12.5% 19.5% 11% 27% 17% auto;
+	}
+}

@@ -36,8 +36,10 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import style from "./Login.module.css";
-import Form from "../../components/Form/Form";
-import { validate } from "../../components/Form/validation";
+import Form from "../../components/Login/Form/Form";
+import { validate } from "../../components/Login/Form/validation";
+import { Link } from "react-router-dom";
+
 
 function Login() {
   const { loginWithRedirect, isAuthenticated } = useAuth0();

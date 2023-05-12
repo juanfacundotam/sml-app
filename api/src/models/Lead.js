@@ -3,79 +3,50 @@ const validator = require('validator');
 
 const LeadSchema = new mongoose.Schema(
 	{
-		id: {
-			type: Number,
-			required: true,
-			unique: true,
-			trim: true,
-		},
-		name: {
+		From: {
 			type: String,
-			required: true,
-			trim: true,
 		},
-		profesion: {
+		Name: {
 			type: String,
-			required: true,
-			trim: true,
 		},
-		nivel: {
-			type: Number,
-			required: true,
-			trim: true,
-			enum: [1, 2, 3],
-		},
-		phone: {
+		Profession: {
 			type: String,
-			required: true,
-			trim: true,
 		},
-		status: {
-			type: Boolean,
-			required: true,
-			default: false,
-			trim: true,
-		},
-		email: {
+		Email: {
 			type: String,
-			required: true,
-			unique: true,
-			trim: true,
 			validate: {
 				validator: validator.isEmail,
 				message: 'El correo electrónico debe tener un formato válido',
 			},
 		},
-		web: {
+		Contact_number: {
 			type: String,
-			required: true,
-			trim: true,
 		},
-		instagram: {
+		Web: {
 			type: String,
-			required: true,
-			trim: true,
 		},
-		nivel: {
+		Instagram: {
 			type: String,
-			required: true,
-			trim: true,
 		},
-		deleted: {
+		Level: {
+			type: String,
+		},
+		Status: {
+			type: String,
+		},
+		Deleted: {
 			type: Boolean,
 			default: false,
 			select: false,
 		},
 	},
-	{
-		timestamps: false,
-	}
+	{ timestamps: true }
 );
 
 LeadSchema.pre('find', function () {
 	this.where({ deleted: false });
 });
 
-const Lead = mongoose.model('Lead', LeadSchema);
+const Lead = new mongoose.model('lead', LeadSchema);
 
 module.exports = Lead;

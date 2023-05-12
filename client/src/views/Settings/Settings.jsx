@@ -1,5 +1,5 @@
 import Nav from "../../components/Nav/Nav";
-import Detail from "../../components/Employees_components/Detail/Detail";
+import Detail from "../../components/Lideres/Employees_components/Detail/Detail";
 
 export default function Settings() {
   return (
@@ -46,7 +46,9 @@ export default function Settings() {
             className="bg-transparent border border-white rounded-md text-center w-2/5 h-1/5 shadow-md shadow-white p-1 text-[#d1d1d1]"
             placeholder="Status"
           />
-          <button className="bg-[#334155] hover:bg-[#4f6686] text-white py-2 px-4 rounded-full m-5">Save Changes</button>
+          <button className="bg-[#334155] hover:bg-[#4f6686] text-white py-2 px-4 rounded-full m-5">
+            Save Changes
+          </button>
         </div>
       </div>
       <Detail />

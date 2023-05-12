@@ -24,7 +24,6 @@ export const TableEmployees = () => {
       mail: "tomasaguilar@gmail.com",
       phone: "11-5566-8899",
       position: "Vendedor",
-
       extra: "...",
     },
     {

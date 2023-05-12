@@ -1,10 +1,8 @@
 import React from "react";
-import style from "./Employees.module.css";
-import CardEmploy from "../../components/Employees_components/CardEmploy/CardEmploy";
-import Detail from "../../components/Employees_components/Detail/Detail";
+
+import Detail from "../../components/Lideres/Employees_components/Detail/Detail";
 import Nav from "../../components/Nav/Nav";
-import Performance from "../../components/Employees_components/Performance/Performance";
-import { TableEmployees } from "../../components/Employees_components/TableEmployees/TableEmployees";
+import { TableEmployees } from "../../components/Lideres/Dashboard/TableEmployees/TableEmployees";
 
 function Employees() {
   return (

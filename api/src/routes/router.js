@@ -1,8 +1,10 @@
 const { Router } = require('express');
 const router = Router();
 const CLevelRouter = require('./CLevelRouter');
-const employeesRouter = require('./EmployeesRouter');
-const leedsRouter = require('./leadsRouter');
+const CorredorRouter = require('./CorredorRouter');
+const LeadRouter = require('./LeadRouter');
+const LeaderRouter = require('./LeaderRouter');
+const VendedorRouter = require('./VendedorRouter');
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -10,7 +12,9 @@ const leedsRouter = require('./leadsRouter');
 // Ejemplo: router.use('/auth', authRouter);
 
 router.use('/clevel', CLevelRouter);
-router.use('/employees', employeesRouter);
-router.use('/leads', leedsRouter);
+router.use('/corredor', CorredorRouter);
+router.use('/lead', LeadRouter);
+router.use('/leader', LeaderRouter);
+router.use('/Vendedor', VendedorRouter);
 
 module.exports = router;

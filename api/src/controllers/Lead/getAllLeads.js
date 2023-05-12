@@ -1,7 +1,7 @@
 const Lead = require('../../models/Lead');
 
 const getAllLeads = async () => {
-	const leads = await Lead.find();
+	const leads = await Lead.findOne();
 	return leads;
 };
 

@@ -3,11 +3,11 @@ const validator = require('validator');
 
 const CLevelSchema = new mongoose.Schema(
 	{
-		name: {
+		Name: {
 			type: String,
-			require: true,
+			required: true,
 		},
-		email: {
+		Email: {
 			type: String,
 			required: true,
 			unique: true,
@@ -16,24 +16,29 @@ const CLevelSchema = new mongoose.Schema(
 				message: 'El correo electrónico debe tener un formato válido',
 			},
 		},
-		phone: {
-			type: String,
-			require: true,
-			default: 0,
+		Birthdate: {
+			type: Date,
+			required: true,
 		},
-		image: {
+		Photo: {
 			type: String,
-			require: true,
 		},
-		deleted: {
+		Country: {
+			type: String,
+		},
+		ContactNumber: {
+			type: String,
+		},
+		Description: {
+			type: String,
+		},
+		Deleted: {
 			type: Boolean,
 			default: false,
 			select: false,
 		},
 	},
-	{
-		timestamps: false,
-	}
+	{ timestamps: true }
 );
 
 CLevelSchema.pre('find', function () {
