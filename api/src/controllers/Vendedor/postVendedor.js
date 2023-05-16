@@ -1,34 +1,34 @@
-const Vendedor = require('../../models/Vendedor');
+const Vendedor = require("../../models/Vendedor");
 
 const postVendedor = async ({
-	Name,
-	Email,
-	Birthdate,
-	Photo,
-	Country,
-	ContactNumber,
-	Description,
-	Leads_contacted,
-	Hired_leads,
-	Declined_leads,
-	Unanswered_leads,
-	Deleted,
+  name,
+  email,
+  birthdate,
+  photo,
+  country,
+  contactNumber,
+  description,
+  leads_contacted,
+  hired_leads,
+  declined_leads,
+  unanswered_leads,
+  deleted,
 }) => {
-	const vendedor = await Vendedor.create({
-		Name,
-		Email,
-		Birthdate,
-		Photo,
-		Country,
-		ContactNumber,
-		Description,
-		Leads_contacted,
-		Hired_leads,
-		Declined_leads,
-		Unanswered_leads,
-		Deleted,
-	});
-	return vendedor;
+  const vendedor = await Vendedor.create({
+    name,
+    email,
+    birthdate,
+    photo,
+    country,
+    contactNumber,
+    description,
+    leads_contacted,
+    hired_leads,
+    declined_leads,
+    unanswered_leads,
+    deleted,
+  });
+  return vendedor;
 };
 
 module.exports = postVendedor;

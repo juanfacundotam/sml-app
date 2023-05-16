@@ -49,9 +49,9 @@ export const Sales = () => {
 	];
 
 	return (
-		<Card className='h-screen bg-[39394b] w-[40rem]'>
+		<Card className='h-full bg-[39394b] w-[735px]'>
 			<div className='flex justify-between items-center m-5'>
-				<Title className={style.title}>Sales</Title>
+				<Title className={style.title}>Recent sales</Title>
 				<button>...</button>
 			</div>
 			<Table className={style.table}>

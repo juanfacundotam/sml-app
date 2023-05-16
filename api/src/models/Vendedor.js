@@ -1,62 +1,61 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
+const mongoose = require("mongoose");
+const validator = require("validator");
 
 const VendedorSchema = new mongoose.Schema(
-	{
-		Name: {
-			type: String,
-			require: true,
-		},
-		Email: {
-			type: String,
-			required: true,
-			unique: true,
-			validate: {
-				validator: validator.isEmail,
-				message: 'El correo electrónico debe tener un formato válido',
-			},
-		},
-		Birthdate: {
-			type: Date,
-			required: true,
-		},
-		Photo: {
-			type: String,
-		},
-		Country: {
-			type: String,
-		},
-		ContactNumber: {
-			type: String,
-		},
-		Description: {
-			type: String,
-		},
-		Leads_contacted: {
-			type: String,
-		},
-		Hired_leads: {
-			type: String,
-		},
-		Declined_leads: {
-			type: String,
-		},
-		Unanswered_leads: {
-			type: String,
-		},
-		Deleted: {
-			type: Boolean,
-			default: false,
-			select: false,
-		},
-	},
-	{ timestamps: true }
+  {
+    name: {
+      type: String,
+      require: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      validate: {
+        validator: validator.isEmail,
+        message: "El correo electrónico debe tener un formato válido",
+      },
+    },
+    birthdate: {
+      type: Date,
+      required: true,
+    },
+    photo: {
+      type: String,
+    },
+    country: {
+      type: String,
+    },
+    contactNumber: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
+    leads_contacted: {
+      type: String,
+    },
+    hired_leads: {
+      type: String,
+    },
+    declined_leads: {
+      type: String,
+    },
+    unanswered_leads: {
+      type: String,
+    },
+    deleted: {
+      type: Boolean,
+      default: false,
+      select: false,
+    },
+  },
+  { timestamps: true }
 );
 
-VendedorSchema.pre('find', function () {
-	this.where({ deleted: false });
+VendedorSchema.pre("find", function () {
+  this.where({ deleted: false });
 });
 
-const Vendedor = new mongoose.model('vendedor', VendedorSchema);
+const Vendedor = new mongoose.model("vendedor", VendedorSchema);
 
 module.exports = Vendedor;

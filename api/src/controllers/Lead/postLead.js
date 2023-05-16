@@ -1,30 +1,27 @@
-const Lead = require('../../models/Lead');
+const Lead = require("../../models/Lead");
 
-const postLead = async ({
-	From,
-	Name,
-	Profession,
-	Email,
-	Contact_number,
-	Web,
-	Instagram,
-	Level,
-	Status,
-	Deleted,
-}) => {
-	const lead = await Lead.create({
-		From,
-		Name,
-		Profession,
-		Email,
-		Contact_number,
-		Web,
-		Instagram,
-		Level,
-		Status,
-		Deleted,
-	});
-	return lead;
+const postLead = async (data) => {
+  const client = await data.map(
+    ({ City, Province, Name, Category, email, Telephone, Url }) => {
+      const lead = Lead.create({
+        name: Name,
+        category: Category,
+        city: City,
+        province: Province,
+        url: Url ? Url : "-",
+        telephone: Telephone ? Telephone : "-",
+        email: email ? email : "-",
+        instagram: "",
+        level: "-",
+        status: "Activo",
+        checked: false,
+        view: false,
+        deleted: false,
+      });
+      return lead;
+    }
+  );
+  return client;
 };
 
 module.exports = postLead;

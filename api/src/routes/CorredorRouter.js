@@ -1,17 +1,18 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const {
-	postCorredorHandler,
-	getAllCorredoresHandler,
-	updateCorredorHandler,
-	getCorredorByIdHandler,
-	getCorredorByNameHandler,
-} = require('../Handlers/CorredorHandlers');
+  postCorredorHandler,
+  getAllCorredoresHandler,
+  updateCorredorHandler,
+  getCorredorByIdHandler,
+  getCorredorByNameHandler,
+} = require("../Handlers/CorredorHandlers");
 const CorredorRouter = Router();
 
-CorredorRouter.post('/', postCorredorHandler);
-CorredorRouter.get('/', getAllCorredoresHandler);
-CorredorRouter.get('/name', getCorredorByNameHandler);
-CorredorRouter.get('/:id', getCorredorByIdHandler);
-CorredorRouter.put('/:id', updateCorredorHandler);
+console.log("entro");
+CorredorRouter.post("/", postCorredorHandler);
+CorredorRouter.get("/", getAllCorredoresHandler);
+CorredorRouter.get("/name", getCorredorByNameHandler);
+CorredorRouter.get("/:id", getCorredorByIdHandler);
+CorredorRouter.put("/:id", updateCorredorHandler);
 
 module.exports = CorredorRouter;

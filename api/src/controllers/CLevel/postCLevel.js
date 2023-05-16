@@ -1,26 +1,26 @@
-const CLevel = require('../../models/CLevel');
+const CLevel = require("../../models/CLevel");
 
 const postCLevel = async ({
-	Name,
-	Email,
-	Birthdate,
-	Photo,
-	Country,
-	ContactNumber,
-	Description,
-	Deleted,
+  name,
+  email,
+  birthdate,
+  photo,
+  country,
+  contactNumber,
+  description,
+  deleted,
 }) => {
-	const cLevel = await CLevel.create({
-		Name,
-		Email,
-		Birthdate,
-		Photo,
-		Country,
-		ContactNumber,
-		Description,
-		Deleted,
-	});
-	return cLevel;
+  const cLevel = await CLevel.create({
+    name,
+    email,
+    birthdate,
+    photo,
+    country,
+    contactNumber,
+    description,
+    deleted,
+  });
+  return cLevel;
 };
 
 module.exports = postCLevel;

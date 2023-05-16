@@ -44,7 +44,7 @@ export const data = {
 
 function Reports() {
   return (
-    <div className="flex flex-col w-[45rem] rounded-xl p-5 bg-[#39394B] color-[#6d6e80]">
+    <div className="flex flex-col w-[45rem] rounded-xl p-5 bg-[#39394B] color-[#6d6e80] h-[410px]">
       <div className="flex flex-col">
         <div className="flex justify-between">
           <h2>Reports</h2>

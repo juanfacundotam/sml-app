@@ -3,13 +3,21 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/router.js');
+// const { auth } = require('express-oauth2-jwt-bearer');
+// const axios = require("axios").default;
 
+// const jwtCheck = auth({
+//   audience: 'http://localhost:5173',
+//   issuerBaseURL: 'https://dev-nzhxzzb0uswslgg5.us.auth0.com/',
+//   tokenSigningAlg: 'RS256'
+// });
 require('./db.js');
 
 const server = express();
 
 server.name = 'API';
 
+// server.use(jwtCheck);
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());

@@ -1,8 +1,8 @@
-const Lead = require('../../models/Lead');
+const Lead = require("../../models/Lead");
 
 const getAllLeads = async () => {
-	const leads = await Lead.findOne();
-	return leads;
+  const leads = await Lead.find();
+  return leads;
 };
 
 module.exports = getAllLeads;

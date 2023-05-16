@@ -6,8 +6,8 @@ import { IoLogOut } from 'react-icons/io5'
 function Logout(){
     const { logout } = useAuth0()
     return(
-        <div>
-            <button onClick={()=> logout()}><IoLogOut /></button>
+        <div  className='mt-2'>
+            <button onClick={()=> logout()}><IoLogOut className='w-8 h-8 hover:text-red-400 pl-1'/></button>
         </div>
     )
 }

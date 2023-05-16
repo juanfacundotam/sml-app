@@ -1,7 +1,7 @@
 .container {
     background-color: #39394b;
     
-    width: 15rem;
+    min-width: 15rem;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -24,6 +24,7 @@
     white-space: nowrap;
     text-align: center;
     font-weight: 500;
+    padding: 6px 10px 6px 10px ;
     cursor: pointer;
     transition: background-color 0.3s;
   }

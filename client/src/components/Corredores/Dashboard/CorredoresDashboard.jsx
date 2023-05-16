@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import style from "./CorredoresDashboard.module.css";
 import Nav from "../../Nav/Nav";
 
@@ -10,110 +12,33 @@ import {
   TableHeaderCell,
   TableBody,
   TableCell,
-  Text,
   Title,
-  Badge,
 } from "@tremor/react";
 
-import { CiGlobe, CiWarning, CiInstagram } from "react-icons/ci";
+import { CiGlobe } from "react-icons/ci";
+import { GrInstagram } from "react-icons/gr";
+import { IoGrid, IoStatsChart } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import { getLeadUnchecked10 } from "../../../redux/actions";
+import IconLabelButtons from "../../MaterialUi/IconLabelButtons";
 
 const CorredoresDashboard = () => {
-  const [client, setClient] = useState([
-    {
-      id: 1,
-      name: "",
-      Web: "",
-      Instagram: "",
-      Nivel: "",
-      Incidencia: "",
-    },
-    {
-      id: 2,
-      name: "",
-      Web: "",
-      Instagram: "",
-      Nivel: "",
-      Incidencia: "",
-    },
-    {
-      id: 3,
-      name: "",
-      Web: "",
-      Instagram: "",
-      Nivel: "",
-      Incidencia: "",
-    },
-    {
-      id: 4,
-      name: "",
-      Web: "",
-      Instagram: "",
-      Nivel: "",
-      Incidencia: "",
-    },
-    {
-      id: 5,
-      name: "",
-      Web: "",
-      Instagram: "",
-      Nivel: "",
-      Incidencia: "",
-    },
-    {
-      id: 6,
-      name: "",
-      Web: "",
-      Instagram: "",
-      Nivel: "",
-      Incidencia: "",
-    },
-    {
-      id: 7,
-      name: "",
-      Web: "",
-      Instagram: "",
-      Nivel: "",
-      Incidencia: "",
-    },
-    {
-      id: 8,
-      name: "",
-      Web: "",
-      Instagram: "",
-      Nivel: "",
-      Incidencia: "",
-    },
-    {
-      id: 9,
-      name: "",
-      Web: "",
-      Instagram: "",
-      Nivel: "",
-      Incidencia: "",
-    },
-    {
-      id: 10,
-      name: "",
-      Web: "",
-      Instagram: "",
-      Nivel: "",
-      Incidencia: "",
-    },
-  ]);
+  const [instaComplete, setInstaComplete] = useState([]);
+  const [client, setClient] = useState([]);
 
-  const [buttonWebStates, setButtonWebStates] = useState(
-    client.map(() => false)
-  );
-  const [buttoninstaStates, setButtoninstaStates] = useState(
-    client.map(() => false)
-  );
-  const [buttonIncidenciaStates, setbuttonIncidenciaStates] = useState(
-    client.map(() => false)
-  );
-  const [webComplete, setWebComplete] = useState(client.map(() => false));
-  const [instaComplete, setInstaComplete] = useState(client.map(() => false));
-
-  useEffect(() => {}, [client]);
+  const handleChangeInstagram = (event, index) => {
+    const { name, value } = event.target;
+    console.log(value);
+    setClient((prevState) => {
+      const updatedClient = [...prevState];
+      updatedClient[index] = {
+        ...updatedClient[index],
+        [name]: value,
+        instagram: value,
+      };
+      return updatedClient;
+    });
+  };
 
   const handleClientClick = (event, index) => {
     const { name, value } = event.target;
@@ -123,16 +48,9 @@ const CorredoresDashboard = () => {
       updatedClient[index] = {
         ...updatedClient[index],
         [name]: value,
-        Nivel: value,
+        level: value,
       };
-      if (name === "Web") {
-        setWebComplete((prevWebComplete) => {
-          const updatedWebComplete = [...prevWebComplete];
-          updatedWebComplete[index] = value.trim() !== "";
-          return updatedWebComplete;
-        });
-      }
-      if (name === "Instagram") {
+      if (name === "instagram") {
         setInstaComplete((prevInstaComplete) => {
           const updatedInstaComplete = [...prevInstaComplete];
           updatedInstaComplete[index] = value.trim() !== "";
@@ -142,225 +60,241 @@ const CorredoresDashboard = () => {
       return updatedClient;
     });
   };
-  const handleClickWeb = (index) => {
-    setButtonWebStates((prevState) => {
-      const updatedStates = [...prevState];
-      updatedStates[index] = !updatedStates[index];
-      return updatedStates;
-    });
+
+  const handleView = async () => {
+    console.log("Enviado el view");
+    try {
+      for (let i = 0; i < leadUnchecked10.length; i++) {
+        const response = await axios.put(
+          `http://localhost:3001/lead/${client[i]._id}`,
+          {
+            view: client[i].view,
+          }
+        );
+        console.log(response.data);
+      }
+      console.log("view seteados");
+    } catch (error) {
+      console.log("No se envio el put de view");
+    }
   };
-  const handleClickInsta = (index) => {
-    setButtoninstaStates((prevState) => {
-      const updated = [...prevState];
-      updated[index] = !updated[index];
-      return updated;
-    });
-  };
-  const handleClickIncidencia = (index) => {
-    setbuttonIncidenciaStates((prevState) => {
-      const updatedIncidencia = [...prevState];
-      updatedIncidencia[index] = !updatedIncidencia[index];
-      return updatedIncidencia;
-    });
-  };
-  const handleClickWebComplete = (index) => {
-    setWebComplete((prevState) => {
-      const updatedWebComple = [...prevState];
-      updatedWebComple[index] = !updatedWebComple[index];
-      return updatedWebComple;
-    });
+
+  const { leadUnchecked10 } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getLeadUnchecked10());
+    handleView();
+  }, [dispatch]);
+
+  useEffect(() => {
+    let clientes = [];
+    let i = 0;
+    if (leadUnchecked10.length > 0) {
+      for (i = 0; i < 10; i++) {
+        clientes.push({
+          _id: leadUnchecked10[i]._id,
+          name: leadUnchecked10[i].name,
+          url: leadUnchecked10[i].url,
+          instagram: "",
+          level: leadUnchecked10[i].level,
+          checked: true,
+          view: true,
+        });
+      }
+    }
+    setClient(clientes);
+  }, [leadUnchecked10]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    alert("Enviando Informacion");
+    try {
+      for (let i = 0; i < leadUnchecked10.length; i++) {
+        if (client[i].level !== "-") {
+          // Verificar si Instagram está vacío pero el nivel es igual a 0
+          if (client[i].instagram.trim() === "" && 
+          (client[i].level === "incidencia"||client[i].level === "0")) {
+            // Realizar el put de todas formas
+            const response = await axios.put(
+              `http://localhost:3001/lead/${client[i]._id}`,
+              {
+                _id: client[i]._id,
+                name: client[i].name,
+                url: client[i].url,
+                instagram: client[i].instagram,
+                level: client[i].level,
+                checked: client[i].checked,
+              }
+            );
+            console.log(response.data);
+          } else if (client[i].instagram.trim() !== "") {
+            // Realizar el put si Instagram no está vacío
+            const response = await axios.put(
+              `http://localhost:3001/lead/${client[i]._id}`,
+              {
+                _id: client[i]._id,
+                name: client[i].name,
+                url: client[i].url,
+                instagram: client[i].instagram,
+                level: client[i].level,
+                checked: client[i].checked,
+              }
+            );
+            console.log(response.data);
+          } else {
+            // Mostrar mensaje de alerta si falta asignar nivel
+            alert(`Al Cliente: ${client[i].name} le falta asignar nivel`);
+          }
+        }
+      }
+      alert("Solicitud enviada correctamente");
+      dispatch(getLeadUnchecked10());
+    } catch (error) {
+      console.log("No se envió el put");
+    }
   };
 
   return (
     <>
-    <Nav/>
-      <Card className="w-full h-screen m-5">
-        <div className="flex justify-between items-center m-5">
-          <Title className={style.title}>Dashboard</Title>
-          <button className={style.buttonAdd}>Send </button>
-        </div>
-
-        <Table className={style.table}>
-          <TableHead className={style.tableHead}>
-            <TableRow className={style.tableRow}>
-              <TableHeaderCell className="text-start">
-                Invoice Id
-              </TableHeaderCell>
-              <TableHeaderCell className="text-start">Name</TableHeaderCell>
-              <TableHeaderCell className="text-start">Web</TableHeaderCell>
-              <TableHeaderCell className="text-start">
-                Instagram
-              </TableHeaderCell>
-              <TableHeaderCell className="text-start">Nivel</TableHeaderCell>
-              <TableHeaderCell className="text-start">
-                Incidencia
-              </TableHeaderCell>
-            </TableRow>
-          </TableHead>
-
-          <TableBody className={style.tableBody}>
-            {client.map((item, index) => (
-              <TableRow key={item.id} className={style.tableCards}>
-                <TableCell className="flex justify-start items-center p-0">
-                  <div className="w-8 ml-2 mr-4 rounded-full">{item.id}</div>
-                </TableCell>
-                <TableCell className="flex justify-start items-center p-0">
-                  <Text className="text-start">
-                    <input
-                      className={style.inputName}
-                      type="text"
-                      name="name"
-                      value={client[index].name}
-                      onChange={(event) => handleClientClick(event, index)}
-                      placeholder="Ingrese el nombre"
-                    />
-                  </Text>
-                </TableCell>
-
-                <TableCell className="flex justify-start items-center p-0">
-                  {/* Botón de web */}
-
-                  <button
-                    type="button"
-                    name={item.id}
-                    onClick={() => handleClickWeb(index)}
-                  >
-                    <CiGlobe
-                      className={
-                        webComplete[index] ? style.iconComplete : style.icon
-                      }
-                    />
-                  </button>
-                  {/* Input de web */}
-                  {buttonWebStates[index] && (
-                    <div className={style.divInput2}>
-                      <input
-                        className={style.input}
-                        type="text"
-                        name="Web"
-                        value={client[index].Web}
-                        onChange={(event) => handleClientClick(event, index)}
-                        placeholder="Ingrese la url"
-                      />
-                      <button
-                        className={style.bottomInput}
-                        type="button"
-                        name={item.id}
-                        onClick={() => handleClickWeb(index)}
-                      >
-                        cerrar
-                      </button>
-                    </div>
-                  )}
-                  {buttonWebStates[index] && <div className={style.divInput} />}
-                </TableCell>
-
-                <TableCell className="flex justify-start items-center p-0 mx-3">
-                  <button
-                    type="button"
-                    name={item.id}
-                    onClick={() => handleClickInsta(index)}
-                  >
-                    <CiInstagram
-                      className={
-                        instaComplete[index]
-                          ? style.iconInstaComplete
-                          : style.icon
-                      }
-                    />
-                  </button>
-                  {instaComplete[index] && (
-                    <Text className="text-start">{item.Instagram}</Text>
-                  )}
-                  {buttoninstaStates[index] && (
-                    <div className={style.divInput2}>
-                      <input
-                        className={style.input}
-                        type="text"
-                        name="Instagram"
-                        value={client[index].Instagram}
-                        onChange={(event) => handleClientClick(event, index)}
-                        placeholder="Ingrese un insta"
-                      />
-                      <button
-                        className={style.bottomInput}
-                        type="button"
-                        name={item.id}
-                        onClick={() => handleClickInsta(index)}
-                      >
-                        cerrar
-                      </button>
-                    </div>
-                  )}
-                  {buttoninstaStates[index] && (
-                    <div className={style.divInput} />
-                  )}
-                </TableCell>
-
-                <TableCell className="flex justify-start items-center p-0">
-                  <button
-                    className={
-                      item.Nivel === "1"
-                        ? style.buttonNivelActive
-                        : style.buttonNivel
-                    }
-                    type="button"
-                    name={item.id}
-                    value="1"
-                    onClick={(event) => handleClientClick(event, index)}
-                  >
-                    1
-                  </button>
-                  <button
-                    className={
-                      item.Nivel === "2"
-                        ? style.buttonNivelActive
-                        : style.buttonNivel
-                    }
-                    type="button"
-                    name={item.id}
-                    value="2"
-                    onClick={(event) => handleClientClick(event, index)}
-                  >
-                    2
-                  </button>
-                  <button
-                    className={
-                      item.Nivel === "3"
-                        ? style.buttonNivelActive
-                        : style.buttonNivel
-                    }
-                    type="button"
-                    name={item.id}
-                    value="3"
-                    onClick={(event) => handleClientClick(event, index)}
-                  >
-                    3
-                  </button>
-                </TableCell>
-
-                <TableCell className="flex justify-start items-center p-0">
-                  <button
-                    type="button"
-                    name={item.id}
-                    onClick={() => handleClickIncidencia(index)}
-                  >
-                    <CiWarning className={style.icon} />
-                  </button>
-                  {buttonIncidenciaStates[index] && (
-                    <input
-                      type="text"
-                      name="Incidencia"
-                      value={client[index].Incidencia}
-                      onChange={(event) => handleClientClick(event, index)}
-                      placeholder="Ingrese un incidencia"
-                    />
-                  )}
-                </TableCell>
+      <Nav />
+      <Card className="w-full m-5">
+        <form onSubmit={handleSubmit}>
+          <div className="flex justify-between items-center">
+            <div className="flex gap-10  mt-2 mx-5 ">
+              <Title className="font-bold text-[#e2e2e2] text-lg">
+                Dashboard
+              </Title>
+              <div className="flex gap-5">
+                <Link to={"/corredores"}>
+                  <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
+                </Link>
+                <Link className="text-5xl" to={"/corredores/analytics"}>
+                  <IoStatsChart className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
+                </Link>
+              </div>
+            </div>
+            <div className="flex gap-12" type="submit" onClick={handleSubmit}>
+              <IconLabelButtons />
+            </div>
+          </div>
+          <Table className={style.table}>
+            <TableHead className={style.tableHead}>
+              <TableRow className={style.tableRow}>
+                <TableHeaderCell className="text-start">
+                  Invoice Id
+                </TableHeaderCell>
+                <TableHeaderCell className="text-start">Name</TableHeaderCell>
+                <TableHeaderCell className="text-start">Web</TableHeaderCell>
+                <TableHeaderCell className="text-start">
+                  Instagram
+                </TableHeaderCell>
+                <TableHeaderCell className="text-start">Nivel</TableHeaderCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+
+            <TableBody className="h-3/4">
+              {client.map((item, index) => (
+                <TableRow key={item._id} className={style.tableCards}>
+                  <TableCell className="flex justify-start items-center p-0">
+                    <div className="w-24 p-1 px-3 rounded-full text-ellipsis opacity-1 overflow-hidden hover:overflow-visible hover:bg-[#ffffff] hover:w-fit hover:text-black z-111 hover:absolute">
+                      <div type="text" id="id" value={client[index]._id}>
+                        <p>{client[index]._id}</p>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell className="flex justify-start items-center p-0">
+                    <div type="text" id="name" value={client[index].name}>
+                      <p className="w-96 p-1 px-3 rounded-full text-ellipsis opacity-1 whitespace-nowrap overflow-hidden ">
+                        {client[index].name}
+                      </p>
+                    </div>
+                  </TableCell>
+
+                  <TableCell className="flex justify-start items-center p-0">
+                    {/* Botón de web */}
+                    <Link to={client[index].url} target="_blank">
+                      <p value={client[index].url}>
+                        <CiGlobe className="text-[2rem] text-[#418df0]" />
+                      </p>
+                    </Link>
+                  </TableCell>
+
+                  <TableCell className="flex justify-start items-center gap-3 p-0 mx-3">
+                    <div>
+                      <GrInstagram className="text-[2rem] text-[#418df0]" />
+                    </div>
+                    <input
+                      className={`bg-transparent rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-white focus:placeholder-black ${
+                        client[index].instagram ? "border-green-500" : ""
+                      }`}
+                      type="text"
+                      name="instagram"
+                      value={client[index].instagram}
+                      onChange={(event) => handleChangeInstagram(event, index)}
+                      placeholder="Ingrese un instagram"
+                    />
+                  </TableCell>
+
+                  <TableCell className="flex justify-start items-center p-0">
+                    <button
+                      className={
+                        item.level === "0"
+                          ? style.buttonNivelActive
+                          : style.buttonNivel
+                      }
+                      type="button"
+                      name={item._id}
+                      value="0"
+                      onClick={(event) => handleClientClick(event, index)}
+                    >
+                      0
+                    </button>
+                    <button
+                      className={
+                        item.level === "1"
+                          ? style.buttonNivelActive
+                          : style.buttonNivel
+                      }
+                      type="button"
+                      name={item._id}
+                      value="1"
+                      onClick={(event) => handleClientClick(event, index)}
+                    >
+                      1
+                    </button>
+                    <button
+                      className={
+                        item.level === "2"
+                          ? style.buttonNivelActive
+                          : style.buttonNivel
+                      }
+                      type="button"
+                      name={item._id}
+                      value="2"
+                      onClick={(event) => handleClientClick(event, index)}
+                    >
+                      2
+                    </button>
+                    <button
+                      className={
+                        item.level === "incidencia"
+                          ? style.buttonNivelActive
+                          : style.buttonNivel
+                      }
+                      type="button"
+                      name={item._id}
+                      value="incidencia"
+                      onClick={(event) => handleClientClick(event, index)}
+                    >
+                      ⚠
+                    </button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </form>
       </Card>
     </>
   );

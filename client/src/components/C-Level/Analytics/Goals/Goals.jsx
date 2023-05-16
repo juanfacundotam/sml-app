@@ -26,7 +26,7 @@ export const data = {
 
 function Goals() {
 	return (
-		<div className='flex flex-col justify-around items-center rounded-xl h-[40rem] w-[30rem] bg-[#39394b]'>
+		<div className='flex flex-col justify-around items-center rounded-xl h-[410px] w-[30rem] bg-[#39394b]'>
 			<div className='flex w-[25rem] justify-between items-center'>
 				<h2>Goals</h2>
 				<p>...</p>

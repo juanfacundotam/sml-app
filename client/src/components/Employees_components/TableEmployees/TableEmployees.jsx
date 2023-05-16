@@ -63,7 +63,7 @@ export const TableEmployees = () => {
   return (
     <Card className="w-3/5 h-screen bg-[#222131] rounded-none">
       <div className="flex justify-between items-center m-5">
-        <Title className={style.title}>Employees</Title>
+        <Title className="font-bold text-[#e2e2e2] text-">Employees</Title>
         <button className={style.buttonAdd}>Add Customer +</button>
       </div>
       <Table className={style.table}>

@@ -1,34 +1,34 @@
-const Corredor = require('../../models/Corredor');
+const Corredor = require("../../models/Corredor");
 
 const postCorredor = async ({
-	Name,
-	Email,
-	Birthdate,
-	Photo,
-	Country,
-	ContactNumber,
-	Description,
-	Classifications,
-	Average_delay,
-	Incidences,
-	Hired_leads,
-	Deleted,
+  name,
+  email,
+  birthdate,
+  photo,
+  country,
+  contactNumber,
+  description,
+  classifications,
+  average_delay,
+  incidences,
+  hired_leads,
+  deleted,
 }) => {
-	const corredor = await Corredor.create({
-		Name,
-		Email,
-		Birthdate,
-		Photo,
-		Country,
-		ContactNumber,
-		Description,
-		Classifications,
-		Average_delay,
-		Incidences,
-		Hired_leads,
-		Deleted,
-	});
-	return corredor;
+  const corredor = await Corredor.create({
+    name,
+    email,
+    birthdate,
+    photo,
+    country,
+    contactNumber,
+    description,
+    classifications,
+    average_delay,
+    incidences,
+    hired_leads,
+    deleted,
+  });
+  return corredor;
 };
 
 module.exports = postCorredor;

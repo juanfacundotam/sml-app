@@ -4,17 +4,17 @@ import About from "../About/About";
 
 function Detail(props) {
   return (
-    <div className="  flex h-screen bg-slate-700  justify-center items-center w-1/5 flex-col  relative">
+    <div className="  flex h-screen bg-slate-700  justify-center items-center w-1/5 flex-col relative ">
       {/* ********* ********* ********* ********* ********* ********* TARJETA DE USUARIO ********* ********* ********* *********  ********* ********* */}
-      <div className=" h-1/4 justify-center items-center text-center flex flex-col min-w-min gap-2 relative">
+      <div className=" h-1/4 justify-center items-center text-center flex flex-col w-full gap-2 relative">
         <div className=" bg-emerald-700  w-20 h-20 rounded-full flex ">
           <img
-            src="https://i.pravatar.cc/150"
+            src={props.picture}
             alt="avatar"
             className="rounded-full "
           />
         </div>
-        <p className=" font-bold text-24 pt-1 text-white">Nico Fadel</p>
+        <p className=" font-bold text-24 pt-1 text-white">{props.name} </p>
         <p className=" font-light text-14 text-gray-400">
           Developer / FullStack
         </p>
@@ -23,7 +23,7 @@ function Detail(props) {
 
       {/* ********* ********* ********* ********* ********* *********  INFORMACION DEL USUARIO ********* ********* ********* ********* ********* *********  */}
       <div className=" h-1/4 justify-center items-left text-left flex flex-col w-4/5 relative gap-2">
-        <p className=" font-normal text-18 pt-1 text-white">Contact Info</p>
+        <p className=" font-normal text-18 pt-1 text-gray-200">Contact Info</p>
         <div className="flex items-center gap-2 text-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ function Detail(props) {
             <polyline points="3 7 12 13 21 7" />
           </svg>
           <p className=" font-normal text-14  text-white pt-0">
-            Correo@correo.com
+            {props.email}
           </p>
         </div>
         <hr className=" border-gray-400 w-11/12" />
@@ -70,7 +70,7 @@ function Detail(props) {
             <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
           </svg>
           <div>
-            <p className=" font-normal text-14 pt-0 text-white">
+            <p className=" font-normal text-14 pt-0 text-gray-200">
               Direcion 321 das12 sdahiuqhd 333 sadji, 444211
             </p>
           </div>

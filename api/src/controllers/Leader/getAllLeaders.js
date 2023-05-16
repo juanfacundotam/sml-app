@@ -1,8 +1,8 @@
-const Leader = require('../../models/Leader');
+const Leader = require("../../models/Leader");
 
 const getAllLeaders = async () => {
-	const leaders = await Leader.findOne();
-	return leaders;
+  const leaders = await Leader.find();
+  return leaders;
 };
 
 module.exports = getAllLeaders;

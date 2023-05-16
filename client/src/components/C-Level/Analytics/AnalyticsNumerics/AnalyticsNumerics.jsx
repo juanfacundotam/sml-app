@@ -9,7 +9,7 @@ import {
 
 function AnalyticsNumerics() {
 	return (
-		<div className={style.container}>
+		<div className={style.container }>
 			<div className={style.card}>
 				<div className={style.icon1}>
 					<BsFillHeartFill />
