@@ -1,5 +1,4 @@
 # Logs
-
 logs
 *.log
 npm-debug.log*
@@ -7,13 +6,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
-
 dist
 dist-ssr
 *.local
-
-**tailwind.css
 
 # Editor directories and files
 .vscode/*
@@ -26,7 +21,4 @@ dist-ssr
 *.sln
 *.sw?
 **node_modules
-**.env
-api/.env
 *.css
-api/.env
