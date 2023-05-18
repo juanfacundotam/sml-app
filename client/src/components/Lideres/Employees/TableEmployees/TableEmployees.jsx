@@ -18,10 +18,11 @@ import { CiMail } from "react-icons/ci";
 import { getAllCorredores, getAllVendedores } from "../../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import NestedModal from "./MaterialUi/NestedModal";
-import BasicButtonGroup from "./MaterialUi/BasicButtonGroup";
-//
+import NestedModalEdit from "./MaterialUi/NestedModalEdit";
 export const TableEmployees = () => {
-  const [cp, setCp] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalIndex, setModalIndex] = useState(null);
+
   const { corredores, vendedores } = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -43,8 +44,9 @@ export const TableEmployees = () => {
     setCurrentPage(pageNumber);
   };
 
-  const controlPanel = () => {
-    setCp(!cp);
+  const modal = (index, item) => {
+    setModalIndex(index);
+    setShowModal(true);
   };
 
   return (
@@ -76,7 +78,11 @@ export const TableEmployees = () => {
 
             <TableBody className={style.tableBody}>
               {currentCard.map((item, index) => (
-                <TableRow key={index} className={style.tableCards}>
+                <TableRow
+                  onClick={(index) => modal(index, item)}
+                  key={index}
+                  className={style.tableCards}
+                >
                   <TableCell className="flex justify-start items-center p-0">
                     <img
                       className="w-8 ml-2 mr-4 rounded-full"
@@ -104,14 +110,13 @@ export const TableEmployees = () => {
                     )}
                   </TableCell>
                   <TableCell className="p-0 relative">
-                    <button onClick={controlPanel}>
-                      <HiOutlineDotsHorizontal className="text-18" />
-                    </button>
-                    {cp ? (
-                      <div className="absolute top-[2rem] right-0">
-                        <BasicButtonGroup />
+                    <div>
+                      <div className=" ml-20 pl-2">
+                        <button>
+                            <NestedModalEdit showModal={showModal} />
+                        </button>
                       </div>
-                    ) : null}
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
