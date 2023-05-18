@@ -13,16 +13,12 @@ import {
   Title,
   Badge,
 } from "@tremor/react";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { CiMail } from "react-icons/ci";
 import { getAllCorredores, getAllVendedores } from "../../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import NestedModal from "./MaterialUi/NestedModal";
-import NestedModalEdit from "./MaterialUi/NestedModalEdit";
+import NestedModalEdit from "./MaterialUi/Edit/NestedModalEdit";
 export const TableEmployees = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [modalIndex, setModalIndex] = useState(null);
-
   const { corredores, vendedores } = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -44,10 +40,7 @@ export const TableEmployees = () => {
     setCurrentPage(pageNumber);
   };
 
-  const modal = (index, item) => {
-    setModalIndex(index);
-    setShowModal(true);
-  };
+  console.log(currentCard);
 
   return (
     <>
@@ -78,11 +71,7 @@ export const TableEmployees = () => {
 
             <TableBody className={style.tableBody}>
               {currentCard.map((item, index) => (
-                <TableRow
-                  onClick={(index) => modal(index, item)}
-                  key={index}
-                  className={style.tableCards}
-                >
+                <TableRow key={index} className={style.tableCards}>
                   <TableCell className="flex justify-start items-center p-0">
                     <img
                       className="w-8 ml-2 mr-4 rounded-full"
@@ -112,9 +101,12 @@ export const TableEmployees = () => {
                   <TableCell className="p-0 relative">
                     <div>
                       <div className=" ml-20 pl-2">
-                        <button>
-                            <NestedModalEdit showModal={showModal} />
-                        </button>
+                        <NestedModalEdit
+                          itemName={item.name}
+                          itemEmail={item.email}
+                          itemPhone={item.contactNumber}
+                          itemRol={item.rol}
+                        />
                       </div>
                     </div>
                   </TableCell>

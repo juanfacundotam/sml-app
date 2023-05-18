@@ -130,7 +130,7 @@ function ChildModal({ inputName, inputEmail, selectEmployees, handleReset }) {
   );
 }
 
-export default function NestedModal(name, email, employees) {
+export default function NestedModal() {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {

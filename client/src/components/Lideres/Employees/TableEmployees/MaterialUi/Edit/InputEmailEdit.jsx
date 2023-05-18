@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-export default function InputName({ name, setName, itemName }) {
+export default function InputEmailEdit({
+  itemEmail,
+  inputEmail,
+  setInputEmail,
+}) {
   const handleChange = (event) => {
-    setName(event.target.value);
+    setInputEmail(event.target.value);
   };
 
   return (
@@ -17,9 +21,9 @@ export default function InputName({ name, setName, itemName }) {
     >
       <TextField
         fullWidth
-        label={itemName}
-        id={itemName}
-        value={name}
+        label={itemEmail}
+        id={itemEmail}
+        value={inputEmail}
         onChange={handleChange}
         InputProps={{
           style: {
