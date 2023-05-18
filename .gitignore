@@ -22,4 +22,5 @@ dist-ssr
 *.sw?
 **node_modules
 *.css
-api/.env
+**.env
+client/public/css/tailwind.css
