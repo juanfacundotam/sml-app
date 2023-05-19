@@ -36,31 +36,6 @@ const CorredoresDashboard = () => {
   const org = useOrganization();
   const orgList = useOrganizationList();
 
-  const SendLeadCreate = () => {
-    toast.success("✔ lead Create!", {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
-  const SendErrorUpdateAlert = () => {
-    toast.error("The lead could not be updated!", {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
-
   const handleChangeInstagram = (event, index) => {
     const { name, value } = event.target;
     console.log(value);
@@ -126,8 +101,8 @@ const CorredoresDashboard = () => {
           name: leadUnchecked10[i].name,
           url: leadUnchecked10[i].url,
           instagram: "",
-          level: leadUnchecked10[i].level,
-          checked: leadUnchecked10[i].checked,
+          level: "-",
+          checked: false,
           view: true,
         });
       }
@@ -135,14 +110,76 @@ const CorredoresDashboard = () => {
     setClient(clientes);
   }, [leadUnchecked10]);
 
-  console.log(leadUnchecked10);
+  const SendLeads = (name) => {
+    toast.info(`✔ ${name} Send Leads! `, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const SendLeadsErrorInsta = (name) => {
+    toast.error(`❌ Error Instagram incomplete ${name}!`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const SendLeadsErrorLevel = (name) => {
+    toast.error(`❌ Error Instagram incomplete ${name}!`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const SendLeadsErrorInsta0 = (name) => {
+    toast.error(`❌ Error Instagram with Level 0 ${name}!`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const SendLeadsSuccess = () => {
+    toast.success(`✔ Send Leads Success!`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    SendLeads(user.fullName);
     try {
       for (let i = 0; i < leadUnchecked10.length; i++) {
         if (client[i].level !== "-") {
-          if (
+          if (client[i].instagram.trim() !== "" && client[i].level === "0") {
+            SendLeadsErrorInsta0(client[i].name);
+          } else if (
             client[i].instagram.trim() === "" &&
             (client[i].level === "incidencia" || client[i].level === "0")
           ) {
@@ -159,47 +196,46 @@ const CorredoresDashboard = () => {
               }
             );
             console.log(response.data);
+            if (client[i].level === "incidencia") {
+              const emailData = {
+                clientName: client[i].name,
+                recipientEmail: "gustavomontespalavecino@gmail.com",
+                message: `Se ha detectado una incidencia clasificada por el corredor ${user.emailAddresses[0].emailAddress} para el cliente ${client[i].name} con el numero de id ${client[i]._id}. Por favor, revisa la situación y toma las medidas necesarias.`,
+              };
+
+              await axios.post(
+                "http://localhost:3001/corredor/sendmail",
+                emailData
+              );
+            }
+          } else if (
+            client[i].instagram.trim() !== "" &&
+            client[i].level !== "-"
+          ) {
+            const response = await axios.put(
+              `http://localhost:3001/lead/${client[i]._id}`,
+              {
+                _id: client[i]._id,
+                name: client[i].name,
+                url: client[i].url,
+                instagram: client[i].instagram,
+                level: client[i].level,
+                checked: true,
+                corredor: user.fullName,
+              }
+            );
+            console.log(response.data);
+          } else {
+            SendLeadsErrorInsta(client[i].name);
           }
-          // if (client[i].level === "incidencia") {
-          //   // Enviar correo electrónico utilizando el servidor back-end
-          //   const emailData = {
-          //     clientName: client[i].name,
-          //     recipientEmail: "gustavomontespalavecino@gmail.com",
-          //     message: `Se ha detectado una incidencia clasificada por el corredor ${user.emailAddresses[0].emailAddress} para el cliente ${client[i].name} con el numero de id ${client[i]._id}. Por favor, revisa la situación y toma las medidas necesarias.`,
-          //   };
-
-          //   await axios.post(
-          //     "http://localhost:3001/corredor/sendmail",
-          //     emailData
-          //   );
-          // }
-          // } else if (
-          //   client[i].instagram.trim() !== "" &&
-          //   client[i].level !== "-"
-          // ) {
-          //   // Realizar el put si Instagram no está vacío
-          //   const response = await axios.put(
-          //     `http://localhost:3001/lead/${client[i]._id}`,
-          //     {
-          //       _id: client[i]._id,
-          //       name: client[i].name,
-          //       url: client[i].url,
-          //       instagram: client[i].instagram,
-          //       level: client[i].level,
-          //       checked: client[i].checked,
-          //       corredor: user.fullName,
-          //     }
-          //   );
-
-          //   console.log(response.data);
-          // }
+        } else {
+          SendLeadsErrorLevel(client[i].name);
         }
       }
-
-      SendLeadCreate();
+      SendLeadsSuccess();
       dispatch(getLeadUnchecked10());
     } catch (error) {
-      SendErrorUpdateAlert();
+      await swal(":(", "error al enviar la informacion!", "error");
       console.log({ error: error.message });
     }
   };
