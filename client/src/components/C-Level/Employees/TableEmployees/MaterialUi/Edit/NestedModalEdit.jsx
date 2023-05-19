@@ -21,6 +21,58 @@ const style = {
   pb: 3,
 };
 
+function ChildModalDelete({ itemRol, itemId }) {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleCreate = async () => {
+    alert("se inicia el banedado");
+
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/${itemRol}/${itemId}`,
+        {
+          deleted: true,
+        }
+      );
+
+      alert(`baneado con exito ${itemRol} ${itemId}`);
+      console.log(response.data);
+    } catch (error) {
+      console.log(`No se pudo enviar el baneado de ${itemRol} ${itemId} `);
+    }
+
+    setOpen(false);
+  };
+
+  return (
+    <React.Fragment>
+      <Button
+        variant="contained"
+        sx={{ marginTop: "2rem" }}
+        onClick={handleOpen}
+      >
+        Delete Employ
+      </Button>
+      <Modal
+        open={open}
+        onClose={handleCreate}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style, width: "20%", backgroundColor: "#39394b" }}>
+          <h2 id="child-modal-title">Confirm employee update</h2>
+          <Button variant="contained" onClick={handleCreate}>
+            Delete Employ
+          </Button>
+        </Box>
+      </Modal>
+    </React.Fragment>
+  );
+}
+
 function ChildModal({ inputName, inputEmail, inputPhone, itemRol, itemId }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -147,6 +199,7 @@ export default function NestedModalEdit({
               itemRol={itemRol}
               itemId={itemId}
             />
+            <ChildModalDelete itemRol={itemRol} itemId={itemId} />
           </div>
         </Box>
       </Modal>

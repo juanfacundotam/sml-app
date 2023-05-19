@@ -50,6 +50,11 @@ const LeadSchema = new mongoose.Schema(
       require: true,
       default: "",
     },
+    noresponde_count: {
+      type: Number,
+      require: true,
+      default: 0,
+    },
     vendedor: {
       type: String,
       require: true,
