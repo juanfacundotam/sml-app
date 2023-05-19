@@ -12,7 +12,7 @@ import {
   Title,
   Badge,
 } from "@tremor/react";
-import { CiMail, CiInstagram, CiPhone } from "react-icons/ci";
+import { CiMail, CiInstagram, CiPhone, CiWarning } from "react-icons/ci";
 import InputRunner from "./MaterialUi/InputRunner";
 import InputSeller from "./MaterialUi/InputSeller";
 import SelectLevel from "./MaterialUi/SelectLevel";
@@ -235,32 +235,38 @@ export const AnalyticLeader = () => {
                       onClick={(index) => handleOpen(item, index)}
                     >
                       <TableCell className="flex justify-center items-center p-0  ">
-                        <div className="text-ellipsis w-8  flex justify-start items-center p-0">
-                          <Text className=" opacity-1 overflow-hidden hover:overflow-visible  hover:bg-[#ffffff] hover:w-fit hover:text-black z-111 hover:absolute ">
+                        <div className="text-ellipsis w-8  flex justify-start items-center p-0 text-start">
+                          <Text className=" rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                             {item._id}
                           </Text>
                         </div>
                       </TableCell>
                       <TableCell className="flex justify-center items-center p-0 ">
                         <div className="w-28 text-ellipsis  flex justify-start items-center p-0">
-                          <Text className=" opacity-1 overflow-hidden hover:overflow-visible hover:bg-[#ffffff] hover:w-fit hover:text-black z-111 hover:absolute">
+                          <Text className=" rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                             {item.name}
                           </Text>
                         </div>
                       </TableCell>
                       <TableCell className="flex justify-center items-center p-0">
                         <div className="w-28 text-ellipsis  flex justify-start items-center p-0 ">
-                          <Text className=" opacity-1 overflow-hidden hover:overflow-visible hover:bg-[#ffffff] hover:w-fit hover:text-black z-111 hover:absolute">
+                          <Text className=" rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                             {item.category}
                           </Text>
                         </div>
                       </TableCell>
-                      <TableCell className="flex justify-center items-center p-0">
-                        <div className="flex w-6 text-ellipsis justify-start items-center p-0 ">
-                          <Text className=" opacity-1 overflow-hidden hover:overflow-visible hover:bg-[#ffffff] hover:w-fit hover:text-black z-111 hover:absolute">
-                            {item.level}
-                          </Text>
-                        </div>
+                      <TableCell className="flex justify-center items-center p-0 ">
+                        {item.level !== "incidencia" ? (
+                          <div className="flex w-6 text-ellipsis justify-start items-center p-0">
+                            <p className="bg-[#6254ff] text-[#ffffff] w-6 rounded flex items-center justify-center text-[23px]  ">
+                              {item.level}
+                            </p>
+                          </div>
+                        ) : (
+                          <div className="bg-[#6254ff] text-[#e8e8e9] w-6 rounded  flex items-center justify-center text-24  ">
+                            <CiWarning className="text-[#fdfa3a] p-0  font-bold" />
+                          </div>
+                        )}
                       </TableCell>
                       <TableCell className="flex justify-center items-center p-0 ">
                         <div className="flex w-6 text-ellipsis justify-start items-center p-0 ">
@@ -283,13 +289,13 @@ export const AnalyticLeader = () => {
                           {item.instagram !== "" ? (
                             <div className=" flex opacity-1 overflow-hidden hover:overflow-visible hover:bg-[#ffffff] hover:w-fit hover:text-black z-111 hover:absolute">
                               <div>
-                                <CiInstagram className={style.mail} />
+                                <CiInstagram className={style.ig} />
                               </div>
                               <Text>{item.instagram}</Text>
                             </div>
                           ) : (
                             <div>
-                              <CiInstagram className={style.notMail} />
+                              <CiInstagram className={style.notIg} />
                             </div>
                           )}
                         </div>
@@ -325,14 +331,33 @@ export const AnalyticLeader = () => {
                         </div>
                       </TableCell>
                       <TableCell className="flex justify-center items-center p-0">
-                        {item.status ? (
+                        {item.status === "Activo" ? (
                           <Text className="bg-[#26af7f]  text-[#1f1e1e]   px-2 py-1.5 rounded-xl text-center w-48">
                             Contratado
                           </Text>
                         ) : (
-                          <Text className="bg-[#b44f82] text-[#e0dfdf] w-full px-2 py-1.5 rounded-xl text-center">
-                            No Contactado
+                          ""
+                        )}
+                        {item.status === "Sin contactar" ? (
+                          <Text className="bg-[#b44f82]  text-[#e0dfdf]   px-2 py-1.5 rounded-xl text-center w-48">
+                            Sin Contactar
                           </Text>
+                        ) : (
+                          ""
+                        )}
+                        {item.status === "No responde" ? (
+                          <Text className="bg-[#b44f82] text-[#e0dfdf] px-2 py-1.5 rounded-xl text-center w-48">
+                            No Responde
+                          </Text>
+                        ) : (
+                          ""
+                        )}
+                        {item.status === "Rechazado" ? (
+                          <Text className="bg-[#b44f82] text-[#e0dfdf] px-2 py-1.5 rounded-xl text-center w-48">
+                            Rechazado
+                          </Text>
+                        ) : (
+                          ""
                         )}
                       </TableCell>
                     </button>

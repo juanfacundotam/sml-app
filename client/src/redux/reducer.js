@@ -180,7 +180,7 @@ const rootReducer = (state = initialState, action) => {
         console.log("sin contactar");
         filteredStatus = copyStatus.filter((client) => {
           const clientStatus = client.status ? client.status : "";
-          return clientStatus === "Sin Contactar";
+          return clientStatus === "Sin contactar";
         });
       }
       return {
