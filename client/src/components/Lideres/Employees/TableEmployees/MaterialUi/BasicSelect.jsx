@@ -10,8 +10,6 @@ const StyledMenuItem = styled(MenuItem)(() => ({
   "&:hover": {
     backgroundColor: "#39394b",
   },
-  backgroundColor: "#39394b",
-  "&.Mui-selected": {},
 }));
 
 const StyledInputLabel = styled(InputLabel)(() => ({
