@@ -21,14 +21,14 @@ import { IoGrid, IoStatsChart } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { getLeadUnchecked10 } from "../../../redux/actions";
 import IconLabelButtons from "../../MaterialUi/IconLabelButtons";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 import {
   useUser,
   useOrganization,
   useOrganizationList,
 } from "@clerk/clerk-react";
-
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
@@ -36,7 +36,6 @@ const CorredoresDashboard = () => {
   const org = useOrganization();
   const orgList = useOrganizationList();
 
-  
   const handleChangeInstagram = (event, index) => {
     const { name, value } = event.target;
     console.log(value);
@@ -61,11 +60,11 @@ const CorredoresDashboard = () => {
         [name]: value,
         level: value,
       };
-      
+
       return updatedClient;
     });
   };
-  
+
   const handleView = async () => {
     console.log("Enviado el view");
     try {
@@ -87,8 +86,6 @@ const CorredoresDashboard = () => {
   const { leadUnchecked10 } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-
-
   useEffect(() => {
     dispatch(getLeadUnchecked10());
     handleView();
@@ -104,32 +101,88 @@ const CorredoresDashboard = () => {
           name: leadUnchecked10[i].name,
           url: leadUnchecked10[i].url,
           instagram: "",
-          level: leadUnchecked10[i].level,
-          checked: leadUnchecked10[i].checked,
+          level: "-",
+          checked: false,
           view: true,
         });
       }
     }
     setClient(clientes);
   }, [leadUnchecked10]);
-  
-  console.log(leadUnchecked10);
-  console.log(user);
-  console.log(user.emailAddresses[0].emailAddress);
-  //console.log(orgList.organizationList[0]);
-  
+
+  const SendLeads = (name) => {
+    toast.info(`✔ ${name} Send Leads! `, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const SendLeadsErrorInsta = (name) => {
+    toast.error(`❌ Error Instagram incomplete ${name}!`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const SendLeadsErrorLevel = (name) => {
+    toast.error(`❌ Error Instagram incomplete ${name}!`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const SendLeadsErrorInsta0 = (name) => {
+    toast.error(`❌ Error Instagram with Level 0 ${name}!`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const SendLeadsSuccess = () => {
+    toast.success(`✔ Send Leads Success!`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await swal("Enviando informacion!", `porfavor no cierre la pestaña hasta completar el proceso`, "warning",);
+    SendLeads(user.fullName);
     try {
       for (let i = 0; i < leadUnchecked10.length; i++) {
         if (client[i].level !== "-") {
-          // Verificar si Instagram está vacío pero el nivel es igual a 0
-          if (
+          if (client[i].instagram.trim() !== "" && client[i].level === "0") {
+            SendLeadsErrorInsta0(client[i].name);
+          } else if (
             client[i].instagram.trim() === "" &&
             (client[i].level === "incidencia" || client[i].level === "0")
           ) {
-            // Realizar el put de todas formas
             const response = await axios.put(
               `http://localhost:3001/lead/${client[i]._id}`,
               {
@@ -138,13 +191,12 @@ const CorredoresDashboard = () => {
                 url: client[i].url,
                 instagram: client[i].instagram,
                 level: client[i].level,
-                checked: client[i].checked,
-                corredor: user.fullName
+                checked: true,
+                corredor: user.fullName,
               }
             );
             console.log(response.data);
             if (client[i].level === "incidencia") {
-              // Enviar correo electrónico utilizando el servidor back-end
               const emailData = {
                 clientName: client[i].name,
                 recipientEmail: "gustavomontespalavecino@gmail.com",
@@ -160,7 +212,6 @@ const CorredoresDashboard = () => {
             client[i].instagram.trim() !== "" &&
             client[i].level !== "-"
           ) {
-            // Realizar el put si Instagram no está vacío
             const response = await axios.put(
               `http://localhost:3001/lead/${client[i]._id}`,
               {
@@ -169,19 +220,19 @@ const CorredoresDashboard = () => {
                 url: client[i].url,
                 instagram: client[i].instagram,
                 level: client[i].level,
-                checked: client[i].checked,
-                corredor: user.fullName
+                checked: true,
+                corredor: user.fullName,
               }
             );
             console.log(response.data);
           } else {
-            await swal("Atencion!", `Al Cliente: ${client[i].name} le falta asignar instagram`, "warning");
+            SendLeadsErrorInsta(client[i].name);
           }
         } else {
-          await swal("Atencion!", `Al Cliente: ${client[i].name} le falta asignar nivel`, "warning",);
+          SendLeadsErrorLevel(client[i].name);
         }
       }
-      await swal("Good job!", "informacion enviada correctamente!", "success");
+      SendLeadsSuccess();
       dispatch(getLeadUnchecked10());
     } catch (error) {
       await swal(":(", "error al enviar la informacion!", "error");
@@ -193,6 +244,7 @@ const CorredoresDashboard = () => {
     <>
       <Nav />
       <Card className="w-full m-5 bg-[#222131]">
+        <ToastContainer />
         <form onSubmit={handleSubmit}>
           <div className="flex justify-between items-center">
             <div className="flex gap-10  mt-2 mx-5 ">
@@ -259,8 +311,9 @@ const CorredoresDashboard = () => {
                       <GrInstagram className="text-[2rem] text-[#418df0]" />
                     </div>
                     <input
-                      className={`bg-transparent rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-white focus:placeholder-black ${client[index].instagram ? "border-green-500" : ""
-                        }`}
+                      className={`bg-transparent rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-white focus:placeholder-black ${
+                        client[index].instagram ? "border-green-500" : ""
+                      }`}
                       type="text"
                       name="instagram"
                       value={client[index].instagram}
