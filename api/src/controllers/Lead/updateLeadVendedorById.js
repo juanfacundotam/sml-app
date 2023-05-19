@@ -45,6 +45,8 @@ const updateLeadVendedorById = async (id, updatedData) => {
     { new: true }
   );
 
+  console.log(vendedor)
+
   const data = {
     leadUpdate,
     vendedor,
