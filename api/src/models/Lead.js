@@ -49,9 +49,15 @@ const LeadSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
-    statusoption: {
+    vendedor_id: {
       type: String,
       require: true,
+      default: "",
+    },
+    corredor_id: {
+      type: String,
+      require: true,
+      default: "",
     },
     checked: {
       type: Boolean,
