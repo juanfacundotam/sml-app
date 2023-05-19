@@ -136,9 +136,6 @@ const CorredoresDashboard = () => {
   }, [leadUnchecked10]);
 
   console.log(leadUnchecked10);
-  console.log(user);
-  console.log(user.emailAddresses[0].emailAddress);
-  //console.log(orgList.organizationList[0]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -157,7 +154,7 @@ const CorredoresDashboard = () => {
                 url: client[i].url,
                 instagram: client[i].instagram,
                 level: client[i].level,
-                checked: client[i].checked,
+                checked: true,
                 corredor: user.fullName,
               }
             );
