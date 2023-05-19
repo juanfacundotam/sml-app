@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Logout from '../../views/Logout/Logout';
-import Profile from '../../views/Login/Profile';
+import { UserButton } from '@clerk/clerk-react';
+import styles from "./Nav.module.css"
 
 import { IoStatsChart, IoSettingsSharp, IoBagSharp } from 'react-icons/io5';
 
@@ -61,8 +61,16 @@ function Nav() {
 			</div>
 
 			<div className='flex flex-col justify-center w-full items-center mb-5'>
-				<Profile />
-				<Logout />
+				{/*<Profile />*/}
+				{<UserButton 
+        appearance={{
+          elements:{
+            userButtonPopoverCard:styles.userButtonPopoverCard,
+            userButtonPopoverActionButtonText: styles.userButtonPopoverActionButtonText,
+            userPreviewMainIdentifier: styles.userPreviewMainIdentifier,
+            userPreviewSecondaryIdentifier: styles.userPreviewSecondaryIdentifier
+          }
+        }}/>}
 			</div>
 		</div>
 	);
