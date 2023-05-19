@@ -321,7 +321,7 @@ const VendedoresDashboard = () => {
             </div>
           )}
         </div>
-        {pages.length > 0 && (
+        {data.length > 10 && (
           <div className="mb-5">
             <PaginationOutlined
               pageStyle={pageStyle}

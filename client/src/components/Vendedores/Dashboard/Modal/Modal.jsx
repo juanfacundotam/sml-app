@@ -48,7 +48,6 @@ function ChildModal({
         lead: item.name,
         status: statusObj.status,
         status_op: statusObj.status_op,
-        Llamados: statusObj.noresponde_count,
       }
     } else {
       dataVendedor = {
@@ -57,6 +56,9 @@ function ChildModal({
         status_op: statusObj.status_op
       }
     }
+
+
+    // console.log(dataVendedor.llamados)
 
     const dataLead = {
       status: statusObj.status,
@@ -242,6 +244,7 @@ export default function NestedModal({
     status_op: item.status_op,
     noresponde_count: item.noresponde_count,
   });
+
 
   useEffect(() => {
     setStatusObj({
