@@ -2,11 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-export default function InputPhoneEdit({
-  ItemPhone,
-  inputPhone,
-  setInputPhone,
-}) {
+export default function InputPhoneEdit({ inputPhone, setInputPhone }) {
   const handleChange = (event) => {
     setInputPhone(event.target.value);
   };
@@ -21,8 +17,8 @@ export default function InputPhoneEdit({
     >
       <TextField
         fullWidth
-        label={ItemPhone}
-        id={ItemPhone}
+        label="Phone"
+        id="Phone"
         value={inputPhone}
         onChange={handleChange}
         InputProps={{

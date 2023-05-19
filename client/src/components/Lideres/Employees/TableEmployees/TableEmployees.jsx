@@ -21,7 +21,7 @@ import NestedModalEdit from "./MaterialUi/Edit/NestedModalEdit";
 export const TableEmployees = () => {
   const { corredores, vendedores } = useSelector((state) => state);
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     dispatch(getAllCorredores());
     dispatch(getAllVendedores());
@@ -102,6 +102,7 @@ export const TableEmployees = () => {
                     <div>
                       <div className=" ml-20 pl-2">
                         <NestedModalEdit
+                          itemId={item._id}
                           itemName={item.name}
                           itemEmail={item.email}
                           itemPhone={item.contactNumber}

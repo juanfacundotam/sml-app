@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-export default function InputNameEdit({ itemName, inputName, setInputName }) {
+export default function InputNameEdit({ inputName, setInputName }) {
   const handleChange = (event) => {
     setInputName(event.target.value);
   };
@@ -17,8 +17,8 @@ export default function InputNameEdit({ itemName, inputName, setInputName }) {
     >
       <TextField
         fullWidth
-        label={itemName}
-        id={itemName}
+        label="Name"
+        id="Name"
         value={inputName}
         onChange={handleChange}
         InputProps={{

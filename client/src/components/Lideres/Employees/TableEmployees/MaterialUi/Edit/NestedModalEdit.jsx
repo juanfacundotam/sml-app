@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import InputEmailEdit from "./InputEmailEdit";
 import InputNameEdit from "./InputNameEdit";
 import InputPhoneEdit from "./InputPhoneEdit";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -20,7 +21,59 @@ const style = {
   pb: 3,
 };
 
-function ChildModal({ inputName, inputEmail, inputPhone, itemRol }) {
+function ChildModalDelete({ itemRol, itemId }) {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleCreate = async () => {
+    alert("se inicia el banedado");
+
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/${itemRol}/${itemId}`,
+        {
+          deleted: true,
+        }
+      );
+
+      alert(`baneado con exito ${itemRol} ${itemId}`);
+      console.log(response.data);
+    } catch (error) {
+      console.log(`No se pudo enviar el baneado de ${itemRol} ${itemId} `);
+    }
+
+    setOpen(false);
+  };
+
+  return (
+    <React.Fragment>
+      <Button
+        variant="contained"
+        sx={{ marginTop: "2rem" }}
+        onClick={handleOpen}
+      >
+        Delete Employ
+      </Button>
+      <Modal
+        open={open}
+        onClose={handleCreate}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style, width: "20%", backgroundColor: "#39394b" }}>
+          <h2 id="child-modal-title">Confirm employee update</h2>
+          <Button variant="contained" onClick={handleCreate}>
+            Delete Employ
+          </Button>
+        </Box>
+      </Modal>
+    </React.Fragment>
+  );
+}
+
+function ChildModal({ inputName, inputEmail, inputPhone, itemRol, itemId }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -40,23 +93,25 @@ function ChildModal({ inputName, inputEmail, inputPhone, itemRol }) {
       setOpen(false);
       return;
     }
-
-    if (!selectEmployees) {
-      alert("El campo Employees es obligatorio");
-      setOpen(false);
-      return;
-    }
+    console.log(itemId);
+    console.log(itemRol);
+    console.log(inputName);
+    console.log(inputEmail);
+    console.log(inputPhone);
 
     try {
-      const response = await axios.put(`http://localhost:3001/${itemRol}`, {
-        name: inputName,
-        email: inputEmail,
-        contactNumber: inputPhone,
-      });
+      const response = await axios.put(
+        `http://localhost:3001/${itemRol}/${itemId}`,
+        {
+          name: inputName,
+          email: inputEmail,
+          contactNumber: inputPhone,
+        }
+      );
       alert("cambiado con exito");
       console.log(response.data);
     } catch (error) {
-      console.log(`No se pudo enviar el post de ${selectEmployees}`);
+      console.log(`No se pudo enviar el post de ${itemRol}`);
     }
 
     setOpen(false);
@@ -78,10 +133,7 @@ function ChildModal({ inputName, inputEmail, inputPhone, itemRol }) {
         aria-describedby="child-modal-description"
       >
         <Box sx={{ ...style, width: "20%", backgroundColor: "#39394b" }}>
-          <h2 id="child-modal-title">Text in a child modal</h2>
-          <p id="child-modal-description">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          </p>
+          <h2 id="child-modal-title">Confirm employee update</h2>
           <Button variant="contained" onClick={handleCreate}>
             Update Employ
           </Button>
@@ -92,15 +144,13 @@ function ChildModal({ inputName, inputEmail, inputPhone, itemRol }) {
 }
 
 export default function NestedModalEdit({
+  itemId,
   itemName,
-  ItemEmail,
+  itemEmail,
   itemPhone,
   itemRol,
 }) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -108,6 +158,13 @@ export default function NestedModalEdit({
   const [inputName, setInputName] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputPhone, setInputPhone] = useState("");
+
+  const handleOpen = () => {
+    setInputName(itemName);
+    setInputEmail(itemEmail);
+    setInputPhone(itemPhone);
+    setOpen(true);
+  };
 
   return (
     <div>
@@ -125,28 +182,29 @@ export default function NestedModalEdit({
             </div>
             <div className="flex flex-col items-center justify-center gap-5">
               <InputNameEdit
-                itemName={itemName}
                 inputName={inputName}
                 setInputName={setInputName}
               />
               <InputEmailEdit
-                ItemEmail={ItemEmail}
                 inputEmail={inputEmail}
                 setInputEmail={setInputEmail}
               />
               <InputPhoneEdit
-                itemPhone={itemPhone}
                 inputPhone={inputPhone}
                 setInputPhone={setInputPhone}
               />
             </div>
           </div>
-          <ChildModal
-            inputName={inputName}
-            inputEmail={inputEmail}
-            inputPhone={inputPhone}
-            itemRol={itemRol}
-          />
+          <div className="flex gap-3 justify-center items-center">
+            <ChildModal
+              inputName={inputName}
+              inputEmail={inputEmail}
+              inputPhone={inputPhone}
+              itemRol={itemRol}
+              itemId={itemId}
+            />
+            <ChildModalDelete itemRol={itemRol} itemId={itemId} />
+          </div>
         </Box>
       </Modal>
     </div>
