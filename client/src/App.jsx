@@ -31,7 +31,7 @@ function PublicPage() {
   return (
     <>
       <h1>Public page</h1>
-      <a href="/sign-in/">Go to protected page</a>
+      <a href="/protected">Go to protected page</a>
     </>
   );
 }
@@ -53,7 +53,7 @@ function ClerkProviderWithRoutes() {
       <Routes>
         <Route path="/" element={<PublicPage />} />
         <Route
-          path="/sign-in/"
+          path="/sign-in/*"
           element={<SignIn routing="path" path="/sign-in" />}
         />
         <Route
