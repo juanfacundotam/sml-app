@@ -18,6 +18,7 @@ import InputSeller from "./MaterialUi/InputSeller";
 import SelectLevel from "./MaterialUi/SelectLevel";
 import SelectStatus from "./MaterialUi/SelectStatus";
 import ModalCient from "./MaterialUi/ModalClient";
+import AddLead from "./MaterialUi/ModalAddLead";
 import Nav from "../../Nav/Nav";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,6 +48,7 @@ export const AnalyticLeader = () => {
     setCurrentPage(pageNumber);
   };
   const [clientOrder, setClientOrder] = useState("");
+  const [categoryOrder, setCategoryOrder] = useState("");
   const [filters, setFilters] = useState({
     level: false,
     runner: false,
@@ -66,6 +68,7 @@ export const AnalyticLeader = () => {
   const handleOrderByClient = () => {
     if (clientOrder === "ASC" || clientOrder === "") {
       setClientOrder("DES");
+      setCategoryOrder("");
       dispatch(orderClients(clientOrder));
       setData(leaderDashboard);
     } else {
@@ -76,22 +79,23 @@ export const AnalyticLeader = () => {
     setCurrentPage(1);
   };
   const headerCategory = () => {
-    if (clientOrder === "ASC") {
+    if (categoryOrder === "ASC") {
       return "Profesion ⤴";
-    } else if (clientOrder === "DES") {
+    } else if (categoryOrder === "DES") {
       return "Profesion ⤵";
     } else {
       return "Profesion";
     }
   };
   const handleOrderByCategory = () => {
-    if (clientOrder === "ASC" || clientOrder === "") {
-      setClientOrder("DES");
-      dispatch(orderCategory(clientOrder));
+    if (categoryOrder === "ASC" || categoryOrder === "") {
+      setCategoryOrder("DES");
+      setClientOrder("");
+      dispatch(orderCategory(categoryOrder));
       setData(leaderDashboard);
     } else {
-      setClientOrder("ASC");
-      dispatch(orderCategory(clientOrder));
+      setCategoryOrder("ASC");
+      dispatch(orderCategory(categoryOrder));
       setData(leaderDashboard);
     }
     setCurrentPage(1);
@@ -156,57 +160,67 @@ export const AnalyticLeader = () => {
             ) : (
               ""
             )}
-            <button className="bg-gray-700 w-fit h-fit p-2 rounded-md">
-              Agregar Clientes
-            </button>
+            <AddLead />
           </div>
           <Table>
-            <TableHead className="text-gray-300 text-14 font-thin">
+            <TableHead className="text-white text-14 font-thin">
               <TableRow className="flex items-center justify-around p-3 ">
                 <TableHeaderCell className="flex justify-center items-center p-0">
-                  <Text className="text-start w-8 p-0">ID</Text>
+                  <Text className="text-start w-8 p-0 text-white">ID</Text>
                 </TableHeaderCell>
                 <TableHeaderCell className="flex justify-center items-center p-0">
                   <button onClick={() => handleOrderByClient()}>
-                    <Text className="text-center w-28 p-0">
+                    <Text className="text-center w-28 p-0 text-white">
                       {headerClient()}
                     </Text>
                   </button>
                 </TableHeaderCell>
                 <TableHeaderCell className="flex justify-center items-center p-0">
                   <button onClick={() => handleOrderByCategory()}>
-                    <Text className="text-center w-28 p-0">
+                    <Text className="text-center w-28 p-0 text-white">
                       {headerCategory()}
                     </Text>
                   </button>
                 </TableHeaderCell>
                 <TableHeaderCell className="flex justify-center items-center p-0">
                   <button onClick={() => handlerFilter("level")}>
-                    <Text className="text-center w-6 p-0">Nivel</Text>
+                    <Text className="text-center w-6 p-0 text-white">
+                      Nivel
+                    </Text>
                   </button>
                 </TableHeaderCell>
                 <TableHeaderCell className="flex justify-center items-center p-0">
-                  <Text className="text-center w-6 p-0">Email</Text>
+                  <Text className="text-center w-6 p-0 text-white">Email</Text>
                 </TableHeaderCell>
                 <TableHeaderCell className="flex justify-center items-center p-0">
-                  <Text className="text-center w-6 p-0">Instagram</Text>
+                  <Text className="text-center w-6 p-0 text-white">
+                    Instagram
+                  </Text>
                 </TableHeaderCell>
                 <TableHeaderCell className="flex justify-center items-center p-0">
-                  <Text className="text-center w-6 p-0">Telefono</Text>
+                  <Text className="text-center w-6 p-0 text-white">
+                    Telefono
+                  </Text>
                 </TableHeaderCell>
                 <TableHeaderCell className="flex justify-center items-center p-0">
                   <button onClick={() => handlerFilter("runner")}>
-                    <Text className="text-center w-28 p-0">Corredor</Text>
+                    <Text className="text-center w-28 p-0 text-white">
+                      Corredor
+                    </Text>
                   </button>
                 </TableHeaderCell>
                 <TableHeaderCell className="flex justify-center items-center p-0">
                   <button onClick={() => handlerFilter("sellers")}>
-                    <Text className="text-center w-28 p-0">Vendedor</Text>
+                    <Text className="text-center w-28 p-0 text-white">
+                      Vendedor
+                    </Text>
                   </button>
                 </TableHeaderCell>
                 <TableHeaderCell className="flex justify-center items-center p-0">
                   <button onClick={() => handlerFilter("status")}>
-                    <Text className="text-center w-48 p-0">Estado</Text>
+                    <Text className="text-center w-48 p-0 text-white">
+                      Estado
+                    </Text>
                   </button>
                 </TableHeaderCell>
               </TableRow>
@@ -223,11 +237,13 @@ export const AnalyticLeader = () => {
                 instagram={modalItems.instagram}
                 telephone={modalItems.telephone}
                 status={modalItems.status}
+                city={modalItems.city}
+                province={modalItems.province}
               />
               {currentCard.map((item, index) => (
                 <TableRow
                   key={item._id}
-                  className="flex bg-gray-700 text-gray-400 text-sm p-3 rounded-lg h-14 my-5"
+                  className="flex bg-[#39394b] text-gray-400 text-sm p-3 rounded-lg h-14 my-5"
                 >
                   <div className="w-full flex justify-around items-center">
                     <button
@@ -236,21 +252,21 @@ export const AnalyticLeader = () => {
                     >
                       <TableCell className="flex justify-center items-center p-0  ">
                         <div className="text-ellipsis w-8  flex justify-start items-center p-0 text-start">
-                          <Text className=" rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
+                          <Text className="text-white rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                             {item._id}
                           </Text>
                         </div>
                       </TableCell>
                       <TableCell className="flex justify-center items-center p-0 ">
                         <div className="w-28 text-ellipsis  flex justify-start items-center p-0">
-                          <Text className=" rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
+                          <Text className=" text-white rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                             {item.name}
                           </Text>
                         </div>
                       </TableCell>
                       <TableCell className="flex justify-center items-center p-0">
                         <div className="w-28 text-ellipsis  flex justify-start items-center p-0 ">
-                          <Text className=" rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
+                          <Text className="text-white rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                             {item.category}
                           </Text>
                         </div>
@@ -258,7 +274,7 @@ export const AnalyticLeader = () => {
                       <TableCell className="flex justify-center items-center p-0 ">
                         {item.level !== "incidencia" ? (
                           <div className="flex w-6 text-ellipsis justify-start items-center p-0">
-                            <p className="bg-[#6254ff] text-[#ffffff] w-6 rounded flex items-center justify-center text-[23px]  ">
+                            <p className="bg-[#6254ff] text-[#ffffff] w-6 rounded flex items-center justify-center  ">
                               {item.level}
                             </p>
                           </div>
@@ -318,14 +334,14 @@ export const AnalyticLeader = () => {
                       </TableCell>
                       <TableCell className="flex justify-center items-center p-0 ">
                         <div className="w-28 text-ellipsis  flex justify-start items-center p-0">
-                          <Text className=" opacity-1 overflow-hidden hover:overflow-visible hover:bg-[#ffffff] hover:w-fit hover:text-black z-111 hover:absolute">
+                          <Text className="text-white rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                             Nombre del Corredor
                           </Text>
                         </div>
                       </TableCell>
                       <TableCell className="flex justify-center items-center p-0 ">
                         <div className="w-28 text-ellipsis  flex justify-start items-center p-0">
-                          <Text className=" opacity-1 overflow-hidden hover:overflow-visible hover:bg-[#ffffff] hover:w-fit hover:text-black z-111 hover:absolute">
+                          <Text className="text-white rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                             Nombre del Vendedor
                           </Text>
                         </div>

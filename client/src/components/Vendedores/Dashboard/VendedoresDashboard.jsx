@@ -38,7 +38,6 @@ const VendedoresDashboard = () => {
     setData(leadCheckedInactive100);
   }, [leadCheckedInactive100]);
 
-
   const [pageStyle, setPageStyle] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardXPage, setCardXpage] = useState(10);
@@ -311,7 +310,7 @@ const VendedoresDashboard = () => {
               </tbody>
             </table>
           </div>
-          {pages.length > 1 && (
+          {pages.length > 0 && (
             <div className="mb-5">
               <PaginationOutlined
                 pageStyle={pageStyle}

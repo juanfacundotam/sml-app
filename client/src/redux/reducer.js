@@ -55,7 +55,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case ORDER_CLIENTS:
-      const copyClient = [...state.leadChequed];
+      const copyClient = [...state.leaderDashboard];
       if (action.payload === "DES") {
         copyClient.sort((a, b) => {
           const clientA = a.name ? a.name.toLowerCase() : "";
@@ -78,7 +78,7 @@ const rootReducer = (state = initialState, action) => {
         leaderDashboard: copyClient,
       };
     case ORDER_CATEGORY:
-      const copyCategory = [...state.leadChequed];
+      const copyCategory = [...state.leaderDashboard];
       if (action.payload === "DES") {
         copyCategory.sort((a, b) => {
           const clientA = a.category ? a.category.toLowerCase() : "";
