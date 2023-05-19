@@ -4,7 +4,22 @@ const Vendedor = require("../../models/Vendedor");
 const updateLeadVendedorById = async (id, updatedData) => {
   // console.log(updatedData.dataLead);
   const leadCountCheck = await Lead.findById(id);
-  console.log(leadCountCheck.noresponde_count)
+
+  
+  if (
+    updatedData.dataLead.status === "No responde" &&
+    leadCountCheck.noresponde_count < 2
+  ) {
+    updatedData.dataLead.noresponde_count++
+  } else if (
+    updatedData.dataLead.status === "No responde" &&
+    leadCountCheck.noresponde_count === 2
+  ) {
+    updatedData.dataLead.noresponde_count = 0;
+    updatedData.dataLead.status = "Rechazado";
+    updatedData.dataLead.status_op = "3 llamados";
+  }
+
 
   const leadUpdate = await Lead.findByIdAndUpdate(id, updatedData.dataLead, {
     new: true,

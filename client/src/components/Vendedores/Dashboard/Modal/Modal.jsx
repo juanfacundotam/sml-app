@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { CiWarning, CiEdit } from "react-icons/ci";
 import { useUser } from "@clerk/clerk-react";
+import moment from "moment";
+import "moment/locale/es";
 
 const style = {
   position: "absolute",
@@ -42,11 +44,11 @@ function ChildModal({
   const handleUpdate = () => {
     const dataVendedor = item.name;
 
-    
     const dataLead = {
       status: statusObj.status,
       status_op: statusObj.status_op,
       vendedor: emailAddress,
+      noresponde_count: item.noresponde_count,
     };
     const dataUpdate = {
       dataLead,
@@ -224,6 +226,7 @@ export default function NestedModal({
   const [statusObj, setStatusObj] = React.useState({
     status: item.status,
     status_op: item.status_op,
+    noresponde_count: item.noresponde_count,
   });
 
   useEffect(() => {
@@ -268,6 +271,35 @@ export default function NestedModal({
     }
   };
 
+  // console.log(item.updatedAt)
+  const formattedUpdate = () => {
+    let fechaYear = "";
+    let fechaMonth = "";
+    let fechaDay = "";
+    let time = "";
+    for (let i = 0; i < item.updatedAt.length; i++) {
+      if (i < 4) {
+        fechaYear += item.updatedAt[i];
+      }
+      else if(i >= 5 && i < 7) {
+        fechaMonth += item.updatedAt[i];
+      }
+      else if (i >= 8 && i < 10) {
+        fechaDay += item.updatedAt[i];
+      }
+      if (i >= 11 && i < 19) {
+        time += item.updatedAt[i];
+      }
+    }
+
+    return (
+      <p htmlFor="" className="text-white m-2">
+        {`Date: ${fechaDay}/${fechaMonth}/${fechaYear} - Hour: ${time}`}
+      </p>
+    );
+  };
+
+
   return (
     <div>
       <CiEdit
@@ -280,12 +312,12 @@ export default function NestedModal({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 550, borderRadius: 5}}>
-            <div className="w-full flex justify-center items-center mt-3 mb-10">
-          <h2 id="parent-modal-title" className="text-center text-white">
-            {item.name}
-          </h2>
-          <div className="flex flex-col absolute right-4 top-4">
+        <Box sx={{ ...style, width: 550, borderRadius: 5 }}>
+          <div className="w-full flex justify-center items-center mt-3 mb-10">
+            <h2 id="parent-modal-title" className="text-center text-white">
+              {item.name}
+            </h2>
+            <div className="flex flex-col absolute right-4 top-4">
               <div className="bg-[#8d8b0c] text-[#e8e8e9] w-[40px] rounded-md h-9 text-[35px] drop-shadow-xl hover:bg-[#c94219] ">
                 <IncidenceModal
                   setOpen={setOpen}
@@ -392,7 +424,7 @@ export default function NestedModal({
                   <option value="Sin dinero">Sin Dinero</option>
                   <option value="Sin interes">Sin Interes</option>
                   <option value="Otro servicio">Otro Servicio</option>
-                  {/* <option value="Otro servicio">Sin respuesta - 3 Llamados</option> */}
+                  {/* <option value="Otro servicio">Sin respuesta - 3 llamados</option> */}
                   {/* <option value="DE">Germany</option> */}
                 </select>
               </div>
@@ -422,6 +454,16 @@ export default function NestedModal({
                     // value="USD"
                     required
                   />
+                </div>
+              </div>
+            )}
+            {item.noresponde_count > 0 && (
+              <div className="flex flex-col justify-center items-center mt-5">
+                <div className="flex justify-center items-center flex-col">
+                  <p htmlFor="" className="text-white m-2">
+                    {`Llamados: ${item.noresponde_count}`}
+                  </p>
+                  {formattedUpdate()}
                 </div>
               </div>
             )}
