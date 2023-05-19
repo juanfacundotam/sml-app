@@ -347,7 +347,7 @@ export const AnalyticLeader = () => {
                         </div>
                       </TableCell>
                       <TableCell className="flex justify-center items-center p-0">
-                        {item.status === "Activo" ? (
+                        {item.status === "Contratado" ? (
                           <Text className="bg-[#26af7f]  text-[#1f1e1e]   px-2 py-1.5 rounded-xl text-center w-48">
                             Contratado
                           </Text>
@@ -361,13 +361,7 @@ export const AnalyticLeader = () => {
                         ) : (
                           ""
                         )}
-                        {item.status === "No responde" ? (
-                          <Text className="bg-[#b44f82] text-[#e0dfdf] px-2 py-1.5 rounded-xl text-center w-48">
-                            No Responde
-                          </Text>
-                        ) : (
-                          ""
-                        )}
+
                         {item.status === "Rechazado" ? (
                           <Text className="bg-[#b44f82] text-[#e0dfdf] px-2 py-1.5 rounded-xl text-center w-48">
                             Rechazado

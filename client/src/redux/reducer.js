@@ -159,7 +159,7 @@ const rootReducer = (state = initialState, action) => {
         console.log("contratado");
         filteredStatus = copyStatus.filter((client) => {
           const clientStatus = client.status ? client.status : "";
-          return clientStatus === "Activo";
+          return clientStatus === "Contratado";
         });
       }
       if (action.payload === "no-responde") {

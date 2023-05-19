@@ -1,8 +1,10 @@
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { textAlign } from "@mui/system";
+import { useDispatch } from "react-redux";
+import { AddLeads } from "../../../../redux/actions";
 
 const style = {
   position: "absolute",
@@ -47,6 +49,33 @@ export default function ChildModal() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [body, setBody] = useState([]);
+  const [eventBody, setEventBody] = useState([]);
+  const dispatch = useDispatch();
+  const OnchangeTextArea = (event) => {
+    setEventBody(event);
+  };
+  // .substring(2, updatedBody.length - 0)
+  const onClickAdd = () => {
+    setBody(() => {
+      let updatedBody = eventBody;
+      console.log(updatedBody);
+      const trimmedData = updatedBody.trim();
+      const dataWithoutCommas = trimmedData.replace(/,\s*$/, "");
+      const objectsArray = dataWithoutCommas.split("},");
+      const formattedArray = objectsArray.map((obj, index) => {
+        if (index === objectsArray.length - 1) {
+          return `${obj.trim()}`;
+        } else {
+          return `${obj.trim()}}`;
+        }
+      });
+      const dataArray = formattedArray.map((objStr) => JSON.parse(objStr));
+      dispatch(AddLeads(dataArray));
+      return updatedBody;
+    });
+  };
   return (
     <React.Fragment>
       <Button variant="contained" sx={{}} onClick={handleOpen}>
@@ -71,8 +100,11 @@ export default function ChildModal() {
             <label>json</label>
             <div className="flex flex-col h-full text-black">
               <textarea
+                onChange={(event) => {
+                  OnchangeTextArea(event.target.value);
+                }}
                 ref={inputRef}
-                type="text"
+                type="array"
                 style={{
                   width: "100%",
                   height: "400px",
@@ -83,6 +115,7 @@ export default function ChildModal() {
                 placeholder="json"
               />
             </div>
+            <button onClick={() => onClickAdd(eventBody)}>Add</button>
           </div>
         </Box>
       </Modal>
