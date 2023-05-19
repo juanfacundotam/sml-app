@@ -12,6 +12,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
+  height: 440,
   bgcolor: "#39394B",
   border: "none",
   boxShadow: 24,
@@ -41,6 +42,7 @@ function ChildModal({
   const handleUpdate = () => {
     const dataVendedor = item.name;
 
+    
     const dataLead = {
       status: statusObj.status,
       status_op: statusObj.status_op,
@@ -278,12 +280,20 @@ export default function NestedModal({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 550, borderRadius: 5 }}>
-          <h2 id="parent-modal-title" className="text-center text-white mb-6">
+        <Box sx={{ ...style, width: 550, borderRadius: 5}}>
+            <div className="w-full flex justify-center items-center mt-3 mb-10">
+          <h2 id="parent-modal-title" className="text-center text-white">
             {item.name}
           </h2>
-          <div className="flex flex-col">
-            <div className="mt-2">
+          <div className="flex flex-col absolute right-4 top-4">
+              <div className="bg-[#8d8b0c] text-[#e8e8e9] w-[40px] rounded-md h-9 text-[35px] drop-shadow-xl hover:bg-[#c94219] ">
+                <IncidenceModal
+                  setOpen={setOpen}
+                  SendIncidenceAlert={SendIncidenceAlert}
+                />
+              </div>
+            </div>
+            {/* <div className="mt-2">
               <label
                 htmlFor="last_name"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -301,8 +311,8 @@ export default function NestedModal({
                 required
                 disabled
               />
-            </div>
-            <div className="mt-5">
+            </div> */}
+            {/* <div className="mt-5">
               <label
                 htmlFor="last_name"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -319,8 +329,8 @@ export default function NestedModal({
                 required
                 disabled
               />
-            </div>
-            <div className="mt-5">
+            </div> */}
+            {/* <div className="mt-5">
               <label
                 htmlFor="last_name"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -337,18 +347,10 @@ export default function NestedModal({
                 required
                 disabled
               />
-              <div className=" w-full flex justify-end items-center mt-3">
-                <div className=" bg-[#8d8b0c] text-[#e8e8e9] w-[40px] rounded h-9 text-[35px] drop-shadow-xl hover:bg-[#c94219] ">
-                  <IncidenceModal
-                    setOpen={setOpen}
-                    SendIncidenceAlert={SendIncidenceAlert}
-                  />
-                </div>
-              </div>
-            </div>
+            </div> */}
           </div>
 
-          <div className=" flex items-center justify-between flex-col mb-10">
+          <div className="h-52 flex items-center justify-start flex-col mb-10">
             <div className="">
               <label
                 htmlFor="countries"
@@ -390,6 +392,7 @@ export default function NestedModal({
                   <option value="Sin dinero">Sin Dinero</option>
                   <option value="Sin interes">Sin Interes</option>
                   <option value="Otro servicio">Otro Servicio</option>
+                  {/* <option value="Otro servicio">Sin respuesta - 3 Llamados</option> */}
                   {/* <option value="DE">Germany</option> */}
                 </select>
               </div>
