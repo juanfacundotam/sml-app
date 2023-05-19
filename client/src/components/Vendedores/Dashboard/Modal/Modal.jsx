@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { CiWarning, CiEdit } from "react-icons/ci";
 import { useUser } from "@clerk/clerk-react";
-import moment from "moment";
+
 import "moment/locale/es";
 
 const style = {
@@ -14,7 +14,6 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  height: 440,
   bgcolor: "#39394B",
   border: "none",
   boxShadow: 24,
@@ -42,7 +41,22 @@ function ChildModal({
   };
 
   const handleUpdate = () => {
-    const dataVendedor = item.name;
+
+    let dataVendedor = {};
+    if(statusObj.status === "No responde"){
+      dataVendedor = {
+        lead: item.name,
+        status: statusObj.status,
+        status_op: statusObj.status_op,
+        Llamados: statusObj.noresponde_count,
+      }
+    } else {
+      dataVendedor = {
+        lead: item.name,
+        status: statusObj.status,
+        status_op: statusObj.status_op
+      }
+    }
 
     const dataLead = {
       status: statusObj.status,
@@ -312,7 +326,7 @@ export default function NestedModal({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 550, borderRadius: 5 }}>
+        <Box sx={{ ...style, width: 550, height: 480, borderRadius: 5 }}>
           <div className="w-full flex justify-center items-center mt-3 mb-10">
             <h2 id="parent-modal-title" className="text-center text-white">
               {item.name}
@@ -457,7 +471,7 @@ export default function NestedModal({
                 </div>
               </div>
             )}
-            {item.noresponde_count > 0 && (
+            {item.noresponde_count > 0 && statusObj.status === "No responde" && (
               <div className="flex flex-col justify-center items-center mt-5">
                 <div className="flex justify-center items-center flex-col">
                   <p htmlFor="" className="text-white m-2">
