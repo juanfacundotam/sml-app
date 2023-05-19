@@ -12,6 +12,7 @@ const postVendedor = async ({
   hired_leads,
   declined_leads,
   unanswered_leads,
+  rol,
   deleted,
 }) => {
   const vendedor = await Vendedor.create({
@@ -26,6 +27,7 @@ const postVendedor = async ({
     hired_leads,
     declined_leads,
     unanswered_leads,
+    rol,
     deleted,
   });
   return vendedor;

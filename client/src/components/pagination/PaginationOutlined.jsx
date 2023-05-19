@@ -10,14 +10,20 @@ export default function PaginationOutlined({
   cardXPage,
   data,
   pages,
+  current,
 }) {
   const [currentPage, setCurrentPage] = useState(pageStyle);
   const pageNumbers = [];
 
   useEffect(() => {
-    setCurrentPage(currentPage);
+    setCurrentPage(current);
   }, [currentPage]);
 
+  useEffect(() => {
+    if (currentPage !== current) {
+      setCurrentPage(1);
+    }
+  }, [currentPage, current]);
 
   for (let i = 1; i <= Math.ceil(data.length / cardXPage); i++) {
     pageNumbers.push(i);
@@ -36,6 +42,7 @@ export default function PaginationOutlined({
           count={pageNumbers.length}
           color="primary"
           onChange={handleChangePage}
+          page={currentPage}
         />
       </Stack>
     </div>

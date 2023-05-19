@@ -8,6 +8,7 @@ const postLeader = async ({
   country,
   contactNumber,
   description,
+  rol,
   deleted,
 }) => {
   const leader = await Leader.create({
@@ -18,6 +19,7 @@ const postLeader = async ({
     country,
     contactNumber,
     description,
+    rol,
     deleted,
   });
   return leader;

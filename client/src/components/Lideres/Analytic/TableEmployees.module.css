@@ -57,10 +57,17 @@
 
 .tableCards {
 }
-.icon {
+.mail {
   color: rgb(116, 136, 201);
   font-size: 23px;
-  margin-right: 5px;
+  width: 30px;
+  text-overflow: ellipsis;
+}
+.notMail {
+  color: gray;
+  font-size: 23px;
+  width: 30px;
+  text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 1500px) {

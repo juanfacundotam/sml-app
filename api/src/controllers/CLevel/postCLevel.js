@@ -8,6 +8,7 @@ const postCLevel = async ({
   country,
   contactNumber,
   description,
+  rol,
   deleted,
 }) => {
   const cLevel = await CLevel.create({
@@ -18,6 +19,7 @@ const postCLevel = async ({
     country,
     contactNumber,
     description,
+    rol,
     deleted,
   });
   return cLevel;

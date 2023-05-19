@@ -22,8 +22,9 @@ import { Link } from "react-router-dom";
 import { getLeadUnchecked10 } from "../../../redux/actions";
 import IconLabelButtons from "../../MaterialUi/IconLabelButtons";
 
+
+
 const CorredoresDashboard = () => {
-  const [instaComplete, setInstaComplete] = useState([]);
   const [client, setClient] = useState([]);
 
   const handleChangeInstagram = (event, index) => {
@@ -50,13 +51,7 @@ const CorredoresDashboard = () => {
         [name]: value,
         level: value,
       };
-      if (name === "instagram") {
-        setInstaComplete((prevInstaComplete) => {
-          const updatedInstaComplete = [...prevInstaComplete];
-          updatedInstaComplete[index] = value.trim() !== "";
-          return updatedInstaComplete;
-        });
-      }
+
       return updatedClient;
     });
   };
@@ -98,7 +93,7 @@ const CorredoresDashboard = () => {
           url: leadUnchecked10[i].url,
           instagram: "",
           level: leadUnchecked10[i].level,
-          checked: true,
+          checked: leadUnchecked10[i].checked,
           view: true,
         });
       }
@@ -106,15 +101,19 @@ const CorredoresDashboard = () => {
     setClient(clientes);
   }, [leadUnchecked10]);
 
+  console.log(leadUnchecked10);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    alert("Enviando Informacion");
+    await swal("Enviando informacion!", `porfavor no cierre la pestaña hasta completar el proceso`, "warning",);
     try {
       for (let i = 0; i < leadUnchecked10.length; i++) {
         if (client[i].level !== "-") {
           // Verificar si Instagram está vacío pero el nivel es igual a 0
-          if (client[i].instagram.trim() === "" && 
-          (client[i].level === "incidencia"||client[i].level === "0")) {
+          if (
+            client[i].instagram.trim() === "" &&
+            (client[i].level === "incidencia" || client[i].level === "0")
+          ) {
             // Realizar el put de todas formas
             const response = await axios.put(
               `http://localhost:3001/lead/${client[i]._id}`,
@@ -128,7 +127,23 @@ const CorredoresDashboard = () => {
               }
             );
             console.log(response.data);
-          } else if (client[i].instagram.trim() !== "") {
+            if (client[i].level === "incidencia") {
+              // Enviar correo electrónico utilizando el servidor back-end
+              const emailData = {
+                clientName: client[i].name,
+                recipientEmail: "gustavomontespalavecino@gmail.com",
+                message: `Se ha detectado una incidencia para el cliente ${client[i].name}. Por favor, revisa la situación y toma las medidas necesarias.`,
+              };
+
+              await axios.post(
+                "http://localhost:3001/corredor/sendmail",
+                emailData
+              );
+            }
+          } else if (
+            client[i].instagram.trim() !== "" &&
+            client[i].level !== "-"
+          ) {
             // Realizar el put si Instagram no está vacío
             const response = await axios.put(
               `http://localhost:3001/lead/${client[i]._id}`,
@@ -142,23 +157,25 @@ const CorredoresDashboard = () => {
               }
             );
             console.log(response.data);
-          } else {
-            // Mostrar mensaje de alerta si falta asignar nivel
-            alert(`Al Cliente: ${client[i].name} le falta asignar nivel`);
-          }
+          }else {
+          await swal("Atencion!", `Al Cliente: ${client[i].name} le falta asignar instagram`, "warning");   
+        }
+        } else {
+          await swal("Atencion!", `Al Cliente: ${client[i].name} le falta asignar nivel`, "warning",);
         }
       }
-      alert("Solicitud enviada correctamente");
+      await swal("Good job!", "informacion enviada correctamente!", "success");
       dispatch(getLeadUnchecked10());
     } catch (error) {
-      console.log("No se envió el put");
+      await swal(":(", "error al enviar la informacion!", "error");
+      console.log({error: error.message});
     }
   };
 
   return (
     <>
       <Nav />
-      <Card className="w-full m-5">
+      <Card className="w-full m-5 bg-[#39394b]">
         <form onSubmit={handleSubmit}>
           <div className="flex justify-between items-center">
             <div className="flex gap-10  mt-2 mx-5 ">

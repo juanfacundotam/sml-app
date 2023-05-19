@@ -17,7 +17,6 @@ const CorredorSchema = new mongoose.Schema(
     },
     birthdate: {
       type: String,
-      required: true,
     },
     photo: {
       type: String,
@@ -42,6 +41,10 @@ const CorredorSchema = new mongoose.Schema(
     },
     hired_leads: {
       type: String,
+    },
+    rol: {
+      type: String,
+      required: true,
     },
     deleted: {
       type: Boolean,

@@ -42,6 +42,15 @@ const LeadSchema = new mongoose.Schema(
     },
     status: {
       type: String,
+      enum: ["Sin contactar", "Rechazado", "Sin Contactar", "No Responde"],
+      require: true,
+    },
+    statusoptions: {
+      type: String,
+      require: true,
+    },
+    statusoption: {
+      type: String,
       require: true,
     },
     checked: {

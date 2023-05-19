@@ -17,7 +17,6 @@ const LeaderSchema = new mongoose.Schema(
     },
     birthdate: {
       type: Date,
-      required: true,
     },
     photo: {
       type: String,
@@ -30,6 +29,10 @@ const LeaderSchema = new mongoose.Schema(
     },
     description: {
       type: String,
+    },
+    rol: {
+      type: String,
+      required: true,
     },
     deleted: {
       type: Boolean,

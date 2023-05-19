@@ -12,6 +12,7 @@ const postCorredor = async ({
   average_delay,
   incidences,
   hired_leads,
+  rol,
   deleted,
 }) => {
   const corredor = await Corredor.create({
@@ -26,6 +27,7 @@ const postCorredor = async ({
     average_delay,
     incidences,
     hired_leads,
+    rol,
     deleted,
   });
   return corredor;
