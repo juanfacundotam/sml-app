@@ -7,8 +7,8 @@ const updateLeadById = require("../controllers/Lead/updateLeadById");
 const getLeadUnchecked = require("../controllers/Lead/getLeadUnchecked");
 const getLeadCheckedInactive100 = require("../controllers/Lead/getLeadCheckedInactive100");
 const getLead10Unchecked = require("../controllers/Lead/getLead10Unchecked");
-const updateLeadVendedorById =require("../controllers/Lead/updateLeadVendedorById")
-const getLeadVendedorById = require("../controllers/Lead/getLeadVendedorById")
+const updateLeadVendedorById = require("../controllers/Lead/updateLeadVendedorById");
+const getLeadVendedorById = require("../controllers/Lead/getLeadVendedorById");
 
 const getAllLeadHandler = async (req, res) => {
   try {
