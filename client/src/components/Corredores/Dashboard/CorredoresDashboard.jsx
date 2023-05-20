@@ -350,7 +350,7 @@ const CorredoresDashboard = () => {
                       1
                     </button>
                     <button
-                      className={
+                        className={
                         item.level === "2"
                           ? style.buttonNivelActive
                           : style.buttonNivel

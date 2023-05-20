@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    gap: 1rem;
+}
+.container h1 {
+    margin: 25px;
+    }
+
+.linksRoutes {
+    background-color: transparent;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+    padding: 5px 30px;
+    text-align: center;
+}
+
+.linksRoutes:hover {
+    box-shadow: 0 0 10px #9B9BA4;
+}
