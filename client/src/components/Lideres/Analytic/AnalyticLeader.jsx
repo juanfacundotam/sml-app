@@ -162,71 +162,71 @@ export const AnalyticLeader = () => {
             )}
             <AddLead />
           </div>
-          <Table>
-            <TableHead className="text-white text-14 font-thin">
-              <TableRow className="flex items-center justify-around p-3 ">
-                <TableHeaderCell className="flex justify-center items-center p-0">
+          <div>
+            <div className="text-white text-14 font-thin">
+              <div className="flex items-center justify-around p-3 ">
+                <div className="flex justify-center items-center p-0">
                   <Text className="text-start w-8 p-0 text-white">ID</Text>
-                </TableHeaderCell>
-                <TableHeaderCell className="flex justify-center items-center p-0">
+                </div>
+                <div className="flex justify-center items-center p-0">
                   <button onClick={() => handleOrderByClient()}>
                     <Text className="text-center w-28 p-0 text-white">
                       {headerClient()}
                     </Text>
                   </button>
-                </TableHeaderCell>
-                <TableHeaderCell className="flex justify-center items-center p-0">
+                </div>
+                <div className="flex justify-center items-center p-0">
                   <button onClick={() => handleOrderByCategory()}>
                     <Text className="text-center w-28 p-0 text-white">
                       {headerCategory()}
                     </Text>
                   </button>
-                </TableHeaderCell>
-                <TableHeaderCell className="flex justify-center items-center p-0">
+                </div>
+                <div className="flex justify-center items-center p-0">
                   <button onClick={() => handlerFilter("level")}>
                     <Text className="text-center w-6 p-0 text-white">
                       Nivel
                     </Text>
                   </button>
-                </TableHeaderCell>
-                <TableHeaderCell className="flex justify-center items-center p-0">
+                </div>
+                <div className="flex justify-center items-center p-0">
                   <Text className="text-center w-6 p-0 text-white">Email</Text>
-                </TableHeaderCell>
-                <TableHeaderCell className="flex justify-center items-center p-0">
+                </div>
+                <div className="flex justify-center items-center p-0">
                   <Text className="text-center w-6 p-0 text-white">
                     Instagram
                   </Text>
-                </TableHeaderCell>
-                <TableHeaderCell className="flex justify-center items-center p-0">
+                </div>
+                <div className="flex justify-center items-center p-0">
                   <Text className="text-center w-6 p-0 text-white">
                     Telefono
                   </Text>
-                </TableHeaderCell>
-                <TableHeaderCell className="flex justify-center items-center p-0">
+                </div>
+                <div className="flex justify-center items-center p-0">
                   <button onClick={() => handlerFilter("runner")}>
                     <Text className="text-center w-28 p-0 text-white">
                       Corredor
                     </Text>
                   </button>
-                </TableHeaderCell>
-                <TableHeaderCell className="flex justify-center items-center p-0">
+                </div>
+                <div className="flex justify-center items-center p-0">
                   <button onClick={() => handlerFilter("sellers")}>
                     <Text className="text-center w-28 p-0 text-white">
                       Vendedor
                     </Text>
                   </button>
-                </TableHeaderCell>
-                <TableHeaderCell className="flex justify-center items-center p-0">
+                </div>
+                <div className="flex justify-center items-center p-0">
                   <button onClick={() => handlerFilter("status")}>
                     <Text className="text-center w-48 p-0 text-white">
                       Estado
                     </Text>
                   </button>
-                </TableHeaderCell>
-              </TableRow>
-            </TableHead>
+                </div>
+              </div>
+            </div>
 
-            <TableBody>
+            <div>
               <ModalCient
                 open={open}
                 handleClose={handleClose}
@@ -241,7 +241,7 @@ export const AnalyticLeader = () => {
                 province={modalItems.province}
               />
               {currentCard.map((item, index) => (
-                <TableRow
+                <div
                   key={item._id}
                   className="flex bg-[#39394b] text-gray-400 text-sm p-3 rounded-lg h-14 my-5"
                 >
@@ -250,28 +250,28 @@ export const AnalyticLeader = () => {
                       className="w-full flex justify-around items-center"
                       onClick={(index) => handleOpen(item, index)}
                     >
-                      <TableCell className="flex justify-center items-center p-0  ">
+                      <div className="flex justify-center items-center p-0  ">
                         <div className="text-ellipsis w-8  flex justify-start items-center p-0 text-start">
                           <Text className="text-white rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                             {item._id}
                           </Text>
                         </div>
-                      </TableCell>
-                      <TableCell className="flex justify-center items-center p-0 ">
+                      </div>
+                      <div className="flex justify-center items-center p-0 ">
                         <div className="w-28 text-ellipsis  flex justify-start items-center p-0">
                           <Text className=" text-white rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                             {item.name}
                           </Text>
                         </div>
-                      </TableCell>
-                      <TableCell className="flex justify-center items-center p-0">
+                      </div>
+                      <div className="flex justify-center items-center p-0">
                         <div className="w-28 text-ellipsis  flex justify-start items-center p-0 ">
                           <Text className="text-white rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                             {item.category}
                           </Text>
                         </div>
-                      </TableCell>
-                      <TableCell className="flex justify-center items-center p-0 ">
+                      </div>
+                      <div className="flex justify-center items-center p-0 ">
                         {item.level !== "incidencia" ? (
                           <div className="flex w-6 text-ellipsis justify-start items-center p-0">
                             <p className="bg-[#6254ff] text-[#ffffff] w-6 rounded flex items-center justify-center  ">
@@ -283,8 +283,8 @@ export const AnalyticLeader = () => {
                             <CiWarning className="text-[#fdfa3a] p-0  font-bold" />
                           </div>
                         )}
-                      </TableCell>
-                      <TableCell className="flex justify-center items-center p-0 ">
+                      </div>
+                      <div className="flex justify-center items-center p-0 ">
                         <div className="flex w-6 text-ellipsis justify-start items-center p-0 ">
                           {item.email !== "-" ? (
                             <div className=" flex opacity-1 overflow-hidden hover:overflow-visible hover:bg-[#ffffff] hover:w-fit hover:text-black z-111 hover:absolute">
@@ -299,8 +299,8 @@ export const AnalyticLeader = () => {
                             </div>
                           )}
                         </div>
-                      </TableCell>
-                      <TableCell className="flex justify-center items-center p-0 ">
+                      </div>
+                      <div className="flex justify-center items-center p-0 ">
                         <div className="flex w-6 text-ellipsis justify-start items-center p-0 ">
                           {item.instagram !== "" ? (
                             <div className=" flex opacity-1 overflow-hidden hover:overflow-visible hover:bg-[#ffffff] hover:w-fit hover:text-black z-111 hover:absolute">
@@ -315,38 +315,38 @@ export const AnalyticLeader = () => {
                             </div>
                           )}
                         </div>
-                      </TableCell>
-                      <TableCell className="flex justify-center items-center p-0 ">
+                      </div>
+                      <div className="flex justify-center items-center p-0 ">
                         <div className="flex w-6 text-ellipsis justify-start items-center p-0 ">
-                          {item.telephone !== "-" ? (
+                          {item.telephone !== "" ? (
                             <div className=" flex opacity-1 overflow-hidden hover:overflow-visible hover:bg-[#ffffff] hover:w-fit hover:text-black z-111 hover:absolute">
                               <div>
                                 <CiPhone className={style.mail} />
                               </div>
-                              <Text>{item.telephone}</Text>
+                              <Text>{item.instagram}</Text>
                             </div>
                           ) : (
                             <div>
-                              <CiPhone className={style.notMail} />
+                              <CiPhone className={style.not} />
                             </div>
                           )}
                         </div>
-                      </TableCell>
-                      <TableCell className="flex justify-center items-center p-0 ">
+                      </div>
+                      <div className="flex justify-center items-center p-0 ">
                         <div className="w-28 text-ellipsis  flex justify-start items-center p-0">
                           <Text className="text-white rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                             Nombre del Corredor
                           </Text>
                         </div>
-                      </TableCell>
-                      <TableCell className="flex justify-center items-center p-0 ">
+                      </div>
+                      <div className="flex justify-center items-center p-0 ">
                         <div className="w-28 text-ellipsis  flex justify-start items-center p-0">
                           <Text className="text-white rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                             Nombre del Vendedor
                           </Text>
                         </div>
-                      </TableCell>
-                      <TableCell className="flex justify-center items-center p-0">
+                      </div>
+                      <div className="flex justify-center items-center p-0">
                         {item.status === "Contratado" ? (
                           <Text className="bg-[#26af7f]  text-[#1f1e1e]   px-2 py-1.5 rounded-xl text-center w-48">
                             Contratado
@@ -369,13 +369,13 @@ export const AnalyticLeader = () => {
                         ) : (
                           ""
                         )}
-                      </TableCell>
+                      </div>
                     </button>
                   </div>
-                </TableRow>
+                </div>
               ))}
-            </TableBody>
-          </Table>
+            </div>
+          </div>
           <PaginationOutlined
             pageStyle={pageStyle}
             setPageStyle={setPageStyle}
