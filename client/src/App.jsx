@@ -95,15 +95,15 @@ function App() {
     <div className="App">
       {/* <ClerkProviderWithRoutes /> */}
       <Routes>
-        <Route path="/" element={<PublicPage />} />
-        <Route
+        {/* <Route path="/" element={<PublicPage />} /> */}
+        {/* <Route
           path="/sign-in/*"
           element={<SignIn routing="path" path="/sign-in" />}
         />
         <Route
           path="/sign-up/*"
           element={<SignUp routing="path" path="/sign-up" />}
-        />
+        /> */}
         <Route path="/home" element={<Landing />} />
         <Route path="/" element={<Login />} />
         <Route path="/lideres" element={<Lideres />} />
