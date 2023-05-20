@@ -45,50 +45,50 @@ function ProtectedPage() {
   );
 }
 
-function ClerkProviderWithRoutes() {
-  const navigate = useNavigate();
+// function ClerkProviderWithRoutes() {
+//   const navigate = useNavigate();
 
-  return (
+//   return (
     // <ClerkProvider publishableKey={clerkPubKey} navigate={(to) => navigate(to)}>
-    <Routes>
-      <Route path="/" element={<PublicPage />} />
-      <Route
-        path="/sign-in/*"
-        element={<SignIn routing="path" path="/sign-in" />}
-      />
-      <Route
-        path="/sign-up/*"
-        element={<SignUp routing="path" path="/sign-up" />}
-      />
-      <Route path="/home" element={<Landing />} />
-      <Route path="/" element={<Login />} />
-      <Route path="/lideres" element={<Lideres />} />
-      <Route path="/lideres/analytics" element={<AnalyticLeader />} />
-      <Route path="/clevel" element={<Clevel />} />
-      <Route path="/clevel/analytics" element={<Analytic />} />
-      <Route path="/corredores" element={<CorredoresDashboard />} />
-      <Route path="/corredores/analytics" element={<CorredoresAnlaytics />} />
-      <Route path="/analytics" element={<Analytics />} />
-      <Route path="/settings" element={<Settings />} />
-      <Route path="/vendedores" element={<VendedoresDashboard />} />
-      <Route path="/vendedores/history" element={<VendedoresAnalytics />} />
-      <Route
-        path="/protected"
-        element={
-          <>
-            <SignedIn>
-              <Landing />
-            </SignedIn>
-            <SignedOut>
-              <RedirectToSignIn />
-            </SignedOut>
-          </>
-        }
-      />
-    </Routes>
+    // <Routes>
+    //   <Route path="/" element={<PublicPage />} />
+    //   <Route
+    //     path="/sign-in/*"
+    //     element={<SignIn routing="path" path="/sign-in" />}
+    //   />
+    //   <Route
+    //     path="/sign-up/*"
+    //     element={<SignUp routing="path" path="/sign-up" />}
+    //   />
+    //   <Route path="/home" element={<Landing />} />
+    //   <Route path="/" element={<Login />} />
+    //   <Route path="/lideres" element={<Lideres />} />
+    //   <Route path="/lideres/analytics" element={<AnalyticLeader />} />
+    //   <Route path="/clevel" element={<Clevel />} />
+    //   <Route path="/clevel/analytics" element={<Analytic />} />
+    //   <Route path="/corredores" element={<CorredoresDashboard />} />
+    //   <Route path="/corredores/analytics" element={<CorredoresAnlaytics />} />
+    //   <Route path="/analytics" element={<Analytics />} />
+    //   <Route path="/settings" element={<Settings />} />
+    //   <Route path="/vendedores" element={<VendedoresDashboard />} />
+    //   <Route path="/vendedores/history" element={<VendedoresAnalytics />} />
+    //   <Route
+    //     path="/protected"
+    //     element={
+    //       <>
+    //         <SignedIn>
+    //           <Landing />
+    //         </SignedIn>
+    //         <SignedOut>
+    //           <RedirectToSignIn />
+    //         </SignedOut>
+    //       </>
+    //     }
+    //   />
+    // </Routes>
     // </ClerkProvider>
-  );
-}
+  // );
+// }
 
 function App() {
   return (
