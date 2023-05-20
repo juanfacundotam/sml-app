@@ -15,6 +15,11 @@ import axios from "axios";
 // axios.defaults.baseURL = "http://localhost:3001";
 
 
+
+axios.defaults.baseURL = "http://localhost:3001";
+
+
+
 const container = document.getElementById("root");
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
 root.render(

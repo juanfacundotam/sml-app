@@ -71,7 +71,7 @@ const CorredoresDashboard = () => {
     try {
       for (let i = 0; i < leadUnchecked10.length; i++) {
         const response = await axios.put(
-          `http://localhost:3001/lead/${client[i]._id}`,
+          `/lead/${client[i]._id}`,
           {
             view: client[i].view,
           }
@@ -131,7 +131,7 @@ const CorredoresDashboard = () => {
           ) {
             // Realizar el put de todas formas
             const response = await axios.put(
-              `http://localhost:3001/lead/${client[i]._id}`,
+              `/lead/${client[i]._id}`,
               {
                 _id: client[i]._id,
                 name: client[i].name,
@@ -152,7 +152,7 @@ const CorredoresDashboard = () => {
               };
 
               await axios.post(
-                "http://localhost:3001/corredor/sendmail",
+                "/corredor/sendmail",
                 emailData
               );
             }
@@ -162,7 +162,7 @@ const CorredoresDashboard = () => {
           ) {
             // Realizar el put si Instagram no está vacío
             const response = await axios.put(
-              `http://localhost:3001/lead/${client[i]._id}`,
+              `/lead/${client[i]._id}`,
               {
                 _id: client[i]._id,
                 name: client[i].name,

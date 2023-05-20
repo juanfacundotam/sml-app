@@ -49,7 +49,7 @@ function ChildModal({ inputName, inputEmail, inputPhone, itemRol, itemId }) {
 
     try {
       const response = await axios.put(
-        `http://localhost:3001/${itemRol}/${itemId}`,
+        `/${itemRol}/${itemId}`,
         {
           name: inputName,
           email: inputEmail,

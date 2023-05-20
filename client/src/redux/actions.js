@@ -14,21 +14,21 @@ export const GET_ALL_VENDEDORES = "GET_ALL_VENDEDORES"
 
 export const getAllLead = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:3001/lead");
+    const response = await axios.get("/lead");
     const LeadData = response.data;
     dispatch({ type: GET_ALL_LEAD, payload: LeadData });
   };
 };
 export const getAllCorredores = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:3001/corredor");
+    const response = await axios.get("/corredor");
     const corredores = response.data;
     dispatch({ type: GET_ALL_CORREDORES, payload: corredores });
   };
 };
 export const getAllVendedores = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:3001/vendedor");
+    const response = await axios.get("/vendedor");
     const vendedores = response.data;
     dispatch({ type: GET_ALL_VENDEDORES, payload: vendedores });
   };
@@ -36,7 +36,7 @@ export const getAllVendedores = () => {
 
 export const getLeadUnchecked = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:3001/lead/unchecked");
+    const response = await axios.get("/lead/unchecked");
     const LeadUnchecked = response.data;
     dispatch({ type: GET_LEAD_UNCHECKED, payload: LeadUnchecked });
   };
@@ -44,7 +44,7 @@ export const getLeadUnchecked = () => {
 
 export const getLeadUnchecked10 = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:3001/lead/unchecked10");
+    const response = await axios.get("/lead/unchecked10");
     const LeadUnchecked10 = response.data;
     dispatch({ type: GET_LEAD_UNCHECKED_10, payload: LeadUnchecked10 });
   };
@@ -52,7 +52,7 @@ export const getLeadUnchecked10 = () => {
 
 export const getLeadChecked = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:3001/lead/checked");
+    const response = await axios.get("/lead/checked");
     const LeadChecked = response.data;
     dispatch({ type: GET_LEAD_CHEQUED, payload: LeadChecked });
   };
@@ -60,7 +60,7 @@ export const getLeadChecked = () => {
 
 export const getLeadCheckedInactive100 = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:3001/lead/checkedinactive100");
+    const response = await axios.get("/lead/checkedinactive100");
     const LeadCheckedInactive100 = response.data;
     dispatch({ type: GET_LEAD_CHEQUED_INACTIVE_100, payload: LeadCheckedInactive100 });
   };

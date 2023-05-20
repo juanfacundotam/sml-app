@@ -50,16 +50,16 @@ function ChildModal({ inputName, inputEmail, selectEmployees, handleReset }) {
     let url;
     switch (selectEmployees) {
       case "clevel":
-        url = "http://localhost:3001/clevel";
+        url = "/clevel";
         break;
       case "leader":
-        url = "http://localhost:3001/leader";
+        url = "/leader";
         break;
       case "corredor":
-        url = "http://localhost:3001/corredor";
+        url = "/corredor";
         break;
       case "vendedor":
-        url = "http://localhost:3001/vendedor";
+        url = "/vendedor";
         break;
       default:
         alert("El campo 'rol' no es válido");
@@ -79,7 +79,7 @@ function ChildModal({ inputName, inputEmail, selectEmployees, handleReset }) {
 
     try {
       const responseEmployees = await axios.post(
-        "http://localhost:3001/employees",
+        "/employees",
         {
           name: inputName,
           email: inputEmail,
