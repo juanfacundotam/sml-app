@@ -21,12 +21,20 @@ import { IoGrid, IoStatsChart } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { getLeadUnchecked10 } from "../../../redux/actions";
 import IconLabelButtons from "../../MaterialUi/IconLabelButtons";
-import swal from 'sweetalert';
-
-
+import swal from "sweetalert";
+import {
+  useUser,
+  useOrganization,
+  useOrganizationList,
+} from "@clerk/clerk-react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
+  const user = useUser().user;
+  const org = useOrganization();
+  const orgList = useOrganizationList();
 
   const handleChangeInstagram = (event, index) => {
     const { name, value } = event.target;
@@ -78,21 +86,6 @@ const CorredoresDashboard = () => {
   const { leadUnchecked10 } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-/*   useEffect(() => {
-    const UserName = localStorage.getItem('UserName');
-    const Password = localStorage.getItem('Password');
-
-    if (UserName && Password) {
-      // El usuario está autenticado, mostrar contenido relevante
-      console.log('Usuario autenticado:', UserName);
-    } else {
-      // El usuario no está autenticado, redirigir a la página de inicio de sesión
-      console.log('Usuario no autenticado');
-      // Redirigir a la página de inicio de sesión
-      window.location.href = '/login';
-    }
-  }, []); */
-
   useEffect(() => {
     dispatch(getLeadUnchecked10());
     handleView();
@@ -108,8 +101,8 @@ const CorredoresDashboard = () => {
           name: leadUnchecked10[i].name,
           url: leadUnchecked10[i].url,
           instagram: "",
-          level: leadUnchecked10[i].level,
-          checked: leadUnchecked10[i].checked,
+          level: "-",
+          checked: false,
           view: true,
         });
       }
@@ -117,20 +110,79 @@ const CorredoresDashboard = () => {
     setClient(clientes);
   }, [leadUnchecked10]);
 
-  console.log(leadUnchecked10);
+  const SendLeads = (name) => {
+    toast.info(`✔ ${name} Send Leads! `, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const SendLeadsErrorInsta = (name) => {
+    toast.error(`❌ Error Instagram incomplete ${name}!`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const SendLeadsErrorLevel = (name) => {
+    toast.error(`❌ Error Instagram incomplete ${name}!`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const SendLeadsErrorInsta0 = (name) => {
+    toast.error(`❌ Error Instagram with Level 0 ${name}!`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const SendLeadsSuccess = () => {
+    toast.success(`✔ Send Leads Success!`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await swal("Enviando informacion!", `porfavor no cierre la pestaña hasta completar el proceso`, "warning",);
+    SendLeads(user.fullName);
     try {
       for (let i = 0; i < leadUnchecked10.length; i++) {
         if (client[i].level !== "-") {
-          // Verificar si Instagram está vacío pero el nivel es igual a 0
-          if (
+          if (client[i].instagram.trim() !== "" && client[i].level === "0") {
+            SendLeadsErrorInsta0(client[i].name);
+          } else if (
             client[i].instagram.trim() === "" &&
             (client[i].level === "incidencia" || client[i].level === "0")
           ) {
-            // Realizar el put de todas formas
             const response = await axios.put(
               `http://localhost:3001/lead/${client[i]._id}`,
               {
@@ -139,16 +191,16 @@ const CorredoresDashboard = () => {
                 url: client[i].url,
                 instagram: client[i].instagram,
                 level: client[i].level,
-                checked: client[i].checked,
+                checked: true,
+                corredor: user.fullName,
               }
             );
             console.log(response.data);
             if (client[i].level === "incidencia") {
-              // Enviar correo electrónico utilizando el servidor back-end
               const emailData = {
                 clientName: client[i].name,
                 recipientEmail: "gustavomontespalavecino@gmail.com",
-                message: `Se ha detectado una incidencia para el cliente ${client[i].name} con el numero de id ${client[i]._id}. Por favor, revisa la situación y toma las medidas necesarias.`,
+                message: `Se ha detectado una incidencia clasificada por el corredor ${user.emailAddresses[0].emailAddress} para el cliente ${client[i].name} con el numero de id ${client[i]._id}. Por favor, revisa la situación y toma las medidas necesarias.`,
               };
 
               await axios.post(
@@ -160,7 +212,6 @@ const CorredoresDashboard = () => {
             client[i].instagram.trim() !== "" &&
             client[i].level !== "-"
           ) {
-            // Realizar el put si Instagram no está vacío
             const response = await axios.put(
               `http://localhost:3001/lead/${client[i]._id}`,
               {
@@ -169,22 +220,23 @@ const CorredoresDashboard = () => {
                 url: client[i].url,
                 instagram: client[i].instagram,
                 level: client[i].level,
-                checked: client[i].checked,
+                checked: true,
+                corredor: user.fullName,
               }
             );
             console.log(response.data);
-          }else {
-          await swal("Atencion!", `Al Cliente: ${client[i].name} le falta asignar instagram`, "warning");   
-        }
+          } else {
+            SendLeadsErrorInsta(client[i].name);
+          }
         } else {
-          await swal("Atencion!", `Al Cliente: ${client[i].name} le falta asignar nivel`, "warning",);
+          SendLeadsErrorLevel(client[i].name);
         }
       }
-      await swal("Good job!", "informacion enviada correctamente!", "success");
+      SendLeadsSuccess();
       dispatch(getLeadUnchecked10());
     } catch (error) {
       await swal(":(", "error al enviar la informacion!", "error");
-      console.log({error: error.message});
+      console.log({ error: error.message });
     }
   };
 
@@ -192,6 +244,7 @@ const CorredoresDashboard = () => {
     <>
       <Nav />
       <Card className="w-full m-5 bg-[#222131]">
+        <ToastContainer />
         <form onSubmit={handleSubmit}>
           <div className="flex justify-between items-center">
             <div className="flex gap-10  mt-2 mx-5 ">
@@ -297,7 +350,7 @@ const CorredoresDashboard = () => {
                       1
                     </button>
                     <button
-                      className={
+                        className={
                         item.level === "2"
                           ? style.buttonNivelActive
                           : style.buttonNivel

@@ -49,8 +49,7 @@ export default function SelectSmall(props) {
         </MenuItem>
         <MenuItem value="contratado">Contratado</MenuItem>
         <MenuItem value="rechazado">Rechazado</MenuItem>
-        <MenuItem value="sin-contactar">Sin Contratar</MenuItem>
-        <MenuItem value="no-responde">No Responde</MenuItem>
+        <MenuItem value="sin-contactar">Sin Contactar</MenuItem>
       </Select>
     </FormControl>
   );

@@ -69,6 +69,18 @@
   width: 30px;
   text-overflow: ellipsis;
 }
+.ig {
+  color: #ff598b;
+  font-size: 23px;
+  width: 30px;
+  text-overflow: ellipsis;
+}
+.notIg {
+  color: gray;
+  font-size: 23px;
+  width: 30px;
+  text-overflow: ellipsis;
+}
 
 @media screen and (max-width: 1500px) {
   .tableRow {

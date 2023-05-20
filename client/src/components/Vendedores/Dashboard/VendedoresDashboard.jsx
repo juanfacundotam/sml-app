@@ -38,7 +38,6 @@ const VendedoresDashboard = () => {
     setData(leadCheckedInactive100);
   }, [leadCheckedInactive100]);
 
-
   const [pageStyle, setPageStyle] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardXPage, setCardXpage] = useState(10);
@@ -144,56 +143,56 @@ const VendedoresDashboard = () => {
     <>
       <Nav />
 
-      {leadCheckedInactive100.length ? (
-        <div className="flex flex-col justify-between items-center w-screen  z-0">
-          {showCopiedMessage && (
-            <p className="mt-2 p-3 bg-[#b9b9b978] text-white rounded-md absolute">
-              Copiado al portapapeles
-            </p>
-          )}
+      <div className="flex flex-col justify-between items-center w-screen  z-0">
+        {showCopiedMessage && (
+          <p className="mt-2 p-3 bg-[#b9b9b978] text-white rounded-md absolute">
+            Copiado al portapapeles
+          </p>
+        )}
 
-          <div className="w-full flex flex-col justify-center items-center">
-            <div className={style.divTitle}>
-              <h1 className="font-bold text-[#e2e2e2] text-lg mx-5 mt-2">
-                Dashboard
-              </h1>
-              <div className="flex gap-5">
-                <Link to={"/vendedores"}>
-                  <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
-                </Link>
-                <Link className="text-5xl" to={"/vendedores/analytics"}>
-                  <IoStatsChart className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
-                </Link>
-              </div>
-              {filters.level === true ? (
-                <select
-                  name="level"
-                  id="level"
-                  onChange={(event) => {
-                    onChangeLevel(event.target.value);
-                  }}
-                  className="w-1/5 text-center bg-transparent border border-white rounded-md p-1 absolute left-[40%] "
-                >
-                  <option value="" disabled selected className="bg-[#222131]">
-                    Seleccione un nivel
-                  </option>
-                  <option value="0" className="bg-[#222131]">
-                    0
-                  </option>
-                  <option value="1" className="bg-[#222131]">
-                    1
-                  </option>
-                  <option value="2" className="bg-[#222131]">
-                    2
-                  </option>
-                  <option value="incidencia" className="bg-[#222131]">
-                    Incidencia
-                  </option>
-                </select>
-              ) : (
-                ""
-              )}
+        <div className="w-full flex flex-col justify-center items-center">
+          <div className={style.divTitle}>
+            <h1 className="font-bold text-[#e2e2e2] text-lg mx-5 mt-2">
+              Dashboard
+            </h1>
+            <div className="flex gap-5">
+              <Link to={"/vendedores"}>
+                <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
+              </Link>
+              <Link className="text-5xl" to={"/vendedores/history"}>
+                <IoStatsChart className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
+              </Link>
             </div>
+            {filters.level === true ? (
+              <select
+                name="level"
+                id="level"
+                onChange={(event) => {
+                  onChangeLevel(event.target.value);
+                }}
+                className="w-1/5 text-center bg-transparent border border-white rounded-md p-1 absolute left-[40%] "
+              >
+                <option value="" disabled selected className="bg-[#222131]">
+                  Seleccione un nivel
+                </option>
+                <option value="0" className="bg-[#222131]">
+                  0
+                </option>
+                <option value="1" className="bg-[#222131]">
+                  1
+                </option>
+                <option value="2" className="bg-[#222131]">
+                  2
+                </option>
+                <option value="incidencia" className="bg-[#222131]">
+                  Incidencia
+                </option>
+              </select>
+            ) : (
+              ""
+            )}
+          </div>
+          {leadCheckedInactive100.length ? (
             <table className={style.table}>
               <thead className="text-gray-400 text-14 font-thin">
                 <tr className={style.tableRow}>
@@ -290,8 +289,14 @@ const VendedoresDashboard = () => {
                       )}
                     </td>
                     <td className="flex justify-start items-start p-0 w-fit">
-                      {item.status !== "Contratado" && (
-                        <p className="bg-[#e95ea3] w-44 h-11 flex justify-center items-center text-white rounded-3xl text-18">
+                      {item.status === "Sin contactar" && (
+                        <p className="bg-[#ff69b4] w-44 h-11 flex justify-center items-center text-white rounded-3xl text-18">
+                          {item.status}
+                        </p>
+                      )}
+                      {item.status === "No responde" && (
+                        // <p className="bg-[#b4215e] w-44 h-11 flex justify-center items-center text-white rounded-3xl text-18">
+                        <p className="bg-[#2148b4] w-44 h-11 flex justify-center items-center text-white rounded-3xl text-18">
                           {/* bg-[#ff69b4]  */}
                           {item.status}
                         </p>
@@ -310,26 +315,26 @@ const VendedoresDashboard = () => {
                 ))}
               </tbody>
             </table>
-          </div>
-          {pages.length > 1 && (
-            <div className="mb-5">
-              <PaginationOutlined
-                pageStyle={pageStyle}
-                setPageStyle={setPageStyle}
-                cardXPage={cardXPage}
-                data={data}
-                pages={pages}
-                current={currentPage}
-              />
+          ) : (
+            <div className="flex items-center justify-center w-full h-screen">
+              <h1>LEADS NOT FOUND...</h1>
             </div>
           )}
-          <ToastContainer />
         </div>
-      ) : (
-        <div className="flex items-center justify-center w-full h-screen">
-          <h1>LEADS NOT FOUND...</h1>
-        </div>
-      )}
+        {data.length > 10 && (
+          <div className="mb-5">
+            <PaginationOutlined
+              pageStyle={pageStyle}
+              setPageStyle={setPageStyle}
+              cardXPage={cardXPage}
+              data={data}
+              pages={pages}
+              current={currentPage}
+            />
+          </div>
+        )}
+        <ToastContainer />
+      </div>
     </>
   );
 };
