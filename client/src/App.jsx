@@ -99,14 +99,16 @@ function App() {
       <Routes>
         <Route path="/home" element={<Landing />} />
         <Route path="/" element={<Login />} />
-        <Route path="/employees" element={<Employees />} />
-        <Route path="/employees/analytics" element={<AnalyticLeader />} />
+        <Route path="/lideres" element={<Lideres />} />
+        <Route path="/lideres/analytics" element={<AnalyticLeader />} />
+        <Route path="/clevel" element={<Clevel />} />
+        <Route path="/clevel/analytics" element={<Analytic />} />
         <Route path="/corredores" element={<CorredoresDashboard />} />
         <Route path="/corredores/analytics" element={<CorredoresAnlaytics />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/vendedores" element={<VendedoresDashboard />} />
-        <Route path="/vendedores/analytics" element={<VendedoresAnalytics />} />
+        <Route path="/vendedores/history" element={<VendedoresAnalytics />} />
       </Routes>
 
       {
