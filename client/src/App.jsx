@@ -9,6 +9,9 @@ import VendedoresDashboard from "./components/Vendedores/Dashboard/VendedoresDas
 import { AnalyticLeader } from "./components/Lideres/Analytic/AnalyticLeader";
 import VendedoresAnalytics from "./components/Vendedores/analytics/VendedoresAnalytics";
 import CorredoresAnlaytics from "./components/Corredores/Analitycs/CorredoresAnalytics";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import Clevel from "./components/C-Level/Clevel";
+import Analytic from "./components/C-Level/Analytics/Analytic";
 // import {
 //   ClerkProvider,
 //   SignedIn,
@@ -18,9 +21,6 @@ import CorredoresAnlaytics from "./components/Corredores/Analitycs/CorredoresAna
 //   SignUp,
 //   UserButton,
 // } from "@clerk/clerk-react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import Clevel from "./components/C-Level/Clevel";
-import Analytic from "./components/C-Level/Analytics/Analytic";
 
 // if (!"pk_test_ZmFtb3VzLWRyYWdvbi0xMi5jbGVyay5hY2NvdW50cy5kZXYk") {
 //   throw new Error("Missing Publishable Key");
@@ -49,114 +49,75 @@ import Analytic from "./components/C-Level/Analytics/Analytic";
 //   const navigate = useNavigate();
 
 //   return (
-// <ClerkProvider publishableKey={clerkPubKey} navigate={(to) => navigate(to)}>
-// <Routes>
-//   <Route path="/" element={<PublicPage />} />
-//   <Route
-//     path="/sign-in/*"
-//     element={<SignIn routing="path" path="/sign-in" />}
-//   />
-//   <Route
-//     path="/sign-up/*"
-//     element={<SignUp routing="path" path="/sign-up" />}
-//   />
-//   <Route path="/home" element={<Landing />} />
-//   <Route path="/" element={<Login />} />
-//   <Route path="/lideres" element={<Lideres />} />
-//   <Route path="/lideres/analytics" element={<AnalyticLeader />} />
-//   <Route path="/clevel" element={<Clevel />} />
-//   <Route path="/clevel/analytics" element={<Analytic />} />
-//   <Route path="/corredores" element={<CorredoresDashboard />} />
-//   <Route path="/corredores/analytics" element={<CorredoresAnlaytics />} />
-//   <Route path="/analytics" element={<Analytics />} />
-//   <Route path="/settings" element={<Settings />} />
-//   <Route path="/vendedores" element={<VendedoresDashboard />} />
-//   <Route path="/vendedores/history" element={<VendedoresAnalytics />} />
-//   <Route
-//     path="/protected"
-//     element={
-//       <>
-//         <SignedIn>
-//           <Landing />
-//         </SignedIn>
-//         <SignedOut>
-//           <RedirectToSignIn />
-//         </SignedOut>
-//       </>
-//     }
-//   />
-// </Routes>
-// </ClerkProvider>
-// );
+//     <ClerkProvider publishableKey={clerkPubKey} navigate={(to) => navigate(to)}>
+//       <Routes>
+//         <Route path="/" element={<PublicPage />} />
+//         <Route
+//           path="/sign-in/*"
+//           element={<SignIn routing="path" path="/sign-in" />}
+//         />
+//         <Route
+//           path="/sign-up/*"
+//           element={<SignUp routing="path" path="/sign-up" />}
+//         />
+//         <Route path="/home" element={<Landing />} />
+//         <Route path="/" element={<Login />} />
+//         <Route path="/lideres" element={<Lideres />} />
+//         <Route path="/lideres/analytics" element={<AnalyticLeader />} />
+//         <Route path="/clevel" element={<Clevel />} />
+//         <Route path="/clevel/analytics" element={<Analytic />} />
+//         <Route path="/corredores" element={<CorredoresDashboard />} />
+//         <Route path="/corredores/analytics" element={<CorredoresAnlaytics />} />
+//         <Route path="/analytics" element={<Analytics />} />
+//         <Route path="/settings" element={<Settings />} />
+//         <Route path="/vendedores" element={<VendedoresDashboard />} />
+//         <Route path="/vendedores/history" element={<VendedoresAnalytics />} />
+//         <Route
+//           path="/protected"
+//           element={
+//             <>
+//               <SignedIn>
+//                 <Landing />
+//               </SignedIn>
+//               <SignedOut>
+//                 <RedirectToSignIn />
+//               </SignedOut>
+//             </>
+//           }
+//         />
+//       </Routes>
+//     </ClerkProvider>
+//   );
 // }
 
 function App() {
   return (
+    // <div className="App">
+    //   <ClerkProviderWithRoutes />
+    // </div>
     <div className="App">
-      {/* <ClerkProviderWithRoutes /> */}
       <Routes>
-        {/* <Route path="/" element={<PublicPage />} /> */}
-        {/* <Route
-          path="/sign-in/*"
-          element={<SignIn routing="path" path="/sign-in" />}
-        />
-        <Route
-          path="/sign-up/*"
-          element={<SignUp routing="path" path="/sign-up" />}
-        /> */}
         <Route path="/home" element={<Landing />} />
         <Route path="/" element={<Login />} />
-        <Route path="/lideres" element={<Lideres />} />
-        <Route path="/lideres/analytics" element={<AnalyticLeader />} />
-        <Route path="/clevel" element={<Clevel />} />
-        <Route path="/clevel/analytics" element={<Analytic />} />
+        <Route path="/employees" element={<Employees />} />
+        <Route path="/employees/analytics" element={<AnalyticLeader />} />
         <Route path="/corredores" element={<CorredoresDashboard />} />
         <Route path="/corredores/analytics" element={<CorredoresAnlaytics />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/vendedores" element={<VendedoresDashboard />} />
-        <Route path="/vendedores/history" element={<VendedoresAnalytics />} />
-        {/* <Route
-          path="/protected"
-          element={
-            <>
-              <SignedIn>
-                <Landing />
-              </SignedIn>
-              <SignedOut>
-                <RedirectToSignIn />
-              </SignedOut>
-            </> */}
-        {/* }
-        /> */}
+        <Route path="/vendedores/analytics" element={<VendedoresAnalytics />} />
       </Routes>
-    </div>
-    // <div className="App">
-    //   <Routes>
-    //     <Route path="/home" element={<Landing />} />
-    //     <Route path="/" element={<Login />} />
-    //     <Route path="/employees" element={<Employees />} />
-    //     <Route path="/employees/analytics" element={<AnalyticLeader />} />
-    //     <Route path="/corredores" element={<CorredoresDashboard />} />
-    //     <Route path="/corredores/analytics" element={<CorredoresAnlaytics />}/>
-    //     <Route path="/analytics" element={<Analytics />} />
-    //     <Route path="/settings" element={<Settings />} />
-    //     <Route
-    //       path="/vendedores"
-    //       element={<VendedoresDashboard/>}
-    //     />
-    //     <Route path="/vendedores/analytics" element={<VendedoresAnalytics/>} />
-    //   </Routes>
 
-    //   {(
-    //     <div className="App flex items-center justify-center">
-    //       <img
-    //         className="opacity-20 w-4/5 mt-[2%]"
-    //         src="https://cdn.discordapp.com/attachments/1105243107555037294/1106577865698459788/White_Logo_Social_Media_Lab.png"
-    //       />
-    //     </div>
-    //   )}
-    // </div>
+      {
+        <div className="App flex items-center justify-center">
+          <img
+            className="opacity-20 w-4/5 mt-[2%]"
+            src="https://cdn.discordapp.com/attachments/1105243107555037294/1106577865698459788/White_Logo_Social_Media_Lab.png"
+          />
+        </div>
+      }
+    </div>
   );
 }
 
