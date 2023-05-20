@@ -64,7 +64,7 @@ function ChildModal({
       status: statusObj.status,
       status_op: statusObj.status_op,
       vendedor: emailAddress,
-      noresponde_count: item.noresponde_count,
+      llamados: item.llamados,
     };
     const dataUpdate = {
       dataLead,
@@ -242,7 +242,7 @@ export default function NestedModal({
   const [statusObj, setStatusObj] = React.useState({
     status: item.status,
     status_op: item.status_op,
-    noresponde_count: item.noresponde_count,
+    llamados: item.llamados,
   });
 
 
@@ -474,11 +474,11 @@ export default function NestedModal({
                 </div>
               </div>
             )}
-            {item.noresponde_count > 0 && statusObj.status === "No responde" && (
+            {item.llamados > 0 && statusObj.status === "No responde" && (
               <div className="flex flex-col justify-center items-center mt-5">
                 <div className="flex justify-center items-center flex-col">
                   <p htmlFor="" className="text-white m-2">
-                    {`Llamados: ${item.noresponde_count}`}
+                    {`Llamados: ${item.llamados}`}
                   </p>
                   {formattedUpdate()}
                 </div>

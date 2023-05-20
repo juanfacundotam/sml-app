@@ -15,15 +15,15 @@ const updateLeadVendedorById = async (id, updatedData) => {
   const leadCountCheck = await Lead.findById(id);
   if (
     updatedData.dataLead.status === "No responde" &&
-    leadCountCheck.noresponde_count < 2
+    leadCountCheck.llamados < 2
   ) {
-    updatedData.dataLead.noresponde_count++;
-    updatedData.dataVendedor.llamados = updatedData.dataLead.noresponde_count;
+    updatedData.dataLead.llamados++;
+    updatedData.dataVendedor.llamados = updatedData.dataLead.llamados;
   } else if (
     updatedData.dataLead.status === "No responde" &&
-    leadCountCheck.noresponde_count === 2
+    leadCountCheck.llamados === 2
   ) {
-    updatedData.dataLead.noresponde_count = 0;
+    updatedData.dataLead.llamados = 0;
     updatedData.dataLead.status = "Rechazado";
     updatedData.dataLead.status_op = "3 llamados";
     updatedData.dataVendedor.status = "Rechazado";
