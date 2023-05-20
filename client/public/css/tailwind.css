@@ -592,8 +592,8 @@ video {
   top: 0px;
 }
 
-.top-4 {
-  top: 1rem;
+.top-\[2rem\] {
+  top: 2rem;
 }
 
 .z-0 {
@@ -669,10 +669,6 @@ video {
 
 .ml-2 {
   margin-left: 0.5rem;
-}
-
-.ml-20 {
-  margin-left: 5rem;
 }
 
 .ml-4 {
@@ -765,6 +761,10 @@ video {
 
 .mt-\[7px\] {
   margin-top: 7px;
+}
+
+.ml-20 {
+  margin-left: 5rem;
 }
 
 .block {
@@ -1431,6 +1431,11 @@ video {
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .py-1 {
