@@ -32,7 +32,7 @@ function ChildModalDelete({ itemRol, itemId }) {
 
     try {
       const response = await axios.put(
-        `/${itemRol}/${itemId}`,
+        `http://localhost:3001/${itemRol}/${itemId}`,
         {
           deleted: true,
         }
@@ -101,7 +101,7 @@ function ChildModal({ inputName, inputEmail, inputPhone, itemRol, itemId }) {
 
     try {
       const response = await axios.put(
-        `/${itemRol}/${itemId}`,
+        `http://localhost:3001/${itemRol}/${itemId}`,
         {
           name: inputName,
           email: inputEmail,
