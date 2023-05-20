@@ -1,9 +1,4 @@
 import React from "react";
-import AnalyticsNumerics from "./AnalyticsNumerics/AnalyticsNumerics";
-import Reports from "./Reports/Reports";
-import Goals from "./Goals/Goals";
-import BestSellers from "./BestSellers/BestSellers";
-import { Sales } from "./Sales/Sales";
 
 function Analytic() {
   return (

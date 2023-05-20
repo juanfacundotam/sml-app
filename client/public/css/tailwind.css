@@ -592,8 +592,8 @@ video {
   top: 0px;
 }
 
-.top-4 {
-  top: 1rem;
+.top-\[2rem\] {
+  top: 2rem;
 }
 
 .z-0 {
@@ -669,10 +669,6 @@ video {
 
 .ml-2 {
   margin-left: 0.5rem;
-}
-
-.ml-20 {
-  margin-left: 5rem;
 }
 
 .ml-4 {
@@ -765,6 +761,10 @@ video {
 
 .mt-\[7px\] {
   margin-top: 7px;
+}
+
+.ml-20 {
+  margin-left: 5rem;
 }
 
 .block {
@@ -878,6 +878,10 @@ video {
 
 .h-screen {
   height: 100vh;
+}
+
+.h-96 {
+  height: 24rem;
 }
 
 .w-1\/3 {
@@ -1152,6 +1156,14 @@ video {
   overflow: hidden;
 }
 
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
 .text-ellipsis {
   text-overflow: ellipsis;
 }
@@ -1421,6 +1433,11 @@ video {
   padding-right: 1.25rem;
 }
 
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -1519,6 +1536,10 @@ video {
   font-size: 18px;
 }
 
+.text-\[23px\] {
+  font-size: 23px;
+}
+
 .text-\[2rem\] {
   font-size: 2rem;
 }
@@ -1529,6 +1550,14 @@ video {
 
 .text-\[35px\] {
   font-size: 35px;
+}
+
+.text-\[16px\] {
+  font-size: 16px;
+}
+
+.text-\[1px\] {
+  font-size: 1px;
 }
 
 .font-bold {
@@ -1632,6 +1661,11 @@ video {
 .text-\[\#ffffff\] {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .text-gray-200 {

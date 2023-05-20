@@ -29,7 +29,7 @@ function Landing() {
 							Clevel-Dashboard
 						</Link>
 						<Link
-							to='/clevel/analytics'
+							to='/analytics'
 							className={style.linksRoutes}>
 							Clevel-Analytics
 						</Link>
@@ -64,9 +64,9 @@ function Landing() {
 							VendedoresDashboard
 						</Link>
 						<Link
-							to='/vendedores/analytics'
+							to='/vendedores/history'
 							className={style.linksRoutes}>
-							VendedoresAnalytics
+							VendedoresHistory
 						</Link>
 					</div>
 					:

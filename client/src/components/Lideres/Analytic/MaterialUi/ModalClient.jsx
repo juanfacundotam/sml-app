@@ -19,7 +19,17 @@ const style = {
 };
 
 export default function BasicModal(props) {
-  const { name, category, level, email, instagram, telephone, status } = props;
+  const {
+    name,
+    category,
+    level,
+    email,
+    instagram,
+    telephone,
+    status,
+    city,
+    province,
+  } = props;
   console.log(name);
   return (
     <div>
@@ -46,7 +56,9 @@ export default function BasicModal(props) {
             </div>
             <div className="font-semibold flex gap-3">
               <p>CIUDAD : </p>
-              <p className="font-normal">Ciudad </p>
+              <p className="font-normal">
+                {province}, {city}{" "}
+              </p>
             </div>
             <div className="font-semibold flex gap-3">
               <p>NIVEL : </p>
