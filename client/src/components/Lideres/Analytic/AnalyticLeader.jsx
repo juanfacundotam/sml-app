@@ -133,7 +133,8 @@ export const AnalyticLeader = () => {
 
   return (
     <>
-      <div className="w-full h-screen flex flex-col">
+      <Nav />
+      <div className="w-3/4 h-screen flex flex-col">
         <Card className="w-full h-full bg-[#222131] rounded-none p-5">
           <div className="flex justify-between items-center mx-5 mb-0">
             <div className="flex gap-5">
