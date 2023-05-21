@@ -4,24 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import PaginationOutlined from "../../pagination/PaginationOutlined";
 import { filterLevel, getLeadCheckedInactive100 } from "../../../redux/actions";
-import { SiGooglemaps } from "react-icons/si";
 import { AiOutlinePhone, AiTwotonePhone } from "react-icons/ai";
 import Modal from "./Modal/Modal";
-import { FaRegEdit } from "react-icons/fa";
-import { BiEdit } from "react-icons/bi";
 import { IoGrid, IoStatsChart } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import {
-  CiGlobe,
-  CiWarning,
-  CiInstagram,
-  CiMail,
-  CiEdit,
-} from "react-icons/ci";
-import { AiOutlineSend } from "react-icons/ai";
-import { IoIosClose } from "react-icons/io";
+import { CiWarning, CiInstagram, CiMail } from "react-icons/ci";
 
 import Nav from "../../Nav/Nav";
 
