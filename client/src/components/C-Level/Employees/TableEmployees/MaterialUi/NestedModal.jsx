@@ -147,10 +147,13 @@ function ChildModal({
         <Box sx={{ ...style, width: "20%", backgroundColor: "#39394b" }}>
           <div className="flex flex-col gap-5 p-8">
             <h2 id="child-modal-title">Confirm employee creation</h2>
-            <div className="flex flex-col gap-2 justify-center items-start">
-              <p id="child-modal-description">Name: {inputName}</p>
-              <p id="child-modal-description">Email: {inputEmail}</p>
-              <p id="child-modal-description">Rol: {selectEmployees}</p>
+            <div className="flex flex-col gap-2 justify-start items-start">
+              <h2 id="child-modal-description">Name</h2>
+              <p id="child-modal-description">{inputName}</p>
+              <h2 id="child-modal-description">Email</h2>
+              <p id="child-modal-description">{inputEmail}</p>
+              <h2 id="child-modal-description">Rol</h2>
+              <p id="child-modal-description">{selectEmployees}</p>
             </div>
             <p id="child-modal-description">
               Are you sure about creating this employee?

@@ -138,6 +138,8 @@ function ChildModal({
       return;
     }
 
+    console.log(itemRol)
+
     try {
       const response = await axios.put(
         `http://localhost:3001/${itemRol}/${itemId}`,
@@ -241,10 +243,10 @@ export default function NestedModalEdit({
                 inputPhone={inputPhone}
                 setInputPhone={setInputPhone}
               />
-              <BasicSelect
+              {/* <BasicSelect
                 employees={selectEmployees}
                 setEmployees={setSelectEmployees}
-              />
+              /> */}
             </div>
           </div>
           <div className="flex gap-3 justify-center items-center">
