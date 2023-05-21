@@ -26,7 +26,7 @@ function Landing() {
 						<Link
 							to='/clevel'
 							className={style.linksRoutes}>
-							Clevel-Dashboard
+							Clevel-Employees
 						</Link>
 						<Link
 							to='/analytics'
@@ -36,7 +36,7 @@ function Landing() {
 						<Link
 							to='/lideres'
 							className={style.linksRoutes}>
-							Lider-Dashboard
+							Lider-Employees
 						</Link>
 						<Link
 							to='/lideres/analytics'
