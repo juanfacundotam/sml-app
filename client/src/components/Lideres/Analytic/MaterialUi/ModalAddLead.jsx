@@ -91,7 +91,7 @@ export default function ChildModal() {
             ...style,
             width: "30%",
             backgroundColor: "#39394b",
-            height: "600px",
+            height: "700px",
           }}
         >
           <div className="flex flex-col gap-5 p-8 h-full">
@@ -110,8 +110,10 @@ export default function ChildModal() {
                   color: "black",
                   textAlign: "start",
                   fontSize: "13px",
+                  backgroundColor: "transparent",
+                  border: "1px solid white",
                 }}
-                placeholder="json"
+                placeholder="Agregar json de clientes"
               />
             </div>
             <button onClick={() => onClickAdd(eventBody)}>Add</button>
