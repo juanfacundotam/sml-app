@@ -4,11 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import PaginationOutlined from "../../pagination/PaginationOutlined";
 import { filterLevel, getLeadCheckedInactive100 } from "../../../redux/actions";
-import { AiOutlinePhone, AiTwotonePhone } from "react-icons/ai";
+import { AiOutlinePhone} from "react-icons/ai";
 import Modal from "./Modal/Modal";
-import { IoGrid, IoStatsChart } from "react-icons/io5";
+import { IoGrid, IoStatsChart} from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaHistory } from "react-icons/fa";
 
 import { CiWarning, CiInstagram, CiMail } from "react-icons/ci";
 
@@ -149,6 +150,9 @@ const VendedoresDashboard = () => {
                 <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
               </Link>
               <Link className="text-5xl" to={"/vendedores/history"}>
+                <FaHistory className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
+              </Link>
+              <Link className="text-5xl" to={"/vendedores/analytics"}>
                 <IoStatsChart className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
               </Link>
             </div>
@@ -222,7 +226,7 @@ const VendedoresDashboard = () => {
                     </td>
 
                     <td className="flex justify-start items-center p-0 w-fit">
-                      <p className="text-center w-24 p-1 px-3 rounded-full text-ellipsis text-18 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
+                      <p className="text-start w-24 p-1 px-3 rounded-full text-ellipsis text-18 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                         {item.province}
                       </p>
                     </td>

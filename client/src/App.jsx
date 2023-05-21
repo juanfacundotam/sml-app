@@ -7,8 +7,9 @@ import Login from "./views/Login/Login";
 import CorredoresDashboard from "./components/Corredores/Dashboard/CorredoresDashboard";
 import VendedoresDashboard from "./components/Vendedores/Dashboard/VendedoresDashboard";
 import { AnalyticLeader } from "./components/Lideres/Analytic/AnalyticLeader";
-import VendedoresAnalytics from "./components/Vendedores/analytics/VendedoresAnalytics";
 import CorredoresAnlaytics from "./components/Corredores/Analitycs/CorredoresAnalytics";
+import VendedoresHistory from "./components/Vendedores/analytics/VendedoresHistory";
+import VendedoresAnalytics from "./components/Vendedores/analytics/VendedoresAnalytics";
 import {
   ClerkProvider,
   SignedIn,
@@ -65,15 +66,16 @@ function ClerkProviderWithRoutes() {
         <Route path="/" element={<Login />} />
         <Route path="/lideres" element={<Lideres />} />
         <Route path="/lideres/analytics" element={<AnalyticLeader />} />
-        <Route path='/lideres/analytics/incidences' element={<Incidences/>}/>
+        <Route path="/lideres/analytics/incidences" element={<Incidences />} />
         <Route path="/clevel" element={<Clevel />} />
         <Route path="/clevel/analytics" element={<Analytic />} />
         <Route path="/corredores" element={<CorredoresDashboard />} />
-        <Route path="/corredores/analytics" element={<CorredoresAnlaytics />} />
+        <Route path="/corredores/history" element={<CorredoresAnlaytics />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/vendedores" element={<VendedoresDashboard />} />
-        <Route path="/vendedores/history" element={<VendedoresAnalytics />} />
+        <Route path="/vendedores/history" element={<VendedoresHistory />} />
+        <Route path="/vendedores/analytics" element={<VendedoresAnalytics />} />
         <Route
           path="/protected"
           element={
@@ -111,7 +113,7 @@ function App() {
     //       path="/vendedores"
     //       element={<VendedoresDashboard/>}
     //     />
-    //     <Route path="/vendedores/analytics" element={<VendedoresAnalytics/>} />
+    //     <Route path="/vendedores/analytics" element={<VendedoresHistory/>} />
     //   </Routes>
 
     //   {(
