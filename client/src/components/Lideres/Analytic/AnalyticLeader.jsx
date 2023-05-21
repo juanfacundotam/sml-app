@@ -133,10 +133,10 @@ export const AnalyticLeader = () => {
 
   useEffect(() => {
     console.log(leaderDashboard);
-    const filtro = leaderDashboard.filter((item) => {
-      return item.status !== "Activo";
-    });
-    setData(filtro);
+    // const filtro = leaderDashboard.filter((item) => {
+    //   return item.view === true;
+    // });
+    setData(leaderDashboard);
   }, [leaderDashboard]);
 
   const [open, setOpen] = useState(false);
@@ -257,6 +257,9 @@ export const AnalyticLeader = () => {
                 status={modalItems.status}
                 city={modalItems.city}
                 province={modalItems.province}
+                corredor={modalItems.corredor}
+                vendedor={modalItems.vendedor}
+                op={modalItems.status_op}
               />
               {currentCard.map((item, index) => (
                 <div
@@ -353,14 +356,14 @@ export const AnalyticLeader = () => {
                       <div className="flex justify-center items-center p-0 ">
                         <div className="w-28 text-ellipsis  flex justify-start items-center p-0">
                           <Text className="text-white rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
-                            Nombre del Corredor
+                            {item.corredor ? item.corredor : "-"}
                           </Text>
                         </div>
                       </div>
                       <div className="flex justify-center items-center p-0 ">
                         <div className="w-28 text-ellipsis  flex justify-start items-center p-0">
                           <Text className="text-white rounded-full text-ellipsis  opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
-                            Nombre del Vendedor
+                            {item.vendedor ? item.vendedor : "-"}
                           </Text>
                         </div>
                       </div>

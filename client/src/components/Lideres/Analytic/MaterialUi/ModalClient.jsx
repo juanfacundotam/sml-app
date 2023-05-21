@@ -8,14 +8,15 @@ const style = {
   top: "40%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 600,
   bgcolor: "rgb(55 65 81)",
-  border: "2px solid #000",
+  //border: "1px solid white",
   boxShadow: 24,
   p: 4,
   textColor: "white",
   color: "white",
-  height: 600,
+  height: 700,
+  borderRadius: "20px",
 };
 
 export default function BasicModal(props) {
@@ -29,6 +30,9 @@ export default function BasicModal(props) {
     status,
     city,
     province,
+    corredor,
+    vendedor,
+    op,
   } = props;
   console.log(name);
   return (
@@ -78,15 +82,19 @@ export default function BasicModal(props) {
             </div>
             <div className="font-semibold flex gap-3">
               <p>CORREDOR: </p>
-              <p className="font-normal">Corredor </p>
+              <p className="font-normal">{corredor}</p>
             </div>
             <div className="font-semibold flex gap-3">
               <p>VENDEDOR: </p>
-              <p className="font-normal">Vendedor </p>
+              <p className="font-normal">{vendedor}</p>
             </div>
             <div className="font-semibold flex gap-3">
               <p>ESTADO: </p>
               <p className="font-normal">{status} </p>
+            </div>
+            <div className="font-semibold flex gap-3">
+              <p>DETALLE: </p>
+              <p className="font-normal">{op} </p>
             </div>
           </div>
         </Box>
