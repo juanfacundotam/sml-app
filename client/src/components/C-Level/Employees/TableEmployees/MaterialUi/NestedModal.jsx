@@ -95,24 +95,22 @@ function ChildModal({
       console.log(`No se pudo enviar el post de ${selectEmployees}`);
     }
 
-    try {
-      
-      const response = await axios.post(
-        "http://localhost:3001/corredor/sendHiringEmail",
-        {
-          employeeName: inputName,
-          recipientEmail: inputEmail,
-        }
-      );
-
-      console.log(response.data);
-      console.log("Correo electrónico de contratación enviado correctamente");
-    } catch (error) {
-      console.error(
-        "Error al enviar el correo electrónico de contratación:",
-        error.message
-      );
-    }
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:3001/corredor/sendHiringEmail",
+    //     {
+    //       employeeName: inputName,
+    //       recipientEmail: inputEmail,
+    //     }
+    //   );
+    //   console.log(response.data);
+    //   console.log("Correo electrónico de contratación enviado correctamente");
+    // } catch (error) {
+    //   console.error(
+    //     "Error al enviar el correo electrónico de contratación:",
+    //     error.message
+    //   );
+    // }
 
     try {
       const responseEmployees = await axios.post(
