@@ -161,7 +161,7 @@ export const AnalyticLeader = () => {
           )}
           <AddLead />
         </div>
-        <div>
+        <table className="w-full">
           <div className="text-white text-14 font-thin">
             <div className="flex items-center justify-around p-3 ">
               <div className="flex justify-center items-center p-0">
@@ -221,7 +221,7 @@ export const AnalyticLeader = () => {
             </div>
           </div>
 
-          <div>
+          <tbody>
             <ModalCient
               open={open}
               handleClose={handleClose}
@@ -372,8 +372,8 @@ export const AnalyticLeader = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
+          </tbody>
+        </table>
         <PaginationOutlined
           pageStyle={pageStyle}
           setPageStyle={setPageStyle}
