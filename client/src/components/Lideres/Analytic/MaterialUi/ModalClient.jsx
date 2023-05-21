@@ -51,21 +51,21 @@ export default function BasicModal(props) {
               <hr className=" border-gray-400 w-5/6 text-center" />
             </div>
             <div className="font-semibold flex gap-3">
-              <p>CATEGORIA : </p>
+              <p>CATEGORIA: </p>
               <p className="font-normal">{category} </p>
             </div>
             <div className="font-semibold flex gap-3">
-              <p>CIUDAD : </p>
+              <p>CIUDAD: </p>
               <p className="font-normal">
                 {province}, {city}{" "}
               </p>
             </div>
             <div className="font-semibold flex gap-3">
-              <p>NIVEL : </p>
+              <p>NIVEL: </p>
               <p className="font-normal">{level} </p>
             </div>
             <div className="font-semibold flex gap-3">
-              <p>EMAIL : </p>
+              <p>EMAIL: </p>
               <p className="font-normal">{email} </p>
             </div>
             <div className="font-semibold flex gap-3">
@@ -73,19 +73,19 @@ export default function BasicModal(props) {
               <p className="font-normal">{instagram} </p>
             </div>
             <div className="font-semibold flex gap-3">
-              <p>TELEFONO : </p>
+              <p>TELEFONO: </p>
               <p className="font-normal">{telephone} </p>
             </div>
             <div className="font-semibold flex gap-3">
-              <p>CORREDOR : </p>
+              <p>CORREDOR: </p>
               <p className="font-normal">Corredor </p>
             </div>
             <div className="font-semibold flex gap-3">
-              <p>VENDEDOR : </p>
+              <p>VENDEDOR: </p>
               <p className="font-normal">Vendedor </p>
             </div>
             <div className="font-semibold flex gap-3">
-              <p>ESTADO : </p>
+              <p>ESTADO: </p>
               <p className="font-normal">{status} </p>
             </div>
           </div>

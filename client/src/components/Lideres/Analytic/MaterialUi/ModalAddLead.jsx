@@ -2,7 +2,6 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import React, { useRef, useEffect, useState } from "react";
-import { textAlign } from "@mui/system";
 import { useDispatch } from "react-redux";
 import { AddLeads } from "../../../../redux/actions";
 

@@ -131,7 +131,10 @@ export const AnalyticLeader = () => {
 
   useEffect(() => {
     console.log(leaderDashboard);
-    setData(leaderDashboard);
+    const filtro = leaderDashboard.filter((item) => {
+      return item.status !== "Activo";
+    });
+    setData(filtro);
   }, [leaderDashboard]);
 
   const [open, setOpen] = useState(false);
