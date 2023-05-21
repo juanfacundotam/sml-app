@@ -106,7 +106,6 @@ export const AnalyticLeader = () => {
   };
   const [levelValue, setLevelValue] = useState("");
   const onChangeLevel = (value) => {
-    console.log(value);
     setLevelValue(value);
     dispatch(filterLevel(value));
     setData(leaderDashboard);
@@ -121,10 +120,6 @@ export const AnalyticLeader = () => {
   };
 
   useEffect(() => {
-    console.log(leaderDashboard);
-    // const filtro = leaderDashboard.filter((item) => {
-    //   return item.view === true;
-    // });
     setData(leaderDashboard);
   }, [leaderDashboard]);
 
@@ -133,7 +128,6 @@ export const AnalyticLeader = () => {
   const handleOpen = (item, index) => {
     setOpen(true);
     setModalItems(item);
-    console.log(item.name);
   };
   const handleClose = () => setOpen(false);
 

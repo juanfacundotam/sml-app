@@ -32,7 +32,6 @@ export default function BasicModal(props) {
     vendedor,
     op,
   } = props;
-  console.log(name);
   return (
     <div>
       <Modal
