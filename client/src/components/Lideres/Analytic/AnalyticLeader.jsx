@@ -1,18 +1,7 @@
 import { Link } from "react-router-dom";
 import style from "./TableEmployees.module.css";
 import PaginationOutlined from "../../pagination/PaginationOutlined";
-import {
-  Card,
-  Table,
-  TableHead,
-  TableRow,
-  TableHeaderCell,
-  TableBody,
-  TableCell,
-  Text,
-  Title,
-  Badge,
-} from "@tremor/react";
+import { Card, Text, Title } from "@tremor/react";
 import { CiMail, CiInstagram, CiPhone, CiWarning } from "react-icons/ci";
 import InputRunner from "./MaterialUi/InputRunner";
 import InputSeller from "./MaterialUi/InputSeller";
