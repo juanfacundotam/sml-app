@@ -105,7 +105,7 @@ const VendedoresHistory = () => {
             <h1 className="font-bold text-[#e2e2e2] w-28 text-lg mx-5 mt-2">
               History
             </h1>
-            <div className="flex gap-5">
+            <div className="flex gap-5 ">
               <Link to={"/vendedores"}>
                 <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
               </Link>
@@ -115,6 +115,11 @@ const VendedoresHistory = () => {
               <Link className="text-5xl" to={"/vendedores/analytics"}>
                 <IoStatsChart className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
               </Link>
+              <div className="absolute right-14">
+                    <select className="w-32 h-10 rounded-lg bg-purple-500 text-white text-center">
+        <option className="py-1">2023</option>
+      </select>
+              </div>
             </div>
             {filters.level === true ? (
               <select
@@ -555,9 +560,7 @@ export default VendedoresHistory;
 //         </div>
 //       </div>
 
-//       <select className="w-32 h-10 rounded-lg bg-purple-500 text-white text-center">
-//         <option className="py-1">2023</option>
-//       </select>
+
 //     </div>
 //     <div className="h-3/5">
 //       <div className="flex flex-col">
