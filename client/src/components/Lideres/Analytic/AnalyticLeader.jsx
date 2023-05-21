@@ -30,6 +30,7 @@ import {
   orderCategory,
   orderClients,
 } from "../../../redux/actions";
+import { IoGrid, IoStatsChart } from "react-icons/io5";
 
 //
 export const AnalyticLeader = () => {
@@ -152,7 +153,18 @@ export const AnalyticLeader = () => {
       <div className="w-full h-screen flex flex-col">
         <Card className="w-full h-full bg-[#222131] rounded-none p-5">
           <div className="flex justify-between items-center mx-5 mb-0">
-            <Title className={style.title}>Analisis</Title>
+            <div className="flex gap-5">
+              <Title className={style.title}>Analisis</Title>
+              <Link to={"/vendedores"}>
+                <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
+              </Link>
+              <Link className="text-5xl" to={"/vendedores/history"}>
+                <FaHistory className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
+              </Link>
+              <Link className="text-5xl" to={"/vendedores/analytics"}>
+                <IoStatsChart className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
+              </Link>
+            </div>
             {filters.level === true ? (
               <SelectLevel onChange={onChangeLevel} value={levelValue} />
             ) : (
