@@ -30,6 +30,7 @@ const style = {
 
 function ChildModalDelete({
   inputName,
+  inputEmail,
   itemRol,
   itemId,
   onModalClose,
@@ -46,6 +47,20 @@ function ChildModalDelete({
     try {
       const response = await axios.put(
         `http://localhost:3001/${itemRol}/${itemId}`,
+        {
+          deleted: true,
+        }
+      );
+
+      console.log(response.data);
+    } catch (error) {
+      ErrorEmployees(inputName);
+      console.log(`No se pudo enviar el baneado de ${itemRol} ${itemId} `);
+    }
+
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/employees/?email=${inputEmail}`,
         {
           deleted: true,
         }
@@ -246,6 +261,7 @@ export default function NestedModalEdit({
             />
             <ChildModalDelete
               inputName={inputName}
+              inputEmail={inputEmail}
               itemRol={itemRol}
               itemId={itemId}
               SendEmployees={SendEmployees}

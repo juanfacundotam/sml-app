@@ -86,6 +86,7 @@ function ChildModal({
         name: inputName,
         email: inputEmail,
         rol: selectEmployees,
+        deleted: false,
       });
       CreateEmployees(inputName);
       console.log(response.data);
@@ -112,6 +113,7 @@ function ChildModal({
           name: inputName,
           email: inputEmail,
           rol: selectEmployees,
+          deleted: false,
         }
       );
       console.log(responseEmployees.data);
