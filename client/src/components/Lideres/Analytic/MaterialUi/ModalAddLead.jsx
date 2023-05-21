@@ -55,11 +55,9 @@ export default function ChildModal() {
   const OnchangeTextArea = (event) => {
     setEventBody(event);
   };
-  // .substring(2, updatedBody.length - 0)
   const onClickAdd = () => {
     setBody(() => {
       let updatedBody = eventBody;
-      console.log(updatedBody);
       const trimmedData = updatedBody.trim();
       const dataWithoutCommas = trimmedData.replace(/,\s*$/, "");
       const objectsArray = dataWithoutCommas.split("},");
