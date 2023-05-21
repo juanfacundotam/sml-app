@@ -588,6 +588,10 @@ video {
   right: 0px;
 }
 
+.right-14 {
+  right: 3.5rem;
+}
+
 .right-4 {
   right: 1rem;
 }
@@ -1108,10 +1112,6 @@ video {
 
 .justify-start {
   justify-content: flex-start;
-}
-
-.justify-end {
-  justify-content: flex-end;
 }
 
 .justify-center {
