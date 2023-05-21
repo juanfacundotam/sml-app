@@ -237,7 +237,7 @@ const VendedoresAnalytics = () => {
       <div className="flex flex-col">
         <div className="flex items-center justify-between  ml-[40px] mt-[30px] mb-[30px]">
           <div className='flex flex-row items-center'>
-            <h1 className="text-2xl font-bold text-white">History</h1>
+            <h1 className="text-2xl font-bold text-white w-28">History</h1>
             <div className="flex gap-5">
               <Link to={"/vendedores"}>
                 <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd] ml-[10px]" />

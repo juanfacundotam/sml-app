@@ -141,7 +141,7 @@ const VendedoresDashboard = () => {
 
         <div className="w-full flex flex-col justify-center items-center">
           <div className={style.divTitle}>
-            <h1 className="font-bold text-[#e2e2e2] text-lg mx-5 mt-2">
+            <h1 className="font-bold text-[#e2e2e2] w-28 text-lg mx-5 mt-2">
               Dashboard
             </h1>
             <div className="flex gap-5">
@@ -221,8 +221,8 @@ const VendedoresDashboard = () => {
                       </p>
                     </td>
 
-                    <td className="flex justify-center items-center p-0 w-fit">
-                      <p className="w-24 p-1 px-3 rounded-full text-ellipsis text-18 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
+                    <td className="flex justify-start items-center p-0 w-fit">
+                      <p className="text-center w-24 p-1 px-3 rounded-full text-ellipsis text-18 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                         {item.province}
                       </p>
                     </td>
@@ -231,7 +231,7 @@ const VendedoresDashboard = () => {
                       {item.email !== "-" ? (
                         <div onClick={() => handleCopyClick(item.email)}>
                           <div className="cursor-pointer">
-                            <CiMail className="text-[35px] mr-5 text-[#418df0]" />
+                            <CiMail className="text-[35px] mr-5 text-[#418df0] z-0" />
                           </div>
                         </div>
                       ) : (
