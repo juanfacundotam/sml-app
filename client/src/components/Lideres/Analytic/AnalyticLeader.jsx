@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import style from "./TableEmployees.module.css";
+import style from "./AnalyticLeader.module.css";
 import PaginationOutlined from "../../pagination/PaginationOutlined";
 import { Card, Text, Title } from "@tremor/react";
 import { CiMail, CiInstagram, CiPhone, CiWarning } from "react-icons/ci";
