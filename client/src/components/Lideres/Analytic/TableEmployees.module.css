@@ -59,25 +59,25 @@
 }
 .mail {
   color: rgb(116, 136, 201);
-  font-size: 23px;
+  font-size: 25px;
   width: 30px;
   text-overflow: ellipsis;
 }
 .notMail {
   color: gray;
-  font-size: 23px;
+  font-size: 25px;
   width: 30px;
   text-overflow: ellipsis;
 }
 .ig {
   color: #ff598b;
-  font-size: 23px;
+  font-size: 25px;
   width: 30px;
   text-overflow: ellipsis;
 }
 .notIg {
   color: gray;
-  font-size: 23px;
+  font-size: 25px;
   width: 30px;
   text-overflow: ellipsis;
 }
