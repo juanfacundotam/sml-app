@@ -30,6 +30,9 @@ export const AnalyticLeader = () => {
   useEffect(() => {
     dispatch(getLeadChecked());
   }, [dispatch]);
+  useEffect(() => {
+    setData(leaderDashboard);
+  }, [leaderDashboard]);
 
   const [pageStyle, setPageStyle] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -119,10 +122,6 @@ export const AnalyticLeader = () => {
     setCurrentPage(1);
   };
 
-  useEffect(() => {
-    setData(leaderDashboard);
-  }, [leaderDashboard]);
-
   const [open, setOpen] = useState(false);
   const [modalItems, setModalItems] = useState([]);
   const handleOpen = (item, index) => {
@@ -139,7 +138,7 @@ export const AnalyticLeader = () => {
           <div className="flex justify-between items-center mx-5 mb-0">
             <div className="flex gap-5">
               <Title className={style.title}>Dashboard</Title>
-              <Link to={"/lideres/analytics"}>
+              <Link to={"/lideres/"}>
                 <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
               </Link>
               <Link className="text-5xl" to={"/lideres/history"}>
