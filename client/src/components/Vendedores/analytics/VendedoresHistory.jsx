@@ -244,11 +244,11 @@ const VendedoresHistory = () => {
                     <td>
                       {/* esto es hardcodeo */}
                       {item.level === "2" ? (
-                        <p className="bg-[#26af7f] text-[#1f1e1e] w-44 h-11 flex justify-center items-center text-white rounded-3xl text-18">
+                        <p className="bg-[#26af7f] w-44 h-11 flex justify-center items-center text-white rounded-3xl text-18">
                           Contratado
                         </p>
                       ) : (
-                        <p className="bg-[#2148b4] text-[#1f1e1e] w-44 h-11 flex justify-center items-center text-white rounded-3xl text-18">
+                        <p className="bg-[#2148b4] w-44 h-11 flex justify-center items-center text-white rounded-3xl text-18">
                           Sin responder
                         </p>
                       )}
