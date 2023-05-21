@@ -92,7 +92,7 @@ export default function ChildModal() {
             height: "700px",
           }}
         >
-          <div className="flex flex-col gap-5 p-8 h-full">
+          <div className="flex flex-col gap-5 p-8 h-full ">
             <h2>Añadir Clientes</h2>
             <label>json</label>
             <div className="flex flex-col h-full text-black">
@@ -114,7 +114,17 @@ export default function ChildModal() {
                 placeholder="Agregar json de clientes"
               />
             </div>
-            <button onClick={() => onClickAdd(eventBody)}>Add</button>
+            <div>
+              <Button
+                variant="contained"
+                sx={{
+                  width: "50px",
+                }}
+                onClick={() => onClickAdd(eventBody)}
+              >
+                Add
+              </Button>
+            </div>
           </div>
         </Box>
       </Modal>
