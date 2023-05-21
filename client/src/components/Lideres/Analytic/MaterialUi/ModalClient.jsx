@@ -1,6 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
 const style = {
@@ -10,7 +9,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 600,
   bgcolor: "rgb(55 65 81)",
-  //border: "1px solid white",
   boxShadow: 24,
   p: 4,
   textColor: "white",
