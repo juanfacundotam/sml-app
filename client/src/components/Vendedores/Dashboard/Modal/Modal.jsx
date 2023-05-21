@@ -6,7 +6,6 @@ import Modal from "@mui/material/Modal";
 import { CiWarning, CiEdit } from "react-icons/ci";
 import { useUser } from "@clerk/clerk-react";
 
-import "moment/locale/es";
 
 const style = {
   position: "absolute",
