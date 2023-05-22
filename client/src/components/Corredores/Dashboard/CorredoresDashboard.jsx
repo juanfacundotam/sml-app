@@ -219,8 +219,8 @@ const CorredoresDashboard = () => {
               };
 
               await axios.post(
-                // "https://sml-app-api.onrender.com/corredor/sendmail",
-                "http://localhost:3001/corredor/sendmail",
+                "https://sml-app-api.onrender.com/corredor/sendmail",
+                // "http://localhost:3001/corredor/sendmail",
                 emailData
               );
             }
