@@ -210,7 +210,7 @@ const CorredoresDashboard = () => {
               }
             );
             console.log(response.data);
-            
+
             if (client[i].level === "incidencia") {
               const emailData = {
                 clientName: client[i].name,
@@ -237,7 +237,8 @@ const CorredoresDashboard = () => {
                 level: client[i].level,
                 checked: true,
                 view: false,
-                corredor: user.fullName,
+                corredor: user.emailAddresses,
+                corredor_name: user.fullName,
               }
             );
             console.log(response.data);
