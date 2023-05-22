@@ -11,7 +11,7 @@ export const FILTER_STATUS = "FILTER_STATUS";
 export const GET_ALL_LEAD_INACTIVE = "GET_ALL_LEAD_INACTIVE";
 export const GET_ALL_CORREDORES = "GET_ALL_CORREDORES";
 export const GET_ALL_VENDEDORES = "GET_ALL_VENDEDORES";
-export const GET_VENDEDOR = "GET_VENDEDOR";
+
 
 export const getAllLead = () => {
   return async (dispatch) => {
@@ -105,10 +105,3 @@ export const AddLeads = (body) => {
   };
 };
 
-export const getVendedor = (id) => {
-  return async (dispatch) => {
-    const response = await axios.get(`http://localhost:3001/vendedor/${id}`);
-    const vendedor = response.data;
-    dispatch({ type: GET_VENDEDOR, payload: vendedor });
-  };
-};
