@@ -27,8 +27,8 @@ function Landing() {
             <Link to="/lideres" className={style.linksRoutes}>
               Lider-Dashboard
             </Link>
-            <Link to="/lideres/analytics" className={style.linksRoutes}>
-              Lider-Analytics
+            <Link to="/lideres/employees" className={style.linksRoutes}>
+              Lider-Employees
             </Link>
             <Link
               to="/lideres/analytics/incidences"

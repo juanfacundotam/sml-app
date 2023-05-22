@@ -140,10 +140,10 @@ export const AnalyticLeader = () => {
             <Link to={"/lideres/"}>
               <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
             </Link>
-            <Link className="text-5xl" to={"/lideres/history"}>
+            <Link className="text-5xl" to={"/lideres/employees"}>
               <FaHistory className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
             </Link>
-            <Link className="text-5xl" to={"/lideres/analytics"}>
+            <Link className="text-5xl" to={"/lideres/employees"}>
               <IoStatsChart className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
             </Link>
           </div>
