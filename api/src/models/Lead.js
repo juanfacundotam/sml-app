@@ -65,6 +65,11 @@ const LeadSchema = new mongoose.Schema(
       require: true,
       default: "",
     },
+    corredor_name: {
+      type: String,
+      require: true,
+      default: "",
+    },
     checked: {
       type: Boolean,
       require: true,
