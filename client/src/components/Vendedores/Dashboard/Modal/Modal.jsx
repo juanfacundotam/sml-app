@@ -64,7 +64,7 @@ function ChildModal({
       status: statusObj.status,
       status_op: statusObj.status_op,
       // vendedor: emailAddress,
-      vendedor: fullName,
+      vendedor: emailAddress,
       llamados: item.llamados,
     };
     const dataUpdate = {
