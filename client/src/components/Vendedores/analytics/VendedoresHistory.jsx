@@ -31,7 +31,7 @@ console.log(user)
   }, [dispatch]);
   useEffect(() => {
     setData(leadCheckedInactive100);
-  }, [vendedor]);
+  }, [leadCheckedInactive100]);
 
   const [pageStyle, setPageStyle] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);

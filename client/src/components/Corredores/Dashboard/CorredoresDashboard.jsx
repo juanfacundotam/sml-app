@@ -34,6 +34,7 @@ import "react-toastify/dist/ReactToastify.css";
 const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
   const user = useUser().user;
+  const { emailAddress } = user.primaryEmailAddress;
   const org = useOrganization();
   const orgList = useOrganizationList();
 
@@ -71,7 +72,7 @@ const CorredoresDashboard = () => {
     try {
       for (let i = 0; i < leadUnchecked10.length; i++) {
         const response = await axios.put(
-          `http://localhost:3001/lead/${client[i]._id}`,
+          `https://sml-app-api.onrender.com/lead/${client[i]._id}`,
           {
             view: client[i].view,
           }
@@ -171,6 +172,18 @@ const CorredoresDashboard = () => {
       theme: "dark",
     });
   };
+  const SendLeadsError = () => {
+    toast.error(`✔ Send Leads Error!`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -185,7 +198,7 @@ const CorredoresDashboard = () => {
             (client[i].level === "incidencia" || client[i].level === "0")
           ) {
             const response = await axios.put(
-              `http://localhost:3001/lead/${client[i]._id}`,
+              `https://sml-app-api.onrender.com/lead/${client[i]._id}`,
               {
                 _id: client[i]._id,
                 name: client[i].name,
@@ -193,19 +206,21 @@ const CorredoresDashboard = () => {
                 instagram: client[i].instagram,
                 level: client[i].level,
                 checked: true,
+                view: false,
                 corredor: user.fullName,
               }
             );
             console.log(response.data);
+
             if (client[i].level === "incidencia") {
               const emailData = {
                 clientName: client[i].name,
-                recipientEmail: "gustavomontespalavecino@gmail.com",
+                recipientEmail: "voeffray.jonathan@gmail.com",
                 message: `Se ha detectado una incidencia clasificada por el corredor ${user.emailAddresses[0].emailAddress} para el cliente ${client[i].name} con el numero de id ${client[i]._id}. Por favor, revisa la situación y toma las medidas necesarias.`,
               };
 
               await axios.post(
-                "http://localhost:3001/corredor/sendmail",
+                "https://sml-app-api.onrender.com/corredor/sendmail",
                 emailData
               );
             }
@@ -214,7 +229,7 @@ const CorredoresDashboard = () => {
             client[i].level !== "-"
           ) {
             const response = await axios.put(
-              `http://localhost:3001/lead/${client[i]._id}`,
+              `https://sml-app-api.onrender.com/lead/${client[i]._id}`,
               {
                 _id: client[i]._id,
                 name: client[i].name,
@@ -222,7 +237,9 @@ const CorredoresDashboard = () => {
                 instagram: client[i].instagram,
                 level: client[i].level,
                 checked: true,
-                corredor: user.fullName,
+                view: false,
+                corredor: emailAddress,
+                corredor_name: user.fullName,
               }
             );
             console.log(response.data);
@@ -236,7 +253,7 @@ const CorredoresDashboard = () => {
       SendLeadsSuccess();
       dispatch(getLeadUnchecked10());
     } catch (error) {
-      await swal(":(", "error al enviar la informacion!", "error");
+      SendLeadsError();
       console.log({ error: error.message });
     }
   };
@@ -310,12 +327,12 @@ const CorredoresDashboard = () => {
                     </Link>
                   </TableCell>
 
-                  <TableCell className="flex justify-start items-center gap-3 p-0 mx-3">
+                  <TableCell className="flex justify-start w-[25rem] items-center gap-3 p-0 mx-3">
                     <div>
                       <GrInstagram className="text-[2rem] text-[#418df0]" />
                     </div>
                     <input
-                      className={`bg-transparent rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-white focus:placeholder-black ${
+                      className={`bg-transparent w-full rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-white focus:placeholder-black ${
                         client[index].instagram ? "border-green-500" : ""
                       }`}
                       type="text"

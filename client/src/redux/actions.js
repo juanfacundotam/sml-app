@@ -11,33 +11,55 @@ export const FILTER_STATUS = "FILTER_STATUS";
 export const GET_ALL_LEAD_INACTIVE = "GET_ALL_LEAD_INACTIVE";
 export const GET_ALL_CORREDORES = "GET_ALL_CORREDORES";
 export const GET_ALL_VENDEDORES = "GET_ALL_VENDEDORES";
+export const GET_ALL_LEADER = "GET_ALL_LEADER";
+export const GET_ALL_CLEVEL = "GET_ALL_CLEVEL";
 
 
 export const getAllLead = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:3001/lead");
+    const response = await axios.get("https://sml-app-api.onrender.com/lead");
     const LeadData = response.data;
     dispatch({ type: GET_ALL_LEAD, payload: LeadData });
   };
 };
 export const getAllCorredores = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:3001/corredor");
+    const response = await axios.get(
+      "https://sml-app-api.onrender.com/corredor"
+    );
     const corredores = response.data;
     dispatch({ type: GET_ALL_CORREDORES, payload: corredores });
   };
 };
 export const getAllVendedores = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:3001/vendedor");
+    const response = await axios.get(
+      "https://sml-app-api.onrender.com/vendedor"
+    );
     const vendedores = response.data;
     dispatch({ type: GET_ALL_VENDEDORES, payload: vendedores });
+  };
+};
+export const getAllLeader = () => {
+  return async (dispatch) => {
+    const response = await axios.get("https://sml-app-api.onrender.com/leader");
+    const leader = response.data;
+    dispatch({ type: GET_ALL_LEADER, payload: leader });
+  };
+};
+export const getAllClevel = () => {
+  return async (dispatch) => {
+    const response = await axios.get("https://sml-app-api.onrender.com/clevel");
+    const clevel = response.data;
+    dispatch({ type: GET_ALL_CLEVEL, payload: clevel });
   };
 };
 
 export const getLeadUnchecked = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:3001/lead/unchecked");
+    const response = await axios.get(
+      "https://sml-app-api.onrender.com/lead/unchecked"
+    );
     const LeadUnchecked = response.data;
     dispatch({ type: GET_LEAD_UNCHECKED, payload: LeadUnchecked });
   };
@@ -45,7 +67,9 @@ export const getLeadUnchecked = () => {
 
 export const getLeadUnchecked10 = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:3001/lead/unchecked10");
+    const response = await axios.get(
+      "https://sml-app-api.onrender.com/lead/unchecked10"
+    );
     const LeadUnchecked10 = response.data;
     dispatch({ type: GET_LEAD_UNCHECKED_10, payload: LeadUnchecked10 });
   };
@@ -53,7 +77,9 @@ export const getLeadUnchecked10 = () => {
 
 export const getLeadChecked = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:3001/lead/checked");
+    const response = await axios.get(
+      "https://sml-app-api.onrender.com/lead/checked"
+    );
     const LeadChecked = response.data;
     dispatch({ type: GET_LEAD_CHEQUED, payload: LeadChecked });
   };
@@ -62,7 +88,7 @@ export const getLeadChecked = () => {
 export const getLeadCheckedInactive100 = () => {
   return async (dispatch) => {
     const response = await axios.get(
-      "http://localhost:3001/lead/checkedinactive100"
+      "https://sml-app-api.onrender.com/lead/checkedinactive100"
     );
     const LeadCheckedInactive100 = response.data;
     dispatch({
@@ -95,7 +121,10 @@ export const filterStatus = (filterStatus) => {
 export const AddLeads = (body) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post("http://localhost:3001/lead/", body);
+      const response = await axios.post(
+        "https://sml-app-api.onrender.com/lead/",
+        body
+      );
       console.log("se agrego");
       return response.data;
     } catch (error) {

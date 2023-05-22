@@ -25,13 +25,13 @@ function Landing() {
               Clevel-Analytics
             </Link>
             <Link to="/lideres" className={style.linksRoutes}>
+              Lider-Dashboard
+            </Link>
+            <Link to="/lideres-employees" className={style.linksRoutes}>
               Lider-Employees
             </Link>
-            <Link to="/lideres/analytics" className={style.linksRoutes}>
-              Lider-Analytics
-            </Link>
             <Link
-              to="/lideres/analytics/incidences"
+              to="/lideres-analytics-incidences"
               className={style.linksRoutes}
             >
               Lider-Analytics-incidences
@@ -39,7 +39,7 @@ function Landing() {
             <Link to="/corredores" className={style.linksRoutes}>
               Corredores-Dashbord
             </Link>
-            <Link to="/corredores/history" className={style.linksRoutes}>
+            <Link to="/corredores-history" className={style.linksRoutes}>
               Corredores-History
             </Link>
             <Link to="/analytics" className={style.linksRoutes}>
@@ -48,7 +48,7 @@ function Landing() {
             <Link to="/vendedores" className={style.linksRoutes}>
               VendedoresDashboard
             </Link>
-            <Link to="/vendedores/history" className={style.linksRoutes}>
+            <Link to="/vendedores-history" className={style.linksRoutes}>
               VendedoresHistory
             </Link>
           </div>
@@ -58,13 +58,13 @@ function Landing() {
             <Link to="/corredores" className={style.linksRoutes}>
               Corredores-Dashbord
             </Link>
-            <Link to="/corredores/analytics" className={style.linksRoutes}>
+            <Link to="/corredores-analytics" className={style.linksRoutes}>
               Corredores-Analytics
             </Link>
             <Link to="/corredores" className={style.linksRoutes}>
               Corredores-Dashbord
             </Link>
-            <Link to="/corredores/analytics" className={style.linksRoutes}>
+            <Link to="/corredores-analytics" className={style.linksRoutes}>
               Corredores-Analytics
             </Link>
           </div>
