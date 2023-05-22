@@ -294,7 +294,8 @@ export default function NestedModal({
     let fechaYear = "";
     let fechaMonth = "";
     let fechaDay = "";
-    let time = "";
+    let timeHour = "";
+    let timeMinute = "";
     for (let i = 0; i < item.updatedAt.length; i++) {
       if (i < 4) {
         fechaYear += item.updatedAt[i];
@@ -303,14 +304,17 @@ export default function NestedModal({
       } else if (i >= 8 && i < 10) {
         fechaDay += item.updatedAt[i];
       }
-      if (i >= 11 && i < 19) {
-        time += item.updatedAt[i];
+      else if (i >= 11 && i < 13) {
+        timeHour += item.updatedAt[i];
+      }
+      if (i >= 13 && i < 19) {
+        timeMinute += item.updatedAt[i];
       }
     }
 
     return (
       <p htmlFor="" className="text-white m-2">
-        {`Date: ${fechaDay}/${fechaMonth}/${fechaYear} - Hour: ${time}`}
+        {`Date: ${fechaDay}/${fechaMonth}/${fechaYear} - Hour: ${timeHour-3}${timeMinute}`}
       </p>
     );
   };
@@ -415,7 +419,7 @@ export default function NestedModal({
                 {/* <option selected>Choose a country</option> */}
                 <option value="Sin contactar">Sin Contactar</option>
                 <option value="Contratado">Contratado</option>
-                <option value="Rechazado">Rechazadado</option>
+                <option value="Rechazado">Rechazado</option>
                 <option value="No responde">No Responde</option>
               </select>
             </div>
