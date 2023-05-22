@@ -600,6 +600,10 @@ video {
   top: 1rem;
 }
 
+.right-14 {
+  right: 3.5rem;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -1108,10 +1112,6 @@ video {
 
 .justify-start {
   justify-content: flex-start;
-}
-
-.justify-end {
-  justify-content: flex-end;
 }
 
 .justify-center {
