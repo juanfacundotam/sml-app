@@ -62,10 +62,10 @@ function ClerkProviderWithRoutes() {
           path="/sign-up/*"
           element={<SignUp routing="path" path="/sign-up" />}
         />
-        <Route path="/home" element={<Landing />} />
+        <Route path="/protected" element={<Landing />} />
         <Route path="/" element={<Login />} />
-        <Route path="/lideres" element={<Lideres />} />
-        <Route path="/lideres-employees" element={<AnalyticLeader />} />
+        <Route path="/lideres" element={<AnalyticLeader />} />
+        <Route path="/lideres-employees" element={<Lideres />} />
         <Route path="/lideres-analytics-incidences" element={<Incidences />} />
         <Route path="/clevel" element={<Clevel />} />
         <Route path="/clevel-analytics" element={<Analytic />} />
