@@ -34,6 +34,7 @@ import "react-toastify/dist/ReactToastify.css";
 const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
   const user = useUser().user;
+  const { emailAddress } = user.primaryEmailAddress;
   const org = useOrganization();
   const orgList = useOrganizationList();
 
@@ -237,7 +238,7 @@ const CorredoresDashboard = () => {
                 level: client[i].level,
                 checked: true,
                 view: false,
-                corredor: user.emailAddresses,
+                corredor: emailAddress,
                 corredor_name: user.fullName,
               }
             );
