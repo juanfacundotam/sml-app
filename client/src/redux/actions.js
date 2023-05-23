@@ -142,8 +142,8 @@ export const getVendedorAllLeads = (email) => {
     const response = await axios.get(
       `http://localhost:3001/vendedor/email?email=${email}`
     );
+    console.log(response.data.leads)
     const allLeads = response.data.leads;
-    console.log(allLeads)
     dispatch({
       type: GET_VENDEDOR_ALL_LEADS,
       payload: allLeads,

@@ -1,10 +1,10 @@
 import style from "./VendedoresHistory.module.css";
-import axios from "axios";
+import axios from "axios"
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import PaginationOutlined from "../../pagination/PaginationOutlined";
-import { filterLevel, getVendedorAllLeads } from "../../../redux/actions";
+import { filterLevel, getLeadCheckedInactive100, getVendedorAllLeads } from "../../../redux/actions";
 import { AiOutlinePhone } from "react-icons/ai";
 import { IoGrid, IoStatsChart } from "react-icons/io5";
 import { FaHistory } from "react-icons/fa";
@@ -15,32 +15,37 @@ import Nav from "../../Nav/Nav";
 
 const VendedoresHistory = () => {
   const [data, setData] = useState([]);
+  const { leadCheckedInactive100 } = useSelector((state) => state);
   const { vendedorAllLeads } = useSelector((state) => state);
   const user = useUser().user;
-  const { emailAddress } = user.primaryEmailAddress;
+  // const { emailAddress } = user.primaryEmailAddress;
   const dispatch = useDispatch();
   // const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
+// console.log(emailAddress)
+
+
   useEffect(() => {
-    dispatch(getVendedorAllLeads("smlappadm@gmail.com"));
+  dispatch(getVendedorAllLeads("smlappadm@gmail.com"));
+    dispatch(getLeadCheckedInactive100());
   }, [dispatch]);
   useEffect(() => {
     setData(vendedorAllLeads);
   }, [vendedorAllLeads]);
-
+ console.log(data)
   const [pageStyle, setPageStyle] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardXPage, setCardXpage] = useState(10);
   const indexLastCard = currentPage * cardXPage;
   const indexFirstCard = indexLastCard - cardXPage;
-  const currentCard = data.leads.slice(indexFirstCard, indexLastCard);
+  const currentCard = data.slice(indexFirstCard, indexLastCard);
   const pages = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
   const [edit, setEdit] = useState(false);
   const [editIndex, setEditIndex] = useState("");
 
-  //FILTER****
+  //FILTER********
   const [filters, setFilters] = useState({
     level: false,
     runner: false,
@@ -67,7 +72,7 @@ const VendedoresHistory = () => {
     setData(vendedorAllLeads);
     setCurrentPage(1);
   };
-  //***** */
+  //*********** */
 
   // const handleCopyClick = (copyToProps) => {
   //   navigator.clipboard
@@ -87,10 +92,10 @@ const VendedoresHistory = () => {
     setEdit(false);
   };
 
-  // const updateLeads = () => {
-  //   dispatch(getLeadCheckedInactive100());
-  //   setData(leadCheckedInactive100);
-  // };
+  const updateLeads = () => {
+    dispatch(getVendedorAllLeads("smlappadm@gmail.com"));
+    setData(vendedorAllLeads);
+  };
 
   return (
     <>
@@ -112,16 +117,16 @@ const VendedoresHistory = () => {
               <Link to={"/vendedores"}>
                 <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
               </Link>
-              <Link className="text-5xl" to={"/vendedores/history"}>
+              <Link className="text-5xl" to={"/vendedores-history"}>
                 <FaHistory className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
               </Link>
-              <Link className="text-5xl" to={"/vendedores/analytics"}>
+              <Link className="text-5xl" to={"/vendedores-analytics"}>
                 <IoStatsChart className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
               </Link>
               <div className="absolute right-14">
-                <select className="w-32 h-10 rounded-lg bg-purple-500 text-white text-center">
-                  <option className="py-1">2023</option>
-                </select>
+                    <select className="w-32 h-10 rounded-lg bg-purple-500 text-white text-center">
+        <option className="py-1">2023</option>
+      </select>
               </div>
             </div>
             {filters.level === true ? (
@@ -153,7 +158,7 @@ const VendedoresHistory = () => {
               ""
             )}
           </div>
-          {vendedor.length ? (
+          {vendedorAllLeads.length ? (
             <table className={style.table}>
               <thead className="text-gray-400 text-14 font-thin">
                 <tr className={style.tableRow}>
@@ -177,14 +182,10 @@ const VendedoresHistory = () => {
               <tbody className="">
                 {currentCard.map((item, index) => (
                   <tr key={item._id} className={style.tableCards}>
-                    <td className="flex justify-start items-center p-0 w-fit">
-                      <div className="w-24 p-1 px-3 rounded-full text-ellipsis text-18 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
-                        {item._id}
-                      </div>
-                    </td>
+
                     <td className="flex justify-start items-center  p-0 w-fit">
                       <p className="w-52 p-1 px-3 rounded-full text-ellipsis text-18 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
-                        {item.name}
+                        {item.lead}
                       </p>
                     </td>
                     <td className="flex justify-start items-center p-0 w-fit">
@@ -250,7 +251,7 @@ const VendedoresHistory = () => {
                       )}
                     </td>
                     <td>
-
+                      {/* esto es hardcodeo */}
                       {item.level === "2" ? (
                         <p className="bg-[#26af7f] w-44 h-11 flex justify-center items-center text-white rounded-3xl text-18">
                           Contratado
