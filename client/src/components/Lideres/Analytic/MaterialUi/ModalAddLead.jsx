@@ -56,23 +56,32 @@ export default function ChildModal() {
     setEventBody(event);
   };
   const onClickAdd = () => {
-    setBody(() => {
-      let updatedBody = eventBody;
-      const trimmedData = updatedBody.trim();
-      const dataWithoutCommas = trimmedData.replace(/,\s*$/, "");
-      const objectsArray = dataWithoutCommas.split("},");
-      const formattedArray = objectsArray.map((obj, index) => {
-        if (index === objectsArray.length - 1) {
-          return `${obj.trim()}`;
-        } else {
-          return `${obj.trim()}}`;
-        }
-      });
-      const dataArray = formattedArray.map((objStr) => JSON.parse(objStr));
-      dispatch(AddLeads(dataArray));
-      return updatedBody;
-    });
+    dispatch(AddLeads(selectedFile));
+    console.log("se agrego");
+    // setBody(() => {
+    //   let updatedBody = eventBody;
+    //   const trimmedData = updatedBody.trim();
+    //   const dataWithoutCommas = trimmedData.replace(/,\s*$/, "");
+    //   const objectsArray = dataWithoutCommas.split("},");
+    //   const formattedArray = objectsArray.map((obj, index) => {
+    //     if (index === objectsArray.length - 1) {
+    //       return `${obj.trim()}`;
+    //     } else {
+    //       return `${obj.trim()}}`;
+    //     }
+    //   });
+    //   const dataArray = formattedArray.map((objStr) => JSON.parse(objStr));
+    //   dispatch(AddLeads(dataArray));
+    //   return updatedBody;
+    // });
   };
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
+
   return (
     <React.Fragment>
       <Button variant="contained" sx={{}} onClick={handleOpen}>
@@ -95,7 +104,11 @@ export default function ChildModal() {
           <div className="flex flex-col gap-5 p-8 h-full ">
             <h2>Añadir Clientes</h2>
             <label>json</label>
-            <div className="flex flex-col h-full text-black">
+            <div>
+              <input type="file" accept=".json" onChange={handleFileChange} />
+              <p>Selected file: {selectedFile ? selectedFile.name : "None"}</p>
+            </div>
+            {/* <div className="flex flex-col h-full text-black">
               <textarea
                 onChange={(event) => {
                   OnchangeTextArea(event.target.value);
@@ -113,7 +126,7 @@ export default function ChildModal() {
                 }}
                 placeholder="Agregar json de clientes"
               />
-            </div>
+            </div> */}
             <div>
               <Button
                 variant="contained"
