@@ -86,7 +86,7 @@ function ChildModal({
       dataLead,
       dataVendedor,
     };
-
+console.log(dataUpdate)
     axios
       .put(
         `/lead/vendedor/${item._id}`,
