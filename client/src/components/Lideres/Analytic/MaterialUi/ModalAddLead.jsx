@@ -50,30 +50,10 @@ export default function ChildModal() {
   };
 
   const [body, setBody] = useState([]);
-  const [eventBody, setEventBody] = useState([]);
   const dispatch = useDispatch();
-  // const OnchangeTextArea = (event) => {
-  //   setEventBody(event);
-  // };
   const onClickAdd = () => {
     dispatch(AddLeads(body));
     console.log("se agrego");
-    // setBody(() => {
-    //   let updatedBody = eventBody;
-    //   const trimmedData = updatedBody.trim();
-    //   const dataWithoutCommas = trimmedData.replace(/,\s*$/, "");
-    //   const objectsArray = dataWithoutCommas.split("},");
-    //   const formattedArray = objectsArray.map((obj, index) => {
-    //     if (index === objectsArray.length - 1) {
-    //       return `${obj.trim()}`;
-    //     } else {
-    //       return `${obj.trim()}}`;
-    //     }
-    //   });
-    //   const dataArray = formattedArray.map((objStr) => JSON.parse(objStr));
-    //   dispatch(AddLeads(dataArray));
-    //   return updatedBody;
-    // });
   };
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -117,32 +97,13 @@ export default function ChildModal() {
               <input type="file" accept=".json" onChange={handleFileChange} />
               <p>Selected file: {selectedFile ? selectedFile.name : "None"}</p>
             </div>
-            {/* <div className="flex flex-col h-full text-black">
-              <textarea
-                onChange={(event) => {
-                  OnchangeTextArea(event.target.value);
-                }}
-                ref={inputRef}
-                type="array"
-                style={{
-                  width: "100%",
-                  height: "400px",
-                  color: "black",
-                  textAlign: "start",
-                  fontSize: "13px",
-                  backgroundColor: "transparent",
-                  border: "1px solid white",
-                }}
-                placeholder="Agregar json de clientes"
-              />
-            </div> */}
             <div>
               <Button
                 variant="contained"
                 sx={{
                   width: "50px",
                 }}
-                onClick={() => onClickAdd(eventBody)}
+                onClick={() => onClickAdd()}
               >
                 Add
               </Button>
