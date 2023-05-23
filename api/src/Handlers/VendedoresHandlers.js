@@ -50,7 +50,6 @@ const getVendedorByNameHandler = async (req, res) => {
 };
 const getVendedorByEmailHandler = async (req, res) => {
 	const { email } = req.query;
-console.log(email)
 	try {
 		const vendedor = await getVendedorByEmail(email);
 		res.status(200).json(vendedor);
