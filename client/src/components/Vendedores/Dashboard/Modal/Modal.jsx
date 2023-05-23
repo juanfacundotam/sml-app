@@ -6,7 +6,6 @@ import Modal from "@mui/material/Modal";
 import { CiWarning, CiEdit } from "react-icons/ci";
 import { useUser } from "@clerk/clerk-react";
 
-
 const style = {
   position: "absolute",
   top: "45%",
