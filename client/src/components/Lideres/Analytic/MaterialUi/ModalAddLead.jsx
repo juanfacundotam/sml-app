@@ -56,8 +56,7 @@ export default function ChildModal() {
   //   setEventBody(event);
   // };
   const onClickAdd = () => {
-    //dispatch(AddLeads(selectedFile));
-    console.log(body);
+    dispatch(AddLeads(body));
     console.log("se agrego");
     // setBody(() => {
     //   let updatedBody = eventBody;
