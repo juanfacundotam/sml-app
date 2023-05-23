@@ -13,6 +13,7 @@ import {
   getAllVendedores,
 } from "../../../../../../redux/actions";
 import BasicSelect from "../BasicSelect";
+import InputEmailEdit from "./InputEmailEdit";
 
 const style = {
   position: "absolute",
@@ -59,18 +60,14 @@ function ChildModalDelete({
     }
 
     try {
-      const response = await axios.put(
-        `https://sml-app-api.onrender.com/employees/?email=${inputEmail}`,
-        {
-          deleted: true,
-        }
+      const response = await axios.delete(
+        `https://sml-app-api.onrender.com/employees/?email=${inputEmail}`
       );
 
       BannedEmployees(inputName);
       onModalClose();
       console.log(response.data);
     } catch (error) {
-      ErrorEmployees(inputName);
       console.log(`No se pudo enviar el baneado de ${itemRol} ${itemId} `);
     }
 
@@ -138,7 +135,7 @@ function ChildModal({
       return;
     }
 
-    console.log(itemRol)
+    console.log(itemRol);
 
     try {
       const response = await axios.put(
@@ -229,7 +226,7 @@ export default function NestedModalEdit({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: "30%", height: "40%", bgcolor: "#39394b" }}>
+        <Box sx={{ ...style, width: "30%", height: "45%", bgcolor: "#39394b" }}>
           <div>
             <div className="flex flex-col gap-5 my-5">
               <h2 id="parent-modal-title">Edit Employ {inputName}</h2>
@@ -238,6 +235,10 @@ export default function NestedModalEdit({
               <InputNameEdit
                 inputName={inputName}
                 setInputName={setInputName}
+              />
+              <InputEmailEdit
+                inputEmail={inputEmail}
+                setInputEmail={setInputEmail}
               />
               <InputPhoneEdit
                 inputPhone={inputPhone}
