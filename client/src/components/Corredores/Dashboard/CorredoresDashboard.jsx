@@ -34,7 +34,6 @@ import "react-toastify/dist/ReactToastify.css";
 const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
   const user = useUser().user;
-  const { emailAddress } = user.primaryEmailAddress;
   const org = useOrganization();
   const orgList = useOrganizationList();
 
@@ -238,8 +237,7 @@ const CorredoresDashboard = () => {
                 level: client[i].level,
                 checked: true,
                 view: false,
-                corredor: emailAddress,
-                corredor_name: user.fullName,
+                corredor: user.fullName,
               }
             );
             console.log(response.data);
@@ -266,6 +264,131 @@ const CorredoresDashboard = () => {
         <form onSubmit={handleSubmit}>
           <div className="flex justify-between items-center">
             <div className="flex gap-10  mt-2 mx-5 ">
+              <h2 className="font-bold text-[#e2e2e2] text-lg">Dashboard</h2>
+              <div className="flex gap-5">
+                <Link to={"/corredores"}>
+                  <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
+                </Link>
+                <Link className="text-5xl" to={"/corredores/history"}>
+                  <FaHistory className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
+                </Link>
+                <Link className="text-5xl" to={"/corredores/history"}>
+                  <IoStatsChart className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
+                </Link>
+              </div>
+            </div>
+            <div className="flex gap-12">
+              <IconLabelButtons />
+            </div>
+          </div>
+          <Table className={style.table}>
+            <TableHead className={style.tableHead}>
+              <TableRow className={style.tableRow}>
+                <TableHeaderCell className="text-start">Name</TableHeaderCell>
+                <TableHeaderCell className="text-start">Web</TableHeaderCell>
+                <TableHeaderCell className="text-start">
+                  Instagram
+                </TableHeaderCell>
+                <TableHeaderCell className="text-start">Nivel</TableHeaderCell>
+              </TableRow>
+            </TableHead>
+            <TableBody className="h-3/4">
+              {client.map((item, index) => (
+                <TableRow key={item._id} className={style.tableCards}>
+                  <TableCell className="flex justify-start items-center p-0">
+                    <div type="text" id="name" value={client[index].name}>
+                      <p className="w-96 p-1 px-3 rounded-full text-ellipsis opacity-1 whitespace-nowrap overflow-hidden">
+                        {client[index].name}
+                      </p>
+                    </div>
+                  </TableCell>
+                  <TableCell className="flex justify-start items-center p-0">
+                    <Link to={client[index].url} target="_blank">
+                      <p value={client[index].url}>
+                        <CiGlobe className="text-[2rem] text-[#418df0]" />
+                      </p>
+                    </Link>
+                  </TableCell>
+                  <TableCell className="flex justify-start w-[25rem] items-center gap-3 p-0 mx-3">
+                    <div>
+                      <GrInstagram className="text-[2rem] text-[#418df0]" />
+                    </div>
+                    <input
+                      className={`bg-transparent w-full rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-white focus:placeholder-black ${
+                        client[index].instagram ? "border-green-500" : ""
+                      }`}
+                      type="text"
+                      name="instagram"
+                      value={client[index].instagram}
+                      onChange={(event) => handleChangeInstagram(event, index)}
+                      placeholder="Ingrese un instagram"
+                    />
+                  </TableCell>
+                  <TableCell className="flex justify-start items-center p-0">
+                    <button
+                      className={
+                        item.level === "0"
+                          ? style.buttonNivelActive
+                          : style.buttonNivel
+                      }
+                      type="button"
+                      name={item._id}
+                      value="0"
+                      onClick={(event) => handleClientClick(event, index)}
+                    >
+                      0
+                    </button>
+                    <button
+                      className={
+                        item.level === "1"
+                          ? style.buttonNivelActive
+                          : style.buttonNivel
+                      }
+                      type="button"
+                      name={item._id}
+                      value="1"
+                      onClick={(event) => handleClientClick(event, index)}
+                    >
+                      1
+                    </button>
+                    <button
+                      className={
+                        item.level === "2"
+                          ? style.buttonNivelActive
+                          : style.buttonNivel
+                      }
+                      type="button"
+                      name={item._id}
+                      value="2"
+                      onClick={(event) => handleClientClick(event, index)}
+                    >
+                      2
+                    </button>
+                    <button
+                      className={
+                        item.level === "incidencia"
+                          ? style.buttonNivelActive
+                          : style.buttonNivel
+                      }
+                      type="button"
+                      name={item._id}
+                      value="incidencia"
+                      onClick={(event) => handleClientClick(event, index)}
+                    >
+                      ⚠
+                    </button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </form>
+      </Card>
+      {/* <Card className="w-full m-5 bg-[#222131]">
+        <ToastContainer />
+        <form onSubmit={handleSubmit}>
+          <div className="flex justify-between items-center">
+            <div className="flex gap-10  mt-2 mx-5 ">
               <Title className="font-bold text-[#e2e2e2] text-lg">
                 Dashboard
               </Title>
@@ -288,9 +411,6 @@ const CorredoresDashboard = () => {
           <Table className={style.table}>
             <TableHead className={style.tableHead}>
               <TableRow className={style.tableRow}>
-                <TableHeaderCell className="text-start">
-                  Invoice Id
-                </TableHeaderCell>
                 <TableHeaderCell className="text-start">Name</TableHeaderCell>
                 <TableHeaderCell className="text-start">Web</TableHeaderCell>
                 <TableHeaderCell className="text-start">
@@ -304,13 +424,6 @@ const CorredoresDashboard = () => {
               {client.map((item, index) => (
                 <TableRow key={item._id} className={style.tableCards}>
                   <TableCell className="flex justify-start items-center p-0">
-                    <div className="w-24 p-1 px-3 rounded-full text-ellipsis opacity-1 overflow-hidden hover:overflow-visible hover:bg-[#ffffff] hover:w-fit hover:text-black z-111 hover:absolute">
-                      <div type="text" id="id" value={client[index]._id}>
-                        <p>{client[index]._id}</p>
-                      </div>
-                    </div>
-                  </TableCell>
-                  <TableCell className="flex justify-start items-center p-0">
                     <div type="text" id="name" value={client[index].name}>
                       <p className="w-96 p-1 px-3 rounded-full text-ellipsis opacity-1 whitespace-nowrap overflow-hidden ">
                         {client[index].name}
@@ -319,7 +432,6 @@ const CorredoresDashboard = () => {
                   </TableCell>
 
                   <TableCell className="flex justify-start items-center p-0">
-                    {/* Botón de web */}
                     <Link to={client[index].url} target="_blank">
                       <p value={client[index].url}>
                         <CiGlobe className="text-[2rem] text-[#418df0]" />
@@ -402,7 +514,7 @@ const CorredoresDashboard = () => {
             </TableBody>
           </Table>
         </form>
-      </Card>
+      </Card> */}
     </>
   );
 };
