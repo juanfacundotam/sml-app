@@ -1,4 +1,4 @@
-import style from "./VendedoresDashboard.module.css";
+import style from "./VentasDashboard.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -17,7 +17,7 @@ import { CiWarning, CiInstagram, CiMail } from "react-icons/ci";
 
 import Nav from "../../Nav/Nav";
 
-const VendedoresDashboard = () => {
+const VentasDashboard = () => {
   const [data, setData] = useState([]);
   const { vendedoresDashboard } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -325,4 +325,4 @@ const VendedoresDashboard = () => {
   );
 };
 
-export default VendedoresDashboard;
+export default VentasDashboard;
