@@ -49,12 +49,12 @@ export default function ChildModal() {
     setOpen(false);
   };
 
-  const [body, setBody] = useState([]);
+  // const [body, setBody] = useState([]);
   const [eventBody, setEventBody] = useState([]);
   const dispatch = useDispatch();
-  const OnchangeTextArea = (event) => {
-    setEventBody(event);
-  };
+  // const OnchangeTextArea = (event) => {
+  //   setEventBody(event);
+  // };
   const onClickAdd = () => {
     dispatch(AddLeads(selectedFile));
     console.log("se agrego");
