@@ -14,6 +14,7 @@ export const GET_ALL_VENDEDORES = "GET_ALL_VENDEDORES";
 export const GET_ALL_LEADER = "GET_ALL_LEADER";
 export const GET_ALL_CLEVEL = "GET_ALL_CLEVEL";
 
+
 export const getAllLead = () => {
   return async (dispatch) => {
     const response = await axios.get("https://sml-app-api.onrender.com/lead");
