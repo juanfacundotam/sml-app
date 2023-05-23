@@ -76,7 +76,7 @@ export default function ChildModal() {
   return (
     <React.Fragment>
       <Button variant="contained" sx={{}} onClick={handleOpen}>
-        Añadir Clientes
+        Add Leads
       </Button>
       <Modal
         open={open}
