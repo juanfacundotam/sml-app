@@ -49,14 +49,15 @@ export default function ChildModal() {
     setOpen(false);
   };
 
-  // const [body, setBody] = useState([]);
+  const [body, setBody] = useState([]);
   const [eventBody, setEventBody] = useState([]);
   const dispatch = useDispatch();
   // const OnchangeTextArea = (event) => {
   //   setEventBody(event);
   // };
   const onClickAdd = () => {
-    dispatch(AddLeads(selectedFile));
+    //dispatch(AddLeads(selectedFile));
+    console.log(body);
     console.log("se agrego");
     // setBody(() => {
     //   let updatedBody = eventBody;
@@ -80,8 +81,17 @@ export default function ChildModal() {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
+
+    const reader = new FileReader();
+    reader.onload = handleFileRead;
+    reader.readAsText(file);
   };
 
+  const handleFileRead = (event) => {
+    const content = event.target.result;
+    const jsonData = JSON.parse(content);
+    setBody(jsonData);
+  };
   return (
     <React.Fragment>
       <Button variant="contained" sx={{}} onClick={handleOpen}>
