@@ -224,7 +224,7 @@ export const AnalyticLeader = () => {
             </div>
           </div>
 
-          <tbody>
+          <div>
             <ModalCient
               open={open}
               handleClose={handleClose}
@@ -375,7 +375,7 @@ export const AnalyticLeader = () => {
                 </div>
               </div>
             ))}
-          </tbody>
+          </div>
         </div>
         <PaginationOutlined
           pageStyle={pageStyle}
