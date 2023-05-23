@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { CiWarning, CiEdit } from "react-icons/ci";
 import { useUser } from "@clerk/clerk-react";
+import { orderCategory } from "../../../../redux/actions";
 
 const style = {
   position: "absolute",
@@ -45,15 +46,29 @@ function ChildModal({
     let dataVendedor = {};
     if (statusObj.status === "No responde") {
       dataVendedor = {
-        lead: item.name,
+        name: item.name,
         status: statusObj.status,
         status_op: statusObj.status_op,
+        province: item.province,
+        category: item.category,
+        telephone: item.telephone,
+        url: item.url,
+        instagram: item.instagram,
+        level: item.level,
+
+        
       };
     } else {
       dataVendedor = {
-        lead: item.name,
+        name: item.name,
         status: statusObj.status,
         status_op: statusObj.status_op,
+        province: item.province,
+        category: item.category,
+        telephone: item.telephone,
+        url: item.url,
+        instagram: item.instagram,
+        level: item.level,
       };
     }
 

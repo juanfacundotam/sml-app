@@ -20,10 +20,10 @@ const VendedoresAnalytics = () => {
             <Link to={"/vendedores"}>
               <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
             </Link>
-            <Link className="text-5xl" to={"/vendedores/history"}>
+            <Link className="text-5xl" to={"/vendedores-history"}>
               <FaHistory className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
             </Link>
-            <Link className="text-5xl" to={"/vendedores/analytics"}>
+            <Link className="text-5xl" to={"/vendedores-analytics"}>
               <IoStatsChart className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
             </Link>
           </div>

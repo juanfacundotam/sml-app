@@ -13,6 +13,7 @@ export const GET_ALL_CORREDORES = "GET_ALL_CORREDORES";
 export const GET_ALL_VENDEDORES = "GET_ALL_VENDEDORES";
 export const GET_ALL_LEADER = "GET_ALL_LEADER";
 export const GET_ALL_CLEVEL = "GET_ALL_CLEVEL";
+export const GET_VENDEDOR_ALL_LEADS = "GET_VENDEDOR_ALL_LEADS"
 
 
 export const getAllLead = () => {
@@ -118,13 +119,14 @@ export const filterStatus = (filterStatus) => {
     dispatch({ type: FILTER_STATUS, payload: filterStatus });
   };
 };
+
 export const AddLeads = (body) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
         "https://sml-app-api.onrender.com/lead/",
         body
-      );
+        );
       console.log("se agrego");
       return response.data;
     } catch (error) {
@@ -134,3 +136,17 @@ export const AddLeads = (body) => {
   };
 };
 
+
+export const getVendedorAllLeads = (email) => {
+  return async (dispatch) => {
+    const response = await axios.get(
+      `https://sml-app-api.onrender.com/vendedor/email?email=${email}`
+    );
+    console.log(response.data.leads)
+    const allLeads = response.data.leads;
+    dispatch({
+      type: GET_VENDEDOR_ALL_LEADS,
+      payload: allLeads,
+    });
+  };
+};
