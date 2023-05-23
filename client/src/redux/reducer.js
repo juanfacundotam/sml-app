@@ -12,6 +12,7 @@ import {
   GET_ALL_VENDEDORES,
   GET_ALL_LEADER,
   GET_ALL_CLEVEL,
+  GET_VENDEDOR_ALL_LEADS
 } from "./actions";
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   vendedores: [],
   leader: [],
   clevel: [],
+  vendedorAllLeads: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -210,6 +212,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         clevel: action.payload,
+      };
+    case GET_VENDEDOR_ALL_LEADS:
+      return {
+        ...state,
+        vendedorAllLeads: action.payload,
       };
 
     default:

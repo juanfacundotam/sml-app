@@ -7,8 +7,8 @@ const getLeadVendedorById = async (id) => {
   const leadResult = await Lead.findOne({ _id: id });
 
   const vendedor = await Vendedor.findOne({ email: leadResult.vendedor});
+
   // // Combinar los datos de la publicación y el usuario
-  console.log(vendedor)
     const data = {
       lead: leadResult,
       Vendedor_Name: {
