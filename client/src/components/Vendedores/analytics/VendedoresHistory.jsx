@@ -181,7 +181,7 @@ const VendedoresHistory = () => {
 
               <tbody className="">
                 {currentCard.map((item, index) => (
-                  <tr key={item._id} className={style.tableCards}>
+                  <tr key={index} className={style.tableCards}>
 
                     <td className="flex justify-start items-center  p-0 w-fit">
                       <p className="w-52 p-1 px-3 rounded-full text-ellipsis text-18 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">

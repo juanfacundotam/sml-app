@@ -47,7 +47,7 @@ function ChildModalDelete({
   const handleCreate = async () => {
     try {
       const response = await axios.put(
-        `https://sml-app-api.onrender.com/${itemRol}/${itemId}`,
+        `/${itemRol}/${itemId}`,
         {
           deleted: true,
         }
@@ -60,8 +60,11 @@ function ChildModalDelete({
     }
 
     try {
-      const response = await axios.delete(
-        `https://sml-app-api.onrender.com/employees/?email=${inputEmail}`
+      const response = await axios.put(
+        `/employees/?email=${inputEmail}`,
+        {
+          deleted: true,
+        }
       );
 
       BannedEmployees(inputName);
@@ -139,7 +142,7 @@ function ChildModal({
 
     try {
       const response = await axios.put(
-        `https://sml-app-api.onrender.com/${itemRol}/${itemId}`,
+        `/${itemRol}/${itemId}`,
         {
           name: inputName,
           email: inputEmail,

@@ -71,7 +71,7 @@ const CorredoresDashboard = () => {
     try {
       for (let i = 0; i < leadUnchecked10.length; i++) {
         const response = await axios.put(
-          `https://sml-app-api.onrender.com/lead/${client[i]._id}`,
+          `/lead/${client[i]._id}`,
           {
             view: client[i].view,
           }
@@ -197,7 +197,7 @@ const CorredoresDashboard = () => {
             (client[i].level === "incidencia" || client[i].level === "0")
           ) {
             const response = await axios.put(
-              `https://sml-app-api.onrender.com/lead/${client[i]._id}`,
+              `/lead/${client[i]._id}`,
               {
                 _id: client[i]._id,
                 name: client[i].name,
@@ -219,7 +219,7 @@ const CorredoresDashboard = () => {
               };
 
               await axios.post(
-                "https://sml-app-api.onrender.com/corredor/sendmail",
+                "/corredor/sendmail",
                 emailData
               );
             }
@@ -228,7 +228,7 @@ const CorredoresDashboard = () => {
             client[i].level !== "-"
           ) {
             const response = await axios.put(
-              `https://sml-app-api.onrender.com/lead/${client[i]._id}`,
+              `/lead/${client[i]._id}`,
               {
                 _id: client[i]._id,
                 name: client[i].name,
