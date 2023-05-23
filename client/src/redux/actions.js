@@ -140,7 +140,7 @@ export const AddLeads = (body) => {
 export const getVendedorAllLeads = (email) => {
   return async (dispatch) => {
     const response = await axios.get(
-      `http://localhost:3001/vendedor/email?email=${email}`
+      `https://sml-app-api.onrender.com/vendedor/email?email=${email}`
     );
     console.log(response.data.leads)
     const allLeads = response.data.leads;
