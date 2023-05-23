@@ -18,7 +18,7 @@ export const GET_VENDEDOR_ALL_LEADS = "GET_VENDEDOR_ALL_LEADS"
 
 export const getAllLead = () => {
   return async (dispatch) => {
-    const response = await axios.get("https://sml-app-api.onrender.com/lead");
+    const response = await axios.get("/lead");
     const LeadData = response.data;
     dispatch({ type: GET_ALL_LEAD, payload: LeadData });
   };
@@ -26,7 +26,7 @@ export const getAllLead = () => {
 export const getAllCorredores = () => {
   return async (dispatch) => {
     const response = await axios.get(
-      "https://sml-app-api.onrender.com/corredor"
+      "/corredor"
     );
     const corredores = response.data;
     dispatch({ type: GET_ALL_CORREDORES, payload: corredores });
@@ -35,7 +35,7 @@ export const getAllCorredores = () => {
 export const getAllVendedores = () => {
   return async (dispatch) => {
     const response = await axios.get(
-      "https://sml-app-api.onrender.com/vendedor"
+      "/vendedor"
     );
     const vendedores = response.data;
     dispatch({ type: GET_ALL_VENDEDORES, payload: vendedores });
@@ -43,14 +43,14 @@ export const getAllVendedores = () => {
 };
 export const getAllLeader = () => {
   return async (dispatch) => {
-    const response = await axios.get("https://sml-app-api.onrender.com/leader");
+    const response = await axios.get("/leader");
     const leader = response.data;
     dispatch({ type: GET_ALL_LEADER, payload: leader });
   };
 };
 export const getAllClevel = () => {
   return async (dispatch) => {
-    const response = await axios.get("https://sml-app-api.onrender.com/clevel");
+    const response = await axios.get("/clevel");
     const clevel = response.data;
     dispatch({ type: GET_ALL_CLEVEL, payload: clevel });
   };
@@ -59,7 +59,7 @@ export const getAllClevel = () => {
 export const getLeadUnchecked = () => {
   return async (dispatch) => {
     const response = await axios.get(
-      "https://sml-app-api.onrender.com/lead/unchecked"
+      "/lead/unchecked"
     );
     const LeadUnchecked = response.data;
     dispatch({ type: GET_LEAD_UNCHECKED, payload: LeadUnchecked });
@@ -69,7 +69,7 @@ export const getLeadUnchecked = () => {
 export const getLeadUnchecked10 = () => {
   return async (dispatch) => {
     const response = await axios.get(
-      "https://sml-app-api.onrender.com/lead/unchecked10"
+      "/lead/unchecked10"
     );
     const LeadUnchecked10 = response.data;
     dispatch({ type: GET_LEAD_UNCHECKED_10, payload: LeadUnchecked10 });
@@ -79,7 +79,7 @@ export const getLeadUnchecked10 = () => {
 export const getLeadChecked = () => {
   return async (dispatch) => {
     const response = await axios.get(
-      "https://sml-app-api.onrender.com/lead/checked"
+      "/lead/checked"
     );
     const LeadChecked = response.data;
     dispatch({ type: GET_LEAD_CHEQUED, payload: LeadChecked });
@@ -89,7 +89,7 @@ export const getLeadChecked = () => {
 export const getLeadCheckedInactive100 = () => {
   return async (dispatch) => {
     const response = await axios.get(
-      "https://sml-app-api.onrender.com/lead/checkedinactive100"
+      "/lead/checkedinactive100"
     );
     const LeadCheckedInactive100 = response.data;
     dispatch({
@@ -124,7 +124,7 @@ export const AddLeads = (body) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://sml-app-api.onrender.com/lead/",
+        "/lead/",
         body
         );
       console.log("se agrego");
@@ -140,7 +140,7 @@ export const AddLeads = (body) => {
 export const getVendedorAllLeads = (email) => {
   return async (dispatch) => {
     const response = await axios.get(
-      `https://sml-app-api.onrender.com/vendedor/email?email=${email}`
+      `/vendedor/email?email=${email}`
     );
     console.log(response.data.leads)
     const allLeads = response.data.leads;

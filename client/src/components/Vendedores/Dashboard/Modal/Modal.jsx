@@ -89,7 +89,7 @@ function ChildModal({
 
     axios
       .put(
-        `https://sml-app-api.onrender.com/lead/vendedor/${item._id}`,
+        `/lead/vendedor/${item._id}`,
         dataUpdate
       )
       .then((response) => {
