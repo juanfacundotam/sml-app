@@ -7,7 +7,7 @@ import { AddLeads } from "../../../../redux/actions";
 
 const style = {
   position: "absolute",
-  top: "50%",
+  top: "30%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   boxShadow: 24,
@@ -85,9 +85,9 @@ export default function ChildModal() {
         <Box
           sx={{
             ...style,
-            width: "30%",
+            width: "40%",
             backgroundColor: "#39394b",
-            height: "700px",
+            height: "300px",
           }}
         >
           <div className="flex flex-col gap-5 p-8 h-full ">
@@ -95,7 +95,6 @@ export default function ChildModal() {
             <label>json</label>
             <div>
               <input type="file" accept=".json" onChange={handleFileChange} />
-              <p>Selected file: {selectedFile ? selectedFile.name : "None"}</p>
             </div>
             <div>
               <Button
