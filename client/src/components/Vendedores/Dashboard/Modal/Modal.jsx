@@ -5,7 +5,6 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { CiWarning, CiEdit } from "react-icons/ci";
 import { useUser } from "@clerk/clerk-react";
-import { orderCategory } from "../../../../redux/actions";
 
 const style = {
   position: "absolute",
@@ -20,8 +19,6 @@ const style = {
   px: 6,
   pb: 4,
 };
-
-
 
 function ChildModal({
   item,
@@ -55,8 +52,6 @@ function ChildModal({
         url: item.url,
         instagram: item.instagram,
         level: item.level,
-
-        
       };
     } else {
       dataVendedor = {
@@ -86,12 +81,9 @@ function ChildModal({
       dataLead,
       dataVendedor,
     };
-console.log(dataUpdate)
+    console.log(dataUpdate);
     axios
-      .put(
-        `/lead/vendedor/${item._id}`,
-        dataUpdate
-      )
+      .put(`/lead/vendedor/${item._id}`, dataUpdate)
       .then((response) => {
         // Si la respuesta es exitosa, redirige a otra página
         if (response.data.title) {
@@ -170,8 +162,94 @@ console.log(dataUpdate)
     </React.Fragment>
   );
 }
+
+
+
+
+
 function IncidenceModal({ setOpen, SendIncidenceAlert }) {
   const [openIncidenceChild, setOpenIncidenceChild] = React.useState(false);
+  const handleOpen = () => {
+    // setOpenChild(true);
+  };
+  const handleClose = () => {
+    setOpenIncidenceChild(false);
+  };
+  const confirmSendIncidence = () => {
+    // setOpenChild(false);
+    setOpen(false);
+    // SendLeadAlert();
+    SendIncidenceAlert();
+  };
+  const handleCancel = () => {
+    // setOpen(false);
+  };
+
+  const sendIncidence = () => {
+    setOpenIncidenceChild(true);
+  };
+  return (
+    <React.Fragment>
+      <div className="flex justify-around items-center">
+        <CiWarning
+          className="text-[#ffffff] p-0 text-[35px] font-bold cursor-pointer"
+          onClick={sendIncidence}
+        />
+      </div>
+      <Modal
+        open={openIncidenceChild}
+        onClose={handleClose}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box
+          sx={{
+            ...style,
+            width: 500,
+            backgroundColor: "#39394B",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        >
+          <h2 id="child-modal-title" className="text-white text-center mb-5">
+            Send Incidence?
+          </h2>
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="5"
+            placeholder="Observation"
+            className="bbg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          ></textarea>
+          <div className="flex justify-around items-center m-5">
+            <button
+              type="button"
+              className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              onClick={handleClose}
+            >
+              No
+            </button>
+            <button
+              type="button"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              onClick={confirmSendIncidence}
+            >
+              Yes
+            </button>
+          </div>
+        </Box>
+      </Modal>
+    </React.Fragment>
+  );
+}
+
+
+
+function intelligentInfo({ setOpen }) {
+  const [openIntelligentInfo, setOpenIntelligentInfo] = React.useState(false);
   const handleOpen = () => {
     // setOpenChild(true);
   };
@@ -320,8 +398,7 @@ export default function NestedModal({
         fechaMonth += item.updatedAt[i];
       } else if (i >= 8 && i < 10) {
         fechaDay += item.updatedAt[i];
-      }
-      else if (i >= 11 && i < 13) {
+      } else if (i >= 11 && i < 13) {
         timeHour += item.updatedAt[i];
       }
       if (i >= 13 && i < 19) {
@@ -331,17 +408,21 @@ export default function NestedModal({
 
     return (
       <p htmlFor="" className="text-white m-2">
-        {`Date: ${fechaDay}/${fechaMonth}/${fechaYear} - Hour: ${timeHour-3}${timeMinute}`}
+        {`Date: ${fechaDay}/${fechaMonth}/${fechaYear} - Hour: ${
+          timeHour - 3
+        }${timeMinute}`}
       </p>
     );
   };
 
   return (
     <div>
-      <CiEdit
-        className="bg-[#6254ff] text-1 text-white w-10 h-8 rounded-md cursor-pointer"
-        onClick={handleOpen}
-      />
+      <div className="flex gap-4">
+        <CiEdit
+          className="bg-[#6254ff] text-1 text-white w-10 h-8 rounded-md cursor-pointer "
+          onClick={handleOpen}
+        />
+      </div>
       <Modal
         open={open}
         onClose={handleClose}
@@ -452,7 +533,9 @@ export default function NestedModal({
                   id="Motivo"
                   onChange={handleSelectChange}
                   name="status_op"
-                  defaultValue={statusObj.status_op ? statusObj.status_op : "default"}
+                  defaultValue={
+                    statusObj.status_op ? statusObj.status_op : "default"
+                  }
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
                   {/* <option selected>Choose a country</option> */}
