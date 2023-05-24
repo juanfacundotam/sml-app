@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { CiWarning, CiEdit } from "react-icons/ci";
 import { useUser } from "@clerk/clerk-react";
+import DateTimePicker from "./DateTimePicker";
+import ResponsiveDateTimePickers from "./ResponsiveDateTimePickers";
 
 const style = {
   position: "absolute",
@@ -105,7 +107,7 @@ function ChildModal({
 
   return (
     <React.Fragment>
-      <div className="flex justify-around items-center">
+      <div className="flex justify-around items-center relative">
         <button
           type="button"
           className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
@@ -162,10 +164,6 @@ function ChildModal({
     </React.Fragment>
   );
 }
-
-
-
-
 
 function IncidenceModal({ setOpen, SendIncidenceAlert }) {
   const [openIncidenceChild, setOpenIncidenceChild] = React.useState(false);
@@ -246,10 +244,9 @@ function IncidenceModal({ setOpen, SendIncidenceAlert }) {
   );
 }
 
-
-
 function intelligentInfo({ setOpen }) {
   const [openIntelligentInfo, setOpenIntelligentInfo] = React.useState(false);
+
   const handleOpen = () => {
     // setOpenChild(true);
   };
@@ -335,7 +332,7 @@ export default function NestedModal({
   updateLeads,
 }) {
   const [open, setOpen] = React.useState(false);
-
+  const [openTimeHour, setOpenTimeHour] = React.useState(false);
   const [statusObj, setStatusObj] = React.useState({
     status: item.status,
     status_op: item.status_op,
@@ -373,7 +370,7 @@ export default function NestedModal({
         [property]: value,
         status_op: "",
       });
-    } else if (value === "Contratado") {
+    } else if (value === "Agendar 2do llamado") {
       setStatusObj({
         ...statusObj,
         [property]: value,
@@ -415,8 +412,13 @@ export default function NestedModal({
     );
   };
 
+  const setDateTime = () => {
+    setOpenTimeHour(!openTimeHour);
+  };
+
   return (
-    <div>
+    <div className="">
+
       <div className="flex gap-4">
         <CiEdit
           className="bg-[#6254ff] text-1 text-white w-10 h-8 rounded-md cursor-pointer "
@@ -429,7 +431,7 @@ export default function NestedModal({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 550, height: 480, borderRadius: 5 }}>
+        <Box sx={{ ...style, width: 550, borderRadius: 5, display:"flex", flexDirection: "column", justifyContent:"space-between"}}>
           <div className="w-full flex justify-center items-center mt-3 mb-10">
             <h2 id="parent-modal-title" className="text-center text-white">
               {item.name}
@@ -499,7 +501,7 @@ export default function NestedModal({
             </div> */}
           </div>
 
-          <div className="h-52 flex items-center justify-start flex-col mb-10">
+          <div className=" h-fit flex items-center justify-start flex-col mb-10">
             <div className="">
               <label
                 htmlFor="countries"
@@ -516,7 +518,7 @@ export default function NestedModal({
               >
                 {/* <option selected>Choose a country</option> */}
                 <option value="Sin contactar">Sin Contactar</option>
-                <option value="Contratado">Contratado</option>
+                <option value="Agendar 2do llamado">Agendar 2do llamado</option>
                 <option value="Rechazado">Rechazado</option>
                 <option value="No responde">No Responde</option>
               </select>
@@ -550,18 +552,15 @@ export default function NestedModal({
                 </select>
               </div>
             )}
-            {statusObj.status === "Contratado" && (
+            {statusObj.status === "Agendar 2do llamado" && (
               <div className="flex flex-col justify-center items-center mt-5">
                 <label
                   htmlFor="last_name"
                   className="block mb-2 text-sm text-center font-medium text-gray-900 dark:text-white"
                 >
-                  Price
+                  Contacto
                 </label>
                 <div className="flex justify-center items-center">
-                  <label htmlFor="" className="text-white m-2">
-                    USD
-                  </label>
                   <input
                     onChange={handleSelectChange}
                     type="text"
@@ -576,6 +575,21 @@ export default function NestedModal({
                     required
                   />
                 </div>
+                <div className="flex items-center justify-center gap-7 mt-10">
+                  <label
+                    htmlFor="last_name"
+                    className="block mb-2 text-sm text-center font-medium text-gray-900 dark:text-white"
+                  >
+                    Fecha y Hora
+                  </label>
+                  <button
+                    type="button"
+                    className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    onClick={setDateTime}
+                  >
+                    Set
+                  </button>
+                </div>
               </div>
             )}
             {item.llamados > 0 && statusObj.status === "No responde" && (
@@ -588,6 +602,9 @@ export default function NestedModal({
                 </div>
               </div>
             )}
+          </div>
+          <div className="flex justify-center items-center absolute -right-80 top-0">
+            {openTimeHour && <ResponsiveDateTimePickers />}
           </div>
 
           <div className="">

@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import PaginationOutlined from "../../pagination/PaginationOutlined";
 import { filterLevel, getLeadCheckedInactive100 } from "../../../redux/actions";
-import { AiOutlinePhone} from "react-icons/ai";
 import Modal from "./Modal/Modal";
 import ModalIntelligentInfo from "./Modal/ModalIntelligenceInfo";
 import { IoGrid, IoStatsChart} from "react-icons/io5";
