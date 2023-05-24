@@ -44,10 +44,9 @@ const updateLeadVendedorById = async (id, updatedData) => {
     { email: updatedData.dataLead.vendedor, "leads.name": valor.name },
     { $set: { "leads.$": valor } },
     { new: true }
-    );
-    
-    if (!vendedor) {
-    console.log("entranding")
+  );
+
+  if (!vendedor) {
     const vendedor = await Vendedor.findOneAndUpdate(
       { email: updatedData.dataLead.vendedor },
       { $addToSet: { leads: { $each: [valor] } } },
@@ -66,7 +65,6 @@ const updateLeadVendedorById = async (id, updatedData) => {
 
   // Imprimir la publicación completa
   return data;
-
 };
 
 module.exports = updateLeadVendedorById;

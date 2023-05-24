@@ -21,6 +21,8 @@ const style = {
   pb: 4,
 };
 
+
+
 function ChildModal({
   item,
   setOpen,
@@ -406,9 +408,7 @@ export default function NestedModal({
 
     return (
       <p htmlFor="" className="text-white m-2">
-        {`Date: ${fechaDay}/${fechaMonth}/${fechaYear} - Hour: ${
-          timeHour - 3
-        }${timeMinute}`}
+        {`Date: ${fechaDay}/${fechaMonth}/${fechaYear} - Hour: ${timeHour-3}${timeMinute}`}
       </p>
     );
   };
@@ -550,9 +550,7 @@ export default function NestedModal({
                   id="Motivo"
                   onChange={handleSelectChange}
                   name="status_op"
-                  defaultValue={
-                    statusObj.status_op ? statusObj.status_op : "default"
-                  }
+                  defaultValue={statusObj.status_op ? statusObj.status_op : "default"}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
                   {/* <option selected>Choose a country</option> */}
