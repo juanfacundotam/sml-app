@@ -1,4 +1,4 @@
-import  styles from "App.module.css"
+import styles from "./App.module.css";
 import Landing from "./views/Landing/Landing";
 import Lideres from "./components/Lideres/Lideres";
 import Analytics from "./views/Analytics/Analytics.jsx";
