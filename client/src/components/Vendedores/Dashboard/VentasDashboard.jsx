@@ -1,4 +1,4 @@
-import style from "./VentasDashboard.module.css";
+import style from "./Vendedoresdashboard.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
