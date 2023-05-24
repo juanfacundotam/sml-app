@@ -331,13 +331,14 @@ export default function NestedModal({
   updateLeads,
 }) {
   const [open, setOpen] = React.useState(false);
+  const [dateHour, setDateHour] = React.useState({});
   const [openTimeHour, setOpenTimeHour] = React.useState(false);
   const [statusObj, setStatusObj] = React.useState({
     status: item.status,
     status_op: item.status_op,
     llamados: item.llamados,
   });
-
+  // const [selectedDate, setSelectedDate] = React.useState(dayjs());
   useEffect(() => {
     setStatusObj({
       ...statusObj,
@@ -418,10 +419,12 @@ export default function NestedModal({
   const closeDateHour = () => {
     setOpenTimeHour(false);
   };
+  const changeTime = async (date) => {
+    await setDateHour({ ...date });
+  };
 
   return (
     <div className="">
-
       <div className="flex gap-4">
         <CiEdit
           className="bg-[#6254ff] text-1 text-white w-10 h-8 rounded-md cursor-pointer "
@@ -434,7 +437,16 @@ export default function NestedModal({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 550, borderRadius: 5, display:"flex", flexDirection: "column", justifyContent:"space-between"}}>
+        <Box
+          sx={{
+            ...style,
+            width: 550,
+            borderRadius: 5,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
           <div className="w-full flex justify-center items-center mt-3 mb-10">
             <h2 id="parent-modal-title" className="text-center text-white">
               {item.name}
@@ -604,7 +616,15 @@ export default function NestedModal({
                     htmlFor="last_name"
                     className="block mb-2 text-sm text-center font-medium text-gray-900 dark:text-white"
                   >
-                    Fecha y Hora
+                    {`Dia: ${dateHour.$D}/${dateHour.$M}/${dateHour.$y} Hora: ${
+                      dateHour.$H && String(dateHour.$H).length === 1
+                        ? `0${dateHour.$H}`
+                        : dateHour.$H
+                    }:${
+                      dateHour.$m && String(dateHour.$m).length === 1
+                        ? `0${dateHour.$m}`
+                        : dateHour.$m
+                    }`}
                   </label>
                   <button
                     type="button"
@@ -628,8 +648,13 @@ export default function NestedModal({
             )}
           </div>
           <div className="flex justify-center items-center absolute -right-80 top-0">
-            
-            {openTimeHour && <ResponsiveDateTimePickers closeDateHour={closeDateHour} className={style.dateTime}/>}
+            {openTimeHour && (
+              <ResponsiveDateTimePickers
+                closeDateHour={closeDateHour}
+                changeTime={changeTime}
+                className={style.dateTime}
+              />
+            )}
           </div>
 
           <div className="">
