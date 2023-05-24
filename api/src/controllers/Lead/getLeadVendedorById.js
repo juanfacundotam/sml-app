@@ -2,10 +2,13 @@ const Lead = require("../../models/Lead");
 const Vendedor = require("../../models/Vendedor");
 
 const getLeadVendedorById = async (id) => {
+  
+  // Obtener el usuario relacionado
   const leadResult = await Lead.findOne({ _id: id });
 
   const vendedor = await Vendedor.findOne({ email: leadResult.vendedor});
 
+  // // Combinar los datos de la publicación y el usuario
     const data = {
       lead: leadResult,
       Vendedor_Name: {
@@ -15,6 +18,7 @@ const getLeadVendedorById = async (id) => {
       }
     };
     
+    // Imprimir la publicación completa
     return data;
 
 };
