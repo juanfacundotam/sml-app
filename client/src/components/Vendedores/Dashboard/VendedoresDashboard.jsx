@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import PaginationOutlined from "../../pagination/PaginationOutlined";
 import { filterLevel, getLeadCheckedInactive100 } from "../../../redux/actions";
-import { AiOutlinePhone} from "react-icons/ai";
 import Modal from "./Modal/Modal";
+import ModalIntelligentInfo from "./Modal/ModalIntelligenceInfo";
 import { IoGrid, IoStatsChart} from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -288,7 +288,8 @@ const VendedoresDashboard = () => {
                         </p>
                       )}
                     </td>
-                    <td className="flex justify-start items-start p-0 w-fit">
+                    <td className="flex justify-start items-start p-0 w-fit gap-3">
+                    <ModalIntelligentInfo/>
                       <Modal
                         item={item}
                         SendLeadAlert={SendLeadAlert}

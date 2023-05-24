@@ -123,7 +123,6 @@ export const AddLeads = (body) => {
 export const getVendedorAllLeads = (email) => {
   return async (dispatch) => {
     const response = await axios.get(`/vendedor/email?email=${email}`);
-    console.log(response.data.leads);
     const allLeads = response.data.leads;
     dispatch({
       type: GET_VENDEDOR_ALL_LEADS,
