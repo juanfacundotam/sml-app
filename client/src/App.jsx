@@ -1,4 +1,4 @@
-import "./App.css";
+import  styles from "App.module.css"
 import Landing from "./views/Landing/Landing";
 import Lideres from "./components/Lideres/Lideres";
 import Analytics from "./views/Analytics/Analytics.jsx";
@@ -27,11 +27,11 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
 
-if (!"pk_test_ZmFtb3VzLWRyYWdvbi0xMi5jbGVyay5hY2NvdW50cy5kZXYk") {
+if (!"pk_test_Z3VpZGVkLWtvZGlhay0xMi5jbGVyay5hY2NvdW50cy5kZXYk") {
   throw new Error("Missing Publishable Key");
 }
 
-const clerkPubKey = "pk_test_ZmFtb3VzLWRyYWdvbi0xMi5jbGVyay5hY2NvdW50cy5kZXYk";
+const clerkPubKey = "pk_test_Z3VpZGVkLWtvZGlhay0xMi5jbGVyay5hY2NvdW50cy5kZXYk";
 function PublicPage() {
   return (
     <>
@@ -52,54 +52,112 @@ function ProtectedPage() {
 
 function ClerkProviderWithRoutes() {
   const navigate = useNavigate();
+  const role = useSelector((state) => state.rol);
 
-   const roleReady = useSelector(state => state.rol);
-  // const [roleReady, setRoleReady] = useState(null);
+  function isRoleAllowed(role) {
+    const allowedRoles = ["vendedor", "clevel", "leader","corredor"];
+    return allowedRoles.includes(role);
+  }
 
-  // useEffect(() => {
-  //   const fetchRole = async () => {
-  //     await new Promise((resolve) => setTimeout(resolve, 3000)); // Esperar 3 segundos
-
-  //     const role = roles; // Obtener el valor de role (puedes reemplazar esto con tu lógica real)
-
-  //     setRoleReady(role); // Establecer roleReady con el valor de role después de 3 segundos
-  //   };
-
-  //   fetchRole();
-  // }, []);
-
-  // if (roleReady === null) {
-  //   return <h1>cargando</h1>; // Renderizar algo mientras roleReady sea null (puede ser un mensaje de carga, por ejemplo)
-  // }
-
-   console.log(roleReady);
   return (
     <ClerkProvider publishableKey={clerkPubKey} navigate={(to) => navigate(to)}>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
           path="/sign-in/*"
-          element={<SignIn routing="path" path="/sign-in" />}
+          element={
+            <SignIn
+              routing="path"
+              path="/sign-in"
+              appearance={{
+                variables: {
+                  colorInputBackground: "#222131",
+
+                  spacingUnit: "0.8rem",
+                },
+                layout: {
+                  socialButtonsPlacement: "top",
+                },
+                elements: {
+                  formButtonPrimary: styles.formButtonPrimary,
+                  socialButtonsBlockButton: styles.socialButtons,
+                  formFieldInput: styles.formFieldInput,
+                  card: styles.card,
+                  main: styles.main,
+                  form: styles.form,
+                  formField: styles.formField,
+                  dividerRow: styles.dividerRow,
+                  formFieldLabel: styles.formFieldLabel,
+                  footerActionText: styles.footerActionText,
+                  logoImage: styles.logoImage,
+                  headerTitle: styles.headerTitle,
+                  headerSubtitle: styles.headerSubtitle,
+                  rootBox: styles.rootBox,
+                },
+              }}
+            ></SignIn>
+          }
         />
+
         <Route
           path="/sign-up/*"
           element={<SignUp routing="path" path="/sign-up" />}
         />
         <Route path="*" element={<h1>error 404</h1>} />
-        <Route path="/home" element={ <Landing />} />
+        <Route path="/home" element={<Landing />} />
         <Route path="/" element={<Login />} />
-        <Route path="/lideres" element={roleReady === "clevel" || roleReady === "leader" ? <AnalyticLeader /> : <h1>error 404</h1>} />
-        <Route path="/lideres/analytics" element={roleReady === "clevel" || roleReady === "leader" ? <AnalyticLeader /> : <h1>error 404</h1>} />
-        <Route path="/lideres/analytics/incidences" element={roleReady === "clevel" || roleReady === "leader" ? <Incidences /> : <h1>error 404</h1>} />
-        <Route path="/clevel" element={roleReady === "clevel" || roleReady === "leader" ? <Clevel /> : <h1>error 404</h1>} />
-        <Route path="/clevel/analytics" element={roleReady === "clevel" || roleReady === "leader" ? <Analytic /> : <h1>error 404</h1>} />
-        <Route path="/corredores" element={roleReady === "corredor" || roleReady === "clevel" || roleReady === "leader" ? <CorredoresDashboard /> : <h1>error 404</h1>} />
-        <Route path="/corredores/history" element={roleReady === "corredor" || roleReady === "clevel" || roleReady === "leader" ? <CorredoresAnlaytics /> : <h1>error 404</h1>} />
+        <Route
+          path="/lideres"
+          element={isRoleAllowed(role) ? <AnalyticLeader /> : <ReturnToPage />}
+        />
+        <Route
+          path="/lideres/analytics"
+          element={isRoleAllowed(role) ? <AnalyticLeader /> : <ReturnToPage />}
+        />
+        <Route
+          path="/lideres/analytics/incidences"
+          element={isRoleAllowed(role) ? <Incidences /> : <ReturnToPage />}
+        />
+        <Route
+          path="/clevel"
+          element={isRoleAllowed(role) ? <Clevel /> : <ReturnToPage />}
+        />
+        <Route
+          path="/clevel/analytics"
+          element={isRoleAllowed(role) ? <Analytic /> : <ReturnToPage />}
+        />
+        <Route
+          path="/corredores"
+          element={
+            isRoleAllowed(role) ? <CorredoresDashboard /> : <ReturnToPage />
+          }
+        />
+        <Route
+          path="/corredores/history"
+          element={
+            isRoleAllowed(role) ? <CorredoresAnlaytics /> : <ReturnToPage />
+          }
+        />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/settings" element={<Settings />} />
-        <Route path="/vendedores" element={roleReady === "vendedor" || roleReady === "clevel" || roleReady === "leader" ? <VendedoresDashboard /> : <h1>error 404</h1>} />
-        <Route path="/vendedores/history" element={roleReady === "vendedor" || roleReady === "clevel" || roleReady === "leader" ? <VendedoresHistory /> : <h1>error 404</h1>} />
-        <Route path="/vendedores/analytics" element={roleReady === "vendedor" || roleReady === "clevel" || roleReady === "leader" ? <VendedoresAnalytics /> : <h1>error 404</h1>} />
+        <Route
+          path="/vendedores"
+          element={
+            isRoleAllowed(role) ? <VentasDashboard/> : <ReturnToPage />
+          }
+        />
+        <Route
+          path="/vendedores/history"
+          element={
+            isRoleAllowed(role) ? <VendedoresHistory /> : <ReturnToPage />
+          }
+        />
+        <Route
+          path="/vendedores/analytics"
+          element={
+            isRoleAllowed(role) ? <VendedoresAnalytics /> : <ReturnToPage />
+          }
+        />
         <Route
           path="/protected"
           element={
@@ -120,7 +178,7 @@ function ClerkProviderWithRoutes() {
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.App}>
       <ClerkProviderWithRoutes />
     </div>
     // <div className="App">
