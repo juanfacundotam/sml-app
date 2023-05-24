@@ -182,8 +182,20 @@ const CorredoresDashboard = () => {
       theme: "dark",
     });
   };
-  const SendLeadsError = () => {
-    toast.error(`✔ Send Leads Error!`, {
+  const SendLeadsError = (name) => {
+    toast.error(`✔ Send Leads Error! ${name}`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const SendLeadsErrorEmail = () => {
+    toast.error(`❌ Error Email empty!`, {
       position: "top-center",
       autoClose: 3000,
       hideProgressBar: false,
@@ -203,6 +215,8 @@ const CorredoresDashboard = () => {
         if (client[i].level !== "-") {
           if (client[i].instagram.trim() !== "" && client[i].level === "0") {
             SendLeadsErrorInsta0(client[i].name);
+          } else if (client[i].email !== "" && client[i].email === "-") {
+            SendLeadsErrorEmail(client[i].name);
           } else if (
             client[i].instagram.trim() === "" &&
             (client[i].level === "incidencia" || client[i].level === "0")
@@ -259,7 +273,6 @@ const CorredoresDashboard = () => {
       console.log({ error: error.message });
     }
   };
-
 
   return (
     <>
@@ -326,7 +339,10 @@ const CorredoresDashboard = () => {
                     </div>
                     <input
                       className={`bg-transparent  w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-white focus:placeholder-black ${
-                        (client[index].email !== "-" && client[index].email !== "") ? "border-green-500" : ""
+                        client[index].email !== "-" &&
+                        client[index].email !== ""
+                          ? "border-green-500"
+                          : ""
                       }`}
                       type="text"
                       name="email"
