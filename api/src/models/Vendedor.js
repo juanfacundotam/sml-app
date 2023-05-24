@@ -31,8 +31,8 @@ const VendedorSchema = new mongoose.Schema(
       type: String,
     },
     leads: {
-      type:Array,
-      default: []
+      type: Array,
+      default: [],
     },
     rol: {
       type: String,
