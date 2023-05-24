@@ -1,26 +1,24 @@
-import Nav from '../../components/Nav/Nav';
-import Detail from '../../components/Lideres/Employees/Detail/Detail';
+import Nav from "../../components/Nav/Nav";
+import Detail from "../../components/Lideres/Employees/Detail/Detail";
 import {
   useUser,
-useOrganization,
-useOrganizationList,
+  useOrganization,
+  useOrganizationList,
 } from "@clerk/clerk-react";
 
 export default function Settings() {
-const user= useUser().user;
-const org= useOrganization();
-const orgList= useOrganizationList();
+  const user = useUser().user;
+  const org = useOrganization();
+  const orgList = useOrganizationList();
 
-console.log(user);
-console.log(org);
-console.log(orgList.organizationList[0]);
+  console.log(user);
+  console.log(org);
+  console.log(orgList.organizationList[0]);
   return (
-
     <>
       <Nav />
-      {(
+      {
         <div className="flex justify-center items-center w-full">
-          {/* <p>{user[url][0]} </p> */}
           <div className="h-screen w-4/5  flex flex-col justify-start items-center p-8">
             <button>Cambio de Colores</button>
             <div>
@@ -67,9 +65,13 @@ console.log(orgList.organizationList[0]);
               </button>
             </div>
           </div>
-           <Detail name={user.fullName} picture={user.experimental_imageUrl} email={user.emailAddresses[0].emailAddress} /> 
+          <Detail
+            name={user.fullName}
+            picture={user.experimental_imageUrl}
+            email={user.emailAddresses[0].emailAddress}
+          />
         </div>
-      )}{" "}
+      }{" "}
     </>
   );
 }
