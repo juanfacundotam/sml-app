@@ -8,11 +8,6 @@ const VendedorRouter = require("./VendedorRouter");
 const AuthRouter = require("./AuthRouter");
 const EmployeesRouter = require("./EmployeesRouter");
 
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
-
 router.use("/employees", EmployeesRouter);
 router.use("/clevel", CLevelRouter);
 router.use("/corredor", CorredorRouter);
