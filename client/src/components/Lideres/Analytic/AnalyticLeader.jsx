@@ -40,7 +40,9 @@ export const AnalyticLeader = () => {
   const indexLastCard = currentPage * cardXPage;
   const indexFirstCard = indexLastCard - cardXPage;
   const showData = data.filter((item) => {
-    return item.status !== "No responde";
+    return (
+      item.status !== "No responde" && item.status !== "Agendar 2do llamado"
+    );
   });
   const currentCard = showData.slice(indexFirstCard, indexLastCard);
   const pages = (pageNumber) => {
