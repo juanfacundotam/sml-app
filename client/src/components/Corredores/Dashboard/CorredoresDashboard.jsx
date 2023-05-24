@@ -22,7 +22,6 @@ import { Link } from "react-router-dom";
 import { getLeadUnchecked10 } from "../../../redux/actions";
 import IconLabelButtons from "../../MaterialUi/IconLabelButtons";
 import { FaHistory } from "react-icons/fa";
-import swal from "sweetalert";
 import {
   useUser,
   useOrganization,
