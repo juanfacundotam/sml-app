@@ -109,7 +109,7 @@ export default function ResponsiveDateTimePickers({closeDateHour}) {
 
 
         >
-          x
+          Close x
         </button>
         </DemoItem>
       </DemoContainer>
