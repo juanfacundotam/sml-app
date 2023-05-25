@@ -247,10 +247,10 @@ const VendedoresDashboard = () => {
                     </td>
                     <td className="flex justify-center items-center p-0 w-fit">
                       {item.instagram ? (
-                        <div onClick={() => handleCopyClick(item.instagram)}>
-                          <div className="cursor-pointer">
+                        <div>
+                          <a href={item.instagram} target="_blank" className="cursor-pointer">
                             <CiInstagram className="text-[35px] mr-5 text-[#ff598b]" />
-                          </div>
+                          </a>
                         </div>
                       ) : (
                         <div>
@@ -276,7 +276,7 @@ const VendedoresDashboard = () => {
                     </td>
                     <td className="flex justify-start items-start p-0 w-fit">
                       {item.status === "Sin contactar" && (
-                        <p className="bg-[#ff69b4] w-44 h-11 flex justify-center items-center text-white rounded-3xl text-18">
+                        <p className="bg-[#d0da3d] w-44 h-11 flex justify-center items-center text-white rounded-3xl text-18">
                           {item.status}
                         </p>
                       )}

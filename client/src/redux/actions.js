@@ -127,7 +127,7 @@ export const getVendedorAllLeads = (email) => {
 
     const allLeadsMaps = allLeads.map(item => {
       if(item.status !== "Sin contactar" && item.status !== "Agendar 2do llamado"){
-        console.log(item)
+    console.log(item)
         return item;
       }
     })
