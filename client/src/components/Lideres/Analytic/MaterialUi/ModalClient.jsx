@@ -69,7 +69,7 @@ export default function BasicModal(props) {
             <div className="font-semibold flex gap-3">
               <p>WEB: </p>
               <a href={web} target="_blank" rel="noopener noreferrer">
-                Ingrese Aqui
+                Ingrese a la web aqui!
               </a>
             </div>
             <div className="font-semibold flex gap-3">
@@ -78,7 +78,9 @@ export default function BasicModal(props) {
             </div>
             <div className="font-semibold flex gap-3">
               <p>INSTAGRAM: </p>
-              <p className="font-normal">{instagram} </p>
+              <a href={instagram} target="_blank" rel="noopener noreferrer">
+                {instagram}
+              </a>
             </div>
             <div className="font-semibold flex gap-3">
               <p>TELEFONO: </p>
