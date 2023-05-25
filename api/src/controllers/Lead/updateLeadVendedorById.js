@@ -10,10 +10,14 @@ const updateLeadVendedorById = async (id, updatedData) => {
   //   ]
   // });
 
-  console.log(updatedData)
   // console.log(VendedorArrays);
   const leadCountCheck = await Lead.findById(id);
-  
+  // console.log(leadCountCheck.llamados)
+
+  if (!updatedData.dataLead.llamados) {
+    updatedData.dataLead.llamados = 0;
+  }
+
   if (
     updatedData.dataLead.status === "No responde" &&
     leadCountCheck.llamados < 2
@@ -30,14 +34,13 @@ const updateLeadVendedorById = async (id, updatedData) => {
     updatedData.dataVendedor.status = "Rechazado";
     updatedData.dataVendedor.status_op = "3 llamados";
   }
-  
 
   const leadUpdate = await Lead.findByIdAndUpdate(id, updatedData.dataLead, {
     new: true,
   });
 
   const valor = updatedData.dataVendedor;
-  
+
   const vendedor = await Vendedor.findOneAndUpdate(
     { email: updatedData.dataLead.vendedor, "leads.name": valor.name },
     { $set: { "leads.$": valor } },
@@ -51,7 +54,6 @@ const updateLeadVendedorById = async (id, updatedData) => {
       { $addToSet: { leads: { $each: [valor] } } },
       { new: true }
     );
-
   } else {
     await vendedor.save();
   }
@@ -60,7 +62,6 @@ const updateLeadVendedorById = async (id, updatedData) => {
     leadUpdate,
     vendedor,
   };
-
 
   return data;
 };

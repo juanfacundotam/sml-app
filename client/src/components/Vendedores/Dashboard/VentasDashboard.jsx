@@ -99,7 +99,7 @@ const VentasDashboard = () => {
       progress: undefined,
       theme: "dark",
     });
-    dispatch(getLeadsLLamadaVenta());
+    dispatch(getLeadsLLamadaVenta("smlappadm@gmail.com"));
   };
   const SendErrorUpdateAlert = () => {
     toast.error("The lead could not be updated!", {

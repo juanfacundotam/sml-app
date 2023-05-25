@@ -611,8 +611,8 @@ export default function NestedModal({
                 </select>
               </div>
             )}
-            {item.status === "Sin contactar" &&
-              statusObj.status === "Agendar 2do llamado" && (
+            {(item.status === "Sin contactar" || item.status === "No responde") &&
+            statusObj.status === "Agendar 2do llamado"  && (
                 <div className="flex flex-col justify-center items-center mt-5 ">
                   <label
                     htmlFor="last_name"
