@@ -101,7 +101,6 @@ const CorredoresDashboard = () => {
     console.log("se cargar los valores", clientCorredor);
 
     try {
-      // const response = await axios.put(`/corredor/?email=${inputEmail}`, clientCorredor);
       const response = await axios.put(
         `/corredor/?email=voeffray.jonathan@gmail.com`,
         clientCorredor
@@ -253,7 +252,6 @@ const CorredoresDashboard = () => {
               email: client[i].email,
               level: client[i].level,
               checked: true,
-              leads: clientIds,
               view: false,
               corredor: user.fullName,
             });
@@ -280,7 +278,6 @@ const CorredoresDashboard = () => {
               email: client[i].email,
               level: client[i].level,
               checked: true,
-              leads: clientIds,
               view: false,
               corredor: user.fullName,
             });
