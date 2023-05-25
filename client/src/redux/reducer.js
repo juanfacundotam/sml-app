@@ -13,9 +13,7 @@ import {
   GET_ALL_LEADER,
   GET_ALL_CLEVEL,
   GET_VENDEDOR_ALL_LEADS,
-  GET_EMPLOYEES,
-  SET_ROL,
-  SET_ACCESS
+  GET_LEADS_LLAMADA_VENTA
 } from "./actions";
 
 const initialState = {
@@ -31,12 +29,8 @@ const initialState = {
   leader: [],
   clevel: [],
   vendedorAllLeads: [],
-  employees: [],
-  rol: undefined,
-  isEmployee: undefined
+  LeadsLlamadaVenta: [],
 };
-
-    
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -67,18 +61,7 @@ const rootReducer = (state = initialState, action) => {
         leadCheckedInactive100: action.payload,
         vendedoresDashboard: action.payload,
       };
-      case SET_ROL:
-        return {
-          ...state,
-          rol: action.payload
-      };
-      // ...
-      case SET_ACCESS:
-        return {
-          ...state,
-          isEmployee: action.payload,
-        };
-    
+
     case ORDER_CLIENTS:
       const copyClient = [...state.leaderDashboard];
       if (action.payload === "DES") {
@@ -237,12 +220,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         vendedorAllLeads: action.payload,
       };
-
-    case GET_EMPLOYEES:
+    case GET_LEADS_LLAMADA_VENTA:
       return {
         ...state,
-        employees: action.payload,
+        LeadsLlamadaVenta: action.payload,
       };
+
     default:
       return { ...state };
   }

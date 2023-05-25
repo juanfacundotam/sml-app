@@ -46,6 +46,14 @@ const CorredorSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    leads: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Lead",
+        },
+      ],
+    },
     deleted: {
       type: Boolean,
       default: false,

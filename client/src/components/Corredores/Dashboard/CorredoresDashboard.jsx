@@ -20,9 +20,8 @@ import { GrInstagram } from "react-icons/gr";
 import { IoGrid, IoStatsChart } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { getLeadUnchecked10 } from "../../../redux/actions";
-import IconLabelButtons from "../../MaterialUi/IconLabelButtons";
+import IconLabelButtons from "./MaterialUi/IconLabelButtons";
 import { FaHistory } from "react-icons/fa";
-import swal from "sweetalert";
 import {
   useUser,
   useOrganization,
@@ -33,9 +32,15 @@ import "react-toastify/dist/ReactToastify.css";
 
 const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
+  const [clientCorredor, setClientCorredor] = useState([]);
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const { leadUnchecked10 } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
   const user = useUser().user;
   const org = useOrganization();
   const orgList = useOrganizationList();
+  // const { emailAddress } = user.primaryEmailAddress;
 
   const handleChangeInstagram = (event, index) => {
     const { name, value } = event.target;
@@ -80,7 +85,6 @@ const CorredoresDashboard = () => {
   };
 
   const handleView = async () => {
-    console.log("Enviado el view");
     try {
       for (let i = 0; i < leadUnchecked10.length; i++) {
         const response = await axios.put(`/lead/${client[i]._id}`, {
@@ -88,19 +92,39 @@ const CorredoresDashboard = () => {
         });
         console.log(response.data);
       }
-      console.log("view seteados");
     } catch (error) {
       console.log("No se envio el put de view");
     }
   };
 
-  const { leadUnchecked10 } = useSelector((state) => state);
-  const dispatch = useDispatch();
+  const handleSubmitLeadsCorredor = async (clientCorredor) => {
+    console.log("se cargar los valores", clientCorredor);
+
+    try {
+      // const response = await axios.put(`/corredor/?email=${inputEmail}`, clientCorredor);
+      const response = await axios.put(
+        `/corredor/?email=voeffray.jonathan@gmail.com`,
+        clientCorredor
+      );
+      console.log(response.data);
+      console.log("se cargan las leads a un corredor");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    dispatch(getLeadUnchecked10());
-    handleView();
+    dispatch(getLeadUnchecked10()).then(() => {
+      setDataLoaded(true);
+    });
   }, [dispatch]);
+
+  useEffect(() => {
+    if (dataLoaded) {
+      handleView();
+      handleSubmitLeadsCorredor(clientCorredor);
+    }
+  }, [dataLoaded]);
 
   useEffect(() => {
     let clientes = [];
@@ -115,12 +139,26 @@ const CorredoresDashboard = () => {
           instagram: "",
           level: "-",
           checked: false,
+          leads: [],
           view: true,
         });
       }
     }
     setClient(clientes);
   }, [leadUnchecked10]);
+
+  useEffect(() => {
+    let leadData = [];
+    if (leadUnchecked10.length > 0) {
+      leadData = leadUnchecked10.map((lead) => ({
+        ...lead,
+        leads: [], // Puedes inicializar el array de leads aquí si es necesario
+      }));
+    }
+    setClientCorredor(leadData);
+  }, [leadUnchecked10]);
+
+  console.log(clientCorredor);
 
   const SendLeads = (name) => {
     toast.info(`✔ ${name} Send Leads! `, {
@@ -194,18 +232,6 @@ const CorredoresDashboard = () => {
       theme: "dark",
     });
   };
-  const SendLeadsErrorEmail = () => {
-    toast.error(`❌ Error Email empty!`, {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -215,8 +241,6 @@ const CorredoresDashboard = () => {
         if (client[i].level !== "-") {
           if (client[i].instagram.trim() !== "" && client[i].level === "0") {
             SendLeadsErrorInsta0(client[i].name);
-          } else if (client[i].email !== "" && client[i].email === "-") {
-            SendLeadsErrorEmail(client[i].name);
           } else if (
             client[i].instagram.trim() === "" &&
             (client[i].level === "incidencia" || client[i].level === "0")
@@ -229,6 +253,7 @@ const CorredoresDashboard = () => {
               email: client[i].email,
               level: client[i].level,
               checked: true,
+              leads: clientIds,
               view: false,
               corredor: user.fullName,
             });
@@ -255,6 +280,7 @@ const CorredoresDashboard = () => {
               email: client[i].email,
               level: client[i].level,
               checked: true,
+              leads: clientIds,
               view: false,
               corredor: user.fullName,
             });
@@ -274,6 +300,8 @@ const CorredoresDashboard = () => {
     }
   };
 
+  console.log(leadUnchecked10);
+
   return (
     <>
       <Nav />
@@ -289,7 +317,7 @@ const CorredoresDashboard = () => {
                 <Link to={"/corredores"}>
                   <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
                 </Link>
-                <Link className="text-5xl" to={"/corredores/history"}>
+                <Link className="text-5xl" to={"/corredores-history"}>
                   <FaHistory className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
                 </Link>
                 <Link className="text-5xl" to={"/corredores/history"}>
@@ -338,7 +366,7 @@ const CorredoresDashboard = () => {
                       <CiMail className="text-[2rem] text-[#418df0]" />
                     </div>
                     <input
-                      className={`bg-transparent  w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-white focus:placeholder-black ${
+                      className={`bg-transparent  w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none  focus:border-gray-500 placeholder-white ${
                         client[index].email !== "-" &&
                         client[index].email !== ""
                           ? "border-green-500"
@@ -357,7 +385,7 @@ const CorredoresDashboard = () => {
                       <GrInstagram className="text-[2rem] text-[#418df0]" />
                     </div>
                     <input
-                      className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-white focus:placeholder-black ${
+                      className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white  ${
                         client[index].instagram ? "border-green-500" : ""
                       }`}
                       type="text"

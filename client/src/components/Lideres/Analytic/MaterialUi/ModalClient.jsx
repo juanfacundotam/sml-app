@@ -31,6 +31,7 @@ export default function BasicModal(props) {
     corredor,
     vendedor,
     op,
+    web,
   } = props;
   return (
     <div>
@@ -66,12 +67,20 @@ export default function BasicModal(props) {
               <p className="font-normal">{level} </p>
             </div>
             <div className="font-semibold flex gap-3">
+              <p>WEB: </p>
+              <a href={web} target="_blank" rel="noopener noreferrer">
+                Ingrese a la web aqui!
+              </a>
+            </div>
+            <div className="font-semibold flex gap-3">
               <p>EMAIL: </p>
               <p className="font-normal">{email} </p>
             </div>
             <div className="font-semibold flex gap-3">
               <p>INSTAGRAM: </p>
-              <p className="font-normal">{instagram} </p>
+              <a href={instagram} target="_blank" rel="noopener noreferrer">
+                {instagram}
+              </a>
             </div>
             <div className="font-semibold flex gap-3">
               <p>TELEFONO: </p>
