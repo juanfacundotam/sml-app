@@ -124,9 +124,16 @@ export const getVendedorAllLeads = (email) => {
   return async (dispatch) => {
     const response = await axios.get(`/vendedor/email?email=${email}`);
     const allLeads = response.data.leads;
+
+    const allLeadsMaps = allLeads.map(item => {
+      if(item.status !== "Sin contactar" && item.status !== "Agendar 2do llamado"){
+        console.log(item)
+        return item;
+      }
+    })
     dispatch({
       type: GET_VENDEDOR_ALL_LEADS,
-      payload: allLeads,
+      payload: allLeadsMaps,
     });
   };
 };

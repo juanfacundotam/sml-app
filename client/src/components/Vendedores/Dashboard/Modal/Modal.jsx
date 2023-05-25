@@ -30,6 +30,8 @@ function ChildModal({
   SendLeadAlert,
   SendErrorUpdateAlert,
   updateLeads,
+  llamadoVenta,
+  handleLlamadoVentaChange
 }) {
   const [openChild, setOpenChild] = React.useState(false);
   const user = useUser().user;
@@ -37,12 +39,22 @@ function ChildModal({
   const { fullName } = user;
   const handleOpen = () => {
     setOpenChild(true);
+    handleLlamadoVentaChange()
+    console.log(llamadoVenta)
   };
   const handleClose = () => {
     setOpenChild(false);
   };
 
   const handleUpdate = () => {
+    if(statusObj.status === "Agendar 2do llamado"){
+      statusObj.status_op = {
+        dia_hora: llamadoVenta.diaHora,
+        contacto: llamadoVenta.contacto,
+        observaciones: llamadoVenta.observaciones
+      }
+    }
+
     let dataVendedor = {};
     if (statusObj.status === "No responde") {
       dataVendedor = {
@@ -340,6 +352,19 @@ export default function NestedModal({
     status_op: item.status_op,
     llamados: item.llamados,
   });
+  const [llamadoVenta, setLlamadoVenta] = React.useState({
+    contacto: "",
+    observaciones: "",
+    dia: dateHour.$D,
+    mes: dateHour.$M,
+    year: dateHour.$y,
+    hora: dateHour.$D,
+    minutos: dateHour.$m,
+    diaHora: ""
+  })
+
+     // {dateHour.$D ? (`Dia: ${dateHour.$D}/${dateHour.$M}/${dateHour.$y} Hora: ${dateHour.$H && String(dateHour.$H).length === 1? `0${dateHour.$H}`: dateHour.$H}:${dateHour.$m && String(dateHour.$m).length === 1 ? `0${dateHour.$m}`: dateHour.$m}`) : ("Fecha y Hora")}
+
   // const [selectedDate, setSelectedDate] = React.useState(dayjs());
   useEffect(() => {
     setStatusObj({
@@ -406,6 +431,7 @@ export default function NestedModal({
       }
     }
 
+    
     return (
       <p htmlFor="" className="text-white m-2">
         {`Date: ${fechaDay}/${fechaMonth}/${fechaYear} - Hour: ${timeHour-3}${timeMinute}`}
@@ -422,7 +448,35 @@ export default function NestedModal({
   const changeTime = async (date) => {
     await setDateHour({ ...date });
   };
-
+  const handleLlamadoVentaChange  = (event) => {
+    if(event){
+    const value = event.target.value;
+    const property = event.target.name;
+    console.log(event.target.value)
+    setLlamadoVenta({
+      ...llamadoVenta,
+      [property]: value,
+      diaHora: `Dia: ${dateHour.$D}/${dateHour.$M}/${dateHour.$y} Hora: ${dateHour.$H && String(dateHour.$H).length === 1? `0${dateHour.$H}`: dateHour.$H}:${dateHour.$m && String(dateHour.$m).length === 1 ? `0${dateHour.$m}`: dateHour.$m}`,
+      dia: dateHour.$D,
+      mes: dateHour.$M,
+      year: dateHour.$y,
+      hora: dateHour.$D,
+      minutos: dateHour.$m,
+    })
+  }
+  else {
+    setLlamadoVenta({
+      ...llamadoVenta,
+      diaHora: `Dia: ${dateHour.$D}/${dateHour.$M}/${dateHour.$y} Hora: ${dateHour.$H && String(dateHour.$H).length === 1? `0${dateHour.$H}`: dateHour.$H}:${dateHour.$m && String(dateHour.$m).length === 1 ? `0${dateHour.$m}`: dateHour.$m}`,
+      dia: dateHour.$D,
+      mes: dateHour.$M,
+      year: dateHour.$y,
+      hora: dateHour.$D,
+      minutos: dateHour.$m,
+    })
+  }
+  }
+  console.log(llamadoVenta)
   return (
     <div className="">
       <div className="flex gap-4">
@@ -459,61 +513,6 @@ export default function NestedModal({
                 />
               </div>
             </div>
-            {/* <div className="mt-2">
-              <label
-                htmlFor="last_name"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Email
-              </label>
-
-              <input
-                type="text"
-                id="last_name"
-                className="bbg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                // placeholder={item.email}
-                placeholder={item.email}
-                value={item.email}
-                required
-                disabled
-              />
-            </div> */}
-            {/* <div className="mt-5">
-              <label
-                htmlFor="last_name"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Instagram
-              </label>
-              <input
-                type="text"
-                id="last_name"
-                className="bbg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                // placeholder={item.email}
-                placeholder={item.instagram}
-                value={item.instagram}
-                required
-                disabled
-              />
-            </div> */}
-            {/* <div className="mt-5">
-              <label
-                htmlFor="last_name"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Phone
-              </label>
-              <input
-                type="text"
-                id="last_name"
-                className="bbg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                // placeholder={item.email}
-                placeholder={item.telephone}
-                value={item.telephone}
-                required
-                disabled
-              />
-            </div> */}
           </div>
 
           <div className=" h-fit flex items-center justify-start flex-col mb-10">
@@ -575,12 +574,12 @@ export default function NestedModal({
                 </label>
                 <div className="flex justify-center items-center">
                   <input
-                    onChange={handleSelectChange}
+                    onChange={handleLlamadoVentaChange}
                     type="text"
                     id="last_name"
-                    name="status_op"
+                    name="contacto"
                     // defaultValue={item.status_op}
-                    value={statusObj.status_op}
+                    value={llamadoVenta.contacto}
                     className="bbg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     // placeholder={item.email}
                     placeholder=""
@@ -596,21 +595,33 @@ export default function NestedModal({
                 </label>
                 <div className="flex justify-center items-center">
                   <textarea
-                    onChange={handleSelectChange}
+                    onChange={handleLlamadoVentaChange}
                     type="text"
                     id="last_name"
-                    name="status_op"
-                    // defaultValue={item.status_op}
-                    value={statusObj.status_op}
+                    name="observaciones"
+
+                    value={llamadoVenta.observaciones}
                     className="bbg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    // placeholder={item.email}
+
                     placeholder=""
                     // value="USD"
                     required
                   />
                 </div>
                 <div className="flex items-center justify-center gap-7 mt-8">
-                  {dateHour.$D ? (<label
+                <input
+                    onChange={handleLlamadoVentaChange}
+                    type="text"
+                    id="last_name"
+                    name="status_op"
+                    // defaultValue={item.status_op}
+                    // value={llamadoVenta.diaHora}
+                    className="bbg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-56 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white text-center dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    value={dateHour.$D ? (`Dia: ${dateHour.$D}/${dateHour.$M}/${dateHour.$y} Hora: ${dateHour.$H && String(dateHour.$H).length === 1? `0${dateHour.$H}`: dateHour.$H}:${dateHour.$m && String(dateHour.$m).length === 1 ? `0${dateHour.$m}`: dateHour.$m}`) : ("Fecha y Hora")}
+                    disabled
+                    required
+                  />
+                  {/* {dateHour.$D ? (<label
                     htmlFor="last_name"
                     className="block mb-2 text-sm text-center font-medium text-gray-900 dark:text-white"
                   >
@@ -628,10 +639,10 @@ export default function NestedModal({
                     className="block mb-2 text-sm text-center font-medium text-gray-900 dark:text-white"
                   >
                     Fecha y Hora
-                  </label>)}
+                  </label>)} */}
                   <button
                     type="button"
-                    className="py-2 px-3 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    className="py-2 px-3  text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                     onClick={setDateTime}
                   >
                     Cambiar
@@ -653,6 +664,7 @@ export default function NestedModal({
           <div className="flex justify-center items-center absolute -right-80 top-0">
             {openTimeHour && (
               <ResponsiveDateTimePickers
+              handleLlamadoVentaChange={handleLlamadoVentaChange}
                 closeDateHour={closeDateHour}
                 changeTime={changeTime}
                 className={style.dateTime}
@@ -664,9 +676,11 @@ export default function NestedModal({
             <ChildModal
               item={item}
               statusObj={statusObj}
+              llamadoVenta={llamadoVenta}
               setOpen={setOpen}
               SendLeadAlert={SendLeadAlert}
               SendErrorUpdateAlert={SendErrorUpdateAlert}
+              handleLlamadoVentaChange={handleLlamadoVentaChange}
               updateLeads={updateLeads}
             />
           </div>

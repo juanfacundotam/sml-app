@@ -13,12 +13,13 @@ import style from "../Modal/ResponsiveDateTimePickers.module.css";
 export default function ResponsiveDateTimePickers({
   closeDateHour,
   changeTime,
+  handleLlamadoVentaChange,
 }) {
   const [selectedDate, setSelectedDate] = React.useState(dayjs());
   let date = "";
   const today = dayjs();
 
-  console.log(selectedDate);
+
   //   React.useEffect(()=>{
 
   //   }, [])
@@ -28,6 +29,7 @@ export default function ResponsiveDateTimePickers({
   };
   const handleDateChange = (date) => {
     setSelectedDate(date);
+    handleLlamadoVentaChange()
   };
 
   const handleCancel = () => {
