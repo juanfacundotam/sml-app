@@ -11,22 +11,21 @@ import {
 import { IoStatsChart, IoSettingsSharp, IoBagSharp } from 'react-icons/io5';
 
 function Nav() {
-	// const user = useUser().user;
-	// const employees = useSelector(state => state.employees);
-	// if (!user || !user.emailAddresses || user.emailAddresses.length === 0) {
-	// 	// Return a loading state or handle the absence of user data
-	// 	return <div>Loading...</div>;
-	//   }
-	//   const email = user.emailAddresses[0].emailAddress;
-	// const rol = () => {
-	// 	const employee = employees.find(employees => employees.email === email);
-	// 	if (employee) {
-	// 		return employee.rol;
-	// 	}
-	// 	return null;
-	// };
-	const role = useSelector((state) => state.rol)
-
+	const user = useUser().user;
+	const employees = useSelector(state => state.employees);
+	if (!user || !user.emailAddresses || user.emailAddresses.length === 0) {
+		// Return a loading state or handle the absence of user data
+		return <div>Loading...</div>;
+	  }
+	  const email = user.emailAddresses[0].emailAddress;
+	const rol = () => {
+		const employee = employees.find(employees => employees.email === email);
+		if (employee) {
+			return employee.rol;
+		}
+		return null;
+	};
+	
 	return (
 		<div className='bg-[#39394B] flex flex-col justify-between items-center h-screen min-w-[190px]'>
 			<div className='flex flex-col items-center justify-center mt-16'>
@@ -40,7 +39,7 @@ function Nav() {
 				</div>
 				<div />
 				<div className=' flex  w-fit mt-12 '>
-					{role === "clevel" || role === "leader"
+					{rol() === "clevel" || rol() === "leader"
 						?
 						<ul className='flex flex-col gap-2'>
 							<li className='flex gap-2 items-center text-[18px] text-white'>

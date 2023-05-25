@@ -1,7 +1,5 @@
 import styles from "./App.module.css";
-import React, { Suspense } from "react";
 import Landing from "./views/Landing/Landing";
-import Lideres from "./components/Lideres/Lideres";
 import Analytics from "./views/Analytics/Analytics.jsx";
 import Settings from "./views/Settings/Settings.jsx";
 import Login from "./views/Login/Login";
@@ -12,7 +10,6 @@ import CorredoresAnlaytics from "./components/Corredores/Analitycs/CorredoresAna
 import VendedoresHistory from "./components/Vendedores/analytics/VendedoresHistory";
 import VendedoresAnalytics from "./components/Vendedores/analytics/VendedoresAnalytics";
 import ReturnToPage from "./components/ReturnToPage/ReturnToPage";
-import VentasDashboard from "./components/Vendedores/Dashboard/VentasDashboard"
 import {
   ClerkProvider,
   SignedIn,
@@ -20,15 +17,13 @@ import {
   RedirectToSignIn,
   SignIn,
   SignUp,
-  UserButton,
 } from "@clerk/clerk-react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Clevel from "./components/C-Level/Clevel";
 import Analytic from "./components/C-Level/Analytics/Analytic";
 import Incidences from "./components/Lideres/incidences/incidencias";
 import { useSelector } from "react-redux";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 if (!"pk_test_Z3VpZGVkLWtvZGlhay0xMi5jbGVyay5hY2NvdW50cy5kZXYk") {
   throw new Error("Missing Publishable Key");
@@ -74,12 +69,11 @@ function ClerkProviderWithRoutes() {
     const storedRoleReady = localStorage.getItem("roleReady");
     if (storedRoleReady) {
       setRoleReady(storedRoleReady);
-    } else {
-      checkRole();
     }
-    console.log(storedRoleReady);
+    checkRole();
+
   }, [role]);
-   
+  
   const handleSignOut = () => {
     localStorage.removeItem("roleReady");
     setRoleReady("");
@@ -134,8 +128,8 @@ function ClerkProviderWithRoutes() {
         <Route path="/" element={<Login />} />
         <Route path="/lideres" element={isRoleAllowed(roleReady) && (roleReady === "clevel" || roleReady === "leader") ? <AnalyticLeader /> : <ReturnToPage/>} />
         <Route path="/lideres/analytics" element={isRoleAllowed(roleReady) && (roleReady === "clevel" || roleReady === "leader") ? <AnalyticLeader /> : <ReturnToPage/>} />
-        <Route path="/lideres/analytics/incidences" element={isRoleAllowed(roleReady) ? <Incidences /> : <ReturnToPage/>} />
-        <Route path="/clevel" element={isRoleAllowed(roleReady) && (roleReady === "clevel" || roleReady === "leader") ? <Clevel /> : <ReturnToPage/>} />
+        <Route path="/lideres/analytics/incidences" element={isRoleAllowed(roleReady) ? <Incidences /> : <returnToPage/>} />
+        <Route path="/clevel" element={isRoleAllowed(roleReady) && (roleReady === "clevel" || roleReady === "leader") ? <Clevel /> : <returnToPage/>} />
         <Route path="/clevel/analytics" element={isRoleAllowed(roleReady) && (roleReady === "clevel" || roleReady === "leader") ? <Analytic /> : <ReturnToPage/>} />
         <Route path="/corredores" element={isRoleAllowed(roleReady) && roleReady === "corredor" ? <CorredoresDashboard /> : <ReturnToPage/>} />
         <Route path="/corredores/history" element={isRoleAllowed(roleReady) && roleReady === "corredor" ? <CorredoresAnlaytics /> : <ReturnToPage/>} />
