@@ -45,6 +45,10 @@ const LeadSchema = new mongoose.Schema(
       enum: ["Sin contactar", "Rechazado", "Contratado", "No responde", "Agendar 2do llamado"],
       require: true,
     },
+    llamada_venta: {
+      type: Object,
+      require: true,
+    },
     status_op: {
       type: String,
       require: true,

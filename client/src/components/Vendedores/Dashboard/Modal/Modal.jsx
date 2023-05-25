@@ -48,7 +48,8 @@ function ChildModal({
 
   const handleUpdate = () => {
     if(statusObj.status === "Agendar 2do llamado"){
-      statusObj.status_op = {
+      statusObj.status_op = llamadoVenta.diaHora;
+      statusObj.llamada_venta = {
         dia_hora: llamadoVenta.diaHora,
         contacto: llamadoVenta.contacto,
         observaciones: llamadoVenta.observaciones
@@ -61,6 +62,7 @@ function ChildModal({
         name: item.name,
         status: statusObj.status,
         status_op: statusObj.status_op,
+        llamada_venta: statusObj.llamada_venta,
         province: item.province,
         category: item.category,
         telephone: item.telephone,
@@ -73,6 +75,7 @@ function ChildModal({
         name: item.name,
         status: statusObj.status,
         status_op: statusObj.status_op,
+        llamada_venta: statusObj.llamada_venta,
         province: item.province,
         category: item.category,
         telephone: item.telephone,
@@ -91,7 +94,9 @@ function ChildModal({
       vendedor: emailAddress,
       vendedor_name: fullName,
       llamados: item.llamados,
+      llamada_venta: statusObj.llamada_venta
     };
+
     const dataUpdate = {
       dataLead,
       dataVendedor,
@@ -351,6 +356,7 @@ export default function NestedModal({
     status: item.status,
     status_op: item.status_op,
     llamados: item.llamados,
+    llamada_venta: {}
   });
   const [llamadoVenta, setLlamadoVenta] = React.useState({
     contacto: "",

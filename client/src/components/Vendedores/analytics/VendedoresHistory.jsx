@@ -141,7 +141,7 @@ const VendedoresHistory = () => {
               </div>
             </div>
           </div>
-          {vendedorAllLeads !== undefined ? (
+          {vendedorAllLeads.name ? (
             <table className={style.table}>
   <thead className="text-gray-400 text-14 font-thin">
     <tr className={style.tableRow}>
