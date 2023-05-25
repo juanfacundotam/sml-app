@@ -36,6 +36,8 @@ const initialState = {
   isEmployee: undefined
 };
 
+    
+
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_LEAD:
@@ -69,7 +71,7 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           rol: action.payload
-        };
+      };
       // ...
       case SET_ACCESS:
         return {

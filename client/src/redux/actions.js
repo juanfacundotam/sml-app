@@ -93,9 +93,16 @@ export const getEmployees = employees => ({
   payload: employees,
 });
 export const setRol = (rol) => {
-  return {
-    type: SET_ROL,
-    payload: rol
+  return async (dispatch) => {
+    // Simular una operación asincrónica para obtener el valor de rol
+    const fetchedRol = await new Promise((resolve) =>
+      setTimeout(() => resolve(rol), 2000)
+    );
+
+    dispatch({
+      type: SET_ROL,
+      payload: fetchedRol
+    });
   };
 };
 export const setAccess = (access) => {

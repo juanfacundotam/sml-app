@@ -1,4 +1,5 @@
 import styles from "./App.module.css";
+import React, { Suspense } from "react";
 import Landing from "./views/Landing/Landing";
 import Lideres from "./components/Lideres/Lideres";
 import Analytics from "./views/Analytics/Analytics.jsx";
@@ -10,6 +11,8 @@ import { AnalyticLeader } from "./components/Lideres/Analytic/AnalyticLeader";
 import CorredoresAnlaytics from "./components/Corredores/Analitycs/CorredoresAnalytics";
 import VendedoresHistory from "./components/Vendedores/analytics/VendedoresHistory";
 import VendedoresAnalytics from "./components/Vendedores/analytics/VendedoresAnalytics";
+import ReturnToPage from "./components/ReturnToPage/ReturnToPage";
+import VentasDashboard from "./components/Vendedores/Dashboard/VentasDashboard"
 import {
   ClerkProvider,
   SignedIn,
@@ -53,14 +56,37 @@ function ProtectedPage() {
 function ClerkProviderWithRoutes() {
   const navigate = useNavigate();
   const role = useSelector((state) => state.rol);
+  const [roleReady, setRoleReady] = useState("");
 
   function isRoleAllowed(role) {
-    const allowedRoles = ["vendedor", "clevel", "leader","corredor"];
+    const allowedRoles = ["vendedor", "clevel", "leader", "corredor"];
     return allowedRoles.includes(role);
   }
 
+  useEffect(() => {
+    const checkRole = async () => {
+      if (role !== undefined && role !== null && role !== "") {
+        setRoleReady(role);
+        localStorage.setItem("roleReady", role);
+      }
+    };
+
+    const storedRoleReady = localStorage.getItem("roleReady");
+    if (storedRoleReady) {
+      setRoleReady(storedRoleReady);
+    } else {
+      checkRole();
+    }
+    console.log(storedRoleReady);
+  }, [role]);
+   
+  const handleSignOut = () => {
+    localStorage.removeItem("roleReady");
+    setRoleReady("");
+  };
+
   return (
-    <ClerkProvider publishableKey={clerkPubKey} navigate={(to) => navigate(to)}>
+    <ClerkProvider publishableKey={clerkPubKey} navigate={(to) => navigate(to)} onSignOut={handleSignOut}>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
@@ -106,58 +132,18 @@ function ClerkProviderWithRoutes() {
         <Route path="*" element={<h1>error 404</h1>} />
         <Route path="/home" element={<Landing />} />
         <Route path="/" element={<Login />} />
-        <Route
-          path="/lideres"
-          element={isRoleAllowed(role) ? <AnalyticLeader /> : <ReturnToPage />}
-        />
-        <Route
-          path="/lideres/analytics"
-          element={isRoleAllowed(role) ? <AnalyticLeader /> : <ReturnToPage />}
-        />
-        <Route
-          path="/lideres/analytics/incidences"
-          element={isRoleAllowed(role) ? <Incidences /> : <ReturnToPage />}
-        />
-        <Route
-          path="/clevel"
-          element={isRoleAllowed(role) ? <Clevel /> : <ReturnToPage />}
-        />
-        <Route
-          path="/clevel/analytics"
-          element={isRoleAllowed(role) ? <Analytic /> : <ReturnToPage />}
-        />
-        <Route
-          path="/corredores"
-          element={
-            isRoleAllowed(role) ? <CorredoresDashboard /> : <ReturnToPage />
-          }
-        />
-        <Route
-          path="/corredores/history"
-          element={
-            isRoleAllowed(role) ? <CorredoresAnlaytics /> : <ReturnToPage />
-          }
-        />
+        <Route path="/lideres" element={isRoleAllowed(roleReady) && (roleReady === "clevel" || roleReady === "leader") ? <AnalyticLeader /> : <ReturnToPage/>} />
+        <Route path="/lideres/analytics" element={isRoleAllowed(roleReady) && (roleReady === "clevel" || roleReady === "leader") ? <AnalyticLeader /> : <ReturnToPage/>} />
+        <Route path="/lideres/analytics/incidences" element={isRoleAllowed(roleReady) ? <Incidences /> : <ReturnToPage/>} />
+        <Route path="/clevel" element={isRoleAllowed(roleReady) && (roleReady === "clevel" || roleReady === "leader") ? <Clevel /> : <ReturnToPage/>} />
+        <Route path="/clevel/analytics" element={isRoleAllowed(roleReady) && (roleReady === "clevel" || roleReady === "leader") ? <Analytic /> : <ReturnToPage/>} />
+        <Route path="/corredores" element={isRoleAllowed(roleReady) && roleReady === "corredor" ? <CorredoresDashboard /> : <ReturnToPage/>} />
+        <Route path="/corredores/history" element={isRoleAllowed(roleReady) && roleReady === "corredor" ? <CorredoresAnlaytics /> : <ReturnToPage/>} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/settings" element={<Settings />} />
-        <Route
-          path="/vendedores"
-          element={
-            isRoleAllowed(role) ? <VentasDashboard/> : <ReturnToPage />
-          }
-        />
-        <Route
-          path="/vendedores/history"
-          element={
-            isRoleAllowed(role) ? <VendedoresHistory /> : <ReturnToPage />
-          }
-        />
-        <Route
-          path="/vendedores/analytics"
-          element={
-            isRoleAllowed(role) ? <VendedoresAnalytics /> : <ReturnToPage />
-          }
-        />
+        <Route path="/vendedores" element={isRoleAllowed(roleReady) && roleReady === "vendedor" ? <VendedoresDashboard /> : <ReturnToPage/>} />
+        <Route path="/vendedores/history" element={isRoleAllowed(roleReady) && roleReady === "vendedor" ? <VendedoresHistory /> : <ReturnToPage/>} />
+        <Route path="/vendedores/analytics" element={isRoleAllowed(roleReady) && roleReady === "vendedor" ? <VendedoresAnalytics /> : <ReturnToPage/>} />
         <Route
           path="/protected"
           element={
@@ -181,32 +167,6 @@ function App() {
     <div className={styles.App}>
       <ClerkProviderWithRoutes />
     </div>
-    // <div className="App">
-    //   <Routes>
-    //     <Route path="/home" element={<Landing />} />
-    //     <Route path="/" element={<Login />} />
-    //     <Route path="/employees" element={<Employees />} />
-    //     <Route path="/employees/analytics" element={<AnalyticLeader />} />
-    //     <Route path="/corredores" element={<CorredoresDashboard />} />
-    //     <Route path="/corredores/analytics" element={<CorredoresAnlaytics />}/>
-    //     <Route path="/analytics" element={<Analytics />} />
-    //     <Route path="/settings" element={<Settings />} />
-    //     <Route
-    //       path="/vendedores"
-    //       element={<VendedoresDashboard/>}
-    //     />
-    //     <Route path="/vendedores/analytics" element={<VendedoresHistory/>} />
-    //   </Routes>
-
-    //   {(
-    //     <div className="App flex items-center justify-center">
-    //       <img
-    //         className="opacity-20 w-4/5 mt-[2%]"
-    //         src="https://cdn.discordapp.com/attachments/1105243107555037294/1106577865698459788/White_Logo_Social_Media_Lab.png"
-    //       />
-    //     </div>
-    //   )}
-    // </div>
   );
 }
 
