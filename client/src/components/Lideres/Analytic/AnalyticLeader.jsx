@@ -233,6 +233,7 @@ export const AnalyticLeader = () => {
               name={modalItems.name}
               category={modalItems.category}
               level={modalItems.level}
+              web={modalItems.url}
               email={modalItems.email}
               instagram={modalItems.instagram}
               telephone={modalItems.telephone}
