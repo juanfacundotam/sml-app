@@ -34,6 +34,7 @@ function Landing() {
 				if (employee) {
 					dispatch(setRol(employee.rol));
 					dispatch(setAccess(isEmployee()))
+					console.log(employee)
 				}
 			} catch (error) {
 				console.error('Error al obtener los empleados:', error);
