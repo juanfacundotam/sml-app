@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import PaginationOutlined from "../../pagination/PaginationOutlined";
-import { filterLevel, getLeadCheckedInactive100 } from "../../../redux/actions";
+import { filterLevel, getLeadCheckedInactive100, getLeadsLLamadaVenta } from "../../../redux/actions";
 import { AiOutlinePhone } from "react-icons/ai";
 import Modal from "./Modal/Modal";
 import { IoGrid, IoStatsChart } from "react-icons/io5";
@@ -19,16 +19,16 @@ import Nav from "../../Nav/Nav";
 
 const VentasDashboard = () => {
   const [data, setData] = useState([]);
-  const { vendedoresDashboard } = useSelector((state) => state);
+  const { LeadsLlamadaVenta } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
   useEffect(() => {
-    dispatch(getLeadCheckedInactive100());
+    dispatch(getLeadsLLamadaVenta());
   }, [dispatch]);
   useEffect(() => {
-    setData(vendedoresDashboard);
-  }, [vendedoresDashboard]);
+    setData(LeadsLlamadaVenta);
+  }, [LeadsLlamadaVenta]);
 
   const [pageStyle, setPageStyle] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -66,7 +66,7 @@ const VentasDashboard = () => {
   const onChangeLevel = (value) => {
     setLevelValue(value);
     dispatch(filterLevel(value));
-    setData(vendedoresDashboard);
+    setData(LeadsLlamadaVenta);
     setCurrentPage(1);
   };
   //********************************* */
@@ -99,7 +99,7 @@ const VentasDashboard = () => {
       progress: undefined,
       theme: "dark",
     });
-    dispatch(getLeadCheckedInactive100());
+    dispatch(getLeadsLLamadaVenta());
   };
   const SendErrorUpdateAlert = () => {
     toast.error("The lead could not be updated!", {
@@ -124,11 +124,11 @@ const VentasDashboard = () => {
       progress: undefined,
       theme: "dark",
     });
-    dispatch(getLeadCheckedInactive100());
+    dispatch(getLeadsLLamadaVenta());
   };
   const updateLeads = () => {
-    dispatch(getLeadCheckedInactive100());
-    setData(vendedoresDashboard);
+    dispatch(getLeadsLLamadaVenta());
+    setData(LeadsLlamadaVenta);
   };
 
   return (
@@ -191,7 +191,7 @@ const VentasDashboard = () => {
               ""
             )}
           </div>
-          {vendedoresDashboard.length ? (
+          {LeadsLlamadaVenta.length > 0 ? (
             <table className={style.table}>
               <thead className="text-gray-400 text-14 font-thin">
                 <tr className={style.tableRow}>

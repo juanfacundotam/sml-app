@@ -27,20 +27,20 @@ const VendedoresHistory = () => {
   const { leadCheckedInactive100 } = useSelector((state) => state);
   const { vendedorAllLeads } = useSelector((state) => state);
   const user = useUser().user;
-  // const { emailAddress } = user.primaryEmailAddress;
+  const { emailAddress } = user.primaryEmailAddress;
   const dispatch = useDispatch();
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
-  // console.log(emailAddress)
+
 
   useEffect(() => {
-    dispatch(getVendedorAllLeads("smlappadm@gmail.com"));
-    dispatch(getLeadCheckedInactive100());
+    dispatch(getVendedorAllLeads(emailAddress));
+
   }, [dispatch]);
   useEffect(() => {
     setData(vendedorAllLeads);
   }, [vendedorAllLeads]);
-  console.log(data);
+
   const [pageStyle, setPageStyle] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardXPage, setCardXpage] = useState(10);
@@ -141,7 +141,7 @@ const VendedoresHistory = () => {
               </div>
             </div>
           </div>
-          {vendedorAllLeads.name ? (
+          {vendedorAllLeads.name !== undefined ? (
             <table className={style.table}>
   <thead className="text-gray-400 text-14 font-thin">
     <tr className={style.tableRow}>
