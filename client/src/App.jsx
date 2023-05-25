@@ -10,6 +10,7 @@ import CorredoresAnlaytics from "./components/Corredores/Analitycs/CorredoresAna
 import VendedoresHistory from "./components/Vendedores/analytics/VendedoresHistory";
 import VendedoresAnalytics from "./components/Vendedores/analytics/VendedoresAnalytics";
 import ReturnToPage from "./components/ReturnToPage/ReturnToPage";
+import Lideres from "./components/Lideres/Lideres"
 import {
   ClerkProvider,
   SignedIn,
@@ -144,8 +145,8 @@ function ClerkProviderWithRoutes() {
           path="/lideres-employees"
           element={
             isRoleAllowed(roleReady) &&
-            (roleReady === "clevel" || roleReady === "leader") ? (
-              <AnalyticLeader />
+            (roleReady === "leader") ? (
+              <Lideres />
             ) : (
               <ReturnToPage />
             )
