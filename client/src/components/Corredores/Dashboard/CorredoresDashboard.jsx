@@ -214,8 +214,6 @@ const CorredoresDashboard = () => {
         if (client[i].level !== "-") {
           if (client[i].instagram.trim() !== "" && client[i].level === "0") {
             SendLeadsErrorInsta0(client[i].name);
-          } else if ((client[i].email === "" || client[i].email === "-") && (client[i].level !== "0" && client[i].level !== "incidencia")) {
-            SendLeadsErrorEmail(client[i].name);
           } else if (
             client[i].instagram.trim() === "" &&
             (client[i].level === "incidencia" || client[i].level === "0")
