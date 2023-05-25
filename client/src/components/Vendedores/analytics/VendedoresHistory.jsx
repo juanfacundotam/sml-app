@@ -20,21 +20,24 @@ import {RiMoneyDollarBoxFill } from "react-icons/ri";
 
 
 
+
 import Nav from "../../Nav/Nav";
 
 const VendedoresHistory = () => {
   const [data, setData] = useState([]);
   const { leadCheckedInactive100 } = useSelector((state) => state);
   const { vendedorAllLeads } = useSelector((state) => state);
-  const user = useUser().user;
   // const { emailAddress } = user.primaryEmailAddress;
   const dispatch = useDispatch();
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
+  const user = useUser().user;
+  const email = user?.emailAddresses[0].emailAddress;
+  console.log(email);
 
 
 
   useEffect(() => {
-    dispatch(getVendedorAllLeads("smlappadm@gmail.com"));
+    dispatch(getVendedorAllLeads(email));
 
   }, [dispatch]);
   useEffect(() => {
@@ -101,7 +104,7 @@ const VendedoresHistory = () => {
   };
 
   const updateLeads = () => {
-    dispatch(getVendedorAllLeads("smlappadm@gmail.com"));
+    dispatch(getVendedorAllLeads(email));
     setData(vendedorAllLeads);
   };
 

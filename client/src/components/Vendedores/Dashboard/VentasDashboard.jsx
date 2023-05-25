@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import PaginationOutlined from "../../pagination/PaginationOutlined";
-import { filterLevel, getLeadCheckedInactive100, getLeadsLLamadaVenta } from "../../../redux/actions";
+import {
+  filterLevel,
+  getLeadCheckedInactive100,
+  getLeadsLLamadaVenta,
+} from "../../../redux/actions";
 import { AiOutlinePhone } from "react-icons/ai";
 import Modal from "./Modal/Modal";
 import { IoGrid, IoStatsChart } from "react-icons/io5";
@@ -12,7 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaHistory } from "react-icons/fa";
 import { MdOutlineAttachMoney } from "react-icons/md";
 import SelectLevel from "./SelectLevel";
-
+import { useUser } from "@clerk/clerk-react";
 import { CiWarning, CiInstagram, CiMail } from "react-icons/ci";
 
 import Nav from "../../Nav/Nav";
@@ -22,9 +26,12 @@ const VentasDashboard = () => {
   const { LeadsLlamadaVenta } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
+  const user = useUser().user;
+  const email = user?.emailAddresses[0].emailAddress;
+  console.log(email);
 
   useEffect(() => {
-    dispatch(getLeadsLLamadaVenta("smlappadm@gmail.com"));
+    dispatch(getLeadsLLamadaVenta(email));
   }, [dispatch]);
   useEffect(() => {
     setData(LeadsLlamadaVenta);
@@ -99,7 +106,7 @@ const VentasDashboard = () => {
       progress: undefined,
       theme: "dark",
     });
-    dispatch(getLeadsLLamadaVenta("smlappadm@gmail.com"));
+    dispatch(getLeadsLLamadaVenta(email));
   };
   const SendErrorUpdateAlert = () => {
     toast.error("The lead could not be updated!", {
@@ -206,6 +213,7 @@ const VentasDashboard = () => {
                       Nivel
                     </button>
                   </th>
+                  <th className="text-start">Llamar</th>
                   <th className="text-start">Status</th>
                   <th className="text-start"></th>
                 </tr>
@@ -278,9 +286,16 @@ const VentasDashboard = () => {
                     </td>
                     <td className="flex justify-start items-center p-0 w-fit">
                       {item.llamada_venta.contacto ? (
-                        <p className="bg-[#6254ff] text-[#ffffff] w-[40px] rounded h-10 flex items-center justify-center text-[15px] drop-shadow-xl">
+                 <div>
+
+                        <p className="w-64  px-3 rounded-full text-ellipsis text-16 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 ">
                           {item.llamada_venta.contacto}
                         </p>
+                        <p className="w-64  px-3 rounded-full text-ellipsis text-16 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111">
+                          {item.llamada_venta.dia_hora}
+                        </p>
+                 </div>
+                      
                       ) : (
                         <div className="bg-[#6254ff] text-[#e8e8e9] w-[40px] rounded h-10 flex items-center justify-center text-[35px] drop-shadow-xl">
                           <CiWarning className="text-[#fdfa3a] p-0 text-[35px] font-bold" />
