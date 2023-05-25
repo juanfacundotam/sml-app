@@ -58,69 +58,17 @@ function Landing() {
 						{role === "clevel" || role === "leader"
 							?
 							<div className={style.rolMenu}>
-								<Link
-									to='/clevel'
-									className={style.linksRoutes}>
-									Lider-Dashboard
-								</Link>
-								<Link
-									to='/clevel/analytics'
-									className={style.linksRoutes}>
-									Lider-Analytics
-								</Link>
-								<Link
-									to='/corredores'
-									className={style.linksRoutes}>
-									Corredores-Dashbord
-								</Link>
-								<Link
-									to='/corredores/history'
-									className={style.linksRoutes}>
-									Corredores-Analytics
-								</Link>
-								<Link
-									to='/analytics'
-									className={style.linksRoutes}>
-									Analytics
-								</Link>
-								<Link
-									to='/vendedores'
-									className={style.linksRoutes}>
-									VendedoresDashboard
-								</Link>
-								<Link
-									to='/vendedores/analytics'
-									className={style.linksRoutes}>
-									VendedoresAnalytics
-								</Link>
+								
 							</div>
 							:
 							role === "vendedor"
 								?
 								<div>
-									<Link
-										to='/vendedores'
-										className={style.linksRoutes}>
-										VendedoresDashboard
-									</Link>
-									<Link
-										to='/vendedores/analytics'
-										className={style.linksRoutes}>
-										VendedoresAnalytics
-									</Link>
+									
 								</div>
 								:
 								<div>
-									<Link
-										to='/corredores'
-										className={style.linksRoutes}>
-										Corredores-Dashbord
-									</Link>
-									<Link
-										to='/corredores/history'
-										className={style.linksRoutes}>
-										Corredores-Analytics
-									</Link>
+									
 								</div>
 						}
 					</div>

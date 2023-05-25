@@ -141,7 +141,7 @@ function ClerkProviderWithRoutes() {
           }
         />
         <Route
-          path="/lideres/analytics"
+          path="/lideres-employees"
           element={
             isRoleAllowed(roleReady) &&
             (roleReady === "clevel" || roleReady === "leader") ? (
@@ -210,7 +210,7 @@ function ClerkProviderWithRoutes() {
           }
         />
         <Route
-          path="/vendedores/history"
+          path="/vendedores-history"
           element={
             isRoleAllowed(roleReady) && roleReady === "vendedor" ? (
               <VendedoresHistory />
@@ -220,7 +220,7 @@ function ClerkProviderWithRoutes() {
           }
         />
         <Route
-          path="/vendedores/analytics"
+          path="/vendedores-analytics"
           element={
             isRoleAllowed(roleReady) && roleReady === "vendedor" ? (
               <VendedoresAnalytics />
