@@ -72,6 +72,9 @@
   padding: 6px;
   border-radius: 10px;
 }
+.tableCards:hover {
+  background-color: #303040;
+}
 
 .tableCell {
   padding: 0;

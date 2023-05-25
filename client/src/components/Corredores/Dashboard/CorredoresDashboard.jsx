@@ -288,7 +288,7 @@ const CorredoresDashboard = () => {
                 <Link to={"/corredores"}>
                   <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
                 </Link>
-                <Link className="text-5xl" to={"/corredores/history"}>
+                <Link className="text-5xl" to={"/corredores-history"}>
                   <FaHistory className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
                 </Link>
                 <Link className="text-5xl" to={"/corredores/history"}>
@@ -337,7 +337,7 @@ const CorredoresDashboard = () => {
                       <CiMail className="text-[2rem] text-[#418df0]" />
                     </div>
                     <input
-                      className={`bg-transparent  w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-white focus:placeholder-black ${
+                      className={`bg-transparent  w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none  focus:border-gray-500 placeholder-white ${
                         client[index].email !== "-" &&
                         client[index].email !== ""
                           ? "border-green-500"
@@ -356,7 +356,7 @@ const CorredoresDashboard = () => {
                       <GrInstagram className="text-[2rem] text-[#418df0]" />
                     </div>
                     <input
-                      className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-white focus:placeholder-black ${
+                      className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white  ${
                         client[index].instagram ? "border-green-500" : ""
                       }`}
                       type="text"
