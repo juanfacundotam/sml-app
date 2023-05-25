@@ -15,8 +15,36 @@ export const GET_ALL_LEADER = "GET_ALL_LEADER";
 export const GET_ALL_CLEVEL = "GET_ALL_CLEVEL";
 export const GET_VENDEDOR_ALL_LEADS = "GET_VENDEDOR_ALL_LEADS";
 export const GET_LEADS_LLAMADA_VENTA = "GET_LEADS_LLAMADA_VENTA";
+export const SET_ROL = "SET_ROL";
+export const SET_ACCESS = "SET_ACCESS";
+export const GET_EMPLOYEES = "GET_EMPLOYEES";
+//
+export const setRol = (rol) => {
+  return async (dispatch) => {
+    // Simular una operación asincrónica para obtener el valor de rol
+    const fetchedRol = await new Promise((resolve) =>
+      setTimeout(() => resolve(rol), 2000)
+    );
 
+    dispatch({
+      type: SET_ROL,
+      payload: fetchedRol
+    });
+  };
+};
 
+export const setAccess = (access) => {
+  return {
+    type: SET_ACCESS,
+    payload: access,
+  };
+};
+export const getEmployees = employees => ({
+  type: GET_EMPLOYEES,
+  payload: employees,
+});
+
+//
 export const getAllLead = () => {
   return async (dispatch) => {
     const response = await axios.get("/lead");

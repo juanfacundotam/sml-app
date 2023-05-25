@@ -13,7 +13,12 @@ import {
   GET_ALL_LEADER,
   GET_ALL_CLEVEL,
   GET_VENDEDOR_ALL_LEADS,
-  GET_LEADS_LLAMADA_VENTA
+  GET_LEADS_LLAMADA_VENTA,
+  GET_EMPLOYEES,
+  SET_ROL,
+  SET_ACCESS
+
+
 } from "./actions";
 
 const initialState = {
@@ -30,10 +35,32 @@ const initialState = {
   clevel: [],
   vendedorAllLeads: [],
   LeadsLlamadaVenta: [],
+  employees: [],
+  rol: undefined,
+  isEmployee: undefined
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_ROL:
+        return {
+          ...state,
+          rol: action.payload
+      };
+      // ...
+      case SET_ACCESS:
+        return {
+          ...state,
+          isEmployee: action.payload,
+        };
+
+case GET_EMPLOYEES:
+      return {
+        ...state,
+        employees: action.payload,
+      };
+
+
     case GET_ALL_LEAD:
       return {
         ...state,
