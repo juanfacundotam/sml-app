@@ -36,8 +36,6 @@ const updateLeadVendedorById = async (id, updatedData) => {
     new: true,
   });
 
-
-  
   const valor = updatedData.dataVendedor;
   
   const vendedor = await Vendedor.findOneAndUpdate(
@@ -47,6 +45,7 @@ const updateLeadVendedorById = async (id, updatedData) => {
   );
 
   if (!vendedor) {
+    console.log("entranding");
     const vendedor = await Vendedor.findOneAndUpdate(
       { email: updatedData.dataLead.vendedor },
       { $addToSet: { leads: { $each: [valor] } } },
