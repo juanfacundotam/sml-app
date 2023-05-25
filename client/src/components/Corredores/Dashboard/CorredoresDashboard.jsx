@@ -193,18 +193,6 @@ const CorredoresDashboard = () => {
       theme: "dark",
     });
   };
-  const SendLeadsErrorEmail = () => {
-    toast.error(`❌ Error Email empty!`, {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
