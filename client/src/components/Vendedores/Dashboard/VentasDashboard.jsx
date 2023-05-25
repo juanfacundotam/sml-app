@@ -24,7 +24,7 @@ const VentasDashboard = () => {
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
   useEffect(() => {
-    dispatch(getLeadsLLamadaVenta());
+    dispatch(getLeadsLLamadaVenta("smlappadm@gmail.com"));
   }, [dispatch]);
   useEffect(() => {
     setData(LeadsLlamadaVenta);
@@ -213,7 +213,7 @@ const VentasDashboard = () => {
 
               <tbody className="">
                 {currentCard.map((item, index) => (
-                  <tr key={item._id} className={style.tableCards}>
+                  <tr key={index} className={style.tableCards}>
                     <td className="flex justify-start items-center  p-0 w-fit">
                       <p className="w-64 p-1 px-3 rounded-full text-ellipsis text-18 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute">
                         {item.name}
@@ -276,15 +276,26 @@ const VentasDashboard = () => {
                         </div>
                       )}
                     </td>
+                    <td className="flex justify-start items-center p-0 w-fit">
+                      {item.llamada_venta.contacto ? (
+                        <p className="bg-[#6254ff] text-[#ffffff] w-[40px] rounded h-10 flex items-center justify-center text-[15px] drop-shadow-xl">
+                          {item.llamada_venta.contacto}
+                        </p>
+                      ) : (
+                        <div className="bg-[#6254ff] text-[#e8e8e9] w-[40px] rounded h-10 flex items-center justify-center text-[35px] drop-shadow-xl">
+                          <CiWarning className="text-[#fdfa3a] p-0 text-[35px] font-bold" />
+                        </div>
+                      )}
+                    </td>
                     <td className="flex justify-start items-start p-0 w-fit">
                       {item.status === "Sin contactar" && (
                         <p className="bg-[#ff69b4] w-44 h-11 flex justify-center items-center text-white rounded-3xl text-18">
                           {item.status}
                         </p>
                       )}
-                      {item.status === "No responde" && (
+                      {item.status === "Agendar 2do llamado" && (
                         // <p className="bg-[#b4215e] w-44 h-11 flex justify-center items-center text-white rounded-3xl text-18">
-                        <p className="bg-[#2148b4] w-44 h-11 flex justify-center items-center text-white rounded-3xl text-18">
+                        <p className="bg-[#21b46f] w-52 h-11 flex justify-center items-center text-white rounded-3xl text-18">
                           {/* bg-[#ff69b4]  */}
                           {item.status}
                         </p>

@@ -1017,6 +1017,10 @@ video {
   width: 14rem;
 }
 
+.w-52 {
+  width: 13rem;
+}
+
 .min-w-\[180px\] {
   min-width: 180px;
 }
@@ -1338,6 +1342,11 @@ video {
   background-color: rgb(208 218 61 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#21b46f\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(33 180 111 / var(--tw-bg-opacity));
+}
+
 .fill-none {
   fill: none;
 }
@@ -1522,6 +1531,14 @@ video {
 
 .text-\[35px\] {
   font-size: 35px;
+}
+
+.text-\[10px\] {
+  font-size: 10px;
+}
+
+.text-\[15px\] {
+  font-size: 15px;
 }
 
 .font-bold {

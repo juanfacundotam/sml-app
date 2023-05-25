@@ -27,14 +27,14 @@ const VendedoresHistory = () => {
   const { leadCheckedInactive100 } = useSelector((state) => state);
   const { vendedorAllLeads } = useSelector((state) => state);
   const user = useUser().user;
-  const { emailAddress } = user.primaryEmailAddress;
+  // const { emailAddress } = user.primaryEmailAddress;
   const dispatch = useDispatch();
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
 
 
   useEffect(() => {
-    dispatch(getVendedorAllLeads(emailAddress));
+    dispatch(getVendedorAllLeads("smlappadm@gmail.com"));
 
   }, [dispatch]);
   useEffect(() => {
@@ -141,7 +141,8 @@ const VendedoresHistory = () => {
               </div>
             </div>
           </div>
-          {vendedorAllLeads.name !== undefined ? (
+          {console.log(vendedorAllLeads)}
+          {vendedorAllLeads.length > 0 ? (
             <table className={style.table}>
   <thead className="text-gray-400 text-14 font-thin">
     <tr className={style.tableRow}>

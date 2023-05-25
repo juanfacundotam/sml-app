@@ -132,7 +132,7 @@ export const getVendedorAllLeads = (email) => {
       if(item.status !== "Sin contactar" && item.status !== "Agendar 2do llamado"){
         return item;
       }
-    })
+    }).filter(item => item !== undefined);
     dispatch({
       type: GET_VENDEDOR_ALL_LEADS,
       payload: allLeadsMaps,
@@ -142,18 +142,18 @@ export const getVendedorAllLeads = (email) => {
 export const getLeadsLLamadaVenta = (email) => {
   return async (dispatch) => {
     const response = await axios.get(`/vendedor/email?email=${email}`);
-    console.log(response)
     const allLeads = response.data.leads;
-
-    const allLeadsMaps = await allLeads.map(item => {
+    
+    const allLeadsVentaMaps =  allLeads.map(item => {
       if(item.status === "Agendar 2do llamado"){
         return item;
       }
-    })
-
+    }).filter(item => item !== undefined);
+    
+    console.log(allLeadsVentaMaps)
     dispatch({
       type: GET_LEADS_LLAMADA_VENTA,
-      payload: allLeadsMaps,
+      payload: allLeadsVentaMaps,
     });
   };
 };
