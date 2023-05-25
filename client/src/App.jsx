@@ -71,16 +71,19 @@ function ClerkProviderWithRoutes() {
       setRoleReady(storedRoleReady);
     }
     checkRole();
-
   }, [role]);
-  
+
   const handleSignOut = () => {
     localStorage.removeItem("roleReady");
     setRoleReady("");
   };
 
   return (
-    <ClerkProvider publishableKey={clerkPubKey} navigate={(to) => navigate(to)} onSignOut={handleSignOut}>
+    <ClerkProvider
+      publishableKey={clerkPubKey}
+      navigate={(to) => navigate(to)}
+      onSignOut={handleSignOut}
+    >
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
@@ -126,18 +129,106 @@ function ClerkProviderWithRoutes() {
         <Route path="*" element={<h1>error 404</h1>} />
         <Route path="/home" element={<Landing />} />
         <Route path="/" element={<Login />} />
-        <Route path="/lideres" element={isRoleAllowed(roleReady) && (roleReady === "clevel" || roleReady === "leader") ? <AnalyticLeader /> : <ReturnToPage/>} />
-        <Route path="/lideres/analytics" element={isRoleAllowed(roleReady) && (roleReady === "clevel" || roleReady === "leader") ? <AnalyticLeader /> : <ReturnToPage/>} />
-        <Route path="/lideres/analytics/incidences" element={isRoleAllowed(roleReady) ? <Incidences /> : <returnToPage/>} />
-        <Route path="/clevel" element={isRoleAllowed(roleReady) && (roleReady === "clevel" || roleReady === "leader") ? <Clevel /> : <returnToPage/>} />
-        <Route path="/clevel/analytics" element={isRoleAllowed(roleReady) && (roleReady === "clevel" || roleReady === "leader") ? <Analytic /> : <ReturnToPage/>} />
-        <Route path="/corredores" element={isRoleAllowed(roleReady) && roleReady === "corredor" ? <CorredoresDashboard /> : <ReturnToPage/>} />
-        <Route path="/corredores/history" element={isRoleAllowed(roleReady) && roleReady === "corredor" ? <CorredoresAnlaytics /> : <ReturnToPage/>} />
+        <Route
+          path="/lideres"
+          element={
+            isRoleAllowed(roleReady) &&
+            (roleReady === "clevel" || roleReady === "leader") ? (
+              <AnalyticLeader />
+            ) : (
+              <ReturnToPage />
+            )
+          }
+        />
+        <Route
+          path="/lideres/analytics"
+          element={
+            isRoleAllowed(roleReady) &&
+            (roleReady === "clevel" || roleReady === "leader") ? (
+              <AnalyticLeader />
+            ) : (
+              <ReturnToPage />
+            )
+          }
+        />
+        <Route
+          path="/lideres/analytics/incidences"
+          element={isRoleAllowed(roleReady) ? <Incidences /> : <returnToPage />}
+        />
+        <Route
+          path="/clevel"
+          element={
+            isRoleAllowed(roleReady) &&
+            (roleReady === "clevel" || roleReady === "leader") ? (
+              <Clevel />
+            ) : (
+              <returnToPage />
+            )
+          }
+        />
+        <Route
+          path="/clevel/analytics"
+          element={
+            isRoleAllowed(roleReady) &&
+            (roleReady === "clevel" || roleReady === "leader") ? (
+              <Analytic />
+            ) : (
+              <ReturnToPage />
+            )
+          }
+        />
+        <Route
+          path="/corredores"
+          element={
+            isRoleAllowed(roleReady) && roleReady === "corredor" ? (
+              <CorredoresDashboard />
+            ) : (
+              <ReturnToPage />
+            )
+          }
+        />
+        <Route
+          path="/corredores/history"
+          element={
+            isRoleAllowed(roleReady) && roleReady === "corredor" ? (
+              <CorredoresAnlaytics />
+            ) : (
+              <ReturnToPage />
+            )
+          }
+        />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/settings" element={<Settings />} />
-        <Route path="/vendedores" element={isRoleAllowed(roleReady) && roleReady === "vendedor" ? <VendedoresDashboard /> : <ReturnToPage/>} />
-        <Route path="/vendedores/history" element={isRoleAllowed(roleReady) && roleReady === "vendedor" ? <VendedoresHistory /> : <ReturnToPage/>} />
-        <Route path="/vendedores/analytics" element={isRoleAllowed(roleReady) && roleReady === "vendedor" ? <VendedoresAnalytics /> : <ReturnToPage/>} />
+        <Route
+          path="/vendedores"
+          element={
+            isRoleAllowed(roleReady) && roleReady === "vendedor" ? (
+              <VendedoresDashboard />
+            ) : (
+              <ReturnToPage />
+            )
+          }
+        />
+        <Route
+          path="/vendedores/history"
+          element={
+            isRoleAllowed(roleReady) && roleReady === "vendedor" ? (
+              <VendedoresHistory />
+            ) : (
+              <ReturnToPage />
+            )
+          }
+        />
+        <Route
+          path="/vendedores/analytics"
+          element={
+            isRoleAllowed(roleReady) && roleReady === "vendedor" ? (
+              <VendedoresAnalytics />
+            ) : (
+              <ReturnToPage />
+            )
+          }
+        />
         <Route
           path="/protected"
           element={
