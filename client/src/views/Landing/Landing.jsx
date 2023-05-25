@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Nav from '../../components/Nav/Nav';
-import { getEmployees, setRol, setAccess } from '../../redux/actions';
+import { getEmployees, setRol, setAccess } from '../../redux/actions'
 import {
 	useUser,
 } from "@clerk/clerk-react";
