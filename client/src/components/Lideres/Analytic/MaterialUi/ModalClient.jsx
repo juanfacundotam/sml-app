@@ -68,7 +68,7 @@ export default function BasicModal(props) {
             </div>
             <div className="font-semibold flex gap-3">
               <p>WEB: </p>
-              <p className="font-normal">{web} </p>
+              <link className="font-normal">{web} </link>
             </div>
             <div className="font-semibold flex gap-3">
               <p>EMAIL: </p>
