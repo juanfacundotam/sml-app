@@ -26,9 +26,7 @@ import {
   orderClients,
 } from "../../../redux/actions";
 import { IoGrid, IoPeople, IoStatsChart } from "react-icons/io5";
-import { FaHistory } from "react-icons/fa";
 
-//
 export const AnalyticLeader = () => {
   const [data, setData] = useState([]);
   const { leaderDashboard } = useSelector((state) => state);

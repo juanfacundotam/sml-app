@@ -27,7 +27,6 @@ import {
 } from "../../../redux/actions";
 import { IoGrid, IoPeople, IoStatsChart } from "react-icons/io5";
 
-//
 export const LideresDasboard = () => {
   const [data, setData] = useState([]);
   const { leaderDashboard } = useSelector((state) => state);
