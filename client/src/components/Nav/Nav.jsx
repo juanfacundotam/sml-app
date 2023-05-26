@@ -10,6 +10,7 @@ import {
   IoSettingsSharp,
   IoBagSharp,
   IoGrid,
+  IoPeople,
 } from "react-icons/io5";
 
 function Nav() {
@@ -144,20 +145,7 @@ function Nav() {
             <ul className="flex flex-col gap-2">
               <li className="flex gap-2 items-center text-[18px]">
                 <span className=" text-lg">
-                  <IoSettingsSharp className="text-[#e0dddd]" />
-                </span>
-                <span>
-                  <Link
-                    to="/settings"
-                    className=" text-[#e0dddd] hover:text-white"
-                  >
-                    Settings
-                  </Link>
-                </span>
-              </li>
-              <li className="flex gap-2 items-center text-[18px]">
-                <span className=" text-lg">
-                  <IoSettingsSharp className="text-[#e0dddd]" />
+                  <IoGrid className="text-[#e0dddd]" />
                 </span>
                 <span>
                   <Link
@@ -170,7 +158,7 @@ function Nav() {
               </li>
               <li className="flex gap-2 items-center text-[18px]">
                 <span className=" text-lg">
-                  <IoSettingsSharp className="text-[#e0dddd]" />
+                  <IoPeople className="text-[#e0dddd]" />
                 </span>
                 <span>
                   <Link
@@ -183,14 +171,27 @@ function Nav() {
               </li>
               <li className="flex gap-2 items-center text-[18px] text-white">
                 <span className="text-[1.5rem]">
-                  <IoBagSharp className="w-4 text-[#e0dddd]" />
+                  <IoStatsChart className="w-4 text-[#e0dddd]" />
                 </span>
                 <span>
                   <Link
-                    to="/protected"
+                    to="/lideres"
                     className="text-[#e0dddd] hover:text-white"
                   >
-                    Home
+                    Analytics
+                  </Link>
+                </span>
+              </li>
+              <li className="flex gap-2 items-center text-[18px]">
+                <span className=" text-lg">
+                  <IoSettingsSharp className="text-[#e0dddd]" />
+                </span>
+                <span>
+                  <Link
+                    to="/settings"
+                    className=" text-[#e0dddd] hover:text-white"
+                  >
+                    Settings
                   </Link>
                 </span>
               </li>
