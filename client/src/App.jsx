@@ -9,6 +9,7 @@ import { AnalyticLeader } from "./components/Lideres/Analytic/AnalyticLeader";
 import CorredoresAnlaytics from "./components/Corredores/Analitycs/CorredoresAnalytics";
 import VendedoresHistory from "./components/Vendedores/analytics/VendedoresHistory";
 import VendedoresAnalytics from "./components/Vendedores/analytics/VendedoresAnalytics";
+import VentasDasboard from "./components/Vendedores/Dashboard/VentasDashboard";
 import ReturnToPage from "./components/ReturnToPage/ReturnToPage";
 import Lideres from "./components/Lideres/Lideres";
 import {
@@ -214,6 +215,16 @@ function ClerkProviderWithRoutes() {
           element={
             isRoleAllowed(roleReady) && roleReady === "vendedor" ? (
               <VendedoresHistory />
+            ) : (
+              <ReturnToPage />
+            )
+          }
+        />
+        <Route
+          path="/vendedores-ventas"
+          element={
+            isRoleAllowed(roleReady) && roleReady === "vendedor" ? (
+              <VentasDasboard />
             ) : (
               <ReturnToPage />
             )

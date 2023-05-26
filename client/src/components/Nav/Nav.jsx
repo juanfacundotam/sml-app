@@ -102,14 +102,27 @@ function Nav() {
             <ul className="flex flex-col gap-2">
               <li className="flex gap-2 items-center text-[18px]">
                 <span className=" text-lg">
-                  <IoSettingsSharp className="text-[#e0dddd]" />
+                  <IoGrid className="text-[#e0dddd]" />
                 </span>
                 <span>
                   <Link
-                    to="/settings"
+                    to="/vendedores"
                     className=" text-[#e0dddd] hover:text-white"
                   >
-                    Settings
+                    Dashboard
+                  </Link>
+                </span>
+              </li>
+              <li className="flex gap-2 items-center text-[18px]">
+                <span className=" text-lg">
+                  <IoStatsChart className="text-[#e0dddd]" />
+                </span>
+                <span>
+                  <Link
+                    to="/vendedores-history"
+                    className=" text-[#e0dddd] hover:text-white"
+                  >
+                    Analytics
                   </Link>
                 </span>
               </li>
@@ -119,23 +132,10 @@ function Nav() {
                 </span>
                 <span>
                   <Link
-                    to="/vendedores"
+                    to="/settings"
                     className=" text-[#e0dddd] hover:text-white"
                   >
-                    Panel de Control
-                  </Link>
-                </span>
-              </li>
-              <li className="flex gap-2 items-center text-[18px] text-white">
-                <span className="text-[1.5rem]">
-                  <IoBagSharp className="w-4 text-[#e0dddd]" />
-                </span>
-                <span>
-                  <Link
-                    to="/protected"
-                    className="text-[#e0dddd] hover:text-white"
-                  >
-                    Home
+                    Settings
                   </Link>
                 </span>
               </li>
