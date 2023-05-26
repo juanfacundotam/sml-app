@@ -8,7 +8,7 @@ const {
   getLeadCheckedHandler,
   getLeadUncheckedHandler,
   getLead10UncheckedHandler,
-  getLeadCheckedInactive100Handler,
+  getLeadCheckedInactive5Handler,
   updateLeadVendedorHandler,
   getLeadVendedorHandler,
 } = require("../Handlers/LeadHandlers");
@@ -16,7 +16,7 @@ const LeadRouter = Router();
 
 LeadRouter.get("/", getAllLeadHandler);
 LeadRouter.get("/checked", getLeadCheckedHandler);
-LeadRouter.get("/checkedinactive100", getLeadCheckedInactive100Handler);
+LeadRouter.get("/checkedinactive5", getLeadCheckedInactive5Handler);
 LeadRouter.get("/unchecked", getLeadUncheckedHandler);
 LeadRouter.get("/unchecked10", getLead10UncheckedHandler);
 LeadRouter.post("/", postLeadHandler);

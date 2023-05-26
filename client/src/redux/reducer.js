@@ -3,7 +3,7 @@ import {
   GET_LEAD_UNCHECKED,
   GET_LEAD_CHEQUED,
   GET_LEAD_UNCHECKED_10,
-  GET_LEAD_CHEQUED_INACTIVE_100,
+  GET_LEAD_CHEQUED_INACTIVE_5,
   ORDER_CLIENTS,
   ORDER_CATEGORY,
   FILTER_LEVEL,
@@ -24,7 +24,7 @@ import {
 const initialState = {
   lead: [],
   leadChequed: [],
-  leadCheckedInactive100: [],
+  leadCheckedInactive5: [],
   leadUnchecked: [],
   leadUnchecked10: [],
   leaderDashboard: [],
@@ -82,10 +82,10 @@ case GET_EMPLOYEES:
         leaderDashboard: action.payload,
         leadChequed: action.payload,
       };
-    case GET_LEAD_CHEQUED_INACTIVE_100:
+    case GET_LEAD_CHEQUED_INACTIVE_5:
       return {
         ...state,
-        leadCheckedInactive100: action.payload,
+        leadCheckedInactive5: action.payload,
         vendedoresDashboard: action.payload,
       };
 
@@ -138,7 +138,7 @@ case GET_EMPLOYEES:
     case FILTER_LEVEL:
       const copyLevel = [...state.leadChequed];
       let filteredLevel = copyLevel;
-      const copyLevelVendedores = [...state.leadCheckedInactive100];
+      const copyLevelVendedores = [...state.leadCheckedInactive5];
       let filteredLevelVendedores = copyLevelVendedores;
 
       if (action.payload === "0") {

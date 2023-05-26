@@ -5,7 +5,7 @@ const getLeadByName = require("../controllers/Lead/getLeadByName");
 const postLead = require("../controllers/Lead/postLead");
 const updateLeadById = require("../controllers/Lead/updateLeadById");
 const getLeadUnchecked = require("../controllers/Lead/getLeadUnchecked");
-const getLeadCheckedInactive100 = require("../controllers/Lead/getLeadCheckedInactive100");
+const getLeadCheckedInactive5 = require("../controllers/Lead/getLeadCheckedInactive5");
 const getLead10Unchecked = require("../controllers/Lead/getLead10Unchecked");
 const updateLeadVendedorById = require("../controllers/Lead/updateLeadVendedorById");
 const getLeadVendedorById = require("../controllers/Lead/getLeadVendedorById");
@@ -44,10 +44,13 @@ const getLeadCheckedHandler = async (req, res) => {
   }
 };
 
-const getLeadCheckedInactive100Handler = async (req, res) => {
+const getLeadCheckedInactive5Handler = async (req, res) => {
+  const email = req.query;
+  console.log(email)
   try {
-    const leadCheckedInactive100 = await getLeadCheckedInactive100();
-    res.status(200).json(leadCheckedInactive100.slice(0, 100));
+    const leadCheckedInactive5 = await getLeadCheckedInactive5(email);
+    console.log(leadCheckedInactive5)
+    res.status(200).json(leadCheckedInactive5);
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
@@ -120,7 +123,7 @@ module.exports = {
   getAllLeadHandler,
   getLeadUncheckedHandler,
   getLeadCheckedHandler,
-  getLeadCheckedInactive100Handler,
+  getLeadCheckedInactive5Handler,
   postLeadHandler,
   updateLeadHandler,
   getLead10UncheckedHandler,

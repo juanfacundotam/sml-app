@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import PaginationOutlined from "../../pagination/PaginationOutlined";
-import { filterLevel, getLeadCheckedInactive100 } from "../../../redux/actions";
+import { filterLevel, getLeadCheckedInactive5 } from "../../../redux/actions";
 import Modal from "./Modal/Modal";
 import ModalIntelligentInfo from "./Modal/ModalIntelligenceInfo";
 import { IoGrid, IoStatsChart} from "react-icons/io5";
@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaHistory } from "react-icons/fa";
 import {MdOutlineAttachMoney } from "react-icons/md";
 import SelectLevel from "./SelectLevel"
-
+import { useUser } from "@clerk/clerk-react";
 import { CiWarning, CiInstagram, CiMail } from "react-icons/ci";
 
 import Nav from "../../Nav/Nav";
@@ -22,14 +22,22 @@ const VendedoresDashboard = () => {
   const { vendedoresDashboard } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
+  const user = useUser().user;
+  const email = user?.emailAddresses[0]?.emailAddress;
+
+
+  localStorage.setItem('email', email);
+  let saveEmail = localStorage.getItem('email');
+  console.log(saveEmail)
 
   useEffect(() => {
-    dispatch(getLeadCheckedInactive100());
+    dispatch(getLeadCheckedInactive5(saveEmail));
+
   }, [dispatch]);
   useEffect(() => {
     setData(vendedoresDashboard);
   }, [vendedoresDashboard]);
-
+  
   const [pageStyle, setPageStyle] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardXPage, setCardXpage] = useState(10);
@@ -41,6 +49,8 @@ const VendedoresDashboard = () => {
   };
   const [edit, setEdit] = useState(false);
   const [editIndex, setEditIndex] = useState("");
+
+
 
   //FILTER**********************
   const [filters, setFilters] = useState({
@@ -99,7 +109,7 @@ const VendedoresDashboard = () => {
       progress: undefined,
       theme: "dark",
     });
-    dispatch(getLeadCheckedInactive100());
+    dispatch(getLeadCheckedInactive5(saveEmail));
   };
   const SendErrorUpdateAlert = () => {
     toast.error("The lead could not be updated!", {
@@ -124,12 +134,17 @@ const VendedoresDashboard = () => {
       progress: undefined,
       theme: "dark",
     });
-    dispatch(getLeadCheckedInactive100());
+    dispatch(getLeadCheckedInactive5());
   };
   const updateLeads = () => {
-    dispatch(getLeadCheckedInactive100());
+    dispatch(getLeadCheckedInactive5());
     setData(vendedoresDashboard);
   };
+
+  const handleAsignarLeads = () => {
+    // dispatch(postAsignarLeads())
+    console.log("ssssssasdasdasdasd")
+  }
 
   return (
     <>
@@ -166,6 +181,13 @@ const VendedoresDashboard = () => {
             ) : (
               ""
             )}
+                    <button
+          type="button"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 absolute right-5"
+          onClick={handleAsignarLeads}
+        >
+          Asignar Leads
+        </button>
           </div>
           {vendedoresDashboard.length ? (
             <table className={style.table}>
