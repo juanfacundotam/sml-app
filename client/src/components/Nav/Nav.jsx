@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import axios from "axios";
 
 import { UserButton, useUser } from "@clerk/clerk-react";
 import {
@@ -14,20 +12,6 @@ import {
 } from "react-icons/io5";
 
 function Nav() {
-  // const user = useUser().user;
-  // const employees = useSelector(state => state.employees);
-  // if (!user || !user.emailAddresses || user.emailAddresses.length === 0) {
-  // 	// Return a loading state or handle the absence of user data
-  // 	return <div>Loading...</div>;
-  //   }
-  //   const email = user.emailAddresses[0].emailAddress;
-  // const rol = () => {
-  // 	const employee = employees.find(employees => employees.email === email);
-  // 	if (employee) {
-  // 		return employee.rol;
-  // 	}
-  // 	return null;
-  // };
 
   const role = useSelector((state) => state.rol);
 
@@ -243,7 +227,6 @@ function Nav() {
       </div>
 
       <div className="flex flex-col justify-center w-full items-center mb-5">
-        {/* <Profile /> */}
         <UserButton />
       </div>
     </div>
@@ -252,69 +235,3 @@ function Nav() {
 
 export default Nav;
 
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// import { IoLogOut, IoStatsChart, IoSettingsSharp, IoGrid } from 'react-icons/io5';
-
-// function Nav() {
-// 	return (
-// 		<div className="bg-gray-800 flex min-w-15rem h-screen">
-// 			<div className="flex flex-col justify-between items-center mt-0.5rem w-full">
-// 				<div className="flex flex-col items-center justify-center gap-1rem mt-1rem w-full">
-// 					<div className="flex flex-col items-center justify-center">
-// 						<Link to="/">
-// 							<span className="text-gray-200">ICONO</span>
-// 						</Link>
-// 						<h1 className="text-white">SML</h1>
-// 					</div>
-// 					<div />
-// 					<div className="flex w-full ml-3rem md:ml-0.5rem">
-// 						<ul className="flex flex-col gap-1rem">
-// 							<li className="flex items-center gap-1rem">
-// 								<span className="text-gray-300">
-// 									<IoGrid />
-// 								</span>
-// 								<Link to="/dashboard" className="text-white">
-// 									Dashboard
-// 								</Link>
-// 							</li>
-// 							<li className="flex items-center gap-1rem">
-// 								<span className="text-gray-300">
-// 									<IoStatsChart />
-// 								</span>
-// 								<Link to="/analytics" className="text-white">
-// 									Analytics
-// 								</Link>
-// 							</li>
-// 							<li className="flex items-center gap-1rem">
-// 								<span className="text-gray-300">
-// 									<IoSettingsSharp />
-// 								</span>
-// 								<Link to="/settings" className="text-white">
-// 									Settings
-// 								</Link>
-// 							</li>
-// 						</ul>
-// 					</div>
-// 				</div>
-
-// 				<div className="flex justify-center items-center gap-0.5rem ml-1rem mb-3rem md:flex-col">
-// 					<img
-// 						className="w-3rem h-3rem rounded-full"
-// 						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFADjIwjVTPKIf_2YkWdv2-N5TPzIItNC0TQ&usqp=CAU"
-// 						alt="avatar"
-// 					/>
-// 					<div className="text-white text-sm">
-// 						<p>Easin Arafat</p>
-// 						<p>Free Account</p>
-// 					</div>
-// 					<div className="text-white text-xl ml-0.5rem">
-// 						<IoLogOut />
-// 					</div>
-// 				</div>
-// 			</div>
-// 		</div>
-// 	);
-// }
-
-// export default Nav;
