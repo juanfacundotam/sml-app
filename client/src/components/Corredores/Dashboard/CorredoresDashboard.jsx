@@ -63,6 +63,9 @@ const CorredoresDashboard = () => {
     });
   };
 
+  const counter = () => {
+    setCount += 1;
+  };
 
   const handleClientClick = (event, index) => {
     const { name, value } = event.target;
@@ -87,7 +90,6 @@ const CorredoresDashboard = () => {
   };
 
   const leadUncheckedAsignedCorredor = async (n) => {
-    console.log(n);
     try {
       const response = await axios.put(
         `/lead/unchecked10/corredor?email=${email}&limit=${n}`
@@ -124,9 +126,8 @@ const CorredoresDashboard = () => {
   useEffect(() => {
     let clientes = [];
     let i = 0;
-
-    if (leadUnchecked10 && leadUnchecked10.length > 0) {
-      for (i = 0; i < 10; i++) {
+    if (leadUnchecked10.length > 0) {
+      for (i = 0; i < leadUnchecked10.length; i++) {
         clientes.push({
           _id: leadUnchecked10[i]._id,
           name: leadUnchecked10[i].name,
@@ -271,9 +272,9 @@ const CorredoresDashboard = () => {
         } else {
           SendLeadsErrorLevel(client[i].name);
         }
+
       }
-      // leadUnchecked10 &&
-      // leadUncheckedAsignedCorredor(10 - leadUnchecked10.length);
+      leadUncheckedAsignedCorredor(10 - leadUnchecked10.length);
       SendLeadsSuccess();
       dispatch(getLeadUnchecked10(email));
       // dispatch(getCorredoresLead(email));
