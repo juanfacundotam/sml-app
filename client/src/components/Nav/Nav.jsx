@@ -46,10 +46,23 @@ function Nav() {
                 </span>
                 <span>
                   <Link
+                    to="/clevel"
+                    className=" text-[#e0dddd] hover:text-white"
+                  >
+                    C-Level
+                  </Link>
+                </span>
+              </li>
+              <li className="flex gap-2 items-center text-[18px]">
+                <span className=" text-lg">
+                  <IoGrid className="text-[#e0dddd]" />
+                </span>
+                <span>
+                  <Link
                     to="/lideres"
                     className=" text-[#e0dddd] hover:text-white"
                   >
-                    Dashboard
+                    Leader
                   </Link>
                 </span>
               </li>
@@ -150,6 +163,19 @@ function Nav() {
             </ul>
           ) : role === "leader" ? (
             <ul className="flex flex-col gap-2">
+              <li className="flex gap-2 items-center text-[18px]">
+                <span className=" text-lg">
+                  <IoGrid className="text-[#e0dddd]" />
+                </span>
+                <span>
+                  <Link
+                    to="/clevel"
+                    className=" text-[#e0dddd] hover:text-white"
+                  >
+                    employees
+                  </Link>
+                </span>
+              </li>
               <li className="flex gap-2 items-center text-[18px]">
                 <span className=" text-lg">
                   <IoGrid className="text-[#e0dddd]" />
