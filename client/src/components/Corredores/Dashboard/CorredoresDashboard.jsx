@@ -21,16 +21,16 @@ import { IoGrid, IoStatsChart } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { getCorredoresLead, getLeadUnchecked10 } from "../../../redux/actions";
 import IconLabelButtons from "./MaterialUi/IconLabelButtons";
-import asignedLead from "./MaterialUi/asignedLead";
 import { useUser } from "@clerk/clerk-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
-  const [dataLoaded, setDataLoaded] = useState(false);
-  const { leadUnchecked10 } = useSelector((state) => state);
+  const { corredorLead } = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  console.log(corredorLead);
 
   const user = useUser().user;
   const email = user?.emailAddresses[0].emailAddress;
@@ -77,53 +77,31 @@ const CorredoresDashboard = () => {
     });
   };
 
-  const handleAsignedLead = () => {
-    leadUncheckedAsignedCorredor();
-    dispatch(getLeadUnchecked10(email));
-  };
-
-  const leadUncheckedAsignedCorredor = async (n) => {
+  const leadUncheckedAsignedCorredor = async () => {
     try {
       const response = await axios.put(
-        `/lead/unchecked10/corredor?email=${email}&limit=${n}`
+        `/lead/unchecked10/corredor?email=${email}`
       );
       console.log(response.data);
     } catch (error) {}
   };
 
-  const handleView = async () => {
-    try {
-      for (let i = 0; i < leadUnchecked10.length; i++) {
-        const response = await axios.put(`/lead/${client[i]._id}`, {
-          view: client[i].view,
-        });
-      }
-    } catch (error) {
-      console.log("No se envio el put de view");
-    }
-  };
-
   useEffect(() => {
     dispatch(getLeadUnchecked10(email));
+    dispatch(getCorredoresLead(email));
   }, [dispatch]);
-
-  useEffect(() => {
-    if (dataLoaded) {
-      handleView();
-    }
-  }, [dataLoaded]);
 
   useEffect(() => {
     let clientes = [];
     let i = 0;
-    if (leadUnchecked10 && leadUnchecked10.length > 0) {
-      for (let i = 0; i < leadUnchecked10.length; i++) {
-        if (leadUnchecked10[i] && leadUnchecked10[i]._id) {
+    if (corredorLead && corredorLead.length > 0) {
+      for (let i = 0; i < corredorLead.length; i++) {
+        if (corredorLead[i] && corredorLead[i]._id) {
           clientes.push({
-            _id: leadUnchecked10[i]._id,
-            name: leadUnchecked10[i].name,
-            url: leadUnchecked10[i].url,
-            email: leadUnchecked10[i].email,
+            _id: corredorLead[i]._id,
+            name: corredorLead[i].name,
+            url: corredorLead[i].url,
+            email: corredorLead[i].email,
             instagram: "",
             level: "-",
             checked: false,
@@ -133,7 +111,7 @@ const CorredoresDashboard = () => {
       }
     }
     setClient(clientes);
-  }, [leadUnchecked10]);
+  }, [corredorLead]);
 
   const SendLeads = (name) => {
     toast.info(`✔ ${name} Send Leads! `, {
@@ -212,7 +190,7 @@ const CorredoresDashboard = () => {
     event.preventDefault();
     SendLeads(user.fullName);
     try {
-      for (let i = 0; i < leadUnchecked10.length; i++) {
+      for (let i = 0; i < corredorLead.length; i++) {
         if (client[i].level !== "-") {
           if (client[i].instagram.trim() !== "" && client[i].level === "0") {
             SendLeadsErrorInsta0(client[i].name);
@@ -232,7 +210,6 @@ const CorredoresDashboard = () => {
             });
             console.log(response.data);
 
-            leadUncheckedAsignedCorredor();
             // if (client[i].level === "incidencia") {
             //   const emailData = {
             //     clientName: client[i].name,
@@ -263,12 +240,12 @@ const CorredoresDashboard = () => {
         } else {
           SendLeadsErrorLevel(client[i].name);
         }
-
-        // leadChecked();
       }
-      SendLeadsSuccess();
+
       dispatch(getLeadUnchecked10(email));
-      // dispatch(getCorredoresLead(email));
+      dispatch(getCorredoresLead(email));
+      leadUncheckedAsignedCorredor();
+      SendLeadsSuccess();
     } catch (error) {
       SendLeadsError();
       console.log({ error: error.message });
@@ -279,9 +256,9 @@ const CorredoresDashboard = () => {
       <Nav />
       <Card className="w-full m-5 bg-[#222131]">
         <ToastContainer />
-        <div className="flex gap-12">
+        {/* <div className="flex gap-12">
           <button onClick={handleAsignedLead}>Asigned Lead</button>
-        </div>
+        </div> */}
         <form onSubmit={handleSubmit}>
           <div className="flex justify-between items-center">
             <div className="flex gap-10  mt-2 mx-5 ">

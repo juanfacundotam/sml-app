@@ -107,7 +107,7 @@ export const getLeadChecked = () => {
 };
 
 export const getLeadCheckedInactive5 = (email) => {
-  console.log(email)
+  console.log(email);
   return async (dispatch) => {
     const response = await axios.get(`/lead/checkedinactive5?email=${email}`);
     const LeadCheckedInactive5 = response.data;
@@ -197,7 +197,9 @@ export const getLeadsLLamadaVenta = (email) => {
 
 export const getCorredoresLead = (email) => {
   return async (dispatch) => {
-    const response = await axios.get(`/corredor/email/?email=${email}`);
+    const response = await axios.put(
+      `/lead/unchecked10/corredor?email=${email}`
+    );
     const corredorLead = response.data;
     dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });
   };
