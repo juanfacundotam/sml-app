@@ -81,7 +81,6 @@ const CorredoresDashboard = () => {
 
   const handleAsignedLead = () => {
     leadUncheckedAsignedCorredor();
-
     dispatch(getLeadUnchecked10(email));
   };
 
@@ -107,10 +106,8 @@ const CorredoresDashboard = () => {
   };
 
   useEffect(() => {
-    dispatch(getLeadUnchecked10(email)).then(() => {
-      setDataLoaded(true);
-    });
-  }, [dispatch, email]);
+    dispatch(getLeadUnchecked10(email));
+  }, [dispatch]);
 
   useEffect(() => {
     if (dataLoaded) {
@@ -234,7 +231,6 @@ const CorredoresDashboard = () => {
               level: client[i].level,
               checked: true,
               view: false,
-              corredor: user.fullName,
             });
             console.log(response.data);
 
@@ -261,7 +257,6 @@ const CorredoresDashboard = () => {
               level: client[i].level,
               checked: true,
               view: false,
-              corredor: user.fullName,
             });
             console.log(response.data);
           } else {
