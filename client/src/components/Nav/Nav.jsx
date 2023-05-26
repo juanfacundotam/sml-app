@@ -5,7 +5,12 @@ import { useEffect } from "react";
 import axios from "axios";
 
 import { UserButton, useUser } from "@clerk/clerk-react";
-import { IoStatsChart, IoSettingsSharp, IoBagSharp } from "react-icons/io5";
+import {
+  IoStatsChart,
+  IoSettingsSharp,
+  IoBagSharp,
+  IoGrid,
+} from "react-icons/io5";
 
 function Nav() {
   // const user = useUser().user;
@@ -194,7 +199,7 @@ function Nav() {
             <ul className="flex flex-col gap-2">
               <li className="flex gap-2 items-center text-[18px]">
                 <span className=" text-lg">
-                  <IoSettingsSharp className="text-[#e0dddd]" />
+                  <IoGrid className="text-[#e0dddd]" />
                 </span>
                 <span>
                   <Link
@@ -207,7 +212,7 @@ function Nav() {
               </li>
               <li className="flex gap-2 items-center text-[18px] text-white">
                 <span className="text-[1.5rem]">
-                  <IoBagSharp className="w-4 text-[#e0dddd]" />
+                  <IoStatsChart className="w-4 text-[#e0dddd]" />
                 </span>
                 <span>
                   <Link
