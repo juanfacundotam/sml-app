@@ -32,8 +32,6 @@ const CorredoresDashboard = () => {
   const { leadUnchecked10 } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  console.log(leadUnchecked10);
-
   const user = useUser().user;
   const email = user?.emailAddresses[0].emailAddress;
 
