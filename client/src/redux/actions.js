@@ -3,7 +3,7 @@ export const GET_ALL_LEAD = "GET_ALL_LEAD";
 export const GET_LEAD_UNCHECKED_10 = "GET_LEAD_UNCHECKED_10";
 export const GET_LEAD_UNCHECKED = "GET_LEAD_UNCHECKED";
 export const GET_LEAD_CHEQUED = "GET_LEAD_CHEQUED";
-export const GET_LEAD_CHEQUED_INACTIVE_100 = "GET_LEAD_CHEQUED_INACTIVE_100";
+export const GET_LEAD_CHEQUED_INACTIVE_5 = "GET_LEAD_CHEQUED_INACTIVE_5";
 export const ORDER_CLIENTS = "ORDER_CLIENTS";
 export const ORDER_CATEGORY = "ORDER_CATEGORY";
 export const FILTER_LEVEL = "FILTER_LEVEL";
@@ -105,13 +105,14 @@ export const getLeadChecked = () => {
   };
 };
 
-export const getLeadCheckedInactive100 = () => {
+export const getLeadCheckedInactive5 = (email) => {
+  console.log(email)
   return async (dispatch) => {
-    const response = await axios.get("/lead/checkedinactive100");
-    const LeadCheckedInactive100 = response.data;
+    const response = await axios.get(`/lead/checkedinactive5?email=${email}`);
+    const LeadCheckedInactive5 = response.data;
     dispatch({
-      type: GET_LEAD_CHEQUED_INACTIVE_100,
-      payload: LeadCheckedInactive100,
+      type: GET_LEAD_CHEQUED_INACTIVE_5,
+      payload: LeadCheckedInactive5,
     });
   };
 };
