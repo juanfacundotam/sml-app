@@ -211,10 +211,10 @@ function Nav() {
                 </span>
                 <span>
                   <Link
-                    to="/corredor-history"
+                    to="/corredores-history"
                     className="text-[#e0dddd] hover:text-white"
                   >
-                    History
+                    Analytics
                   </Link>
                 </span>
               </li>

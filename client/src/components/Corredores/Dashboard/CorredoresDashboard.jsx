@@ -297,10 +297,8 @@ const CorredoresDashboard = () => {
                 <Link to={"/corredores"}>
                   <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
                 </Link>
+
                 <Link className="text-5xl" to={"/corredores-history"}>
-                  <FaHistory className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
-                </Link>
-                <Link className="text-5xl" to={"/corredores/history"}>
                   <IoStatsChart className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
                 </Link>
               </div>
