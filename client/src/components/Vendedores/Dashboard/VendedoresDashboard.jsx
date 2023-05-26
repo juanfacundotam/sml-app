@@ -23,16 +23,20 @@ const VendedoresDashboard = () => {
   const dispatch = useDispatch();
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
   const user = useUser().user;
-  const email = user?.emailAddresses[0].emailAddress;
+  const email = user?.emailAddresses[0]?.emailAddress;
 
+
+  localStorage.setItem('email', email);
+  let saveEmail = localStorage.getItem('email');
+  console.log(saveEmail)
 
   useEffect(() => {
-      dispatch(getLeadCheckedInactive5(email));
+    dispatch(getLeadCheckedInactive5(saveEmail));
+
   }, [dispatch]);
   useEffect(() => {
     setData(vendedoresDashboard);
   }, [vendedoresDashboard]);
-  console.log(data.length)
   
   const [pageStyle, setPageStyle] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -105,7 +109,7 @@ const VendedoresDashboard = () => {
       progress: undefined,
       theme: "dark",
     });
-    dispatch(getLeadCheckedInactive5());
+    dispatch(getLeadCheckedInactive5(saveEmail));
   };
   const SendErrorUpdateAlert = () => {
     toast.error("The lead could not be updated!", {
@@ -136,6 +140,11 @@ const VendedoresDashboard = () => {
     dispatch(getLeadCheckedInactive5());
     setData(vendedoresDashboard);
   };
+
+  const handleAsignarLeads = () => {
+    // dispatch(postAsignarLeads())
+    console.log("ssssssasdasdasdasd")
+  }
 
   return (
     <>
@@ -172,6 +181,13 @@ const VendedoresDashboard = () => {
             ) : (
               ""
             )}
+                    <button
+          type="button"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 absolute right-5"
+          onClick={handleAsignarLeads}
+        >
+          Asignar Leads
+        </button>
           </div>
           {vendedoresDashboard.length ? (
             <table className={style.table}>

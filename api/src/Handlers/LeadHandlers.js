@@ -49,7 +49,8 @@ const getLeadCheckedInactive5Handler = async (req, res) => {
   console.log(email)
   try {
     const leadCheckedInactive5 = await getLeadCheckedInactive5(email);
-    res.status(200).json(leadCheckedInactive5.slice(0, 5));
+    console.log(leadCheckedInactive5)
+    res.status(200).json(leadCheckedInactive5);
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
