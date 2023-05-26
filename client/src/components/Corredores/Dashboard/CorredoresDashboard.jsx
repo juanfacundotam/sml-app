@@ -29,9 +29,10 @@ import "react-toastify/dist/ReactToastify.css";
 const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
-  const [count, setCount] = useState(0);
   const { leadUnchecked10 } = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  console.log(leadUnchecked10);
 
   const user = useUser().user;
   const email = user?.emailAddresses[0].emailAddress;
@@ -63,10 +64,6 @@ const CorredoresDashboard = () => {
     });
   };
 
-  const counter = () => {
-    setCount += 1;
-  };
-
   const handleClientClick = (event, index) => {
     const { name, value } = event.target;
 
@@ -83,10 +80,9 @@ const CorredoresDashboard = () => {
   };
 
   const handleAsignedLead = () => {
-    let n = 10;
-    if (leadUnchecked10.length === 0) {
-      leadUncheckedAsignedCorredor(n);
-    }
+    leadUncheckedAsignedCorredor();
+
+    dispatch(getLeadUnchecked10(email));
   };
 
   const leadUncheckedAsignedCorredor = async (n) => {
@@ -104,7 +100,6 @@ const CorredoresDashboard = () => {
         const response = await axios.put(`/lead/${client[i]._id}`, {
           view: client[i].view,
         });
-        console.log(response.data);
       }
     } catch (error) {
       console.log("No se envio el put de view");
@@ -126,18 +121,20 @@ const CorredoresDashboard = () => {
   useEffect(() => {
     let clientes = [];
     let i = 0;
-    if (leadUnchecked10.length > 0) {
-      for (i = 0; i < leadUnchecked10.length; i++) {
-        clientes.push({
-          _id: leadUnchecked10[i]._id,
-          name: leadUnchecked10[i].name,
-          url: leadUnchecked10[i].url,
-          email: leadUnchecked10[i].email,
-          instagram: "",
-          level: "-",
-          checked: false,
-          view: true,
-        });
+    if (leadUnchecked10 && leadUnchecked10.length > 0) {
+      for (let i = 0; i < leadUnchecked10.length; i++) {
+        if (leadUnchecked10[i] && leadUnchecked10[i]._id) {
+          clientes.push({
+            _id: leadUnchecked10[i]._id,
+            name: leadUnchecked10[i].name,
+            url: leadUnchecked10[i].url,
+            email: leadUnchecked10[i].email,
+            instagram: "",
+            level: "-",
+            checked: false,
+            view: true,
+          });
+        }
       }
     }
     setClient(clientes);
@@ -241,6 +238,7 @@ const CorredoresDashboard = () => {
             });
             console.log(response.data);
 
+            leadUncheckedAsignedCorredor();
             // if (client[i].level === "incidencia") {
             //   const emailData = {
             //     clientName: client[i].name,
@@ -273,8 +271,8 @@ const CorredoresDashboard = () => {
           SendLeadsErrorLevel(client[i].name);
         }
 
+        // leadChecked();
       }
-      leadUncheckedAsignedCorredor(10 - leadUnchecked10.length);
       SendLeadsSuccess();
       dispatch(getLeadUnchecked10(email));
       // dispatch(getCorredoresLead(email));

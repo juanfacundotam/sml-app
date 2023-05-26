@@ -1,7 +1,7 @@
 const Lead = require("../../models/Lead");
 
 const getCorredorLead10 = async (email) => {
-  const leads = await Lead.find({ corredor: "" }).limit(1);
+  const leads = await Lead.find({ corredor: "" }).limit(10);
 
   leads.forEach(async (lead) => {
     lead.corredor = email;
