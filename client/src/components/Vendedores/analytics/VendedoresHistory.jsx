@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import PaginationOutlined from "../../pagination/PaginationOutlined";
 import {
   filterLevel,
-  getLeadCheckedInactive100,
+  getLeadCheckedInactive5,
   getVendedorAllLeads,
 } from "../../../redux/actions";
 import { AiOutlinePhone } from "react-icons/ai";
@@ -24,14 +24,13 @@ import Nav from "../../Nav/Nav";
 
 const VendedoresHistory = () => {
   const [data, setData] = useState([]);
-  const { leadCheckedInactive100 } = useSelector((state) => state);
+  const { leadCheckedInactive5 } = useSelector((state) => state);
   const { vendedorAllLeads } = useSelector((state) => state);
   // const { emailAddress } = user.primaryEmailAddress;
   const dispatch = useDispatch();
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
   const user = useUser().user;
   const email = user?.emailAddresses[0].emailAddress;
-  console.log(email);
 
 
   // console.log(emailAddress)

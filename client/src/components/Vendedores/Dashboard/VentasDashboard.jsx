@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import PaginationOutlined from "../../pagination/PaginationOutlined";
 import {
   filterLevel,
-  getLeadCheckedInactive100,
+  getLeadCheckedInactive5,
   getLeadsLLamadaVenta,
 } from "../../../redux/actions";
 import { AiOutlinePhone } from "react-icons/ai";
