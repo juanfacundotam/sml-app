@@ -18,7 +18,7 @@ import {
   orderCategory,
   orderClients,
 } from "../../../redux/actions";
-import { IoGrid, IoStatsChart } from "react-icons/io5";
+import { IoGrid, IoStatsChart, IoPeople } from "react-icons/io5";
 import { FaHistory } from "react-icons/fa";
 
 //
@@ -30,7 +30,9 @@ const Incidences = () => {
     dispatch(getLeadChecked());
   }, [dispatch]);
   useEffect(() => {
-    const filteredData = leaderDashboard.filter(item=>item.level==="incidencia")
+    const filteredData = leaderDashboard.filter(
+      (item) => item.level === "incidencia"
+    );
     setData(filteredData);
   }, [leaderDashboard]);
 
@@ -136,20 +138,19 @@ const Incidences = () => {
       <Card className="w-full h-full bg-[#222131] rounded-none p-5">
         <div className="flex justify-between items-center mx-5 mb-0">
           <div className="flex gap-5">
-            <Title className={style.title}>Dashboard</Title>
+            <Title className={style.title}>Incidencias</Title>
             <Link to={"/lideres/"}>
               <IoGrid className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
             </Link>
-            <Link className="text-5xl" to={"/lideres/history"}>
-              <FaHistory className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
+            <Link className="text-5xl" to={"/lideres-employees"}>
+              <IoPeople className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
             </Link>
-            <Link className="text-5xl" to={"/lideres/analytics"}>
+            <Link className="text-5xl" to={"/lideres-analytics"}>
               <IoStatsChart className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
             </Link>
-            <Link className="text-5xl" to={"/lideres-analytics-incidences"}>
+            <Link className="text-5xl" to={"/lideres-incidences"}>
               <CiWarning className="text-[2rem] text-[#418df0] hover:text-[#3570bd]" />
             </Link>
-            
           </div>
           {filters.level === true ? (
             <SelectLevel onChange={onChangeLevel} value={levelValue} />
@@ -163,9 +164,8 @@ const Incidences = () => {
           ) : (
             ""
           )}
-          
         </div>
-        <table className="w-full">
+        <div className="w-full">
           <div className="text-white text-14 font-thin">
             <div className="flex items-center justify-around p-3 ">
               <div className="flex justify-center items-center p-0">
@@ -225,7 +225,7 @@ const Incidences = () => {
             </div>
           </div>
 
-          <tbody>
+          <div>
             <ModalCient
               open={open}
               handleClose={handleClose}
@@ -378,8 +378,8 @@ const Incidences = () => {
                 </div>
               </div>
             ))}
-          </tbody>
-        </table>
+          </div>
+        </div>
         <PaginationOutlined
           pageStyle={pageStyle}
           setPageStyle={setPageStyle}
@@ -392,4 +392,4 @@ const Incidences = () => {
     </>
   );
 };
-export default Incidences
+export default Incidences;

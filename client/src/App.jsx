@@ -6,6 +6,7 @@ import Login from "./views/Login/Login";
 import CorredoresDashboard from "./components/Corredores/Dashboard/CorredoresDashboard";
 import VendedoresDashboard from "./components/Vendedores/Dashboard/VendedoresDashboard";
 import { AnalyticLeader } from "./components/Lideres/Analytic/AnalyticLeader";
+import { LideresDasboard } from "./components/Lideres/Dashboard/DashboardLeader";
 import CorredoresAnlaytics from "./components/Corredores/Analitycs/CorredoresAnalytics";
 import VendedoresHistory from "./components/Vendedores/analytics/VendedoresHistory";
 import VendedoresAnalytics from "./components/Vendedores/analytics/VendedoresAnalytics";
@@ -136,6 +137,17 @@ function ClerkProviderWithRoutes() {
           element={
             isRoleAllowed(roleReady) &&
             (roleReady === "clevel" || roleReady === "leader") ? (
+              <LideresDasboard />
+            ) : (
+              <ReturnToPage />
+            )
+          }
+        />
+        <Route
+          path="/lideres-analytics"
+          element={
+            isRoleAllowed(roleReady) &&
+            (roleReady === "clevel" || roleReady === "leader") ? (
               <AnalyticLeader />
             ) : (
               <ReturnToPage />
@@ -170,8 +182,7 @@ function ClerkProviderWithRoutes() {
         <Route
           path="/clevel-analytics"
           element={
-            isRoleAllowed(roleReady) &&
-            (roleReady === "clevel" || roleReady === "leader") ? (
+            isRoleAllowed(roleReady) && roleReady === "clevel" ? (
               <Analytic />
             ) : (
               <ReturnToPage />

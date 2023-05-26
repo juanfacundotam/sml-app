@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import style from "./AnalyticLeader.module.css";
+import style from "./DashboardLeader.module.css";
 import PaginationOutlined from "../../pagination/PaginationOutlined";
 import { Card, Text, Title } from "@tremor/react";
 import {
@@ -26,10 +26,9 @@ import {
   orderClients,
 } from "../../../redux/actions";
 import { IoGrid, IoPeople, IoStatsChart } from "react-icons/io5";
-import { FaHistory } from "react-icons/fa";
 
 //
-export const AnalyticLeader = () => {
+export const LideresDasboard = () => {
   const [data, setData] = useState([]);
   const { leaderDashboard } = useSelector((state) => state);
   const dispatch = useDispatch();

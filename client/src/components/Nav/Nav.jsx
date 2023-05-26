@@ -175,7 +175,7 @@ function Nav() {
                 </span>
                 <span>
                   <Link
-                    to="/lideres"
+                    to="/lideres-analytics"
                     className="text-[#e0dddd] hover:text-white"
                   >
                     Analytics
