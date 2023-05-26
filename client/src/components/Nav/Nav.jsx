@@ -29,7 +29,7 @@ function Nav() {
     <div className="bg-[#39394B] flex flex-col justify-between items-center h-screen min-w-[190px]">
       <div className="flex flex-col items-center justify-center mt-16">
         <div className="flex flex-col items-center justify-center m-1">
-          <Link to={"/home"}>
+          <Link to={"/protected"}>
             <img
               className="opacity-80 w-44"
               src="https://cdn.discordapp.com/attachments/1105243107555037294/1106577865698459788/White_Logo_Social_Media_Lab.png"
@@ -159,11 +159,11 @@ function Nav() {
                     to="/lideres"
                     className=" text-[#e0dddd] hover:text-white"
                   >
-                    Dashboard 
+                    Dashboard
                   </Link>
                 </span>
               </li>
-			  <li className="flex gap-2 items-center text-[18px]">
+              <li className="flex gap-2 items-center text-[18px]">
                 <span className=" text-lg">
                   <IoSettingsSharp className="text-[#e0dddd]" />
                 </span>
@@ -190,7 +190,7 @@ function Nav() {
                 </span>
               </li>
             </ul>
-          ):  (
+          ) : (
             <ul className="flex flex-col gap-2">
               <li className="flex gap-2 items-center text-[18px]">
                 <span className=" text-lg">
@@ -202,6 +202,19 @@ function Nav() {
                     className=" text-[#e0dddd] hover:text-white"
                   >
                     Dashboard
+                  </Link>
+                </span>
+              </li>
+              <li className="flex gap-2 items-center text-[18px] text-white">
+                <span className="text-[1.5rem]">
+                  <IoBagSharp className="w-4 text-[#e0dddd]" />
+                </span>
+                <span>
+                  <Link
+                    to="/corredor-history"
+                    className="text-[#e0dddd] hover:text-white"
+                  >
+                    History
                   </Link>
                 </span>
               </li>
@@ -218,21 +231,8 @@ function Nav() {
                   </Link>
                 </span>
               </li>
-              <li className="flex gap-2 items-center text-[18px] text-white">
-                <span className="text-[1.5rem]">
-                  <IoBagSharp className="w-4 text-[#e0dddd]" />
-                </span>
-                <span>
-                  <Link
-                    to="/protected"
-                    className="text-[#e0dddd] hover:text-white"
-                  >
-                    Home
-                  </Link>
-                </span>
-              </li>
             </ul>
-          ) }
+          )}
         </div>
       </div>
 

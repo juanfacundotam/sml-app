@@ -153,7 +153,7 @@ function ClerkProviderWithRoutes() {
           }
         />
         <Route
-          path="/lideres/analytics/incidences"
+          path="/lideres-incidences"
           element={isRoleAllowed(roleReady) ? <Incidences /> : <returnToPage />}
         />
         <Route
@@ -168,7 +168,7 @@ function ClerkProviderWithRoutes() {
           }
         />
         <Route
-          path="/clevel/analytics"
+          path="/clevel-analytics"
           element={
             isRoleAllowed(roleReady) &&
             (roleReady === "clevel" || roleReady === "leader") ? (
@@ -189,7 +189,7 @@ function ClerkProviderWithRoutes() {
           }
         />
         <Route
-          path="/corredores/history"
+          path="/corredores-history"
           element={
             isRoleAllowed(roleReady) && roleReady === "corredor" ? (
               <CorredoresAnlaytics />
