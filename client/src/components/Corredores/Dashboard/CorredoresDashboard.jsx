@@ -19,7 +19,7 @@ import { CiGlobe, CiMail } from "react-icons/ci";
 import { GrInstagram } from "react-icons/gr";
 import { IoGrid, IoStatsChart } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { getCorredoresLead, getLeadUnchecked10 } from "../../../redux/actions";
+import { getCorredoresLead } from "../../../redux/actions";
 import IconLabelButtons from "./MaterialUi/IconLabelButtons";
 import { useUser } from "@clerk/clerk-react";
 import { ToastContainer, toast } from "react-toastify";
@@ -83,22 +83,20 @@ const CorredoresDashboard = () => {
     });
   };
 
-  const leadUncheckedAsignedCorredor = async () => {
-    try {
-      const response = await axios.put(
-        `/lead/unchecked10/corredor?email=${email}`
-      );
-      console.log(response.data);
-    } catch (error) {}
-  };
+  // const leadUncheckedAsignedCorredor = async () => {
+  //   try {
+  //     const response = await axios.put(
+  //       `/lead/unchecked10/corredor?email=${email}`
+  //     );
+  //     console.log(response.data);
+  //   } catch (error) {}
+  // };
 
   useEffect(() => {
 
-    dispatch(getLeadUnchecked10(email)).then(() => {
-      setDataLoaded(true);
-    });
+    getCorredoresLead(email)
 
-  }, [dispatch]);
+  }, [dispatch, email]);
 
   useEffect(() => {
     let clientes = [];
@@ -252,10 +250,10 @@ const CorredoresDashboard = () => {
       }
 
       dispatch(getCorredoresLead(email));
-      leadUncheckedAsignedCorredor();
+
       SendLeadsSuccess();
 
-      dispatch(getLeadUnchecked10(email));
+      // dispatch(getLeadUnchecked10(email));
 
     } catch (error) {
       SendLeadsError();
