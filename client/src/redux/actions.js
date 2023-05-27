@@ -199,12 +199,6 @@ export const getLeadsLLamadaVenta = (email) => {
   };
 };
 
-export const putCorredoresLead = (email) => {
-  return async () => {
-    await axios.put(`/lead/unchecked10/corredor?email=${email}`);
-  };
-};
-
 export const getLeadCorredores = (email) => {
   return async (dispatch) => {
     const response = await axios.get(`lead/unchecked10?email=${email}`);
