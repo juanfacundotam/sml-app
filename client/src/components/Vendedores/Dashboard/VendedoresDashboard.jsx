@@ -33,7 +33,9 @@ const VendedoresDashboard = () => {
   useEffect(() => {
     dispatch(getLeadCheckedInactive5(saveEmail));
 
-  }, [dispatch]);
+  }, [dispatch, saveEmail]);
+
+  
   useEffect(() => {
     setData(vendedoresDashboard);
   }, [vendedoresDashboard]);
