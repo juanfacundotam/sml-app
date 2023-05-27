@@ -107,16 +107,17 @@ export const getLeadChecked = () => {
 };
 
 export const getLeadCheckedInactive5 = (email) => {
-  console.log(email);
-  return async (dispatch) => {
-    const response = await axios.get(`/lead/checkedinactive5?email=${email}`);
-    const LeadCheckedInactive5 = response.data;
-    console.log(LeadCheckedInactive5)
-    dispatch({
-      type: GET_LEAD_CHEQUED_INACTIVE_5,
-      payload: LeadCheckedInactive5,
-    });
-  };
+  if(email){
+    return async (dispatch) => {
+      const response = await axios.get(`/lead/checkedinactive5?email=${email}`);
+      const LeadCheckedInactive5 = response.data;
+      console.log(LeadCheckedInactive5)
+      dispatch({
+        type: GET_LEAD_CHEQUED_INACTIVE_5,
+        payload: LeadCheckedInactive5,
+      });
+    };
+  } 
 };
 
 export const orderClients = (order) => {
@@ -197,7 +198,7 @@ export const getLeadsLLamadaVenta = (email) => {
 };
 
 export const getCorredoresLead = (email) => {
-  if(!email) {
+  if(email) {
     return async (dispatch) => {
       const response = await axios.put(
         `/lead/unchecked10/corredor?email=${email}`
