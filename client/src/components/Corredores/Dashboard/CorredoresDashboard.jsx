@@ -30,12 +30,20 @@ const CorredoresDashboard = () => {
   const { corredorLead } = useSelector((state) => state);
   const dispatch = useDispatch();
 
+
+  console.log(LeadValue);
+
+
+  const org = useOrganization();
+  const orgList = useOrganizationList();
   const user = useUser().user;
-  const email = user?.emailAddresses[0].emailAddress;
+  const email = user?.emailAddresses[0]?.emailAddress;
+  // const { emailAddress } = user.primaryEmailAddress;
+
 
   const handleChangeInstagram = (event, index) => {
     const { name, value } = event.target;
-    console.log(value);
+
     setClient((prevState) => {
       const updatedClient = [...prevState];
       updatedClient[index] = {
@@ -85,7 +93,11 @@ const CorredoresDashboard = () => {
   };
 
   useEffect(() => {
-    dispatch(getCorredoresLead(email));
+
+    dispatch(getLeadUnchecked10(email)).then(() => {
+      setDataLoaded(true);
+    });
+
   }, [dispatch]);
 
   useEffect(() => {
@@ -242,6 +254,9 @@ const CorredoresDashboard = () => {
       dispatch(getCorredoresLead(email));
       leadUncheckedAsignedCorredor();
       SendLeadsSuccess();
+
+      dispatch(getLeadUnchecked10(email));
+
     } catch (error) {
       SendLeadsError();
       console.log({ error: error.message });
