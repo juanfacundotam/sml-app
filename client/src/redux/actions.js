@@ -197,12 +197,13 @@ export const getLeadsLLamadaVenta = (email) => {
 };
 
 export const getCorredoresLead = (email) => {
-  console.log('esta andando estooooooooooooooo?');
-  return async (dispatch) => {
-    const response = await axios.put(
-      `/lead/unchecked10/corredor?email=${email}`
-    );
-    const corredorLead = response.data;
-    dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });
-  };
+  if(!email) {
+    return async (dispatch) => {
+      const response = await axios.put(
+        `/lead/unchecked10/corredor?email=${email}`
+        );
+        const corredorLead = response.data;
+        dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });
+      };
+    }
 };

@@ -1,20 +1,12 @@
 const Lead = require("../../models/Lead");
 
 const getCorredorLead10 = async (email) => {
-  //   const leads = await Lead.find({ corredor: "" }).limit(10);
-
-  //   leads.forEach(async (lead) => {
-  //     lead.corredor = email;
-  //     await lead.save();
-  //   });
-
-  //   return leads;
-  // };
-
   const leadUnchecked = await Lead.find({
     corredor: email,
     checked: false,
-  }).limit(10);
+  })
+    .limit(10)
+    .exec();
 
   let count = 0;
   count = 10 - leadUnchecked.length;
@@ -25,11 +17,10 @@ const getCorredorLead10 = async (email) => {
   if (count > 0 && count <= 10) {
     const leadRest = await Lead.find({
       checked: false,
-      $or: [{ corredor: "" }, { corredor: undefined }],
+      corredor: "",
     })
       .limit(count)
       .exec();
-    console.log(leadRest);
 
     if (leadRest.length > 0) {
       await Promise.all(
@@ -41,6 +32,7 @@ const getCorredorLead10 = async (email) => {
     }
   }
 
+  console.log(...leadUnchecked, ...leadRest);
   return [...leadUnchecked, ...leadRest];
 };
 
