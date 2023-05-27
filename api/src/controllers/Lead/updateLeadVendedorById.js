@@ -9,10 +9,11 @@ const updateLeadVendedorById = async (id, updatedData) => {
   //     { unanswered_leads: updatedData.dataVendedor.status },
   //   ]
   // });
+
   // console.log(VendedorArrays);
   const leadCountCheck = await Lead.findById(id);
   // console.log(leadCountCheck.llamados)
-  
+
   if (!updatedData.dataLead.llamados) {
     updatedData.dataLead.llamados = 0;
   }
@@ -38,8 +39,7 @@ const updateLeadVendedorById = async (id, updatedData) => {
   const leadUpdate = await Lead.findByIdAndUpdate(id, updatedData.dataLead, {
     new: true,
   });
-  console.log(leadUpdate)
-  
+
   const valor = updatedData.dataVendedor;
   
   const vendedor = await Vendedor.findOneAndUpdate(
@@ -49,6 +49,7 @@ const updateLeadVendedorById = async (id, updatedData) => {
   );
 
   if (!vendedor) {
+    console.log("entranding");
     const vendedor = await Vendedor.findOneAndUpdate(
       { email: updatedData.dataLead.vendedor },
       { $addToSet: { leads: { $each: [valor] } } },
