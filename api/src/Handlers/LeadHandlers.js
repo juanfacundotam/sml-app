@@ -9,7 +9,6 @@ const getLeadCheckedInactive5 = require("../controllers/Lead/getLeadCheckedInact
 const getLead10Unchecked = require("../controllers/Lead/getLead10Unchecked");
 const updateLeadVendedorById = require("../controllers/Lead/updateLeadVendedorById");
 const getLeadVendedorById = require("../controllers/Lead/getLeadVendedorById");
-// const getCorredorLead10 = require("../controllers/Lead/getCorredorLead10");
 
 const getAllLeadHandler = async (req, res) => {
   try {
