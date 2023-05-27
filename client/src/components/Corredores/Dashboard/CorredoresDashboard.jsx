@@ -28,18 +28,13 @@ import "react-toastify/dist/ReactToastify.css";
 const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
   const { corredorLead } = useSelector((state) => state);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  
+  console.log(corredorLead);;
 
-
-  console.log(LeadValue);
-
-
-  const org = useOrganization();
-  const orgList = useOrganizationList();
   const user = useUser().user;
   const email = user?.emailAddresses[0]?.emailAddress;
   // const { emailAddress } = user.primaryEmailAddress;
-
 
   const handleChangeInstagram = (event, index) => {
     const { name, value } = event.target;
@@ -93,9 +88,7 @@ const CorredoresDashboard = () => {
   // };
 
   useEffect(() => {
-
-    getCorredoresLead(email)
-
+    getCorredoresLead(email);
   }, [dispatch, email]);
 
   useEffect(() => {
@@ -254,7 +247,6 @@ const CorredoresDashboard = () => {
       SendLeadsSuccess();
 
       // dispatch(getLeadUnchecked10(email));
-
     } catch (error) {
       SendLeadsError();
       console.log({ error: error.message });
