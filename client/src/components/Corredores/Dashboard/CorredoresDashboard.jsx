@@ -30,8 +30,6 @@ const CorredoresDashboard = () => {
   const { corredorLead } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  console.log(corredorLead);
-
   const user = useUser().user;
   const email = user?.emailAddresses[0].emailAddress;
 
@@ -87,7 +85,6 @@ const CorredoresDashboard = () => {
   };
 
   useEffect(() => {
-    dispatch(getLeadUnchecked10(email));
     dispatch(getCorredoresLead(email));
   }, [dispatch]);
 
@@ -242,7 +239,6 @@ const CorredoresDashboard = () => {
         }
       }
 
-      dispatch(getLeadUnchecked10(email));
       dispatch(getCorredoresLead(email));
       leadUncheckedAsignedCorredor();
       SendLeadsSuccess();

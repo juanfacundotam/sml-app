@@ -24,7 +24,7 @@ export const setRol = (rol) => {
   return async (dispatch) => {
     // Simular una operación asincrónica para obtener el valor de rol
     const fetchedRol = await new Promise((resolve) =>
-      setTimeout(() => resolve(rol), 1)
+      setTimeout(() => resolve(rol), 3000)
     );
 
     dispatch({
