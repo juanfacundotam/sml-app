@@ -137,13 +137,17 @@ const VendedoresDashboard = () => {
       progress: undefined,
       theme: "dark",
     });
-    dispatch(getLeadCheckedInactive5());
+    // dispatch(getLeadCheckedInactive5());
   };
   const updateLeads = () => {
     dispatch(getLeadCheckedInactive5());
     setData(vendedoresDashboard);
   };
-
+  const handleUpdateIncidence = async () => {
+    // dispatch()
+  //  await dispatch(getLeadCheckedInactive5());
+    SendIncidenceAlert()
+  }
 
   return (
     <>
@@ -288,6 +292,7 @@ const VendedoresDashboard = () => {
                         updateLeads={updateLeads}
                         emailAddress={saveEmail}
                         fullName={fullName}
+                        handleUpdateIncidence={handleUpdateIncidence}
                       />
                     </td>
                   </tr>
