@@ -18,12 +18,13 @@ export const GET_LEADS_LLAMADA_VENTA = "GET_LEADS_LLAMADA_VENTA";
 export const SET_ROL = "SET_ROL";
 export const SET_ACCESS = "SET_ACCESS";
 export const GET_EMPLOYEES = "GET_EMPLOYEES";
+export const GET_CORREDOR_LEAD = "GET_CORREDOR_LEAD";
 //
 export const setRol = (rol) => {
   return async (dispatch) => {
     // Simular una operación asincrónica para obtener el valor de rol
     const fetchedRol = await new Promise((resolve) =>
-      setTimeout(() => resolve(rol), 2000)
+      setTimeout(() => resolve(rol), 3000)
     );
 
     dispatch({
@@ -89,9 +90,9 @@ export const getLeadUnchecked = () => {
   };
 };
 
-export const getLeadUnchecked10 = () => {
+export const getLeadUnchecked10 = (email) => {
   return async (dispatch) => {
-    const response = await axios.get("/lead/unchecked10");
+    const response = await axios.get(`/lead/unchecked10?email=${email}`);
     const LeadUnchecked10 = response.data;
     dispatch({ type: GET_LEAD_UNCHECKED_10, payload: LeadUnchecked10 });
   };
@@ -106,7 +107,7 @@ export const getLeadChecked = () => {
 };
 
 export const getLeadCheckedInactive5 = (email) => {
-  console.log(email)
+  console.log(email);
   return async (dispatch) => {
     const response = await axios.get(`/lead/checkedinactive5?email=${email}`);
     const LeadCheckedInactive5 = response.data;
@@ -192,5 +193,16 @@ export const getLeadsLLamadaVenta = (email) => {
       type: GET_LEADS_LLAMADA_VENTA,
       payload: allLeadsVentaMaps,
     });
+  };
+};
+
+export const getCorredoresLead = (email) => {
+  console.log('esta andando estooooooooooooooo?');
+  return async (dispatch) => {
+    const response = await axios.put(
+      `/lead/unchecked10/corredor?email=${email}`
+    );
+    const corredorLead = response.data;
+    dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });
   };
 };

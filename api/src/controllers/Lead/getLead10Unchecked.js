@@ -1,5 +1,6 @@
 const Lead = require("../../models/Lead");
 
+
 const getLead10Unchecked = async (email) => {
  
 
@@ -30,6 +31,7 @@ const getLead10Unchecked = async (email) => {
   }
 
   return [...leadUnchecked, ...leadRest];
+
 };
 
 module.exports = getLead10Unchecked;
