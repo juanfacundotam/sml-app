@@ -19,7 +19,7 @@ import { CiGlobe, CiMail } from "react-icons/ci";
 import { GrInstagram } from "react-icons/gr";
 import { IoGrid, IoStatsChart } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { getCorredoresLead } from "../../../redux/actions";
+import { putCorredoresLead,getLeadCorredores } from "../../../redux/actions";
 import IconLabelButtons from "./MaterialUi/IconLabelButtons";
 import { useUser } from "@clerk/clerk-react";
 import { ToastContainer, toast } from "react-toastify";
@@ -28,9 +28,7 @@ import "react-toastify/dist/ReactToastify.css";
 const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
   const { corredorLead } = useSelector((state) => state);
-  const dispatch = useDispatch()
-  
-  console.log(corredorLead);;
+  const dispatch = useDispatch();
 
   const user = useUser().user;
   const email = user?.emailAddresses[0]?.emailAddress;
@@ -49,6 +47,12 @@ const CorredoresDashboard = () => {
       return updatedClient;
     });
   };
+  useEffect(() => {
+    console.log(email);
+    dispatch(getLeadCorredores(email));
+    console.log(corredorLead);
+  }, [dispatch]);
+
   const handleChangeEmail = (event, index) => {
     const { name, value } = event.target;
     console.log(value);
@@ -86,10 +90,6 @@ const CorredoresDashboard = () => {
   //     console.log(response.data);
   //   } catch (error) {}
   // };
-
-  useEffect(() => {
-    getCorredoresLead(email);
-  }, [dispatch, email]);
 
   useEffect(() => {
     let clientes = [];
@@ -242,7 +242,7 @@ const CorredoresDashboard = () => {
         }
       }
 
-      dispatch(getCorredoresLead(email));
+      dispatch(putCorredoresLead(email));
 
       SendLeadsSuccess();
 

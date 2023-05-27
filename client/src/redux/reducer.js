@@ -252,6 +252,8 @@ const rootReducer = (state = initialState, action) => {
         LeadsLlamadaVenta: action.payload,
       };
     case GET_CORREDOR_LEAD:
+      console.log("clientes del corredor");
+      console.log(action.payload);
       return {
         ...state,
         corredorLead: action.payload,

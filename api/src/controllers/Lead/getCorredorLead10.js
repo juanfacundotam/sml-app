@@ -33,6 +33,7 @@ const getCorredorLead10 = async (email) => {
   }
 
   console.log(...leadUnchecked, ...leadRest);
+  console.log("ASD123");
   return [...leadUnchecked, ...leadRest];
 };
 

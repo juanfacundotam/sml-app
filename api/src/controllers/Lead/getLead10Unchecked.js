@@ -1,37 +1,35 @@
 const Lead = require("../../models/Lead");
 
-
 const getLead10Unchecked = async (email) => {
- 
-
+  console.log("hola");
   const leadUnchecked = await Lead.find({
-    corredor: email,
+    corredor: "nikitocja@gmail.com",
     checked: false,
-    view: false,
+    view: true,
   })
-    .limit(1)
+    .limit(10)
     .exec();
 
-  let count = 0;
-  count = 10 - leadUnchecked.length;
+  // let count = 0;
+  // count = 10 - leadUnchecked.length;
 
-  const leadRest = await Lead.find({
-    checked: false,
-    view: false,
-    corredor: "",
-  })
-    .limit(count)
-    .exec();
+  // const leadRest = await Lead.find({
+  //   checked: false,
+  //   view: false,
+  //   corredor: "",
+  // })
+  //   .limit(1)
+  //   .exec();
 
-  if (leadRest.length > 0) {
-    leadRest.forEach((element) => {
-      element.corredor = email;
-      element.save();
-    });
-  }
+  // if (leadRest.length > 0) {
+  //   leadRest.forEach((element) => {
+  //     element.corredor = email;
+  //     element.save();
+  //   });
+  // }
+  console.log("chau");
 
-  return [...leadUnchecked, ...leadRest];
-
+  return [...leadUnchecked];
 };
 
 module.exports = getLead10Unchecked;

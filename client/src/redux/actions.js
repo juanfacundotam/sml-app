@@ -107,17 +107,17 @@ export const getLeadChecked = () => {
 };
 
 export const getLeadCheckedInactive5 = (email) => {
-  if(email){
+  if (email) {
     return async (dispatch) => {
       const response = await axios.get(`/lead/checkedinactive5?email=${email}`);
       const LeadCheckedInactive5 = response.data;
-      console.log(LeadCheckedInactive5)
+      console.log(LeadCheckedInactive5);
       dispatch({
         type: GET_LEAD_CHEQUED_INACTIVE_5,
         payload: LeadCheckedInactive5,
       });
     };
-  } 
+  }
 };
 
 export const orderClients = (order) => {
@@ -168,9 +168,10 @@ export const getVendedorAllLeads = (email) => {
     //     }
     //   })
     //   .filter((item) => item !== undefined);
-      const allLeadsMaps = await allLeads.filter((item) => (
+    const allLeadsMaps = await allLeads.filter(
+      (item) =>
         item.status !== "Sin contactar" && item.status !== "Agendar 2do llamado"
-      ));
+    );
     dispatch({
       type: GET_VENDEDOR_ALL_LEADS,
       payload: allLeadsMaps,
@@ -198,14 +199,16 @@ export const getLeadsLLamadaVenta = (email) => {
   };
 };
 
-export const getCorredoresLead = (email) => {
-  if(email) {
-    return async (dispatch) => {
-      const response = await axios.put(
-        `/lead/unchecked10/corredor?email=${email}`
-        );
-        const corredorLead = response.data;
-        dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });
-      };
-    }
+export const putCorredoresLead = (email) => {
+  return async () => {
+    await axios.put(`/lead/unchecked10/corredor?email=${email}`);
+  };
+};
+
+export const getLeadCorredores = (email) => {
+  return async (dispatch) => {
+    const response = await axios.get(`lead/unchecked10?email=${email}`);
+    const corredorLead = response.data;
+    dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });
+  };
 };
