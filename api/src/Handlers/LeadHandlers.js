@@ -28,15 +28,6 @@ const getLeadUncheckedHandler = async (req, res) => {
   }
 };
 
-// const getCorredorLead10Handler = async (req, res) => {
-//   const { email } = req.query;
-//   try {
-//     const leadCorredor = await getCorredorLead10(email);
-//     res.status(200).json(leadCorredor);
-//   } catch (error) {
-//     res.status(404).json({ error: error.message });
-//   }
-// };
 const getLead10UncheckedHandler = async (req, res) => {
   const { email } = req.query;
   try {
@@ -143,5 +134,4 @@ module.exports = {
   getLeadByNameHandler,
   updateLeadVendedorHandler,
   getLeadVendedorHandler,
-  // getCorredorLead10Handler,
 };
