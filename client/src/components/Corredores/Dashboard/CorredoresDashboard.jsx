@@ -231,7 +231,7 @@ const CorredoresDashboard = () => {
               email: client[i].email,
               level: client[i].level,
               checked: true,
-              view: false,
+              view: true,
             });
             console.log(response.data);
           } else {
@@ -242,7 +242,7 @@ const CorredoresDashboard = () => {
         }
       }
 
-      dispatch(putCorredoresLead(email));
+      dispatch(getLeadCorredores(email));
 
       SendLeadsSuccess();
 
