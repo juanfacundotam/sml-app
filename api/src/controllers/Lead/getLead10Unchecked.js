@@ -1,9 +1,8 @@
 const Lead = require("../../models/Lead");
 
 const getLead10Unchecked = async (email) => {
-  console.log("hola");
   const leadUnchecked = await Lead.find({
-    corredor: "nikitocja@gmail.com",
+    corredor: email,
     checked: false,
     view: true,
   })
@@ -16,8 +15,6 @@ const getLead10Unchecked = async (email) => {
   } else {
     count = 10;
   }
-
-  console.log(count);
 
   const leadRest = await Lead.find({
     checked: false,
@@ -36,8 +33,6 @@ const getLead10Unchecked = async (email) => {
       element.save();
     });
   }
-
-  console.log("chau");
 
   return [...leadUnchecked, ...limitedLeadRest];
 };
