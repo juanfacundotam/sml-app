@@ -24,7 +24,7 @@ export const setRol = (rol) => {
   return async (dispatch) => {
     // Simular una operación asincrónica para obtener el valor de rol
     const fetchedRol = await new Promise((resolve) =>
-      setTimeout(() => resolve(rol), 2000)
+      setTimeout(() => resolve(rol), 1)
     );
 
     dispatch({
@@ -196,6 +196,7 @@ export const getLeadsLLamadaVenta = (email) => {
 };
 
 export const getCorredoresLead = (email) => {
+  console.log('esta andando estooooooooooooooo?');
   return async (dispatch) => {
     const response = await axios.put(
       `/lead/unchecked10/corredor?email=${email}`

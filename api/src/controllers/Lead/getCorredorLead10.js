@@ -14,26 +14,33 @@ const getCorredorLead10 = async (email) => {
   const leadUnchecked = await Lead.find({
     corredor: email,
     checked: false,
-  })
-    .limit(10)
-    .exec();
+  }).limit(10);
 
   let count = 0;
   count = 10 - leadUnchecked.length;
+  console.log(count);
 
-  const leadRest = await Lead.find({
-    checked: false,
-    corredor: "",
-  })
-    .limit(count)
-    .exec();
+  let leadRest = [];
 
-  if (leadRest.length > 0) {
-    leadRest.forEach((element) => {
-      element.corredor = email;
-      element.save();
-    });
+  if (count > 0 && count <= 10) {
+    const leadRest = await Lead.find({
+      checked: false,
+      $or: [{ corredor: "" }, { corredor: "undefined" }],
+    })
+      .limit(count)
+      .exec();
+    console.log(leadRest);
+
+    if (leadRest.length > 0) {
+      await Promise.all(
+        leadRest.map(async (element) => {
+          element.corredor = email;
+          await element.save();
+        })
+      );
+    }
   }
+
   return [...leadUnchecked, ...leadRest];
 };
 
