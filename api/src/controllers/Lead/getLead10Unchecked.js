@@ -10,26 +10,36 @@ const getLead10Unchecked = async (email) => {
     .limit(10)
     .exec();
 
-  // let count = 0;
-  // count = 10 - leadUnchecked.length;
+  let count;
+  if (leadUnchecked.length > 0) {
+    count = 10 - leadUnchecked.length;
+  } else {
+    count = 10;
+  }
 
-  // const leadRest = await Lead.find({
-  //   checked: false,
-  //   view: false,
-  //   corredor: "",
-  // })
-  //   .limit(1)
-  //   .exec();
+  console.log(count);
 
-  // if (leadRest.length > 0) {
-  //   leadRest.forEach((element) => {
-  //     element.corredor = email;
-  //     element.save();
-  //   });
-  // }
+  const leadRest = await Lead.find({
+    checked: false,
+    view: false,
+    corredor: "",
+  })
+    .limit(count)
+    .exec();
+  const limitedLeadRest = leadRest.slice(0, count);
+  console.log(limitedLeadRest.length);
+
+  if (limitedLeadRest.length > 0) {
+    limitedLeadRest.forEach((element) => {
+      element.corredor = email;
+      element.view = true;
+      element.save();
+    });
+  }
+
   console.log("chau");
 
-  return [...leadUnchecked];
+  return [...leadUnchecked, ...limitedLeadRest];
 };
 
 module.exports = getLead10Unchecked;

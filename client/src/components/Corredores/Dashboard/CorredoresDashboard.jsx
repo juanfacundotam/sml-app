@@ -19,7 +19,7 @@ import { CiGlobe, CiMail } from "react-icons/ci";
 import { GrInstagram } from "react-icons/gr";
 import { IoGrid, IoStatsChart } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { putCorredoresLead,getLeadCorredores } from "../../../redux/actions";
+import { putCorredoresLead, getLeadCorredores } from "../../../redux/actions";
 import IconLabelButtons from "./MaterialUi/IconLabelButtons";
 import { useUser } from "@clerk/clerk-react";
 import { ToastContainer, toast } from "react-toastify";
@@ -206,7 +206,7 @@ const CorredoresDashboard = () => {
               email: client[i].email,
               level: client[i].level,
               checked: true,
-              view: false,
+              view: true,
             });
             console.log(response.data);
 
