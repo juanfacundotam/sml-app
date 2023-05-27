@@ -158,18 +158,19 @@ export const getVendedorAllLeads = (email) => {
   return async (dispatch) => {
     const response = await axios.get(`/vendedor/email?email=${email}`);
     const allLeads = response.data.leads;
-    console.log(allLeads);
-
-    const allLeadsMaps = allLeads
-      .map((item) => {
-        if (
-          item.status !== "Sin contactar" &&
-          item.status !== "Agendar 2do llamado"
-        ) {
-          return item;
-        }
-      })
-      .filter((item) => item !== undefined);
+    // const allLeadsMaps = allLeads
+    //   .map((item) => {
+    //     if (
+    //       item.status !== "Sin contactar" &&
+    //       item.status !== "Agendar 2do llamado"
+    //     ) {
+    //       return item;
+    //     }
+    //   })
+    //   .filter((item) => item !== undefined);
+      const allLeadsMaps = await allLeads.filter((item) => (
+        item.status !== "Sin contactar" && item.status !== "Agendar 2do llamado"
+      ));
     dispatch({
       type: GET_VENDEDOR_ALL_LEADS,
       payload: allLeadsMaps,

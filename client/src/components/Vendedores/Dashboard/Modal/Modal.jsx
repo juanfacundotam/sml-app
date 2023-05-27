@@ -193,6 +193,7 @@ function IncidenceModal({
   emailAddress,
   fullName,
   updateLeads,
+  handleUpdateIncidence,
 }) {
   const [openIncidenceChild, setOpenIncidenceChild] = React.useState(false);
   const handleOpen = () => {
@@ -240,8 +241,6 @@ function IncidenceModal({
   //   }
   // };
 
-
-
   const handleClose = () => {
     setOpenIncidenceChild(false);
   };
@@ -249,42 +248,44 @@ function IncidenceModal({
     statusObj.status = "incidencia";
     // await setStatusObj({...statusObj, status: "incidencia"})
 
-      const dataVendedor = {
-        _id: item._id,
-        name: item.name,
-        status: statusObj.status,
-        status_op: statusObj.status_op,
-        llamada_venta: statusObj.llamada_venta,
-        province: item.province,
-        category: item.category,
-        telephone: item.telephone,
-        url: item.url,
-        instagram: item.instagram,
-        level: item.level,
-      };
+    const dataVendedor = {
+      _id: item._id,
+      name: item.name,
+      status: statusObj.status,
+      status_op: statusObj.status_op,
+      llamada_venta: statusObj.llamada_venta,
+      province: item.province,
+      category: item.category,
+      telephone: item.telephone,
+      url: item.url,
+      instagram: item.instagram,
+      level: item.level,
+    };
 
-      const dataLead = {
-        status: statusObj.status,
-        status_op: statusObj.status_op,
-        vendedor: emailAddress,
-        vendedor_name: fullName,
-        llamados: item.llamados,
-        llamada_venta: statusObj.llamada_venta,
-      };
+    const dataLead = {
+      status: statusObj.status,
+      status_op: statusObj.status_op,
+      vendedor: emailAddress,
+      vendedor_name: fullName,
+      llamados: item.llamados,
+      llamada_venta: statusObj.llamada_venta,
+    };
 
-      const dataUpdate = {
-        dataLead,
-        dataVendedor,
-      };
-      axios
-        .put(`/lead/vendedor/${item._id}`, dataUpdate)
-        .then((response) => {})
-        .catch((error) => {
-          console.log("error al enviar lña incidencia");
-        });
+    const dataUpdate = {
+      dataLead,
+      dataVendedor,
+    };
+    axios
+      .put(`/lead/vendedor/${item._id}`, dataUpdate)
+      .then((response) => {})
+      .catch((error) => {
+        console.log("error al enviar lña incidencia");
+      });
+
     setOpen(false);
-    SendIncidenceAlert();
-    updateLeads();
+    handleUpdateIncidence()
+    // SendIncidenceAlert();
+    // updateLeads();
   };
   const handleCancel = () => {
     // setOpen(false);
@@ -439,6 +440,7 @@ export default function NestedModal({
   updateLeads,
   emailAddress,
   fullName,
+  handleUpdateIncidence,
 }) {
   const [open, setOpen] = React.useState(false);
   const [dateHour, setDateHour] = React.useState({});
@@ -465,14 +467,6 @@ export default function NestedModal({
       ...statusObj,
       status: item.status,
     });
-    // if(statusObj.status === "No responde" || statusObj.status === "Sin contratar") {
-    //   setStatusObj({
-    //     ...statusObj,
-    //     status: statusObj.status,
-    //     status_op: ""
-
-    //   });
-    // }
   }, [setStatusObj]);
 
   const handleOpen = () => {
@@ -624,6 +618,7 @@ export default function NestedModal({
                   emailAddress={emailAddress}
                   fullName={fullName}
                   updateLeads={updateLeads}
+                  handleUpdateIncidence={handleUpdateIncidence}
                 />
               </div>
             </div>
