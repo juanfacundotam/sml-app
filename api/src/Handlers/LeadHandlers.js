@@ -59,7 +59,7 @@ const getLeadCheckedHandler = async (req, res) => {
 };
 
 const getLeadCheckedInactive5Handler = async (req, res) => {
-  const email = req.query;
+  const {email} = req.query;
 
   try {
     const leadCheckedInactive5 = await getLeadCheckedInactive5(email);

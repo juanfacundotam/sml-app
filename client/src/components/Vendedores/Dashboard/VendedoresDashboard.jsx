@@ -24,6 +24,7 @@ const VendedoresDashboard = () => {
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
   const user = useUser().user;
   const email = user?.emailAddresses[0]?.emailAddress;
+  const { fullName } = user;
 
 
   localStorage.setItem('email', email);
@@ -143,10 +144,6 @@ const VendedoresDashboard = () => {
     setData(vendedoresDashboard);
   };
 
-  const handleAsignarLeads = () => {
-    // dispatch(postAsignarLeads())
-    console.log("ssssssasdasdasdasd")
-  }
 
   return (
     <>
@@ -183,13 +180,7 @@ const VendedoresDashboard = () => {
             ) : (
               ""
             )}
-                    <button
-          type="button"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 absolute right-5"
-          onClick={handleAsignarLeads}
-        >
-          Asignar Leads
-        </button>
+
           </div>
           {vendedoresDashboard.length ? (
             <table className={style.table}>
@@ -295,6 +286,8 @@ const VendedoresDashboard = () => {
                         SendIncidenceAlert={SendIncidenceAlert}
                         SendErrorUpdateAlert={SendErrorUpdateAlert}
                         updateLeads={updateLeads}
+                        emailAddress={saveEmail}
+                        fullName={fullName}
                       />
                     </td>
                   </tr>

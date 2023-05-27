@@ -21,8 +21,6 @@ const style = {
   pb: 4,
 };
 
-
-
 function ChildModal({
   item,
   setOpen,
@@ -34,11 +32,9 @@ function ChildModal({
   handleLlamadoVentaChange,
 }) {
   const [openChild, setOpenChild] = React.useState(false);
-  const user = useUser().user;
-  const { emailAddress } = user.primaryEmailAddress;
-  const { fullName } = user;
+
   const handleOpen = () => {
-    console.log(statusObj)
+    console.log(statusObj);
     setOpenChild(true);
     handleLlamadoVentaChange();
   };
@@ -47,7 +43,10 @@ function ChildModal({
   };
 
   const handleUpdate = () => {
-    if (statusObj.status === "Agendar 2do llamado" || statusObj.status === "Agendar otro llamado") {
+    if (
+      statusObj.status === "Agendar 2do llamado" ||
+      statusObj.status === "Agendar otro llamado"
+    ) {
       statusObj.status = "Agendar 2do llamado";
       statusObj.status_op = llamadoVenta.diaHora;
       statusObj.llamada_venta = {
@@ -56,7 +55,6 @@ function ChildModal({
         observaciones: llamadoVenta.observaciones,
       };
     }
-
 
     let dataVendedor = {};
     if (statusObj.status === "No responde") {
@@ -90,7 +88,7 @@ function ChildModal({
         level: item.level,
       };
     }
-    
+
     const dataLead = {
       status: statusObj.status,
       status_op: statusObj.status_op,
@@ -101,16 +99,15 @@ function ChildModal({
       llamada_venta: statusObj.llamada_venta,
     };
 
-    
     const dataUpdate = {
       dataLead,
       dataVendedor,
     };
     axios
-    .put(`/lead/vendedor/${item._id}`, dataUpdate)
-    .then((response) => {
-      // Si la respuesta es exitosa, redirige a otra página
-      if (response.data.title) {
+      .put(`/lead/vendedor/${item._id}`, dataUpdate)
+      .then((response) => {
+        // Si la respuesta es exitosa, redirige a otra página
+        if (response.data.title) {
           updateLeads();
           setOpen(false);
         }
@@ -123,6 +120,7 @@ function ChildModal({
     setOpenChild(false);
     setOpen(false);
   };
+
   const handleCancel = () => {
     setOpen(false);
   };
@@ -187,19 +185,106 @@ function ChildModal({
   );
 }
 
-function IncidenceModal({ setOpen, SendIncidenceAlert }) {
+function IncidenceModal({
+  setOpen,
+  SendIncidenceAlert,
+  statusObj,
+  item,
+  emailAddress,
+  fullName,
+  updateLeads,
+}) {
   const [openIncidenceChild, setOpenIncidenceChild] = React.useState(false);
   const handleOpen = () => {
     // setOpenChild(true);
   };
+
+  // const handleUpdate = () => {
+  //   if (statusObj.status === "incidencia") {
+  //     const dataVendedor = {
+  //       _id: item._id,
+  //       name: item.name,
+  //       status: statusObj.status,
+  //       status_op: statusObj.status_op,
+  //       llamada_venta: statusObj.llamada_venta,
+  //       province: item.province,
+  //       category: item.category,
+  //       telephone: item.telephone,
+  //       url: item.url,
+  //       instagram: item.instagram,
+  //       level: item.level,
+  //     };
+
+  //     const dataLead = {
+  //       status: statusObj.status,
+  //       status_op: statusObj.status_op,
+  //       vendedor: emailAddress,
+  //       vendedor_name: fullName,
+  //       llamados: item.llamados,
+  //       llamada_venta: statusObj.llamada_venta,
+  //     };
+
+  //     const dataUpdate = {
+  //       dataLead,
+  //       dataVendedor,
+  //     };
+  //     // axios
+  //     //   .put(`/lead/vendedor/${item._id}`, dataUpdate)
+  //     //   .then((response) => {})
+  //     //   .catch((error) => {
+  //     //     console.log("error al enviar lña incidencia");
+  //     //   });
+
+  //   //  updateLeads();
+  //   SendIncidenceAlert();
+  //   }
+  // };
+
+
+
   const handleClose = () => {
     setOpenIncidenceChild(false);
   };
   const confirmSendIncidence = () => {
-    // setOpenChild(false);
+    statusObj.status = "incidencia";
+    // await setStatusObj({...statusObj, status: "incidencia"})
+
+      const dataVendedor = {
+        _id: item._id,
+        name: item.name,
+        status: statusObj.status,
+        status_op: statusObj.status_op,
+        llamada_venta: statusObj.llamada_venta,
+        province: item.province,
+        category: item.category,
+        telephone: item.telephone,
+        url: item.url,
+        instagram: item.instagram,
+        level: item.level,
+      };
+
+      const dataLead = {
+        status: statusObj.status,
+        status_op: statusObj.status_op,
+        vendedor: emailAddress,
+        vendedor_name: fullName,
+        llamados: item.llamados,
+        llamada_venta: statusObj.llamada_venta,
+      };
+
+      const dataUpdate = {
+        dataLead,
+        dataVendedor,
+      };
+      axios
+        .put(`/lead/vendedor/${item._id}`, dataUpdate)
+        .then((response) => {})
+        .catch((error) => {
+          console.log("error al enviar lña incidencia");
+        });
     setOpen(false);
-    // SendLeadAlert();
     SendIncidenceAlert();
+    updateLeads();
   };
   const handleCancel = () => {
     // setOpen(false);
@@ -352,6 +437,8 @@ export default function NestedModal({
   SendIncidenceAlert,
   SendErrorUpdateAlert,
   updateLeads,
+  emailAddress,
+  fullName,
 }) {
   const [open, setOpen] = React.useState(false);
   const [dateHour, setDateHour] = React.useState({});
@@ -373,9 +460,6 @@ export default function NestedModal({
     diaHora: "",
   });
 
-  // {dateHour.$D ? (`Dia: ${dateHour.$D}/${dateHour.$M}/${dateHour.$y} Hora: ${dateHour.$H && String(dateHour.$H).length === 1? `0${dateHour.$H}`: dateHour.$H}:${dateHour.$m && String(dateHour.$m).length === 1 ? `0${dateHour.$m}`: dateHour.$m}`) : ("Fecha y Hora")}
-
-  // const [selectedDate, setSelectedDate] = React.useState(dayjs());
   useEffect(() => {
     setStatusObj({
       ...statusObj,
@@ -534,6 +618,12 @@ export default function NestedModal({
                 <IncidenceModal
                   setOpen={setOpen}
                   SendIncidenceAlert={SendIncidenceAlert}
+                  setStatusObj={setStatusObj}
+                  statusObj={statusObj}
+                  item={item}
+                  emailAddress={emailAddress}
+                  fullName={fullName}
+                  updateLeads={updateLeads}
                 />
               </div>
             </div>
@@ -596,7 +686,9 @@ export default function NestedModal({
                   id="Motivo"
                   onChange={handleSelectChange}
                   name="status_op"
-                  defaultValue={statusObj.status_op ? statusObj.status_op : "default"}
+                  defaultValue={
+                    statusObj.status_op ? statusObj.status_op : "default"
+                  }
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
                   {/* <option selected>Choose a country</option> */}
@@ -611,8 +703,9 @@ export default function NestedModal({
                 </select>
               </div>
             )}
-            {(item.status === "Sin contactar" || item.status === "No responde") &&
-            statusObj.status === "Agendar 2do llamado"  && (
+            {(item.status === "Sin contactar" ||
+              item.status === "No responde") &&
+              statusObj.status === "Agendar 2do llamado" && (
                 <div className="flex flex-col justify-center items-center mt-5 ">
                   <label
                     htmlFor="last_name"
@@ -801,18 +894,18 @@ export default function NestedModal({
                     USD
                   </label>
                   <input
-                      onChange={handleSelectChange}
-                      type="text"
-                      id="last_name"
-                      name="status_op"
-                      // defaultValue={item.status_op}
-                      
-                      className="bbg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      // placeholder={item.email}
-                      placeholder=""
-                      // value="USD"
-                      required
-                    />
+                    onChange={handleSelectChange}
+                    type="text"
+                    id="last_name"
+                    name="status_op"
+                    // defaultValue={item.status_op}
+
+                    className="bbg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    // placeholder={item.email}
+                    placeholder=""
+                    // value="USD"
+                    required
+                  />
                 </div>
               )}
             {item.llamados > 0 && statusObj.status === "No responde" && (
@@ -835,7 +928,7 @@ export default function NestedModal({
               />
             )}
           </div>
-
+          {/*
           <div className="flex justify-center items-center absolute -right-80 top-0">
             {openTimeHour && (
               <ResponsiveDateTimePickers
@@ -845,7 +938,7 @@ export default function NestedModal({
                 className={style.dateTime}
               />
             )}
-          </div>
+          </div> */}
 
           <div className="">
             <ChildModal
@@ -857,6 +950,8 @@ export default function NestedModal({
               SendErrorUpdateAlert={SendErrorUpdateAlert}
               handleLlamadoVentaChange={handleLlamadoVentaChange}
               updateLeads={updateLeads}
+              emailAddress={emailAddress}
+              fullName={fullName}
             />
           </div>
         </Box>
