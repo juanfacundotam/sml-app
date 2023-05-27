@@ -30,6 +30,8 @@ function ChildModal({
   updateLeads,
   llamadoVenta,
   handleLlamadoVentaChange,
+  emailAddress,
+  fullName
 }) {
   const [openChild, setOpenChild] = React.useState(false);
 
@@ -914,16 +916,17 @@ export default function NestedModal({
               </div>
             )}
           </div>
-          <div className="flex justify-center items-center absolute -right-80 top-0">
+          {/* <div className="flex justify-center items-center absolute -right-80 top-0">
             {openTimeHour && (
               <ResponsiveDateTimePickers
                 closeDateHour={closeDateHour}
                 changeTime={changeTime}
                 className={style.dateTime}
+                handleLlamadoVentaChange ={handleLlamadoVentaChange }
               />
             )}
-          </div>
-          {/*
+          </div> */}
+          
           <div className="flex justify-center items-center absolute -right-80 top-0">
             {openTimeHour && (
               <ResponsiveDateTimePickers
@@ -933,7 +936,7 @@ export default function NestedModal({
                 className={style.dateTime}
               />
             )}
-          </div> */}
+          </div>
 
           <div className="">
             <ChildModal
