@@ -21,6 +21,7 @@ const style = {
   pb: 4,
 };
 
+//************************************************************************************************ */
 function ChildModal({
   item,
   setOpen,
@@ -190,6 +191,8 @@ function ChildModal({
   );
 }
 
+
+//************************************************************************************************ */
 function IncidenceModal({
   setOpen,
   SendIncidenceAlert,
@@ -292,7 +295,6 @@ function IncidenceModal({
     SendIncidenceAlert();
   };
 
-
   const sendIncidence = () => {
     setOpenIncidenceChild(true);
   };
@@ -353,7 +355,7 @@ function IncidenceModal({
     </React.Fragment>
   );
 }
-
+//************************************************************************************************ */
 function intelligentInfo({ setOpen }) {
   const [openIntelligentInfo, setOpenIntelligentInfo] = React.useState(false);
 
@@ -433,7 +435,7 @@ function intelligentInfo({ setOpen }) {
     </React.Fragment>
   );
 }
-
+//************************************************************************************************ */
 export default function NestedModal({
   item,
   SendLeadAlert,
