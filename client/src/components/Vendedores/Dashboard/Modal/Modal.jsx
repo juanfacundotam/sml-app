@@ -285,14 +285,16 @@ function IncidenceModal({
     };
     axios
       .put(`/lead/vendedor/${item._id}`, dataUpdate)
-      .then((response) => {})
+      .then((response) => {
+        SendIncidenceAlert();
+      })
       .catch((error) => {
         console.log("error al enviar la incidencia");
       });
 
     setOpen(false);
 
-    SendIncidenceAlert();
+    // SendIncidenceAlert();
   };
 
   const sendIncidence = () => {

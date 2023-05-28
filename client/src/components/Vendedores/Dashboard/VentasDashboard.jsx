@@ -39,9 +39,10 @@ const VentasDashboard = () => {
     dispatch(getLeadsLLamadaVenta(emailAddress));
   }, [dispatch, emailAddress]);
 
+  
   useEffect(() => {
     setData(LeadsLlamadaVenta);
-  }, [LeadsLlamadaVenta]);
+  }, [LeadsLlamadaVenta, setData]);
 
   const [pageStyle, setPageStyle] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -138,6 +139,8 @@ const VentasDashboard = () => {
       theme: "dark",
     });
     dispatch(getLeadsLLamadaVenta(emailAddress));
+    // window.location.reload();
+    // this.forceUpdate();
   };
   const updateLeads = () => {
     // dispatch(getLeadsLLamadaVenta());

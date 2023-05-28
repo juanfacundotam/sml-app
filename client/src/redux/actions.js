@@ -180,7 +180,6 @@ export const getLeadsLLamadaVenta = (email) => {
         }
       })
       .filter((item) => item !== undefined);
-
     console.log(allLeadsVentaMaps);
     dispatch({
       type: GET_LEADS_LLAMADA_VENTA,
