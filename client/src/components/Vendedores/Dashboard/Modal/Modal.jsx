@@ -49,6 +49,7 @@ function ChildModal({
       statusObj.status === "Agendar 2do llamado" ||
       statusObj.status === "Agendar otro llamado"
     ) {
+  
       statusObj.status = "Agendar 2do llamado";
       statusObj.status_op = llamadoVenta.diaHora;
       statusObj.llamada_venta = {
@@ -197,7 +198,6 @@ function IncidenceModal({
   emailAddress,
   fullName,
   updateLeads,
-  handleUpdateIncidence,
 }) {
   const [openIncidenceChild, setOpenIncidenceChild] = React.useState(false);
   const handleOpen = () => {
@@ -284,17 +284,14 @@ function IncidenceModal({
       .put(`/lead/vendedor/${item._id}`, dataUpdate)
       .then((response) => {})
       .catch((error) => {
-        console.log("error al enviar lña incidencia");
+        console.log("error al enviar la incidencia");
       });
 
     setOpen(false);
-    handleUpdateIncidence()
-    // SendIncidenceAlert();
-    // updateLeads();
+
+    SendIncidenceAlert();
   };
-  const handleCancel = () => {
-    // setOpen(false);
-  };
+
 
   const sendIncidence = () => {
     setOpenIncidenceChild(true);
@@ -445,7 +442,6 @@ export default function NestedModal({
   updateLeads,
   emailAddress,
   fullName,
-  handleUpdateIncidence,
 }) {
   const [open, setOpen] = React.useState(false);
   const [dateHour, setDateHour] = React.useState({});
@@ -623,7 +619,6 @@ export default function NestedModal({
                   emailAddress={emailAddress}
                   fullName={fullName}
                   updateLeads={updateLeads}
-                  handleUpdateIncidence={handleUpdateIncidence}
                 />
               </div>
             </div>

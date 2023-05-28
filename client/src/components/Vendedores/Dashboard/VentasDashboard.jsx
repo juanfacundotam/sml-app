@@ -34,10 +34,11 @@ const VentasDashboard = () => {
   localStorage.setItem('email', email);
   let emailAddress = localStorage.getItem('email');
 
-
+  
   useEffect(() => {
     dispatch(getLeadsLLamadaVenta(emailAddress));
-  }, [dispatch]);
+  }, [dispatch, emailAddress]);
+
   useEffect(() => {
     setData(LeadsLlamadaVenta);
   }, [LeadsLlamadaVenta]);
@@ -136,11 +137,11 @@ const VentasDashboard = () => {
       progress: undefined,
       theme: "dark",
     });
-    dispatch(getLeadsLLamadaVenta());
+    dispatch(getLeadsLLamadaVenta(emailAddress));
   };
   const updateLeads = () => {
-    dispatch(getLeadsLLamadaVenta());
-    setData(LeadsLlamadaVenta);
+    // dispatch(getLeadsLLamadaVenta());
+    // setData(LeadsLlamadaVenta);
   };
 
   return (
