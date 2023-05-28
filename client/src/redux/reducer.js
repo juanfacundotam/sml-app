@@ -18,6 +18,7 @@ import {
   SET_ROL,
   SET_ACCESS,
   GET_CORREDOR_LEAD,
+  GET_CORREDOR_LEAD_CHECKED,
 } from "./actions";
 
 const initialState = {
@@ -38,6 +39,7 @@ const initialState = {
   rol: undefined,
   isEmployee: undefined,
   corredorLead: [],
+  corredorLeadChecked: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -255,6 +257,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         corredorLead: action.payload,
+      };
+    case GET_CORREDOR_LEAD_CHECKED:
+      return {
+        ...state,
+        corredorLeadChecked: action.payload,
       };
 
     default:

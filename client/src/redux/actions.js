@@ -19,6 +19,8 @@ export const SET_ROL = "SET_ROL";
 export const SET_ACCESS = "SET_ACCESS";
 export const GET_EMPLOYEES = "GET_EMPLOYEES";
 export const GET_CORREDOR_LEAD = "GET_CORREDOR_LEAD";
+export const GET_CORREDOR_LEAD_CHECKED = "GET_CORREDOR_LEAD_CHECKED";
+
 //
 export const setRol = (rol) => {
   return async (dispatch) => {
@@ -193,5 +195,12 @@ export const getLeadCorredores = (email) => {
     const response = await axios.get(`lead/unchecked10?email=${email}`);
     const corredorLead = response.data;
     dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });
+  };
+};
+export const getLeadCorredoresChecked = (email) => {
+  return async (dispatch) => {
+    const response = await axios.get(`lead/corredorchecked?email=${email}`);
+    const corredorLeadChecked = response.data;
+    dispatch({ type: GET_CORREDOR_LEAD_CHECKED, payload: corredorLeadChecked });
   };
 };
