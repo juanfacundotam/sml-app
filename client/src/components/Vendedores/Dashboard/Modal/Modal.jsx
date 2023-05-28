@@ -105,10 +105,12 @@ function ChildModal({
       dataLead,
       dataVendedor,
     };
+
     axios
       .put(`/lead/vendedor/${item._id}`, dataUpdate)
       .then((response) => {
         // Si la respuesta es exitosa, redirige a otra página
+
         if (response.data.title) {
           updateLeads();
           setOpen(false);

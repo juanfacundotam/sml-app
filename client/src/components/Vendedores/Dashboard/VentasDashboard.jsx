@@ -27,11 +27,16 @@ const VentasDashboard = () => {
   const dispatch = useDispatch();
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
   const user = useUser().user;
-  const email = user?.emailAddresses[0].emailAddress;
-  console.log(email);
+  const email = user?.emailAddresses[0]?.emailAddress;
+  const  fullName  = user?.fullName;
+
+
+  localStorage.setItem('email', email);
+  let emailAddress = localStorage.getItem('email');
+
 
   useEffect(() => {
-    dispatch(getLeadsLLamadaVenta(email));
+    dispatch(getLeadsLLamadaVenta(emailAddress));
   }, [dispatch]);
   useEffect(() => {
     setData(LeadsLlamadaVenta);
@@ -106,7 +111,7 @@ const VentasDashboard = () => {
       progress: undefined,
       theme: "dark",
     });
-    dispatch(getLeadsLLamadaVenta(email));
+    dispatch(getLeadsLLamadaVenta(emailAddress));
   };
   const SendErrorUpdateAlert = () => {
     toast.error("The lead could not be updated!", {
@@ -323,6 +328,7 @@ const VentasDashboard = () => {
                         SendIncidenceAlert={SendIncidenceAlert}
                         SendErrorUpdateAlert={SendErrorUpdateAlert}
                         updateLeads={updateLeads}
+                        emailAddress={emailAddress}
                       />
                     </td>
                   </tr>
