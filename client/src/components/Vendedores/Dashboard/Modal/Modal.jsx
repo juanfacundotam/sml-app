@@ -268,6 +268,7 @@ function IncidenceModal({
 
     const dataLead = {
       status: statusObj.status,
+      level: statusObj.status,
       status_op: statusObj.status_op,
       vendedor: emailAddress,
       vendedor_name: fullName,
