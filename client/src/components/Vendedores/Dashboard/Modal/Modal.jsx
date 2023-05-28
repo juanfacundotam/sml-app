@@ -263,7 +263,7 @@ function IncidenceModal({
       telephone: item.telephone,
       url: item.url,
       instagram: item.instagram,
-      level: item.level,
+      level: statusObj.status,
     };
 
     const dataLead = {
