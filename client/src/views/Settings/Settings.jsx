@@ -12,10 +12,6 @@ import UploadWidget from "../../components/UploadWidget/UploadWidget"
 export default function Settings() {
   const user = useUser().user;
 
-<<<<<<< HEAD
-=======
-  console.log(user);
->>>>>>> parent of 6db6c39 (Clean code)
   return (
     <>
       

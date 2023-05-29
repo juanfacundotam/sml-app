@@ -101,8 +101,6 @@ export default function BasicModal(props) {
     props.handleClose();
   };
 
-  console.log(url)
-  console.log(_id)
   const handleFixClick = () => {
     const updatedData = {
       email: filledEmail,
