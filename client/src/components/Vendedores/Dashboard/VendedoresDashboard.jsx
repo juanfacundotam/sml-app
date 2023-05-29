@@ -24,17 +24,17 @@ const VendedoresDashboard = () => {
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
   const user = useUser().user;
   const email = user?.emailAddresses[0]?.emailAddress;
-  const { fullName } = user;
+  const  fullName  = user?.fullName;
 
 
   localStorage.setItem('email', email);
-  let saveEmail = localStorage.getItem('email');
-  console.log(saveEmail)
+  let emailAddress = localStorage.getItem('email');
+  console.log(emailAddress)
 
   useEffect(() => {
-    dispatch(getLeadCheckedInactive5(saveEmail));
+    dispatch(getLeadCheckedInactive5(emailAddress));
 
-  }, [dispatch, saveEmail]);
+  }, [dispatch, emailAddress]);
 
   
   useEffect(() => {
@@ -112,7 +112,7 @@ const VendedoresDashboard = () => {
       progress: undefined,
       theme: "dark",
     });
-    dispatch(getLeadCheckedInactive5(saveEmail));
+    dispatch(getLeadCheckedInactive5(emailAddress));
   };
   const SendErrorUpdateAlert = () => {
     toast.error("The lead could not be updated!", {
@@ -137,17 +137,16 @@ const VendedoresDashboard = () => {
       progress: undefined,
       theme: "dark",
     });
-    // dispatch(getLeadCheckedInactive5());
+
+    dispatch(getLeadCheckedInactive5(emailAddress));
+    // setData(vendedoresDashboard);
+
   };
   const updateLeads = () => {
-    dispatch(getLeadCheckedInactive5());
-    setData(vendedoresDashboard);
+    // dispatch(getLeadCheckedInactive5(emailAddress));
+    // setData(vendedoresDashboard);
   };
-  const handleUpdateIncidence = async () => {
-    // dispatch()
-  //  await dispatch(getLeadCheckedInactive5());
-    SendIncidenceAlert()
-  }
+
 
   return (
     <>
@@ -290,9 +289,8 @@ const VendedoresDashboard = () => {
                         SendIncidenceAlert={SendIncidenceAlert}
                         SendErrorUpdateAlert={SendErrorUpdateAlert}
                         updateLeads={updateLeads}
-                        emailAddress={saveEmail}
+                        emailAddress={emailAddress}
                         fullName={fullName}
-                        handleUpdateIncidence={handleUpdateIncidence}
                       />
                     </td>
                   </tr>

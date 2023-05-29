@@ -31,7 +31,7 @@ console.log(count)
     })
       .limit(count)
       .exec();
-console.log(leadRest)
+
 
     // if (leadRest.length > 0) {
     //   await Promise.all(
@@ -41,12 +41,12 @@ console.log(leadRest)
     //     })
     //   );
     // }
-    // if (leadRest.length > 0) {
-    //   leadRest.forEach((element) => {
-    //     element.vendedor = email;
-    //     element.save();
-    //   });
-    // }
+    if (leadRest.length > 0) {
+      leadRest.forEach((element) => {
+        element.vendedor = email;
+        element.save();
+      });
+    }
   }
 
   return [

@@ -21,6 +21,7 @@ const style = {
   pb: 4,
 };
 
+//************************************************************************************************ */
 function ChildModal({
   item,
   setOpen,
@@ -30,6 +31,8 @@ function ChildModal({
   updateLeads,
   llamadoVenta,
   handleLlamadoVentaChange,
+  emailAddress,
+  fullName
 }) {
   const [openChild, setOpenChild] = React.useState(false);
 
@@ -47,6 +50,7 @@ function ChildModal({
       statusObj.status === "Agendar 2do llamado" ||
       statusObj.status === "Agendar otro llamado"
     ) {
+  
       statusObj.status = "Agendar 2do llamado";
       statusObj.status_op = llamadoVenta.diaHora;
       statusObj.llamada_venta = {
@@ -103,10 +107,12 @@ function ChildModal({
       dataLead,
       dataVendedor,
     };
+
     axios
       .put(`/lead/vendedor/${item._id}`, dataUpdate)
       .then((response) => {
         // Si la respuesta es exitosa, redirige a otra página
+
         if (response.data.title) {
           updateLeads();
           setOpen(false);
@@ -185,6 +191,8 @@ function ChildModal({
   );
 }
 
+
+//************************************************************************************************ */
 function IncidenceModal({
   setOpen,
   SendIncidenceAlert,
@@ -193,7 +201,6 @@ function IncidenceModal({
   emailAddress,
   fullName,
   updateLeads,
-  handleUpdateIncidence,
 }) {
   const [openIncidenceChild, setOpenIncidenceChild] = React.useState(false);
   const handleOpen = () => {
@@ -259,11 +266,12 @@ function IncidenceModal({
       telephone: item.telephone,
       url: item.url,
       instagram: item.instagram,
-      level: item.level,
+      level: statusObj.status,
     };
 
     const dataLead = {
       status: statusObj.status,
+      level: statusObj.status,
       status_op: statusObj.status_op,
       vendedor: emailAddress,
       vendedor_name: fullName,
@@ -277,18 +285,16 @@ function IncidenceModal({
     };
     axios
       .put(`/lead/vendedor/${item._id}`, dataUpdate)
-      .then((response) => {})
+      .then((response) => {
+        SendIncidenceAlert();
+      })
       .catch((error) => {
-        console.log("error al enviar lña incidencia");
+        console.log("error al enviar la incidencia");
       });
 
     setOpen(false);
-    handleUpdateIncidence()
+
     // SendIncidenceAlert();
-    // updateLeads();
-  };
-  const handleCancel = () => {
-    // setOpen(false);
   };
 
   const sendIncidence = () => {
@@ -351,7 +357,7 @@ function IncidenceModal({
     </React.Fragment>
   );
 }
-
+//************************************************************************************************ */
 function intelligentInfo({ setOpen }) {
   const [openIntelligentInfo, setOpenIntelligentInfo] = React.useState(false);
 
@@ -431,7 +437,7 @@ function intelligentInfo({ setOpen }) {
     </React.Fragment>
   );
 }
-
+//************************************************************************************************ */
 export default function NestedModal({
   item,
   SendLeadAlert,
@@ -440,7 +446,6 @@ export default function NestedModal({
   updateLeads,
   emailAddress,
   fullName,
-  handleUpdateIncidence,
 }) {
   const [open, setOpen] = React.useState(false);
   const [dateHour, setDateHour] = React.useState({});
@@ -618,7 +623,6 @@ export default function NestedModal({
                   emailAddress={emailAddress}
                   fullName={fullName}
                   updateLeads={updateLeads}
-                  handleUpdateIncidence={handleUpdateIncidence}
                 />
               </div>
             </div>
@@ -914,16 +918,17 @@ export default function NestedModal({
               </div>
             )}
           </div>
-          <div className="flex justify-center items-center absolute -right-80 top-0">
+          {/* <div className="flex justify-center items-center absolute -right-80 top-0">
             {openTimeHour && (
               <ResponsiveDateTimePickers
                 closeDateHour={closeDateHour}
                 changeTime={changeTime}
                 className={style.dateTime}
+                handleLlamadoVentaChange ={handleLlamadoVentaChange }
               />
             )}
-          </div>
-          {/*
+          </div> */}
+          
           <div className="flex justify-center items-center absolute -right-80 top-0">
             {openTimeHour && (
               <ResponsiveDateTimePickers
@@ -933,7 +938,7 @@ export default function NestedModal({
                 className={style.dateTime}
               />
             )}
-          </div> */}
+          </div>
 
           <div className="">
             <ChildModal
