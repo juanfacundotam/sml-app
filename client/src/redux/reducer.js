@@ -192,28 +192,28 @@ const rootReducer = (state = initialState, action) => {
       let filteredStatus = copyStatus;
 
       if (action.payload === "contratado") {
-        console.log("contratado");
+        ("contratado");
         filteredStatus = copyStatus.filter((client) => {
           const clientStatus = client.status ? client.status : "";
           return clientStatus === "Contratado";
         });
       }
       if (action.payload === "no-responde") {
-        console.log("no contesta");
+        ("no contesta");
         filteredStatus = copyStatus.filter((client) => {
           const clientstatus = client.status ? client.status : "";
           return clientstatus === "No responde";
         });
       }
       if (action.payload === "rechazado") {
-        console.log("rechazado");
+        ("rechazado");
         filteredStatus = copyStatus.filter((client) => {
           const clientStatus = client.status ? client.status : "";
           return clientStatus === "Rechazado";
         });
       }
       if (action.payload === "sin-contactar") {
-        console.log("sin contactar");
+        ("sin contactar");
         filteredStatus = copyStatus.filter((client) => {
           const clientStatus = client.status ? client.status : "";
           return clientStatus === "Sin contactar";

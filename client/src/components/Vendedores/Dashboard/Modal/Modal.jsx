@@ -37,7 +37,7 @@ function ChildModal({
   const [openChild, setOpenChild] = React.useState(false);
 
   const handleOpen = () => {
-    console.log(statusObj);
+    (statusObj);
     setOpenChild(true);
     handleLlamadoVentaChange();
   };
@@ -240,7 +240,7 @@ function IncidenceModal({
   //     //   .put(`/lead/vendedor/${item._id}`, dataUpdate)
   //     //   .then((response) => {})
   //     //   .catch((error) => {
-  //     //     console.log("error al enviar lña incidencia");
+  //     //     ("error al enviar lña incidencia");
   //     //   });
 
   //   //  updateLeads();
@@ -289,7 +289,7 @@ function IncidenceModal({
         SendIncidenceAlert();
       })
       .catch((error) => {
-        console.log("error al enviar la incidencia");
+        ("error al enviar la incidencia");
       });
 
     setOpen(false);

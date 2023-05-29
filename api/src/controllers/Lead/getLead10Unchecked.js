@@ -23,8 +23,8 @@ const getLead10Unchecked = async (email) => {
   })
     .limit(count)
     .exec();
+
   const limitedLeadRest = leadRest.slice(0, count);
-  console.log(limitedLeadRest.length);
 
   if (limitedLeadRest.length > 0) {
     limitedLeadRest.forEach((element) => {
