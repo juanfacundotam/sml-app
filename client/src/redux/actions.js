@@ -191,10 +191,14 @@ export const getLeadsLLamadaVenta = (email) => {
 };
 
 export const getLeadCorredores = (email) => {
+  console.log('antes del if' , email);
   return async (dispatch) => {
-    const response = await axios.get(`lead/unchecked10?email=${email}`);
-    const corredorLead = response.data;
-    dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });
+    if (email !== 'undefined' && email !== "") {
+      console.log('despues del if', email);
+      const response = await axios.get(`lead/unchecked10?email=${email}`);
+      const corredorLead = response.data;
+      dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });
+    }
   };
 };
 

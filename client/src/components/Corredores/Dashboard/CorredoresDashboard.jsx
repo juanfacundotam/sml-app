@@ -50,11 +50,10 @@ const CorredoresDashboard = () => {
     });
   };
 
+  console.log(email);
   useEffect(() => {
-    if (email !== undefined && email !== "") {
       dispatch(getLeadCorredores(email));
-    }
-  }, [dispatch]);
+  }, [dispatch, email]);
 
   const handleChangeEmail = (event, index) => {
     const { name, value } = event.target;
