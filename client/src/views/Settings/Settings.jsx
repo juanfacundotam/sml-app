@@ -9,7 +9,7 @@ import {
 export default function Settings() {
   const user = useUser().user;
 
-  console.log(user);
+  (user);
   return (
     <>
       <Nav />

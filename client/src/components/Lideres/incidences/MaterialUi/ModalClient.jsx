@@ -101,8 +101,8 @@ export default function BasicModal(props) {
     props.handleClose();
   };
 
-  console.log(url)
-  console.log(_id)
+  (url)
+  (_id)
   const handleFixClick = () => {
     const updatedData = {
       email: filledEmail,
@@ -115,7 +115,7 @@ export default function BasicModal(props) {
     axios
       .put(`lead/${_id}`, updatedData)
       .then((response) => {
-        console.log("Datos actualizados correctamente:", response.data)
+        ("Datos actualizados correctamente:", response.data)
         toast.success("✔ Lead Update!", {
           position: "top-center",
           autoClose: 3000,

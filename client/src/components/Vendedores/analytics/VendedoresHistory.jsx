@@ -33,7 +33,7 @@ const VendedoresHistory = () => {
   const email = user?.emailAddresses[0].emailAddress;
 
 
-  // console.log(emailAddress)
+  // (emailAddress)
 
   useEffect(() => {
     dispatch(getVendedorAllLeads(email));

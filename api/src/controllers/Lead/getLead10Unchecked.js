@@ -34,8 +34,6 @@ const getLead10Unchecked = async (email) => {
     });
   }
 
-  console.log(limitedLeadRest);
-
   return [...leadUnchecked, ...limitedLeadRest];
 };
 

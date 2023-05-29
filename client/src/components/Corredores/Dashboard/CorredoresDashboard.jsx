@@ -50,14 +50,14 @@ const CorredoresDashboard = () => {
     });
   };
 
-  console.log(email);
+  (email);
   useEffect(() => {
       dispatch(getLeadCorredores(email));
   }, [dispatch, email]);
 
   const handleChangeEmail = (event, index) => {
     const { name, value } = event.target;
-    console.log(value);
+    (value);
     setClient((prevState) => {
       const updatedClient = [...prevState];
       updatedClient[index] = {
@@ -228,7 +228,7 @@ const CorredoresDashboard = () => {
       SendLeadsSuccess();
     } catch (error) {
       SendLeadsError();
-      console.log({ error: error.message });
+      ({ error: error.message });
     }
   };
   return (

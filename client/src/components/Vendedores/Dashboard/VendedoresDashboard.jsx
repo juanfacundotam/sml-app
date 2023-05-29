@@ -29,7 +29,7 @@ const VendedoresDashboard = () => {
 
   localStorage.setItem('email', email);
   let emailAddress = localStorage.getItem('email');
-  console.log(emailAddress)
+  (emailAddress)
 
   useEffect(() => {
     dispatch(getLeadCheckedInactive5(emailAddress));
