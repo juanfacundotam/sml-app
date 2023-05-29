@@ -52,6 +52,7 @@ export default function ChildModal() {
 
   const [body, setBody] = useState([]);
   const dispatch = useDispatch();
+  const onClickClose = () => {};
   const onClickAdd = () => {
     if (body[0]) {
       SendAddLeads();
@@ -138,11 +139,20 @@ export default function ChildModal() {
                 ref={inputRef}
               />
             </div>
-            <div>
+            <div className="flex gap-2 justify-center items-center">
+              <Button
+                variant="outlined"
+                sx={{
+                  width: "100px",
+                }}
+                onClick={() => handleClose()}
+              >
+                Close X
+              </Button>
               <Button
                 variant="contained"
                 sx={{
-                  width: "50px",
+                  width: "100px",
                 }}
                 onClick={() => onClickAdd()}
               >
