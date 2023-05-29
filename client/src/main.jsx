@@ -8,13 +8,9 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:3001/api";
-//axios.defaults.baseURL = "https://sml-app-api.onrender.com";
-<<<<<<< HEAD
-//axios.defaults.baseURL = "https://sml-app.com/api";
-=======
+// axios.defaults.baseURL = "http://localhost:3001/api";
+axios.defaults.baseURL = "https://sml-app-api.onrender.com";
 // axios.defaults.baseURL = "https://sml-app.com/api";
->>>>>>> parent of 6db6c39 (Clean code)
 
 const container = document.getElementById("root");
 const root = createRoot(container);
