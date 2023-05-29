@@ -197,6 +197,7 @@ export const getLeadCorredores = (email) => {
     dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });
   };
 };
+
 export const getLeadCorredoresChecked = (email) => {
   return async (dispatch) => {
     const response = await axios.get(`lead/corredorchecked?email=${email}`);

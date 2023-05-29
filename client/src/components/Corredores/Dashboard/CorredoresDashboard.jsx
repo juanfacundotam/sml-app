@@ -31,7 +31,10 @@ const CorredoresDashboard = () => {
   const dispatch = useDispatch();
 
   const user = useUser().user;
-  const email = user?.emailAddresses[0]?.emailAddress;
+  const mail = user?.emailAddresses[0]?.emailAddress;
+
+  localStorage.setItem("email", mail);
+  let email = localStorage.getItem("email");
 
   const handleChangeInstagram = (event, index) => {
     const { name, value } = event.target;
@@ -46,9 +49,12 @@ const CorredoresDashboard = () => {
       return updatedClient;
     });
   };
+
   useEffect(() => {
-    email !== undefined && dispatch(getLeadCorredores(email));
-  }, [dispatch, email]);
+    if (email !== undefined && email !== "") {
+      dispatch(getLeadCorredores(email));
+    }
+  }, [dispatch]);
 
   const handleChangeEmail = (event, index) => {
     const { name, value } = event.target;
