@@ -85,7 +85,7 @@ function ChildModal({
         rol: selectEmployees,
       });
       CreateEmployees(inputName);
-      (response.data);
+      console.log(response.data);
 
       // const emailData = {
       //   clientName: client[i].name,
@@ -99,7 +99,7 @@ function ChildModal({
       // );
     } catch (error) {
       ErrorCreateEmployees(inputName);
-      (`No se pudo enviar el post de ${selectEmployees}`);
+      console.log(`No se pudo enviar el post de ${selectEmployees}`);
     }
 
     try {
@@ -111,9 +111,9 @@ function ChildModal({
           rol: selectEmployees,
         }
       );
-      (responseEmployees.data);
+      console.log(responseEmployees.data);
     } catch (error) {
-      (`No se pudo enviar el post de Employees`);
+      console.log(`No se pudo enviar el post de Employees`);
     }
 
     dispatch(getAllCorredores());

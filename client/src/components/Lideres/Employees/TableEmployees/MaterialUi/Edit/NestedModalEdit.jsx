@@ -50,10 +50,10 @@ function ChildModalDelete({
         deleted: true,
       });
 
-      (response.data);
+      console.log(response.data);
     } catch (error) {
       ErrorEmployees(inputName);
-      (`No se pudo enviar el baneado de ${itemRol} ${itemId} `);
+      console.log(`No se pudo enviar el baneado de ${itemRol} ${itemId} `);
     }
     try {
       const response = await axios.put(`/employees/?email=${inputEmail}`, {
@@ -62,9 +62,9 @@ function ChildModalDelete({
 
       BannedEmployees(inputName);
       onModalClose();
-      (response.data);
+      console.log(response.data);
     } catch (error) {
-      (`No se pudo enviar el baneado de ${itemRol} ${itemId} `);
+      console.log(`No se pudo enviar el baneado de ${itemRol} ${itemId} `);
     }
     dispatch(getAllCorredores());
     dispatch(getAllVendedores());
@@ -139,10 +139,10 @@ function ChildModal({
       });
       EditEmployees(inputName);
       onModalClose();
-      (response.data);
+      console.log(response.data);
     } catch (error) {
       ErrorEditEmployees(inputName);
-      (`No se pudo enviar el post de ${itemRol}`);
+      console.log(`No se pudo enviar el post de ${itemRol}`);
     }
 
     dispatch(getAllCorredores());

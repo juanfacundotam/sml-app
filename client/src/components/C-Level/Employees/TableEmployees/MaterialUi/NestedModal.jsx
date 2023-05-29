@@ -89,10 +89,10 @@ function ChildModal({
         deleted: false,
       });
       CreateEmployees(inputName);
-      (response.data);
+      console.log(response.data);
     } catch (error) {
       ErrorCreateEmployees(inputName);
-      (`No se pudo enviar el post de ${selectEmployees}`);
+      console.log(`No se pudo enviar el post de ${selectEmployees}`);
     }
 
     try {
@@ -107,8 +107,8 @@ function ChildModal({
         // "http://localhost:3001/corredor/sendHiringEmail",
         emailData
       );
-      (response.data);
-      ("Correo electrónico de contratación enviado correctamente");
+      console.log(response.data);
+      console.log("Correo electrónico de contratación enviado correctamente");
     } catch (error) {
       console.error(
         "Error al enviar el correo electrónico de contratación:",
@@ -126,9 +126,9 @@ function ChildModal({
           deleted: false,
         }
       );
-      (responseEmployees.data);
+      console.log(responseEmployees.data);
     } catch (error) {
-      (`No se pudo enviar el post de Employees`);
+      console.log(`No se pudo enviar el post de Employees`);
     }
 
     dispatch(getAllCorredores());

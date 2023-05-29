@@ -31,7 +31,7 @@ export default function ModalIntelligentInfo({ item }) {
     setOpen(false);
   };
 
-  // (item.updatedAt)
+  // console.log(item.updatedAt)
   const formattedUpdate = () => {
     let fechaYear = "";
     let fechaMonth = "";

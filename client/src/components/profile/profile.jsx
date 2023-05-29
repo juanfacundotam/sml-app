@@ -30,7 +30,7 @@ const Profile = () => {
 
                 setUserMetadata(user_metadata);
             } catch (e) {
-                (e.message);
+                console.log(e.message);
             }
         };
 
@@ -40,8 +40,8 @@ const Profile = () => {
     return (
         
         isAuthenticated && (
-            <div>{(useAuth0)}
-                {(useAuth0())}
+            <div>{console.log(useAuth0)}
+                {console.log(useAuth0())}
                 <img src={user.picture} alt={user.name} />
                 <h2>{user.name}</h2>
                 <p>{user.email}</p>

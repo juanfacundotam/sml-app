@@ -39,14 +39,22 @@ const CorredoresDashboard = () => {
     });
   };
 
+<<<<<<< HEAD
   email;
+=======
+  console.log(email);
+>>>>>>> parent of 6db6c39 (Clean code)
   useEffect(() => {
     dispatch(getLeadCorredores(email));
   }, [dispatch, email]);
 
   const handleChangeEmail = (event, index) => {
     const { name, value } = event.target;
+<<<<<<< HEAD
     value;
+=======
+    console.log(value);
+>>>>>>> parent of 6db6c39 (Clean code)
     setClient((prevState) => {
       const updatedClient = [...prevState];
       updatedClient[index] = {
@@ -217,7 +225,7 @@ const CorredoresDashboard = () => {
       SendLeadsSuccess();
     } catch (error) {
       SendLeadsError();
-      ({ error: error.message });
+      console.log({ error: error.message });
     }
   };
   return (

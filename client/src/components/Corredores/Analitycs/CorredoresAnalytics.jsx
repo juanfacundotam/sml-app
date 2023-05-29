@@ -26,7 +26,7 @@ const CorredoresAnlaytics = () => {
   const { corredorLeadChecked } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  (corredorLeadChecked);
+  console.log(corredorLeadChecked);
 
   const user = useUser().user;
   const email = user?.emailAddresses[0]?.emailAddress;

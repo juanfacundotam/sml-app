@@ -113,7 +113,7 @@ export const getLeadCheckedInactive5 = (email) => {
     return async (dispatch) => {
       const response = await axios.get(`/lead/checkedinactive5?email=${email}`);
       const LeadCheckedInactive5 = response.data;
-      (LeadCheckedInactive5);
+      console.log(LeadCheckedInactive5);
       dispatch({
         type: GET_LEAD_CHEQUED_INACTIVE_5,
         payload: LeadCheckedInactive5,
@@ -147,7 +147,7 @@ export const AddLeads = (body) => {
   return async (dispatch) => {
     try {
       const response = await axios.post("/lead/", body);
-      ("se agrego");
+      console.log("se agrego");
       return response.data;
     } catch (error) {
       console.error("Error al agregar el lead:", error);
@@ -182,7 +182,7 @@ export const getLeadsLLamadaVenta = (email) => {
         }
       })
       .filter((item) => item !== undefined);
-    (allLeadsVentaMaps);
+    console.log(allLeadsVentaMaps);
     dispatch({
       type: GET_LEADS_LLAMADA_VENTA,
       payload: allLeadsVentaMaps,
@@ -191,10 +191,10 @@ export const getLeadsLLamadaVenta = (email) => {
 };
 
 export const getLeadCorredores = (email) => {
-  ('antes del if' , email);
+  console.log('antes del if' , email);
   return async (dispatch) => {
     if (email !== 'undefined' && email !== "") {
-      ('despues del if', email);
+      console.log('despues del if', email);
       const response = await axios.get(`lead/unchecked10?email=${email}`);
       const corredorLead = response.data;
       dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });
