@@ -20,6 +20,7 @@ export const SET_ACCESS = "SET_ACCESS";
 export const GET_EMPLOYEES = "GET_EMPLOYEES";
 export const GET_CORREDOR_LEAD = "GET_CORREDOR_LEAD";
 export const GET_CORREDOR_LEAD_CHECKED = "GET_CORREDOR_LEAD_CHECKED";
+export const FIND_CORREDORES_NAME = "FIND_CORREDORES_NAME";
 
 //
 export const setRol = (rol) => {
@@ -142,6 +143,12 @@ export const filterStatus = (filterStatus) => {
   };
 };
 
+export const findCorredoresByName = (corredorName) => {
+  return (dispatch) => {
+    dispatch({ type: FIND_CORREDORES_NAME, payload: corredorName });
+  };
+};
+
 export const AddLeads = (body) => {
   return async (dispatch) => {
     try {
@@ -189,7 +196,7 @@ export const getLeadsLLamadaVenta = (email) => {
 
 export const getLeadCorredores = (email) => {
   return async (dispatch) => {
-    if (email !== 'undefined' && email !== "") {
+    if (email !== "undefined" && email !== "") {
       const response = await axios.get(`lead/unchecked10?email=${email}`);
       const corredorLead = response.data;
       dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });
