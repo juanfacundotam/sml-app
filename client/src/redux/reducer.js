@@ -20,6 +20,7 @@ import {
   GET_CORREDOR_LEAD,
   GET_CORREDOR_LEAD_CHECKED,
   FIND_CORREDORES_NAME,
+  FIND_VENDEDORES_NAME,
 } from "./actions";
 
 const initialState = {
@@ -221,11 +222,19 @@ const rootReducer = (state = initialState, action) => {
         leaderDashboard: filteredStatus,
       };
     case FIND_CORREDORES_NAME:
-      const leads = action.payload;
-      const result = leads.sort(
+      const corredorName = action.payload;
+      const CorredorNameSort = corredorName.sort(
         (a, b) => (b ? b.level : "") - (a ? a.level : "")
       );
-      console.log(result);
+      return {
+        ...state,
+        leaderDashboard: action.payload,
+      };
+    case FIND_CORREDORES_NAME:
+      const vendedorName = action.payload;
+      const vendedorNameSort = vendedorName.sort(
+        (a, b) => (b ? b.level : "") - (a ? a.level : "")
+      );
       return {
         ...state,
         leaderDashboard: action.payload,
