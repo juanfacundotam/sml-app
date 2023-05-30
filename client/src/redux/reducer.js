@@ -221,6 +221,11 @@ const rootReducer = (state = initialState, action) => {
         leaderDashboard: filteredStatus,
       };
     case FIND_CORREDORES_NAME:
+      const leads = action.payload;
+      const result = leads.sort(
+        (a, b) => (b ? b.level : "") - (a ? a.level : "")
+      );
+      console.log(result);
       return {
         ...state,
         leaderDashboard: action.payload,
