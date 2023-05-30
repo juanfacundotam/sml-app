@@ -26,6 +26,7 @@ export default function Settings() {
   const dispatch = useDispatch()
   const allEmployees = [...corredores, ...vendedores, ...clevel, ...leader]
   const selectedEmployee = allEmployees.find(employee => employee.email === userEmail);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [formData, setFormData] = useState({
     birthdate: '',
@@ -49,13 +50,16 @@ export default function Settings() {
       .then((response) => {
         // Manejar la respuesta exitosa aquí si es necesario
         console.log(response);
+        setFormSubmitted(true); // Establecer el estado formSubmitted en true
+        dispatch(getAllCorredores());
+        dispatch(getAllVendedores());
+        dispatch(getAllLeader());
+        dispatch(getAllClevel());
       })
       .catch((error) => {
         // Manejar el error aquí si es necesario
         console.error(error);
       });
-      dispatch()
-    console.log(formData);
   };
   const handleImageUpload = (imageUrl) => {
     setProfileImageUrl(imageUrl);
@@ -135,6 +139,7 @@ export default function Settings() {
             </div>
           </div>
           <Detail
+            key={formSubmitted ? "submitted" : "not-submitted"}
             name={user?.fullName}
             picture={selectedEmployee?.photo}
             email={user?.emailAddresses[0].emailAddress}

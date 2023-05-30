@@ -30,7 +30,7 @@ const UploadWidget = ({ onImageUpload }) => {
           }
         );
       }, []);
-console.log(imageUrl);
+      
     return (
         <>
             <button
