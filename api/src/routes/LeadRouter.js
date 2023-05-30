@@ -14,11 +14,13 @@ const {
   getLeadCorredorCheckedHandler,
   limpiezaBaseHandler,
   findLeadCorredorNameHandler,
+  findLeadVendedorNameHandler,
 } = require("../Handlers/LeadHandlers");
 const LeadRouter = Router();
 
 LeadRouter.get("/", getAllLeadHandler);
 LeadRouter.get("/corredor", findLeadCorredorNameHandler);
+LeadRouter.get("/vendedor", findLeadVendedorNameHandler);
 LeadRouter.put("/limpieza", limpiezaBaseHandler);
 LeadRouter.get("/checked", getLeadCheckedHandler);
 LeadRouter.get("/checkedinactive5", getLeadCheckedInactive5Handler);
