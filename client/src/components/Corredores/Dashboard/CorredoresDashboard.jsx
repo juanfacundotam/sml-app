@@ -9,13 +9,18 @@ import { GrInstagram } from "react-icons/gr";
 import { IoGrid, IoStatsChart } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { getLeadCorredores } from "../../../redux/actions";
-import IconLabelButtons from "./MaterialUi/IconLabelButtons";
 import { useUser } from "@clerk/clerk-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import IconLabelButtons from "./MaterialUi/IconLabelButtons";
+import BasicButtons from "./MaterialUi/BasicButtons";
 
 const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
+  const [category, setCategory] = useState("");
+  const [province, setProvince] = useState("");
+  const [loader, setLoader] = useState(false);
+
   const { corredorLead } = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -24,6 +29,24 @@ const CorredoresDashboard = () => {
 
   localStorage.setItem("email", mail);
   let email = localStorage.getItem("email");
+
+  useEffect(() => {
+    dispatch(getLeadCorredores(email, category, province));
+  }, [dispatch]);
+
+  const filtrar = () => {
+    dispatch(getLeadCorredores(email, category, province));
+  };
+
+  const filterCategory = (event) => {
+    const { value } = event.target;
+    setCategory(value);
+  };
+
+  const filterProvince = (event) => {
+    const { value } = event.target;
+    setProvince(value);
+  };
 
   const handleChangeInstagram = (event, index) => {
     const { name, value } = event.target;
@@ -38,11 +61,6 @@ const CorredoresDashboard = () => {
       return updatedClient;
     });
   };
-
-
-  useEffect(() => {
-    dispatch(getLeadCorredores(email));
-  }, [dispatch, email]);
 
   const handleChangeEmail = (event, index) => {
     const { name, value } = event.target;
@@ -97,7 +115,7 @@ const CorredoresDashboard = () => {
   const SendLeads = (name) => {
     toast.info(`✔ ${name} Send Leads! `, {
       position: "top-center",
-      autoClose: 3000,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -211,7 +229,7 @@ const CorredoresDashboard = () => {
         }
       }
 
-      dispatch(getLeadCorredores(email));
+      dispatch(getLeadCorredores(email, category, province));
 
       SendLeadsSuccess();
     } catch (error) {
@@ -243,7 +261,33 @@ const CorredoresDashboard = () => {
             </div>
           </div>
 
-          <div className="flex flex-col w-full">
+          <div className="flex gap-5 mt-5 justify-center items-center">
+            <label>Profesion: </label>
+            <input
+              className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
+              type="text"
+              name="category"
+              value={category}
+              onChange={filterCategory}
+              placeholder="Filtrar Profesion"
+            />
+
+            <label>Categoria: </label>
+            <input
+              className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
+              type="text"
+              name="province"
+              value={province}
+              onChange={filterProvince}
+              placeholder="Filtrar Provincia"
+            />
+
+            <div onClick={filtrar}>
+              <BasicButtons />
+            </div>
+          </div>
+
+          <table className="w-full">
             <thead className={style.tableHead}>
               <tr className={style.tableRow}>
                 <th className="text-start">Name</th>
@@ -367,7 +411,7 @@ const CorredoresDashboard = () => {
                   </tr>
                 ))}
             </tbody>
-          </div>
+          </table>
         </form>
       </div>
     </>

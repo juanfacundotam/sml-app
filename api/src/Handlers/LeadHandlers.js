@@ -20,6 +20,7 @@ const getAllLeadHandler = async (req, res) => {
     res.status(404).json({ error: error.message });
   }
 };
+
 const getLeadUncheckedHandler = async (req, res) => {
   try {
     const leadUnchecked = await getLeadUnchecked();
