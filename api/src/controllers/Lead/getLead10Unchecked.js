@@ -34,7 +34,7 @@ const getLead10Unchecked = async (query) => {
 
     if (limitedLeadRest.length > 0) {
       limitedLeadRest.forEach((element) => {
-        element.corredor = email;
+        element.corredor = query.email;
         element.view = true;
         element.save();
       });

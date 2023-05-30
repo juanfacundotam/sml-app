@@ -188,10 +188,11 @@ export const getLeadsLLamadaVenta = (email) => {
 };
 
 export const getLeadCorredores = (email, category, province) => {
-  console.log(category);
-  console.log(province);
   return async (dispatch) => {
     if (email !== "undefined" && email !== "") {
+      console.log(email);
+      console.log(category);
+      console.log(province);
       const response = await axios.get(
         `lead/unchecked10?email=${email}&category=${category}&province=${province}`
       );

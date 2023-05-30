@@ -19,7 +19,6 @@ const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
   const [category, setCategory] = useState("");
   const [province, setProvince] = useState("");
-  const [loader, setLoader] = useState(false);
 
   const { corredorLead } = useSelector((state) => state);
   const dispatch = useDispatch();
