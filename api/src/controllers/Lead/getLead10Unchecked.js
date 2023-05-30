@@ -1,9 +1,13 @@
 const Lead = require("../../models/Lead");
 
+let leadUnchecked = [];
+let limitedLeadRest = [];
+let leadRest = [];
+
 const getLead10Unchecked = async (query) => {
   if (!query.category && !query.province) {
 
-    const leadUnchecked = await Lead.find({
+    leadUnchecked = await Lead.find({
       corredor: query.email,
       checked: false,
       view: true,
@@ -18,7 +22,7 @@ const getLead10Unchecked = async (query) => {
       count = 10;
     }
 
-    const leadRest = await Lead.find({
+    leadRest = await Lead.find({
       checked: false,
       view: false,
       corredor: "",
@@ -26,15 +30,15 @@ const getLead10Unchecked = async (query) => {
       .limit(count)
       .exec();
 
-    const limitedLeadRest = leadRest.slice(0, count);
+    limitedLeadRest = leadRest.slice(0, count);
 
-    // if (limitedLeadRest.length > 0) {
-    //   limitedLeadRest.forEach((element) => {
-    //     element.corredor = email;
-    //     element.view = true;
-    //     element.save();
-    //   });
-    // }
+    if (limitedLeadRest.length > 0) {
+      limitedLeadRest.forEach((element) => {
+        element.corredor = email;
+        element.view = true;
+        element.save();
+      });
+    }
 
   } else {
 
@@ -64,7 +68,7 @@ const getLead10Unchecked = async (query) => {
     let categoryRegex = query.category
       ? new RegExp(query.category, "i")
       : /.*/;
-    const leadUnchecked = await Lead.find({
+    leadUnchecked = await Lead.find({
       corredor: query.email,
       checked: false,
       view: true,
@@ -84,7 +88,7 @@ const getLead10Unchecked = async (query) => {
 
     
   
-    const leadRest = await Lead.find({
+    leadRest = await Lead.find({
       checked: false,
       view: false,
       corredor: "",
@@ -94,19 +98,19 @@ const getLead10Unchecked = async (query) => {
       .limit(count)
       .exec();
       
-      const limitedLeadRest = leadRest.slice(0, count);
-      console.log(limitedLeadRest);
+      limitedLeadRest = leadRest.slice(0, count);
 
-    // if (limitedLeadRest.length > 0) {
-    //   limitedLeadRest.forEach((element) => {
-    //     element.corredor = query.email;
-    //     element.view = true;
-    //     element.save();
-    //   });
-    // }
-    console.log("con aunque sea un filtro");
+
+    if (limitedLeadRest.length > 0) {
+      limitedLeadRest.forEach((element) => {
+        element.corredor = query.email;
+        element.view = true;
+        element.save();
+      });
+    }
     
   }
+  console.log([...leadUnchecked, ...limitedLeadRest]);
 
   return [...leadUnchecked, ...limitedLeadRest];
 };

@@ -35,7 +35,6 @@ const getLead10UncheckedHandler = async (req, res) => {
     const leadUnchecked = await getLead10Unchecked(query);
     res.status(200).json(leadUnchecked);
   } catch (error) {
-    console.log(error.message)
     res.status(404).json({ error: error.message });
   }
 };
