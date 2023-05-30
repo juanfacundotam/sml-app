@@ -144,8 +144,10 @@ export const filterStatus = (filterStatus) => {
 };
 
 export const findCorredoresByName = (corredorName) => {
-  return (dispatch) => {
-    dispatch({ type: FIND_CORREDORES_NAME, payload: corredorName });
+  return async (dispatch) => {
+    const response = await axios.get(`/lead/corredor?name=${corredorName}`);
+    const corredoresByName = response.data;
+    dispatch({ type: FIND_CORREDORES_NAME, payload: corredoresByName });
   };
 };
 
