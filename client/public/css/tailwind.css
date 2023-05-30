@@ -795,6 +795,10 @@ video {
   height: 2.25rem;
 }
 
+.h-\[36\.5px\] {
+  height: 36.5px;
+}
+
 .h-fit {
   height: -moz-fit-content;
   height: fit-content;
@@ -910,6 +914,10 @@ video {
 
 .w-\[300px\] {
   width: 300px;
+}
+
+.w-\[36\.5px\] {
+  width: 36.5px;
 }
 
 .w-\[40px\] {
@@ -1541,11 +1549,6 @@ video {
 .text-\[\#ffffff\] {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .text-gray-200 {

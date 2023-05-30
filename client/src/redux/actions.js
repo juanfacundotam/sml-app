@@ -53,8 +53,8 @@ export const getEmployees = (employees) => ({
 export const getAllLead = () => {
   return async (dispatch) => {
     const response = await axios.get("/lead");
-    const LeadData = response.data;
-    dispatch({ type: GET_ALL_LEAD, payload: LeadData });
+    const lead = response.data;
+    dispatch({ type: GET_ALL_LEAD, payload: lead });
   };
 };
 export const getAllCorredores = () => {
@@ -204,10 +204,15 @@ export const getLeadsLLamadaVenta = (email) => {
   };
 };
 
-export const getLeadCorredores = (email) => {
+export const getLeadCorredores = (email, category, province) => {
   return async (dispatch) => {
     if (email !== "undefined" && email !== "") {
-      const response = await axios.get(`lead/unchecked10?email=${email}`);
+      console.log(email);
+      console.log(category);
+      console.log(province);
+      const response = await axios.get(
+        `lead/unchecked10?email=${email}&category=${category}&province=${province}`
+      );
       const corredorLead = response.data;
       dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });
     }
