@@ -19,6 +19,7 @@ import {
   SET_ACCESS,
   GET_CORREDOR_LEAD,
   GET_CORREDOR_LEAD_CHECKED,
+  FIND_CORREDORES_NAME,
 } from "./actions";
 
 const initialState = {
@@ -218,6 +219,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         leaderDashboard: filteredStatus,
+      };
+    case FIND_CORREDORES_NAME:
+      return {
+        ...state,
+        leaderDashboard: action.payload,
       };
     case GET_ALL_CORREDORES:
       return {
