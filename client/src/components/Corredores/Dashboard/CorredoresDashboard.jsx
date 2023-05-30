@@ -271,7 +271,7 @@ const CorredoresDashboard = () => {
               placeholder="Filtrar Profesion"
             />
 
-            <label>Categoria: </label>
+            <label>Provincia: </label>
             <input
               className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
               type="text"
