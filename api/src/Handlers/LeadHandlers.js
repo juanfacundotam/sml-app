@@ -10,8 +10,9 @@ const getLead10Unchecked = require("../controllers/Lead/getLead10Unchecked");
 const updateLeadVendedorById = require("../controllers/Lead/updateLeadVendedorById");
 const getLeadVendedorById = require("../controllers/Lead/getLeadVendedorById");
 const getLeadCorredorChecked = require("../controllers/Lead/getLeadCorredoresChecked");
-const findLeadCorredorName = require("../controllers/Lead/findLeadCorredorName");
 const limpiezaBaseFunction = require("../controllers/Lead/limpiezaBaseFunction");
+const findLeadCorredorName = require("../controllers/Lead/findLeadCorredorName");
+const findLeadVendedorName = require("../controllers/Lead/findLeadVendedorName");
 
 const getAllLeadHandler = async (req, res) => {
   try {
@@ -136,9 +137,17 @@ const getLeadCorredorCheckedHandler = async (req, res) => {
 };
 const findLeadCorredorNameHandler = async (req, res) => {
   const { name } = req.query;
-  console.log(name);
   try {
     const foundCorredor = await findLeadCorredorName(name);
+    res.status(200).json(foundCorredor);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
+const findLeadVendedorNameHandler = async (req, res) => {
+  const { name } = req.query;
+  try {
+    const foundCorredor = await findLeadVendedorName(name);
     res.status(200).json(foundCorredor);
   } catch (error) {
     res.status(404).json({ error: error.message });
@@ -168,4 +177,5 @@ module.exports = {
   getLeadCorredorCheckedHandler,
   limpiezaBaseHandler,
   findLeadCorredorNameHandler,
+  findLeadVendedorNameHandler,
 };
