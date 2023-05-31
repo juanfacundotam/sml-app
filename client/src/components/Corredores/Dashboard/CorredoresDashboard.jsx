@@ -18,7 +18,7 @@ import BasicButtons from "./MaterialUi/BasicButtons";
 const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
   const [category, setCategory] = useState("");
-  const [province, setProvince] = useState("");
+  const [country, setCountry] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   const { corredorLead } = useSelector((state) => state);
@@ -32,11 +32,11 @@ const CorredoresDashboard = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    dispatch(getLeadCorredores(email, category, province));
+    dispatch(getLeadCorredores(email, category, country));
   }, [dispatch]);
 
   const filtrar = () => {
-    dispatch(getLeadCorredores(email, category, province));
+    dispatch(getLeadCorredores(email, category, country));
   };
 
   const filterCategory = (event) => {
@@ -44,9 +44,9 @@ const CorredoresDashboard = () => {
     setCategory(value);
   };
 
-  const filterProvince = (event) => {
+  const filterCountry = (event) => {
     const { value } = event.target;
-    setProvince(value);
+    setCountry(value);
   };
 
   const handleChangeInstagram = (event, index) => {
@@ -234,7 +234,7 @@ const CorredoresDashboard = () => {
         }
       }
 
-      dispatch(getLeadCorredores(email, category, province));
+      dispatch(getLeadCorredores(email, category, country));
 
       SendLeadsSuccess();
     } catch (error) {
@@ -283,9 +283,9 @@ const CorredoresDashboard = () => {
             <input
               className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
               type="text"
-              name="province"
-              value={province}
-              onChange={filterProvince}
+              name="country"
+              value={country}
+              onChange={filterCountry}
               placeholder="Filtrar Provincia"
             />
 
