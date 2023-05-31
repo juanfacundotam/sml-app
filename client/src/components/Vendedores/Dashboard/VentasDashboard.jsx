@@ -28,6 +28,7 @@ const VentasDashboard = () => {
   const dispatch = useDispatch();
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
   const [showObservaciones, setShowObservaciones] = useState(false);
+  const [observationMessage, setObservationMessage] = useState("false");
   const user = useUser().user;
   const email = user?.emailAddresses[0]?.emailAddress;
   const fullName = user?.fullName;
@@ -146,8 +147,10 @@ const VentasDashboard = () => {
     // setData(LeadsLlamadaVenta);
   };
 
-  const showObservacionesHandler = () => {
-    setShowObservaciones(!showObservaciones);
+
+  const showObservacionesHandler = (observacion) => {
+    setObservationMessage(observacion)
+    setShowObservaciones(true);
   };
   const closeObservacionesHandler = () => {
     setShowObservaciones(false);
@@ -271,7 +274,7 @@ const VentasDashboard = () => {
                       {showObservaciones && (
                         <div className="flex justify-start items-center max-w-lg absolute top-2 bg-[#b9b9b978] text-white rounded-md">
                           <p className="mt-2 p-3    ">
-                            Observaciones: {item.llamada_venta.observaciones}
+                            Observaciones: {observationMessage}
                           </p>
                           <button
                             onClick={closeObservacionesHandler}
@@ -297,7 +300,7 @@ const VentasDashboard = () => {
                       <p
                         onClick={() => handleCopyClick(item.telephone)}
                         className="text-start w-44 p-1 cursor-pointer px-3 rounded-full text-ellipsis text-18 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute"
-                        >
+                      >
                         {item.telephone}
                       </p>
                     </td>
@@ -313,24 +316,28 @@ const VentasDashboard = () => {
                       )}
                     </td>
                     <td className="flex justify-start items-center p-0 w-fit">
-                      <div>
-                        {item.llamada_venta.contacto.contacto ? (
-                          <p className="w-64  px-3 rounded-full text-ellipsis text-16 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 ">
+                      <div className="w-52 h-11">
+                        {item.llamada_venta.contacto ? (
+                          <p className="w-64  rounded-full text-ellipsis text-16 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 ">
                             {item.llamada_venta.contacto}
                           </p>
-                        ):(<p>Sin contacto</p>)}
+                        ) : (
+                          <p className= "w-64 rounded-full text-ellipsis text-16 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111" >Sin contacto</p>
+                        )}
                         <div className="flex justify-start items-center">
-                        {item.llamada_venta.contacto.dia_hora ? (
-                          <p className="w-fit  px-3 rounded-full text-ellipsis text-16 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111">
-                            {item.llamada_venta.dia_hora}
-                          </p>
-                          ):(<p>Sin Día/Hora</p>)}
-                            </div>
-                            </div>
-                          <AiOutlineInfoCircle
-                            className="border-2  border-[#dddb6376] text-1 text-[#dddb63b0] w-8 h-8 rounded-md cursor-pointer mx-3"
-                            onClick={showObservacionesHandler}
-                          />
+                          {item.llamada_venta.dia_hora[5] !== "u" ? (
+                            <p className="w-fit rounded-full text-ellipsis text-16 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111">
+                              {item.llamada_venta.dia_hora}
+                            </p>
+                          ) : (
+                            <p className="w-fit rounded-full text-ellipsis text-16 opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111">Sin Día/Hora</p>
+                          )}
+                        </div>
+                      </div>
+                      <AiOutlineInfoCircle
+                        className="border-2  border-[#dddb6376] text-1 text-[#dddb63b0] w-8 h-8 rounded-md cursor-pointer "
+                        onClick={()=>{showObservacionesHandler(item.llamada_venta.observaciones)}}
+                      />
                     </td>
                     <td className="flex justify-start items-start p-0 w-fit">
                       {item.status === "Sin contactar" && (
