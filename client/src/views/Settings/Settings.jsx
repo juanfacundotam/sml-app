@@ -3,7 +3,7 @@ import Detail from "../../components/Lideres/Employees/Detail/Detail";
 import {
   useUser,
 } from "@clerk/clerk-react";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { useEffect } from "react";
 import { getAllCorredores, getAllVendedores, getAllClevel, getAllLeader } from "../../redux/actions";
 import { useDispatch } from "react-redux";
@@ -28,9 +28,10 @@ export default function Settings() {
   const selectedEmployee = allEmployees.find(employee => employee.email === userEmail);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  console.log(allEmployees);
   const [formData, setFormData] = useState({
     birthdate: '',
-    // photo: '',
+    photo: '',
     country: '',
     contactNumber: '',
     description: '',
@@ -126,12 +127,12 @@ export default function Settings() {
                   placeholder="Descripción"
                 />
 
-                {/* <div className={styles.pictureInput} >
+                <div className={styles.pictureInput} >
                   <UploadWidget onImageUpload={handleImageUpload} />
                   {profileImageUrl && (
                     <Image name="photo" onChange={handleChange} value={profileImageUrl} cloudName={VITE_CLOUND_NAME} publicId={profileImageUrl} className={styles.picture} />
                   )}
-                </div> */}
+                </div>
 
                 <button type="submit" className={styles.button}>Enviar</button>
               </form>
@@ -141,7 +142,7 @@ export default function Settings() {
           <Detail
             key={formSubmitted ? "submitted" : "not-submitted"}
             name={user?.fullName}
-            // picture={selectedEmployee?.photo}
+            picture={selectedEmployee?.photo}
             email={user?.emailAddresses[0].emailAddress}
             contactNumber={selectedEmployee?.contactNumber}
             description={selectedEmployee?.description}
