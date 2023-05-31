@@ -37,11 +37,18 @@ const LeadSchema = new mongoose.Schema(
     },
     level: {
       type: String,
-      enum: ["","-","0", "1", "2", "incidencia"],
+      enum: ["", "-", "0", "1", "2", "incidencia"],
     },
     status: {
       type: String,
-      enum: ["Sin contactar", "Rechazado", "Contratado", "No responde", "Agendar 2do llamado", "incidencia"],
+      enum: [
+        "Sin contactar",
+        "Rechazado",
+        "Contratado",
+        "No responde",
+        "Agendar 2do llamado",
+        "incidencia",
+      ],
       require: true,
     },
     llamada_venta: {
@@ -87,6 +94,38 @@ const LeadSchema = new mongoose.Schema(
       type: Boolean,
       require: true,
       default: false,
+    },
+    country: {
+      type: String,
+      require: true,
+    },
+    profesion: {
+      type: String,
+      require: true,
+    },
+    marca_personal: {
+      type: String,
+      require: true,
+    },
+    description: {
+      type: String,
+      require: true,
+      default: "",
+    },
+    speech: {
+      type: String,
+      require: true,
+      default: "",
+    },
+    monto_op: {
+      type: Number,
+      require: true,
+      default: 0,
+    },
+    fecha_op: {
+      type: String,
+      require: true,
+      default: "",
     },
     deleted: {
       type: Boolean,
