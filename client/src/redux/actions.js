@@ -205,14 +205,14 @@ export const getLeadsLLamadaVenta = (email) => {
   };
 };
 
-export const getLeadCorredores = (email, category, country) => {
+export const getLeadCorredores = (email, profesion, country) => {
   return async (dispatch) => {
     if (email !== "undefined" && email !== "") {
       console.log(email);
-      console.log(category);
+      console.log(profesion);
       console.log(country);
       const response = await axios.get(
-        `lead/unchecked10?email=${email}&category=${category}&country=${country}`
+        `lead/unchecked10?email=${email}&profesion=${profesion}&country=${country}`
       );
       const corredorLead = response.data;
       dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });
