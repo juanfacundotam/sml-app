@@ -1,49 +1,49 @@
 const Lead = require("../../models/Lead");
 
-let leadUnchecked = [];
-let limitedLeadRest = [];
-let leadRest = [];
-
 const getLead10Unchecked = async (query) => {
-  if (!query.category && !query.province) {
+  let leadUnchecked = [];
+  let limitedLeadRest = [];
+  let leadRest = [];
 
-    leadUnchecked = await Lead.find({
-      corredor: query.email,
+  const { email, category, province } = query;
+
+  const findLeadUnchecked = async (conditions, limit) => {
+    return Lead.find(conditions, null, { limit }).lean();
+  };
+
+  const updateLeadRest = async (conditions, updates) => {
+    return Lead.updateMany(conditions, updates);
+  };
+
+  if (!category && !province) {
+    leadUnchecked = await findLeadUnchecked({
+      corredor: email,
       checked: false,
       view: true,
-    })
-      .limit(10)
-      .exec();
+    }, 10);
 
-    let count;
-    if (leadUnchecked.length > 0) {
-      count = 10 - leadUnchecked.length;
-    } else {
-      count = 10;
+    const count = 10 - leadUnchecked.length;
+    if (count > 0) {
+      limitedLeadRest = await findLeadUnchecked({
+        checked: false,
+        view: false,
+        corredor: "",
+      }, count);
+
+      if (limitedLeadRest.length > 0) {
+        const updates = limitedLeadRest.map(element => ({
+          updateOne: {
+            filter: { _id: element._id },
+            update: { corredor: email, view: true },
+          },
+        }));
+
+        await Lead.bulkWrite(updates);
+      }
     }
-
-    leadRest = await Lead.find({
-      checked: false,
-      view: false,
-      corredor: "",
-    })
-      .limit(count)
-      .exec();
-
-    limitedLeadRest = leadRest.slice(0, count);
-
-    if (limitedLeadRest.length > 0) {
-      limitedLeadRest.forEach((element) => {
-        element.corredor = query.email;
-        element.view = true;
-        element.save();
-      });
-    }
-
   } else {
-
-    await Lead.updateMany(
-      { corredor: query.email },
+    await updateLeadRest(
+      { corredor: email },
       {
         $set: {
           level: "",
@@ -62,55 +62,39 @@ const getLead10Unchecked = async (query) => {
       }
     );
 
-    let provinceRegex = query.province
-      ? new RegExp(query.province, "i")
-      : /.*/;
-    let categoryRegex = query.category
-      ? new RegExp(query.category, "i")
-      : /.*/;
-    leadUnchecked = await Lead.find({
-      corredor: query.email,
+    const provinceRegex = province ? new RegExp(province, "i") : /.*/;
+    const categoryRegex = category ? new RegExp(category, "i") : /.*/;
+
+    leadUnchecked = await findLeadUnchecked({
+      corredor: email,
       checked: false,
       view: true,
       province: provinceRegex,
       category: categoryRegex,
-    })
-      .limit(10)
-      .exec();
+    }, 10);
 
-      
-      let count;
-      if (leadUnchecked.length > 0) {
-      count = 10 - leadUnchecked.length;
-    } else {
-      count = 10;
+    const count = 10 - leadUnchecked.length;
+    if (count > 0) {
+      limitedLeadRest = await findLeadUnchecked({
+        checked: false,
+        view: false,
+        corredor: "",
+        province: provinceRegex,
+        category: categoryRegex,
+      }, count);
+
+      if (limitedLeadRest.length > 0) {
+        const updates = limitedLeadRest.map(element => ({
+          updateOne: {
+            filter: { _id: element._id },
+            update: { corredor: email, view: true },
+          },
+        }));
+
+        await Lead.bulkWrite(updates);
+      }
     }
-
-    
-  
-    leadRest = await Lead.find({
-      checked: false,
-      view: false,
-      corredor: "",
-      province: provinceRegex,
-      category: categoryRegex,
-    })
-      .limit(count)
-      .exec();
-      
-      limitedLeadRest = leadRest.slice(0, count);
-
-
-    if (limitedLeadRest.length > 0) {
-      limitedLeadRest.forEach((element) => {
-        element.corredor = query.email;
-        element.view = true;
-        element.save();
-      });
-    }
-    
   }
-  console.log([...leadUnchecked, ...limitedLeadRest]);
 
   return [...leadUnchecked, ...limitedLeadRest];
 };
