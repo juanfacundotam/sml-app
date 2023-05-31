@@ -121,16 +121,16 @@ const rootReducer = (state = initialState, action) => {
       const copyCategory = [...state.leaderDashboard];
       if (action.payload === "DES") {
         copyCategory.sort((a, b) => {
-          const clientA = a.category ? a.category.toLowerCase() : "";
-          const clientB = b.category ? b.category.toLowerCase() : "";
+          const clientA = a.profesion ? a.profesion.toLowerCase() : "";
+          const clientB = b.profesion ? b.profesion.toLowerCase() : "";
           return clientB.localeCompare(clientA, "default", {
             sensitivity: "accent",
           });
         });
       } else {
         copyCategory.sort((a, b) => {
-          const clientA = a.category ? a.category.toLowerCase() : "";
-          const clientB = b.category ? b.category.toLowerCase() : "";
+          const clientA = a.profesion ? a.profesion.toLowerCase() : "";
+          const clientB = b.profesion ? b.profesion.toLowerCase() : "";
           return clientA.localeCompare(clientB, "default", {
             sensitivity: "accent",
           });
