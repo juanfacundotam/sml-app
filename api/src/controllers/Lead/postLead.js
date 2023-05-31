@@ -2,14 +2,29 @@ const Lead = require("../../models/Lead");
 
 const postLead = async (data) => {
   const client = await data.map(
-    ({ City, Province, Name, Category, email, Telephone, Url }) => {
+    ({
+      city,
+      province,
+      name,
+      category,
+      email,
+      telephone,
+      url,
+      country,
+      profesion,
+      marca_personal,
+      description,
+      speech,
+      monto_op,
+      fecha_op,
+    }) => {
       const lead = Lead.create({
-        name: Name,
-        category: Category,
-        city: City,
-        province: Province,
-        url: Url ? Url : "-",
-        telephone: Telephone ? Telephone : "-",
+        name: name,
+        category: category,
+        city: city,
+        province: province,
+        url: url ? url : "-",
+        telephone: telephone ? telephone : "-",
         email: email ? email : "",
         instagram: "",
         level: "-",
@@ -19,6 +34,13 @@ const postLead = async (data) => {
         corredor_id: "",
         checked: false,
         view: false,
+        country: country,
+        profesion: profesion,
+        marca_personal: marca_personal,
+        description: description ? description : "",
+        speech: speech ? speech : "",
+        monto_op: monto_op ? monto_op : 0,
+        fecha_op: fecha_op ? fecha_op : "",
         deleted: false,
       });
       return lead;

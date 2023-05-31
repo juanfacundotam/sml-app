@@ -41,12 +41,6 @@ const getLeadCheckedInactive5 = async (email) => {
           })
         );
       }
-      // if (leadRest.length > 0) {
-      //   leadRest.forEach((element) => {
-      //     element.vendedor = email;
-      //     element.save();
-      //   });
-      // }
     }
   }
 
@@ -58,4 +52,3 @@ const getLeadCheckedInactive5 = async (email) => {
 };
 
 module.exports = getLeadCheckedInactive5;
-
