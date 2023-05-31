@@ -16,22 +16,28 @@ const getLead10Unchecked = async (query) => {
   };
 
   if (!category && !province) {
-    leadUnchecked = await findLeadUnchecked({
-      corredor: email,
-      checked: false,
-      view: true,
-    }, 10);
+    leadUnchecked = await findLeadUnchecked(
+      {
+        corredor: email,
+        checked: false,
+        view: true,
+      },
+      10
+    );
 
     const count = 10 - leadUnchecked.length;
     if (count > 0) {
-      limitedLeadRest = await findLeadUnchecked({
-        checked: false,
-        view: false,
-        corredor: "",
-      }, count);
+      limitedLeadRest = await findLeadUnchecked(
+        {
+          checked: false,
+          view: false,
+          corredor: "",
+        },
+        count
+      );
 
       if (limitedLeadRest.length > 0) {
-        const updates = limitedLeadRest.map(element => ({
+        const updates = limitedLeadRest.map((element) => ({
           updateOne: {
             filter: { _id: element._id },
             update: { corredor: email, view: true },
@@ -43,7 +49,7 @@ const getLead10Unchecked = async (query) => {
     }
   } else {
     await updateLeadRest(
-      { corredor: email },
+      { corredor: email, checked: false },
       {
         $set: {
           level: "",
@@ -65,26 +71,32 @@ const getLead10Unchecked = async (query) => {
     const provinceRegex = province ? new RegExp(province, "i") : /.*/;
     const categoryRegex = category ? new RegExp(category, "i") : /.*/;
 
-    leadUnchecked = await findLeadUnchecked({
-      corredor: email,
-      checked: false,
-      view: true,
-      province: provinceRegex,
-      category: categoryRegex,
-    }, 10);
+    leadUnchecked = await findLeadUnchecked(
+      {
+        corredor: email,
+        checked: false,
+        view: true,
+        province: provinceRegex,
+        category: categoryRegex,
+      },
+      10
+    );
 
     const count = 10 - leadUnchecked.length;
     if (count > 0) {
-      limitedLeadRest = await findLeadUnchecked({
-        checked: false,
-        view: false,
-        corredor: "",
-        province: provinceRegex,
-        category: categoryRegex,
-      }, count);
+      limitedLeadRest = await findLeadUnchecked(
+        {
+          checked: false,
+          view: false,
+          corredor: "",
+          province: provinceRegex,
+          category: categoryRegex,
+        },
+        count
+      );
 
       if (limitedLeadRest.length > 0) {
-        const updates = limitedLeadRest.map(element => ({
+        const updates = limitedLeadRest.map((element) => ({
           updateOne: {
             filter: { _id: element._id },
             update: { corredor: email, view: true },
