@@ -19,6 +19,7 @@ const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
   const [category, setCategory] = useState("");
   const [province, setProvince] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const { corredorLead } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const CorredoresDashboard = () => {
   let email = localStorage.getItem("email");
 
   useEffect(() => {
+    setIsLoading(true);
     dispatch(getLeadCorredores(email, category, province));
   }, [dispatch]);
 
@@ -109,6 +111,10 @@ const CorredoresDashboard = () => {
       }
     }
     setClient(clientes);
+
+    if (corredorLead.length > 0) {
+      setIsLoading(false);
+    }
   }, [corredorLead]);
 
   const SendLeads = (name) => {
@@ -236,6 +242,8 @@ const CorredoresDashboard = () => {
       console.log({ error: error.message });
     }
   };
+
+  console.log(isLoading);
   return (
     <>
       <Nav />
@@ -285,8 +293,11 @@ const CorredoresDashboard = () => {
               <BasicButtons />
             </div>
           </div>
-
-          {corredorLead.length > 0 ? (
+          {isLoading ? (
+            <div className={style.containerLoader}>
+              <div className={style.customloader}></div>
+            </div>
+          ) : corredorLead.length > 0 ? (
             <table className="w-full">
               <thead className={style.tableHead}>
                 <tr className={style.tableRow}>
@@ -304,7 +315,7 @@ const CorredoresDashboard = () => {
                     <tr key={index} className={style.tableCards}>
                       <td className="flex justify-start items-center p-0">
                         <div type="text" id="name" value={item.name}>
-                          <p className="w-96 p-1 px-3 rounded-full text-ellipsis opacity-1 whitespace-nowrap overflow-hidden ">
+                          <p className="w-96 p-1 px-3 rounded-full text-ellipsis opacity-1 whitespace-nowrap overflow-hidden">
                             {item.name}
                           </p>
                         </div>
@@ -323,7 +334,7 @@ const CorredoresDashboard = () => {
                           <CiMail className="text-[2rem] text-[#418df0]" />
                         </div>
                         <input
-                          className={`bg-transparent  w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none  focus:border-gray-500 placeholder-white ${
+                          className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white ${
                             item.email !== "-" && item.email !== ""
                               ? "border-green-500"
                               : ""
@@ -341,7 +352,7 @@ const CorredoresDashboard = () => {
                           <GrInstagram className="text-[2rem] text-[#418df0]" />
                         </div>
                         <input
-                          className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white  ${
+                          className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white ${
                             item.instagram ? "border-green-500" : ""
                           }`}
                           type="text"
