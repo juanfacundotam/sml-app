@@ -561,7 +561,7 @@ export default function NestedModal({
         year: dateHour.$y,
         hora: dateHour.$D,
         minutos: dateHour.$m,
-      });
+      })
     } else {
       setLlamadoVenta({
         ...llamadoVenta,

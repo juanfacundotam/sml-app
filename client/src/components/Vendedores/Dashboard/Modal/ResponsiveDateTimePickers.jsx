@@ -40,6 +40,7 @@ export default function ResponsiveDateTimePickers({
     dayjs.locale("es"); // Establecer el idioma en español
   }, []);
   
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es" locale="es">
       <DemoContainer components={["StaticDateTimePicker"]}>
