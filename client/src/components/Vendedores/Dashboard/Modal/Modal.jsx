@@ -32,7 +32,7 @@ function ChildModal({
   llamadoVenta,
   handleLlamadoVentaChange,
   emailAddress,
-  fullName
+  fullName,
 }) {
   const [openChild, setOpenChild] = React.useState(false);
 
@@ -49,13 +49,19 @@ function ChildModal({
       statusObj.status === "Agendar 2do llamado" ||
       statusObj.status === "Agendar otro llamado"
     ) {
-  
       statusObj.status = "Agendar 2do llamado";
       statusObj.status_op = llamadoVenta.diaHora;
       statusObj.llamada_venta = {
         dia_hora: llamadoVenta.diaHora,
         contacto: llamadoVenta.contacto,
         observaciones: llamadoVenta.observaciones,
+        dateObject: {
+          hora: llamadoVenta.hora,
+          minutos: llamadoVenta.minutos,
+          dia: llamadoVenta.dia,
+          mes: llamadoVenta.mes,
+          year: llamadoVenta.year,
+        },
       };
     }
 
@@ -124,12 +130,13 @@ function ChildModal({
       });
     setOpenChild(false);
     setOpen(false);
+
+    console.log(llamadoVenta);
   };
 
   const handleCancel = () => {
     setOpen(false);
   };
-
   return (
     <React.Fragment>
       <div className="flex justify-around items-center relative">
@@ -189,7 +196,6 @@ function ChildModal({
     </React.Fragment>
   );
 }
-
 
 //************************************************************************************************ */
 function IncidenceModal({
@@ -437,6 +443,9 @@ function intelligentInfo({ setOpen }) {
   );
 }
 //************************************************************************************************ */
+
+
+
 export default function NestedModal({
   item,
   SendLeadAlert,
@@ -561,7 +570,7 @@ export default function NestedModal({
         year: dateHour.$y,
         hora: dateHour.$D,
         minutos: dateHour.$m,
-      })
+      });
     } else {
       setLlamadoVenta({
         ...llamadoVenta,
@@ -927,7 +936,7 @@ export default function NestedModal({
               />
             )}
           </div> */}
-          
+
           <div className="flex justify-center items-center absolute -right-80 top-0">
             {openTimeHour && (
               <ResponsiveDateTimePickers

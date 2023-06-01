@@ -96,55 +96,58 @@ const VentasDashboard = () => {
     ];
     // console.log(datos[2].slice(10, 14))
 
-    console.log(datos.sort((a, b) => {
-      if (a === "Sin Día/Hora" && b !== "Sin Día/Hora") {
-        return 1;
-      } else if (a !== "Sin Día/Hora" && b === "Sin Día/Hora") {
-        return -1;
-      } else {
-        const diaA = a[6] !== "/" ? a.slice(5, 7) : a.slice(5, 6);
-        const diaB = b[6] !== "/" ? b.slice(5, 7) : b.slice(5, 6);
-        if (diaA !== diaB) {
-          return diaA - diaB;
-        }
-        const mesA = a[7] !== "/" ? a.slice(7, 9) : a.slice(8, 9);
-        const mesB = b[7] !== "/" ? b.slice(7, 9) : b.slice(8, 9);
-        if (mesA !== mesB) {
-          return mesA - mesB;
-        }
-        const añoA = a.slice(10, 14);
-        const añoB = b.slice(10, 14);
-        return añoA - añoB;
-      }
-    }))
-    
- 
-    console.log(datos.sort((a, b) => {
-      const diaA = a[6] !== "/" ? a.slice(5, 7) : a.slice(5, 6);
-      const diaB = b[6] !== "/" ? b.slice(5, 7) : b.slice(5, 6);
-      return diaA - diaB;
-    }).sort((a, b) => {
-        const mesA = a[7] !== "/" ? a.slice(7, 9) : a.slice(8, 9);
-        const mesB = b[7] !== "/" ? b.slice(7, 9) : b.slice(8, 9);
-        return mesA - mesB;
-      })
-      .sort((a, b) => {
-        const añoA = a.slice(10, 14);
-        const añoB = b.slice(10, 14);
-        return añoA - añoB;
-      })
-      .sort((a, b) => {
+    console.log(
+      datos.sort((a, b) => {
         if (a === "Sin Día/Hora" && b !== "Sin Día/Hora") {
-          return 1; 
+          return 1;
         } else if (a !== "Sin Día/Hora" && b === "Sin Día/Hora") {
-          return -1; 
+          return -1;
         } else {
-          return 0; 
+          const diaA = a[6] !== "/" ? a.slice(5, 7) : a.slice(5, 6);
+          const diaB = b[6] !== "/" ? b.slice(5, 7) : b.slice(5, 6);
+          if (diaA !== diaB) {
+            return diaA - diaB;
+          }
+          const mesA = a[7] !== "/" ? a.slice(7, 9) : a.slice(8, 9);
+          const mesB = b[7] !== "/" ? b.slice(7, 9) : b.slice(8, 9);
+          if (mesA !== mesB) {
+            return mesA - mesB;
+          }
+          const añoA = a.slice(10, 14);
+          const añoB = b.slice(10, 14);
+          return añoA - añoB;
         }
-      }))
+      })
+    );
+
+    console.log(
+      datos
+        .sort((a, b) => {
+          const diaA = a[6] !== "/" ? a.slice(5, 7) : a.slice(5, 6);
+          const diaB = b[6] !== "/" ? b.slice(5, 7) : b.slice(5, 6);
+          return diaA - diaB;
+        })
+        .sort((a, b) => {
+          const mesA = a[7] !== "/" ? a.slice(7, 9) : a.slice(8, 9);
+          const mesB = b[7] !== "/" ? b.slice(7, 9) : b.slice(8, 9);
+          return mesA - mesB;
+        })
+        .sort((a, b) => {
+          const añoA = a.slice(10, 14);
+          const añoB = b.slice(10, 14);
+          return añoA - añoB;
+        })
+        .sort((a, b) => {
+          if (a === "Sin Día/Hora" && b !== "Sin Día/Hora") {
+            return 1;
+          } else if (a !== "Sin Día/Hora" && b === "Sin Día/Hora") {
+            return -1;
+          } else {
+            return 0;
+          }
+        })
+    );
   };
-
-
 
   const handleCopyClick = (copyToProps) => {
     navigator.clipboard
@@ -175,6 +178,7 @@ const VentasDashboard = () => {
       theme: "dark",
     });
     dispatch(getLeadsLLamadaVenta(emailAddress));
+    pages(1);
   };
   const SendErrorUpdateAlert = () => {
     toast.error("The lead could not be updated!", {
@@ -216,6 +220,7 @@ const VentasDashboard = () => {
     setShowObservaciones(false);
   };
 
+  console.log(data);
   return (
     <>
       <Nav />
