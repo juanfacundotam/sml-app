@@ -39,7 +39,6 @@ const VentasDashboard = () => {
 
   useEffect(() => {
     dispatch(getLeadsLLamadaVenta(emailAddress));
-    ordenarLeadsLlamadasVentas();
   }, [dispatch, emailAddress]);
 
   useEffect(() => {
