@@ -23,6 +23,8 @@ export const GET_CORREDOR_LEAD_CHECKED = "GET_CORREDOR_LEAD_CHECKED";
 export const FIND_CORREDORES_NAME = "FIND_CORREDORES_NAME";
 export const FIND_VENDEDORES_NAME = "FIND_VENDEDORES_NAME";
 export const GET_ALL_EMPLOYEES = "GET_ALL_EMPLOYEES";
+export const GET_ALL_PROFESION = "GET_ALL_PROFESION";
+export const GET_ALL_COUNTRY = "GET_ALL_COUNTRY";
 
 //
 export const setRol = (rol) => {
@@ -208,9 +210,6 @@ export const getLeadsLLamadaVenta = (email) => {
 export const getLeadCorredores = (email, profesion, country) => {
   return async (dispatch) => {
     if (email !== "undefined" && email !== "") {
-      console.log(email);
-      console.log(profesion);
-      console.log(country);
       const response = await axios.get(
         `lead/unchecked10?email=${email}&profesion=${profesion}&country=${country}`
       );
@@ -233,5 +232,21 @@ export const getAllEmployees = () => {
     const response = await axios.get("/employees");
     const allEmployees = response.data;
     dispatch({ type: GET_ALL_EMPLOYEES, payload: allEmployees });
+  };
+};
+
+export const getAllProfesion = () => {
+  return async (dispatch) => {
+    const response = await axios.get("/lead/profesion");
+    const allProfesion = response.data;
+    dispatch({ type: GET_ALL_PROFESION, payload: allProfesion });
+  };
+};
+
+export const getAllCountries = () => {
+  return async (dispatch) => {
+    const response = await axios.get("/lead/country");
+    const allCountries = response.data;
+    dispatch({ type: GET_ALL_COUNTRY, payload: allCountries });
   };
 };

@@ -36,7 +36,6 @@ export default function Settings() {
     description: false,
   });
 
-  console.log(allEmployees);
   const [formData, setFormData] = useState({
     birthdate: '',
     photo: userImageUrl,
@@ -78,7 +77,6 @@ export default function Settings() {
 
     axios.put(`${selectedEmployee.rol}/${selectedEmployee._id}`, formData)
       .then((response) => {
-        console.log(response);
         setFormSubmitted(true);
         dispatch(getAllCorredores());
         dispatch(getAllVendedores());

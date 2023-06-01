@@ -8,7 +8,11 @@ import { CiGlobe, CiMail } from "react-icons/ci";
 import { GrInstagram } from "react-icons/gr";
 import { IoGrid, IoStatsChart } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { getLeadCorredores } from "../../../redux/actions";
+import {
+  getAllCountries,
+  getAllProfesion,
+  getLeadCorredores,
+} from "../../../redux/actions";
 import { useUser } from "@clerk/clerk-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,9 +23,12 @@ const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
   const [profesion, setProfesion] = useState("");
   const [country, setCountry] = useState("");
+  const [category, seCategory] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   const { corredorLead } = useSelector((state) => state);
+  const { allCountries } = useSelector((state) => state);
+  const { allProfesion } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const user = useUser().user;
@@ -33,6 +40,8 @@ const CorredoresDashboard = () => {
   useEffect(() => {
     setIsLoading(true);
     dispatch(getLeadCorredores(email, profesion, country));
+    dispatch(getAllProfesion());
+    dispatch(getAllCountries());
   }, [dispatch]);
 
   const filtrar = () => {
@@ -47,6 +56,11 @@ const CorredoresDashboard = () => {
   const filterCountry = (event) => {
     const { value } = event.target;
     setCountry(value);
+  };
+
+  const filterCategory = (event) => {
+    const { value } = event.target;
+    seCategory(value);
   };
 
   const handleChangeInstagram = (event, index) => {
@@ -235,6 +249,8 @@ const CorredoresDashboard = () => {
       }
 
       dispatch(getLeadCorredores(email, profesion, country));
+      dispatch(getAllProfesion());
+      dispatch(getAllCountries());
 
       SendLeadsSuccess();
     } catch (error) {
@@ -243,7 +259,6 @@ const CorredoresDashboard = () => {
     }
   };
 
-  console.log(isLoading);
   return (
     <>
       <Nav />
@@ -270,24 +285,64 @@ const CorredoresDashboard = () => {
 
           <div className="flex gap-5 mt-5 justify-center items-center">
             <label>Profesion: </label>
-            <input
+            <select
+              className={`bg-transparent text-black w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
+              value={profesion}
+              onChange={filterProfesion}
+            >
+              {allProfesion &&
+                allProfesion.map((option, index) => (
+                  <option className="text-black" key={index} value={option}>
+                    {option}
+                  </option>
+                ))}
+
+              <option className="text-black" value="">
+                Otras Profesiones
+              </option>
+            </select>
+            {/* <input
               className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
               type="text"
               name="profesion"
               value={profesion}
               onChange={filterProfesion}
               placeholder="Filtrar Profesion"
-            />
-
-            <label>Provincia: </label>
+            /> */}
+            {/* <label>Categoria: </label>
             <input
+              className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
+              type="text"
+              name="category"
+              value={category}
+              onChange={filterCategory}
+              placeholder="Filtrar Categoria"
+            /> */}
+
+            <label>Pais: </label>
+            <select
+              className={`bg-transparent text-black w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
+              value={country}
+              onChange={filterCountry}
+            >
+              {allCountries &&
+                allCountries.map((option, index) => (
+                  <option className="text-black" key={index} value={option}>
+                    {option}
+                  </option>
+                ))}
+              <option className="text-black" value="">
+                Otras Paises
+              </option>
+            </select>
+            {/* <input
               className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
               type="text"
               name="country"
               value={country}
               onChange={filterCountry}
               placeholder="Filtrar Provincia"
-            />
+            /> */}
 
             <div onClick={filtrar}>
               <BasicButtons />

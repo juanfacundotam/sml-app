@@ -13,11 +13,31 @@ const getLeadCorredorChecked = require("../controllers/Lead/getLeadCorredoresChe
 const limpiezaBaseFunction = require("../controllers/Lead/limpiezaBaseFunction");
 const findLeadCorredorName = require("../controllers/Lead/findLeadCorredorName");
 const findLeadVendedorName = require("../controllers/Lead/findLeadVendedorName");
+const getAllProfession = require("../controllers/Lead/getAllProfesion");
+const getAllCountry = require("../controllers/Lead/getAllCountry");
 
 const getAllLeadHandler = async (req, res) => {
   try {
     const lead = await getAllLeads();
     res.status(200).json(lead);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
+
+const getAllProfesionHandler = async (req, res) => {
+  try {
+    const profesion = await getAllProfession();
+    res.status(200).json(profesion);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
+
+const getAllCountriesHandler = async (req, res) => {
+  try {
+    const country = await getAllCountry();
+    res.status(200).json(country);
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
@@ -179,4 +199,6 @@ module.exports = {
   limpiezaBaseHandler,
   findLeadCorredorNameHandler,
   findLeadVendedorNameHandler,
+  getAllProfesionHandler,
+  getAllCountriesHandler,
 };
