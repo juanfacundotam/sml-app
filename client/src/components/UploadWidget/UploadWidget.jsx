@@ -32,16 +32,15 @@ const UploadWidget = ({ onImageUpload }) => {
       }, []);
       
     return (
-        <div className="flex flex-col justify-end items-end gap-1 w-full h-fit mt-5">
-
+        <>
             <button
                 className={styles.boton}
                 onClick={() => widgetRef.current.open()}
-                >
+            >
                 Cambiar foto
             </button>
-              </div>
 
+        </>
     )
 }
 
