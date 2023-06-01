@@ -25,14 +25,12 @@ export default function BasicModal(props) {
     _id,
     name,
     category,
-    level,
     email,
     instagram,
     telephone,
     city,
     province,
     url,
-    corredor,
     handleClose,
     updateParentState
   } = props
@@ -40,9 +38,9 @@ export default function BasicModal(props) {
   const [filledEmail, setFilledEmail] = useState(email || "")
   const [filledInstagram, setFilledInstagram] = useState(instagram || "")
   const [filledTelephone, setFilledTelephone] = useState(telephone || "")
-  const [filledLevel, setFilledLevel] = useState(level || "")
+  const [filledLevel, setFilledLevel] = useState("")
   const [filledUrl, setFilledUrl] = useState(url || "")
-  const [filledCorredor, setFilledCorredor] = useState(corredor || "")
+  const [filledCorredor, setFilledCorredor] = useState("")
 
   const [inputVisibility, setInputVisibility] = useState({
     email: false,
@@ -76,27 +74,15 @@ export default function BasicModal(props) {
     const newValue = updatedValue !== "" ? updatedValue : url
     setFilledUrl(newValue)
   };
-  const handleCorredorChange = () => {
-    setInputVisibility((prevState) => ({
-      ...prevState,
-      corredor: true,
-    }))
-  }
 
-  const handleLevelChange = () => {
-    setInputVisibility((prevState) => ({
-      ...prevState,
-      level: true,
-    }))
-  }
 
   const handleCloseModal = () => {
     setFilledEmail(email || "")
     setFilledInstagram(instagram || "")
     setFilledTelephone(telephone || "")
-    setFilledLevel(level || "")
+    setFilledLevel("")
     setFilledUrl(url || "")
-    setFilledCorredor(corredor || "")
+    setFilledCorredor("")
 
     setInputVisibility({
       email: false,
@@ -174,25 +160,10 @@ export default function BasicModal(props) {
                 {province}, {city}{" "}
               </p>
             </div>
-            {!inputVisibility.level ? (
-              <div className="font-semibold flex gap-3">
-                <p>NIVEL: </p>
-                <p className="font-normal">{level}</p>
-                <button onClick={handleLevelChange} className="font-semibold">
-                  Change
-                </button>
-              </div>
-            ) : (
-              <div className="font-semibold flex gap-3">
-                <p>NIVEL: </p>
-                <input
-                  type="text"
-                  value="-"
-                  disabled
-                  className="font-normal"
-                />
-              </div>
-            )}
+            <div className="font-semibold flex gap-3">
+              <p>NIVEL: </p>
+              <p className="font-normal">-</p>
+            </div>
             {!inputVisibility.email ? (
               <div className="font-semibold flex gap-3">
                 <p>EMAIL: </p>
@@ -262,30 +233,15 @@ export default function BasicModal(props) {
                 />
               </div>
             )}
-             {!inputVisibility.corredor ? (
-              <div className="font-semibold flex gap-3">
-                <p>Corredor: </p>
-                <p className="font-normal">{corredor}</p>
-                <button onClick={handleCorredorChange} className="font-semibold">
-                  Change
-                </button>
-              </div>
-            ) : (
-              <div className="font-semibold flex gap-3">
-                <p>Corredor: </p>
-                <input
-                  type="text"
-                  value="-"
-                  disabled
-                  className="font-normal"
-                />
-              </div>
-            )}
             <div className="font-semibold flex gap-3">
+              <p>Corredor: </p>
+              <p className="font-normal">-</p>
+            </div>
+            <div className="w-28 font-semibold flex gap-3">
               <p>WEB: </p>
-              <div className="font-semibold flex gap-3">
+              <div className="w-28 text-ellipsis  flex justify-start items-center p-0">
                 {!inputVisibility.url ? (
-                  <p className="font-normal truncate text-white w-48 overflow-hidden overflow-ellipsis" title={url}>
+                  <p className="text-sm font-normal text-white rounded-full text-ellipsis opacity-1 overflow-hidden whitespace-nowrap hover:overflow-visible hover:bg-[#e3e1e1] hover:w-fit hover:text-black z-111 hover:absolute" title={url}>
                     {url}
                   </p>
                 ) : (
