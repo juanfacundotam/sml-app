@@ -207,11 +207,16 @@ export const getLeadsLLamadaVenta = (email) => {
   };
 };
 
-export const getLeadCorredores = (email, profesion, country) => {
+export const getLeadCorredores = (
+  email,
+  profesion,
+  country,
+  marca_personal
+) => {
   return async (dispatch) => {
     if (email !== "undefined" && email !== "") {
       const response = await axios.get(
-        `lead/unchecked10?email=${email}&profesion=${profesion}&country=${country}`
+        `lead/unchecked10?email=${email}&profesion=${profesion}&country=${country}&marca_personal=${marca_personal}`
       );
       const corredorLead = response.data;
       dispatch({ type: GET_CORREDOR_LEAD, payload: corredorLead });

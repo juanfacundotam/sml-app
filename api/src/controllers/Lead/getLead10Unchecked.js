@@ -5,7 +5,7 @@ const getLead10Unchecked = async (query) => {
   let limitedLeadRest = [];
   let leadRest = [];
 
-  const { email, profesion, country, category } = query;
+  const { email, profesion, country, category, marca_personal } = query;
 
   const findLeadUnchecked = async (conditions, limit) => {
     return Lead.find(conditions, null, { limit }).lean();
@@ -15,7 +15,7 @@ const getLead10Unchecked = async (query) => {
     return Lead.updateMany(conditions, updates);
   };
 
-  if (!profesion && !country && !category) {
+  if (!profesion && !country && !category && !marca_personal) {
     leadUnchecked = await findLeadUnchecked(
       {
         corredor: email,
@@ -71,6 +71,7 @@ const getLead10Unchecked = async (query) => {
     const countryRegex = country ? new RegExp(country, "i") : /.*/;
     const profesionRegex = profesion ? new RegExp(profesion, "i") : /.*/;
     const categoryRegex = category ? new RegExp(category, "i") : /.*/;
+    const marca_personalRegex = marca_personal ? new RegExp(marca_personal, "i") : /.*/;
 
     leadUnchecked = await findLeadUnchecked(
       {
@@ -80,6 +81,7 @@ const getLead10Unchecked = async (query) => {
         country: countryRegex,
         profesion: profesionRegex,
         category: categoryRegex,
+        marca_personal: marca_personalRegex,
       },
       10
     );
@@ -94,6 +96,7 @@ const getLead10Unchecked = async (query) => {
           country: countryRegex,
           profesion: profesionRegex,
           category: categoryRegex,
+          marca_personal: marca_personalRegex,
         },
         count
       );

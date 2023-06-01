@@ -23,6 +23,7 @@ const CorredoresDashboard = () => {
   const [client, setClient] = useState([]);
   const [profesion, setProfesion] = useState("");
   const [country, setCountry] = useState("");
+  const [marca_personal, setMarca_personal] = useState("");
   const [category, seCategory] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -39,13 +40,13 @@ const CorredoresDashboard = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    dispatch(getLeadCorredores(email, profesion, country));
+    dispatch(getLeadCorredores(email, profesion, country, marca_personal));
     dispatch(getAllProfesion());
     dispatch(getAllCountries());
   }, [dispatch]);
 
   const filtrar = () => {
-    dispatch(getLeadCorredores(email, profesion, country));
+    dispatch(getLeadCorredores(email, profesion, country, marca_personal));
   };
 
   const filterProfesion = (event) => {
@@ -62,6 +63,18 @@ const CorredoresDashboard = () => {
     const { value } = event.target;
     seCategory(value);
   };
+
+  const checkMarcaPersonal = () => {
+    if (marca_personal) {
+      setMarca_personal("SI");
+    } else {
+      setMarca_personal("");
+    }
+  };
+
+  useEffect(() => {
+    checkMarcaPersonal();
+  }, [checkMarcaPersonal]);
 
   const handleChangeInstagram = (event, index) => {
     const { name, value } = event.target;
@@ -248,7 +261,7 @@ const CorredoresDashboard = () => {
         }
       }
 
-      dispatch(getLeadCorredores(email, profesion, country));
+      dispatch(getLeadCorredores(email, profesion, country, marca_personal));
       dispatch(getAllProfesion());
       dispatch(getAllCountries());
 
@@ -286,7 +299,7 @@ const CorredoresDashboard = () => {
           <div className="flex gap-5 mt-5 justify-center items-center">
             <label>Profesion: </label>
             <select
-              className={`bg-transparent text-black w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
+              className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
               value={profesion}
               onChange={filterProfesion}
             >
@@ -301,30 +314,17 @@ const CorredoresDashboard = () => {
                 Otras Profesiones
               </option>
             </select>
-            {/* <input
-              className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
-              type="text"
-              name="profesion"
-              value={profesion}
-              onChange={filterProfesion}
-              placeholder="Filtrar Profesion"
-            /> */}
-            {/* <label>Categoria: </label>
-            <input
-              className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
-              type="text"
-              name="category"
-              value={category}
-              onChange={filterCategory}
-              placeholder="Filtrar Categoria"
-            /> */}
-
             <label>Pais: </label>
             <select
-              className={`bg-transparent text-black w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
+              className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
               value={country}
               onChange={filterCountry}
             >
+              <option
+                disabled="disabled"
+                className="text-black"
+                value=""
+              ></option>
               {allCountries &&
                 allCountries.map((option, index) => (
                   <option className="text-black" key={index} value={option}>
@@ -335,15 +335,14 @@ const CorredoresDashboard = () => {
                 Otras Paises
               </option>
             </select>
-            {/* <input
-              className={`bg-transparent w-[12rem] rounded-full border-2 border-gray-300 py-2 px-4 leading-tight focus:outline-none focus:border-gray-500 placeholder-white`}
-              type="text"
-              name="country"
-              value={country}
-              onChange={filterCountry}
-              placeholder="Filtrar Provincia"
-            /> */}
 
+            <label>Nombre Propio: </label>
+            <input
+              className="mr-5 h-6 w-6"
+              type="checkbox"
+              checked={marca_personal}
+              onChange={(e) => setMarca_personal(e.target.checked)}
+            />
             <div onClick={filtrar}>
               <BasicButtons />
             </div>
