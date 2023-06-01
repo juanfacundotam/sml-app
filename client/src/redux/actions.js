@@ -188,19 +188,12 @@ export const getVendedorAllLeads = (email) => {
 };
 export const getLeadsLLamadaVenta = (email) => {
   return async (dispatch) => {
-    const response = await axios.get(`/vendedor/email?email=${email}`);
-    const allLeads = response.data.leads;
+    const response = await axios.get(`/vendedor/ventas/email?email=${email}`);
+    const allLeads = response.data;
 
-    const allLeadsVentaMaps = allLeads
-      .map((item) => {
-        if (item.status === "Agendar 2do llamado") {
-          return item;
-        }
-      })
-      .filter((item) => item !== undefined);
     dispatch({
       type: GET_LEADS_LLAMADA_VENTA,
-      payload: allLeadsVentaMaps,
+      payload: allLeads,
     });
   };
 };

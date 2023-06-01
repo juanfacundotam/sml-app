@@ -468,7 +468,7 @@ export default function NestedModal({
     contacto: "",
     observaciones: "",
     dia: dateHour.$D,
-    mes: dateHour.$M,
+    mes: (dateHour.$M + 1),
     year: dateHour.$y,
     hora: dateHour.$D,
     minutos: dateHour.$m,
@@ -556,7 +556,7 @@ export default function NestedModal({
       setLlamadoVenta({
         ...llamadoVenta,
         [property]: value,
-        diaHora: `Dia: ${dateHour.$D}/${dateHour.$M}/${dateHour.$y} Hora: ${
+        diaHora: `Dia: ${dateHour.$D}/${(dateHour.$M + 1)}/${dateHour.$y} Hora: ${
           dateHour.$H && String(dateHour.$H).length === 1
             ? `0${dateHour.$H}`
             : dateHour.$H
@@ -566,7 +566,7 @@ export default function NestedModal({
             : dateHour.$m
         }`,
         dia: dateHour.$D,
-        mes: dateHour.$M,
+        mes: (dateHour.$M + 1),
         year: dateHour.$y,
         hora: dateHour.$D,
         minutos: dateHour.$m,
@@ -574,7 +574,7 @@ export default function NestedModal({
     } else {
       setLlamadoVenta({
         ...llamadoVenta,
-        diaHora: `Dia: ${dateHour.$D}/${dateHour.$M}/${dateHour.$y} Hora: ${
+        diaHora: `Dia: ${dateHour.$D}/${(dateHour.$M + 1)}/${dateHour.$y} Hora: ${
           dateHour.$H && String(dateHour.$H).length === 1
             ? `0${dateHour.$H}`
             : dateHour.$H
@@ -584,7 +584,7 @@ export default function NestedModal({
             : dateHour.$m
         }`,
         dia: dateHour.$D,
-        mes: dateHour.$M,
+        mes: (dateHour.$M + 1),
         year: dateHour.$y,
         hora: dateHour.$D,
         minutos: dateHour.$m,
@@ -864,7 +864,7 @@ export default function NestedModal({
                       className="bbg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-56 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white text-center dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       value={
                         dateHour.$D
-                          ? `Dia: ${dateHour.$D}/${dateHour.$M}/${
+                          ? `Dia: ${dateHour.$D}/${(dateHour.$M+1)}/${
                               dateHour.$y
                             } Hora: ${
                               dateHour.$H && String(dateHour.$H).length === 1
