@@ -38,10 +38,12 @@ const CorredoresDashboard = () => {
   let email = localStorage.getItem("email");
 
   useEffect(() => {
-    dispatch(getLeadCorredores(email, profesion, country, marca_personal));
-    dispatch(getAllProfesion());
-    dispatch(getAllCountries());
-  }, [dispatch]);
+    if (mail !== undefined) {
+      dispatch(getLeadCorredores(email, profesion, country, marca_personal));
+      dispatch(getAllProfesion());
+      dispatch(getAllCountries());
+    }
+  }, [dispatch, mail]);
 
   const filtrar = () => {
     dispatch(getLeadCorredores(email, profesion, country, marca_personal));
