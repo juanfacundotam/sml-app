@@ -25,7 +25,6 @@ const CorredoresDashboard = () => {
   const [country, setCountry] = useState("");
   const [marca_personal, setMarca_personal] = useState("");
   const [category, seCategory] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
 
   const { corredorLead } = useSelector((state) => state);
   const { allCountries } = useSelector((state) => state);
@@ -39,7 +38,6 @@ const CorredoresDashboard = () => {
   let email = localStorage.getItem("email");
 
   useEffect(() => {
-    setIsLoading(true);
     dispatch(getLeadCorredores(email, profesion, country, marca_personal));
     dispatch(getAllProfesion());
     dispatch(getAllCountries());
@@ -129,7 +127,7 @@ const CorredoresDashboard = () => {
             name: corredorLead[i].name,
             url: corredorLead[i].url,
             email: corredorLead[i].email,
-            instagram: "",
+            instagram: corredorLead[i].instagram,
             level: "-",
             checked: false,
             view: true,
@@ -138,11 +136,21 @@ const CorredoresDashboard = () => {
       }
     }
     setClient(clientes);
-
-    if (corredorLead.length > 0) {
-      setIsLoading(false);
-    }
   }, [corredorLead]);
+
+  useEffect(() => {
+    const updateClients = async () => {
+      for (let i = 0; i < corredorLead.length; i++) {
+        const response = await axios.put(`/lead/${client[i]._id}`, {
+          instagram: client[i].instagram,
+          email: client[i].email,
+          level: client[i].level,
+        });
+      }
+    };
+
+    updateClients();
+  }, [client]);
 
   const SendLeads = (name) => {
     toast.info(`✔ ${name} Send Leads! `, {
@@ -347,11 +355,7 @@ const CorredoresDashboard = () => {
               <BasicButtons />
             </div>
           </div>
-          {isLoading ? (
-            <div className={style.containerLoader}>
-              <div className={style.customloader}></div>
-            </div>
-          ) : corredorLead.length > 0 ? (
+          {corredorLead && corredorLead.length > 0 ? (
             <table className="w-full">
               <thead className={style.tableHead}>
                 <tr className={style.tableRow}>
