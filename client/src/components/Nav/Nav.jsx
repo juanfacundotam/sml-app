@@ -9,7 +9,7 @@ import {
   IoCashSharp,
   IoPeople,
   IoExitOutline,
-  IoWalkOutline
+  IoWalkOutline,
 } from "react-icons/io5";
 
 function Nav() {
@@ -29,12 +29,16 @@ function Nav() {
           <Link to={"/protected"}>
             <img
               className="opacity-80 w-44"
-              src="https://cdn.discordapp.com/attachments/1105243107555037294/1106577865698459788/White_Logo_Social_Media_Lab.png"
+              src="https://i.postimg.cc/Kvj4Yr5X/White-Logo-Social-Media-Lab.webp"
             />
           </Link>
         </div>
 
-        {!isEmployee || !roleReady? <div className={styles.ldsCircle}><div></div></div> :(
+        {!isEmployee || !roleReady ? (
+          <div className={styles.ldsCircle}>
+            <div></div>
+          </div>
+        ) : (
           <div className=" flex  w-fit mt-12 ">
             {roleReady === "clevel" ? (
               <ul className="flex flex-col gap-2">

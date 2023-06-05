@@ -121,13 +121,13 @@ function ChildModal({
     }
 
     try {
-      const response = await axios.put(`/${itemRol}/${itemId}`, {
+      const response = await axios.put(`/${itemRol}/?email=${itemEmail}`, {
         name: inputName,
         email: inputEmail,
         rol: selectEmployees,
         contactNumber: inputPhone,
       });
-      const response1 = await axios.put(`/employees/${itemEmail}`, {
+      const response1 = await axios.put(`/employees/?email=${inputEmail}`, {
         name: inputName,
         email: inputEmail,
         rol: selectEmployees,
@@ -140,10 +140,7 @@ function ChildModal({
       console.log(`No se pudo enviar el post de ${itemRol}`);
     }
 
-    dispatch(getAllCorredores());
-    dispatch(getAllVendedores());
-    dispatch(getAllLeader());
-    dispatch(getAllClevel());
+    dispatch(getAllEmployees());
     setOpen(false);
   };
 
